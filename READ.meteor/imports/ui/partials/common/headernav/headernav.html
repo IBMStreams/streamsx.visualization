@@ -1,0 +1,63 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="navbar-header hidden-xs col-sm-6 col-md-4 col-lg-3">
+          <a class="navbar-brand" ui-sref="read.developer.home">READ</a>
+          <span class="navbar-brand pull-right" ng-show="$ctrl.sidebar.present" ng-click="$ctrl.toggleSidebar()">
+            <i class="fa fa-bars"></i>
+          </span>
+      </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
+      <ul class="nav navbar-nav">
+        <li class="hidden-sm hidden-md hidden-lg">
+          <a href="javascript:void(0)" ui-sref="read.developer.home">READ</a>
+        </li>
+
+        <li class="hidden-sm hidden-md hidden-lg">
+          <a href="javascript:void(0)" ng-show="$ctrl.sidebar.present" ng-click="$ctrl.sidebar.show = ! $ctrl.sidebar.show">
+            <i class="fa fa-bars"></i>
+          </a>
+        </li>
+
+        <li><a ui-sref="read.developer.app.share"><span class="hidden-xs hidden-sm">App</span> <i class="fa fa-gears"></i></a></li>
+        <li><a ui-sref="read.developer.app.datapanel"><span class="hidden-xs hidden-sm">Data Panel</span> <i class="fa fa-th"></i></a></li>
+        <li><a ui-sref="read.developer.app.dashboard.designer"><span class="hidden-xs hidden-sm">Dashboard</span> <i class="fa fa-dashboard"></i></a></li>
+
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript:void(0)">
+            <span class="hidden-xs hidden-sm">Playground</span> <i class="fa fa-wrench"></i> <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a ui-sref="read.developer.playground.dataschema">Data Schema</a></li>
+            <li role="separator" class="divider"></li>
+            <li class="disabled"><a href="javascript:void(0)">ChartJS</a></li>
+            <li><a ui-sref="read.developer.playground.viz.nvd3">NVD3</a></li>
+            <li class="disabled"><a href="javascript:void(0)">Leaflet</a></li>
+            <li class="disabled"><a href="javascript:void(0)">D3</a></li>
+            <li class="disabled"><a href="javascript:void(0)">DCJS</a></li>
+            <li role="separator" class="divider"></li>
+            <li class="disabled"><a href="javascript:void(0)">User Control</a></li>
+            <li role="separator" class="divider"></li>
+            <li class="disabled"><a href="javascript:void(0)">API Bridge</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript:void(0)">
+            <span class="hidden-xs hidden-sm">Docs</span> <i class="fa fa-book"></i> <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="disabled"><a href="javascript:void(0)">Getting Started</a></li>
+            <li><a ui-sref="read.docs.tutorial">Tutorial</a></li>
+            <li class="disabled"><a href="javascript:void(0)">Guide</a></li>
+            <li class="disabled"><a href="javascript:void(0)">API Reference</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</nav>

@@ -1,0 +1,32 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="navbar-header hidden-xs col-sm-6 col-md-4 col-lg-3">
+          <a ng-if="! $ctrl.app.name" class="navbar-brand" href="javascript:void(0)">READ</a>
+          <a ng-if="$ctrl.app.name" class="navbar-brand" href="javascript:void(0)">{{$ctrl.app.name}}</a>
+          <span class="navbar-brand pull-right" ng-show="$ctrl.sidebar.present" ng-click="$ctrl.toggleSidebar()">
+            <i class="fa fa-bars"></i>
+          </span>
+      </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
+      <ul class="nav navbar-nav">
+        <li class="hidden-sm hidden-md hidden-lg">
+          <a ng-if="! $ctrl.app.name" href="javascript:void(0)">READ</a>
+          <a ng-if="$ctrl.app.name" href="javascript:void(0)">{{$ctrl.app.name}}</a>
+        </li>
+
+        <li class="hidden-sm hidden-md hidden-lg">
+          <a href="javascript:void(0)" ng-show="$ctrl.sidebar.present" ng-click="$ctrl.sidebar.show = ! $ctrl.sidebar.show">
+            <i class="fa fa-bars"></i>
+          </a>
+        </li>
+
+        <li><a href="javascript:void(0)"><span class="hidden-xs hidden-sm">{{$ctrl.app.selectedDashboardName}}</span></a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</nav>

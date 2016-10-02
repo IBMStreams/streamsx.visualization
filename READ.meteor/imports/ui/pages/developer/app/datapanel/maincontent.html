@@ -1,0 +1,32 @@
+<div ng-if="mainContentCtrl.dataPanel" class="main-content-panel-wrapper">
+  <div class="main-content-panel" ng-controller="dataSetCtrl as dataSetCtrl" ng-if="mainContentCtrl.dataSet">
+    <div class="panel with-nav-tabs panel-default">
+      <div class="panel-heading">
+        <ul class="nav nav-tabs">
+          <li ng-class="{active: dataSetCtrl.selectedTab === 'editor'}" ng-if="dataSetCtrl.dataSet">
+            <a ng-click="dataSetCtrl.selectedTab = 'editor'">Edit
+            <i ng-if="! dataSetCtrl.validators.dataSetEditor" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+          </a>
+          </li>
+          <li ng-class="{active: dataSetCtrl.selectedTab === 'viewer'}" ng-if="dataSetCtrl.lastDataObject">
+            <a ng-click="dataSetCtrl.selectedTab = 'viewer'">View </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="panel-body">
+        <div ng-if="dataSetCtrl.selectedTab === 'editor'">
+          <raw-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'raw'"></raw-data-editor>
+        </div>
+        <div ng-if="dataSetCtrl.selectedTab === 'viewer'">
+          <pre class="pre-scrollable" ng-if="dataSetCtrl.lastDataObject.isData">{{dataSetCtrl.lastDataObject.data | json:2}}</pre>
+          <dl class="alert alert-danger" role="alert" ng-if="! dataSetCtrl.lastDataObject.isData">
+            <dt ng-repeat-start="(key, value) in dataSetCtrl.lastDataObject.error">{{key}}</dt>
+            <dd ng-repeat-end>{{value}}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

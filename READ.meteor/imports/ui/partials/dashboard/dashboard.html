@@ -1,0 +1,18 @@
+<div class="grid-stack">
+  <div ng-repeat="visualization in $ctrl.visualizations" class="grid-stack-item"
+  data-gs-x="{{visualization.gridStack.x}}" data-gs-y="{{visualization.gridStack.y}}"
+  data-gs-width="{{visualization.gridStack.width}}" data-gs-height="{{visualization.gridStack.height}}"
+  data-visualization-id="{{visualization._id}}">
+    <div class="grid-stack-item-content">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong>{{visualization.name}}</strong>
+        </div>
+        <div class="panel-body" dimensions="visualization.dimensions">
+          <visualization visualization="visualization" dim="visualization.dimensions">
+          </visualization>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

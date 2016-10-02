@@ -1,0 +1,27 @@
+<form name="apiBridgeForm">
+  <div class="form-group" ng-if="sideNavCtrl.apiBridges.length > 0">
+    <label for="selectedApiBridgeId">Select API Bridge</label>
+    <div class="radio" ng-repeat="apiBridge in sideNavCtrl.apiBridges">
+      <label>
+          <input type="radio" ng-model="sideNavCtrl.selectedApiBridgeId" value="{{apiBridge._id}}"
+          ng-change="sideNavCtrl.updateUserSelectedApiBridgeId(sideNavCtrl.selectedApiBridgeId)"/>
+        {{apiBridge.name}}
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error': apiBridgeForm.newApiBridgeName.$dirty && dataSchemaForm.newApiBridgeName.$invalid }">
+    <label for="newApiBridgeName">Create API Bridge</label>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="api bridge"
+      ng-model="sideNavCtrl.newApiBridgeName" name="newApiBridgeName" minlength=3 maxlength=12
+      ng-model-options="{ debounce: 400 }"></input>
+      <span class="input-group-addon btn btn-default"
+      ng-class="{'disabled': apiBridgeForm.newApiBridgeName.$isEmpty(apiBridgeForm.newApiBridgeName.$modelValue) || apiBridgeForm.newApiBridgeName.$invalid}"
+      ng-click="(apiBridgeForm.newApiBridgeName.$invalid || sideNavCtrl.createApiBridge())"><i class="fa fa-arrow-circle-right"></i></span>
+    </div>
+    <div ng-messages="apiBridgeForm.newApiBridgeName.$error" class="help-block">
+      <div ng-message="minlength">API Bridge name must have at least 3 characters</div>
+    </div>
+  </div>
+</form>

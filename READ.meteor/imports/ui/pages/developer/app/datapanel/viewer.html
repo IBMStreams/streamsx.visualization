@@ -1,0 +1,8 @@
+<div ng-if="dataSetCtrl.currentMessage">
+  <label for="dataSet">Data Set</label>
+  <pre class="pre-scrollable" ng-if="dataSetCtrl.currentMessage.isData">{{dataSetCtrl.currentMessage.data | json:2}}</pre>
+  <dl class="alert alert-danger" role="alert" ng-if="! dataSetCtrl.currentMessage.isData">
+    <dt ng-repeat-start="(key, value) in dataSetCtrl.currentMessage.error">{{key}}</dt>
+    <dd ng-repeat-end>{{value}}</dd>
+  </dl>
+</div>

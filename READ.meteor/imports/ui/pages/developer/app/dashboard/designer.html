@@ -1,0 +1,98 @@
+<div class="main-content-panel-wrapper after-button" ng-if="mainContentCtrl.dashboard.selectedVisualizationId" ng-controller="vizDesignCtrl as vizDesignCtrl">
+  <div class="main-content-panel" ng-if="vizDesignCtrl.visualization">
+    <div class="panel with-nav-tabs panel-default">
+      <div class="panel-heading">
+        <ul class="nav nav-tabs">
+          <li ng-class="{active: vizDesignCtrl.selectedTab === 'data'}">
+            <a ng-click="vizDesignCtrl.selectedTab = 'data'">Data</a>
+          </li>
+          <li ng-class="{active: vizDesignCtrl.selectedTab === 'basicOptions'}">
+            <a ng-click="vizDesignCtrl.selectedTab = 'basicOptions'">Basic Options
+            <i ng-if="! vizDesignCtrl.validators.basicOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i></a>
+          </li>
+          <li ng-class="{active: vizDesignCtrl.selectedTab === 'visualization'}">
+            <a ng-click="vizDesignCtrl.selectedTab = 'visualization'">Visualization</a>
+          </li>
+          <li ng-class="{active: vizDesignCtrl.selectedTab === 'advancedOptions'}">
+            <a ng-click="vizDesignCtrl.selectedTab = 'advancedOptions'">Advanced Options
+            <i ng-if="! vizDesignCtrl.validators.advancedOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i></a>
+          </li>
+          <li ng-class="{active: vizDesignCtrl.selectedTab === 'usageInfo'}">
+            <a ng-click="vizDesignCtrl.selectedTab = 'usageInfo'">Usage Info</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="panel-body">
+        <div ng-if="vizDesignCtrl.selectedTab === 'data'">
+          <div class="row" ng-if="vizDesignCtrl.nameExtended">
+            <div class="col-md-6 col-lg-4">
+              <form name="vizDesignCtrl.dataForm">
+                <div class="form-group">
+                  <label for="dataSet">Data Set</label>
+                  <select class="form-control" ng-model="vizDesignCtrl.visualization.dataSetId" name="dataSet"
+                  ng-options="dataSet._id as dataSet.name group by dataSet.dataPanelName for dataSet in vizDesignCtrl.dataSets"
+                  ng-change="vizDesignCtrl.updateAndReload()">
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="template">Chart Type</label>
+                  <select class="form-control" ng-model="vizDesignCtrl.visualization.templateId" name="template"
+                  ng-options="template._id as template.name group by template.pluginName for template in vizDesignCtrl.templates"
+                  ng-change="vizDesignCtrl.updateAndReload()">
+                  </select>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div ng-if="vizDesignCtrl.selectedTab === 'basicOptions'">
+          <form name="vizDesignCtrl.basicOptionsForm">
+            <div class="form-group">
+              <label for="basicOptions">Basic Options</label>
+              <div ui-ace=vizDesignCtrl.aceJavaScriptOptions ng-model=vizDesignCtrl.visualization.basicOptions
+              valid-json json-schema="vizDesignCtrl.basicOptionsSchema"
+              ng-model-options="{allowInvalid: true}"
+              ng-readonly="vizDesignCtrl.visualization.readOnly" name="basicOptions">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div ng-if="vizDesignCtrl.selectedTab === 'visualization'">
+          <div class="designer-chart-container" dimensions="vizDesignCtrl.dimensions">
+            <visualization visualization="vizDesignCtrl.visualization" dim="vizDesignCtrl.dimensions"></visualization>
+            <!-- <nvd3-provider message="vizDesignCtrl.canonicalDataObject"
+            options="vizDesignCtrl.advancedOptions" dim="vizDesignCtrl.dimensions"></nvd3-provider> -->
+          </div>
+        </div>
+
+        <div ng-if="vizDesignCtrl.selectedTab === 'advancedOptions'">
+          <form name="vizDesignCtrl.advancedOptionsForm" novalidate>
+            <div class="form-group">
+              <label for="advancedOptions">Advanced Options</label>
+              <div ui-ace=vizDesignCtrl.aceJavaScriptOptions ng-model=vizDesignCtrl.visualization.advancedOptions
+              valid-object ng-model-options="{allowInvalid: true}"
+              ng-readonly="vizDesignCtrl.visualization.readOnly" name="advancedOptions">
+              </div>
+            </div>
+          </form>
+
+          <label>Canonical Data</label>
+          <pre class="pre-scrollable" ng-if="vizDesignCtrl.canonicalDataObject.isData">{{vizDesignCtrl.canonicalDataObject.data | json:2}}</pre>
+          <dl class="alert alert-danger" role="alert" ng-if="! vizDesignCtrl.canonicalDataObject.isData">
+            <dt ng-repeat-start="(key, value) in vizDesignCtrl.canonicalDataObject.error">{{key}}</dt>
+            <dd ng-repeat-end>{{value}}</dd>
+          </dl>
+        </div>
+
+        <div ng-if="vizDesignCtrl.selectedTab === 'usageInfo'">
+          <div ng-bind-html="vizDesignCtrl.template.usageInfo"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

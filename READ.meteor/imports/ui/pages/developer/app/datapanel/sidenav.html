@@ -1,0 +1,13 @@
+<ul class="nav nav-tabs">
+  <li role="presentation" ng-class="{active: sideNavCtrl.readState.sidebar.dataPanel === 'dataPanels'}"><a href="javascript:void(0)" ng-click="sideNavCtrl.readState.sidebar.dataPanel = 'dataPanels'">Data Panels</a></li>
+  <li role="presentation" ng-class="{active: sideNavCtrl.readState.sidebar.dataPanel === 'dataSets'}"><a href="javascript:void(0)" ng-click="sideNavCtrl.readState.sidebar.dataPanel = 'dataSets'">Data Sets</a></li>
+</ul>
+<br />
+<div ng-if="sideNavCtrl.readState.sidebar.dataPanel === 'dataPanels'">
+  <side-nav items="sideNavCtrl.dataPanels" items-control="sideNavCtrl.dataPanelsControl"
+  item="sideNavCtrl.dataPanel" item-controls="sideNavCtrl.dataPanelControls"></side-nav>
+</div>
+<div ng-if="sideNavCtrl.readState.sidebar.dataPanel === 'dataSets'">
+  <side-nav items="sideNavCtrl.dataSets" items-control="sideNavCtrl.dataSetsControl"
+  item="sideNavCtrl.dataSet" item-controls="sideNavCtrl.dataSetControls"></side-nav>
+</div>

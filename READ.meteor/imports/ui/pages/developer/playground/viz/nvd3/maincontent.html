@@ -1,0 +1,144 @@
+<div ng-if="mainContentCtrl.item" class="main-content-panel-wrapper">
+  <div class="main-content-panel">
+    <div class="panel with-nav-tabs panel-default">
+      <div class="panel-heading">
+        <ul class="nav nav-tabs">
+          <li ng-class="{active: mainContentCtrl.selectedTab === 'data'}">
+            <a ng-click="mainContentCtrl.selectedTab = 'data'">
+              Data <i ng-if="! mainContentCtrl.validators.testData" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+            </a>
+          </li>
+          <li ng-class="{active: mainContentCtrl.selectedTab === 'basicOptions'}">
+            <a ng-click="mainContentCtrl.selectedTab = 'basicOptions'">
+              Basic Options <i ng-if="! mainContentCtrl.validators.basicOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+            </a>
+          </li>
+          <li ng-class="{active: mainContentCtrl.selectedTab === 'canonicalData'}">
+            <a ng-click="mainContentCtrl.selectedTab = 'canonicalData'">
+              Canonical Data <i ng-if="! mainContentCtrl.validators.canonicalTransform" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+            </a>
+          </li>
+          <li ng-class="{active: mainContentCtrl.selectedTab === 'advancedOptions'}">
+            <a ng-click="mainContentCtrl.selectedTab = 'advancedOptions'">
+              Advanced Options <i ng-if="! mainContentCtrl.validators.advancedOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+            </a>
+          </li>
+          <li ng-class="{active: mainContentCtrl.selectedTab === 'visualization'}">
+            <a ng-click="mainContentCtrl.selectedTab = 'visualization'">
+              Visualization <i ng-if="! mainContentCtrl.canonicalDataObject.isData" class="fa fa-times-circle" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+            </a>
+          </li>
+          <li ng-class="{active: mainContentCtrl.selectedTab === 'usageInfo'}">
+            <a ng-click="mainContentCtrl.selectedTab = 'usageInfo'">Usage Info</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="panel-body">
+        <div ng-if="mainContentCtrl.selectedTab === 'data'">
+          <form name="mainContentCtrl.testDataForm" novalidate>
+            <div class="form-group">
+              <label for="inputSchema">Input Schema</label>
+              <select class="form-control" ng-model="mainContentCtrl.item.inputSchemaId" name="inputSchema"
+              ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas">
+              </select>
+            </div>
+
+            <hr/>
+            <div class="form-group">
+              <label for="testData">Data</label>
+              <div ui-ace=mainContentCtrl.aceJavaScriptOptions ng-model=mainContentCtrl.item.testData
+              valid-json ng-model-options="{allowInvalid: true}"
+              ng-readonly="mainContentCtrl.item.readOnly" name="testData">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div ng-if="mainContentCtrl.selectedTab === 'basicOptions'">
+          <form name="mainContentCtrl.basicOptionsForm" novalidate>
+            <div class="form-group">
+              <label for="basicOptionsSchema">Basic Options Schema</label>
+              <select class="form-control" ng-model="mainContentCtrl.item.basicOptionsSchemaId"
+              name="basicOptionsSchema"
+              ng-change="mainContentCtrl.updateBasicOptionsSchema(mainContentCtrl.item.basicOptionsSchemaId)"
+              ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas">
+              </select>
+            </div>
+
+            <hr/>
+            <div class="form-group">
+              <label for="basicOptions">Basic Options</label>
+              <div ui-ace=mainContentCtrl.aceJavaScriptOptions ng-model=mainContentCtrl.item.basicOptions
+              valid-json json-schema="mainContentCtrl.basicOptionsSchema"
+              ng-model-options="{allowInvalid: true}"
+              ng-readonly="mainContentCtrl.item.readOnly" name="basicOptions">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div ng-if="mainContentCtrl.selectedTab === 'canonicalData'">
+          <form name="mainContentCtrl.canonicalForm" novalidate>
+            <div class="form-group">
+              <label for="canonicalSchema">Canonical Data Schema</label>
+              <select class="form-control" ng-model="mainContentCtrl.item.canonicalSchemaId"
+              name="canonicalSchema" ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas">
+              </select>
+            </div>
+            <hr/>
+            <div class="form-group">
+              <label for="canonicalTransform">Canonical Transform</label>
+              <div ui-ace=mainContentCtrl.aceJavaScriptOptions ng-model=mainContentCtrl.item.canonicalTransform
+              valid-function ng-model-options="{allowInvalid: true}"
+              ng-readonly="mainContentCtrl.item.readOnly" name="canonicalTransform">
+              </div>
+            </div>
+            <hr/>
+            <label for="canonicalData">Canonical Data</label>
+            <pre class="pre-scrollable" ng-if="mainContentCtrl.canonicalDataObject.isData">{{mainContentCtrl.canonicalDataObject.data | json:2}}</pre>
+            <dl class="alert alert-danger" role="alert" ng-if="! mainContentCtrl.canonicalDataObject.isData">
+              <dt ng-repeat-start="(key, value) in mainContentCtrl.canonicalDataObject.error">{{key}}</dt>
+              <dd ng-repeat-end>{{value}}</dd>
+            </dl>
+          </form>
+        </div>
+
+        <div ng-if="mainContentCtrl.selectedTab === 'advancedOptions'">
+          <form name="mainContentCtrl.advancedOptionsForm" novalidate>
+            <div class="form-group">
+              <label for="advancedOptions">Advanced Options</label>
+              <div ui-ace=mainContentCtrl.aceJavaScriptOptions ng-model=mainContentCtrl.item.advancedOptions
+              valid-object ng-model-options="{allowInvalid: true}"
+              ng-readonly="mainContentCtrl.item.readOnly" name="advancedOptions">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div ng-if="mainContentCtrl.selectedTab === 'visualization'">
+          <div class="playground-chart-container" dimensions="mainContentCtrl.dimensions">
+            <nvd3-provider message="mainContentCtrl.canonicalDataObject"
+            options="mainContentCtrl.advancedOptions" dim="mainContentCtrl.dimensions"></nvd3-provider>
+          </div>
+        </div>
+
+        <div ng-if="mainContentCtrl.selectedTab === 'usageInfo'">
+          <form name="mainContentCtrl.usageInfoForm" ng-if="! mainContentCtrl.item.readOnly" novalidate>
+            <div class="form-group">
+              <label for="usageInfo">Usage Info Editor</label>
+              <div ui-ace=mainContentCtrl.aceHTMLOptions ng-model=mainContentCtrl.item.usageInfo
+              ng-readonly="mainContentCtrl.item.readOnly" name="usageInfo">
+              </div>
+            </div>
+          </form>
+          <hr ng-if="! mainContentCtrl.item.readOnly" />
+
+          <div ng-bind-html="mainContentCtrl.item.usageInfo"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
