@@ -1,2 +1,0 @@
-# READ.meteor
-Meteorized READ
