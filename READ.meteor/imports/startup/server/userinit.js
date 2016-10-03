@@ -1,7 +1,9 @@
 export default guestUser = {
-  name: 'guest',
-  _id: 'guest',
-  selectedIds: {
-  },
-  shareServiceURL: 'http://localhost:3002' // this is not how we want to insert in general, with user accounts / auth and all.
-};
+    "_id" : "guest",
+    "name" : "guest",
+    "selectedIds" : {
+        "dataSchemaId" : "QF4W6cr7KkJWZ23Bf",
+        "nvd3Id" : "GrjTHgAnhoWDy748u"
+    },
+    "shareServiceURL" : "http://localhost:3002"
+}

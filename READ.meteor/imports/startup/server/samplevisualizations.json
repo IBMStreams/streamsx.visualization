@@ -1,0 +1,85 @@
+[{
+	"_id": "gjbTNBdgPrab5DzLe",
+	"userId": "guest",
+	"appId": "BpPxba9EYyQo4uCvs",
+	"dashboardId": "mtpYjei2q7m3ip3hY",
+	"name": "first line",
+	"templateId": "GrjTHgAnhoWDy748u",
+	"dataSetId": "QA5Rj5efhEnxmpbXg",
+	"basicOptions": "{\n    xKey: \"time\",\n    yKeys: [\"sin\", \"sin2\", \"cos\"]\n}",
+	"advancedOptions": "{\n    chart: {\n        type: 'lineChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d){ return d.x; },\n        y: function(d){ return d.y; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Time (ms)' \n        },\n        yAxis: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('.02f')(d);\n            },\n            axisLabelDistance: -10\n        }\n    }\n}",
+	"gridStack": {
+		"x": 5,
+		"y": 4,
+		"height": 4,
+		"width": 7
+	}
+},
+{
+	"_id": "okTWACACzpLLjGwrm",
+	"userId": "guest",
+	"appId": "BpPxba9EYyQo4uCvs",
+	"dashboardId": "mtpYjei2q7m3ip3hY",
+	"name": "second line",
+	"templateId": "GrjTHgAnhoWDy748u",
+	"dataSetId": "QA5Rj5efhEnxmpbXg",
+	"basicOptions": "{\n    xKey: \"time\",\n    yKeys: [\"sin\", \"sin2\", \"cos\"]\n}",
+	"advancedOptions": "{\n    chart: {\n        type: 'lineChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d){ return d.x; },\n        y: function(d){ return d.y; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Time (ms)' \n        },\n        yAxis: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('.02f')(d);\n            },\n            axisLabelDistance: -10\n        }\n    }\n}",
+	"gridStack": {
+		"x": 0,
+		"y": 4,
+		"height": 4,
+		"width": 5
+	}
+},
+{
+	"_id": "ArDkpNuaTKwqrQMc8",
+	"userId": "guest",
+	"appId": "BpPxba9EYyQo4uCvs",
+	"dashboardId": "mtpYjei2q7m3ip3hY",
+	"name": "third line",
+	"templateId": "GrjTHgAnhoWDy748u",
+	"dataSetId": "QA5Rj5efhEnxmpbXg",
+	"basicOptions": "{\n    xKey: \"time\",\n    yKeys: [\"sin\", \"sin2\", \"cos\"]\n}",
+	"advancedOptions": "{\n    chart: {\n        type: 'lineChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d){ return d.x; },\n        y: function(d){ return d.y; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Time (ms)' \n        },\n        yAxis: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('.02f')(d);\n            },\n            axisLabelDistance: -10\n        }\n    }\n}",
+	"gridStack": {
+		"x": 5,
+		"y": 11,
+		"height": 3,
+		"width": 5
+	}
+},
+{
+	"_id": "8hRd6WSac8sAdqvy4",
+	"userId": "guest",
+	"appId": "BpPxba9EYyQo4uCvs",
+	"dashboardId": "mtpYjei2q7m3ip3hY",
+	"name": "4th",
+	"templateId": "GrjTHgAnhoWDy748u",
+	"dataSetId": "QA5Rj5efhEnxmpbXg",
+	"basicOptions": "{\n    xKey: \"time\",\n    yKeys: [\"sin\", \"sin2\", \"cos\"]\n}",
+	"advancedOptions": "{\n    chart: {\n        type: 'lineChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d){ return d.x; },\n        y: function(d){ return d.y; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Time (ms)' \n        },\n        yAxis: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('.02f')(d);\n            },\n            axisLabelDistance: -10\n        }\n    }\n}",
+	"gridStack": {
+		"x": 7,
+		"y": 8,
+		"height": 3,
+		"width": 5
+	}
+},
+{
+	"_id": "WWMXCo7HyXJvsSAw4",
+	"userId": "guest",
+	"appId": "BpPxba9EYyQo4uCvs",
+	"dashboardId": "mtpYjei2q7m3ip3hY",
+	"name": "fifth",
+	"templateId": "GrjTHgAnhoWDy748u",
+	"dataSetId": "QA5Rj5efhEnxmpbXg",
+	"basicOptions": "{\n    xKey: \"time\",\n    yKeys: [\"sin\", \"sin2\", \"cos\"]\n}",
+	"advancedOptions": "{\n    chart: {\n        type: 'lineChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d){ return d.x; },\n        y: function(d){ return d.y; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Time (ms)' \n        },\n        yAxis: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('.02f')(d);\n            },\n            axisLabelDistance: -10\n        }\n    }\n}",
+	"gridStack": {
+		"x": 0,
+		"y": 0,
+		"height": 4,
+		"width": 7
+	}
+}]
