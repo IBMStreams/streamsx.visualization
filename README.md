@@ -12,11 +12,11 @@ READ is a cloud-ready developer-centric API-friendly playground for visual analy
   * ```meteor npm install```
   * ```cd streamsx.visualization/READ.share```
   * ```meteor npm install```
-3. Start READ
+3. Start READ.meteor
   * ```cd streamsx.visualization/READ.meteor```
   * ```meteor```
   * Visit READ playground at http://localhost:3000
-4. Start READ.share service which lets you share READ dashboards
+4. Start READ.share
   * ```cd streamsx.visualization/READ.share```
   * ```export MONGO_URL="mongodb://localhost:3001/meteor"```
   * ```meteor --port 3002```
