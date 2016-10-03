@@ -20,5 +20,6 @@ READ is a cloud-ready developer-centric API-friendly playground for visual analy
   * ```cd streamsx.visualization/READ.share```
   * ```export MONGO_URL="mongodb://localhost:3001/meteor"```
   * ```meteor --port 3002```
-5. Next steps
-  * Follow the tutorial: http://localhost:3000/#/docs/tutorial
+
+## Next steps
+Follow the tutorial: http://localhost:3000/#/docs/tutorial
