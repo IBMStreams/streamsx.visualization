@@ -26,9 +26,9 @@ function ($scope, $reactive, $state, readState, defaultDataSets) {
     itemType: "Data Panel",
     clonable: false,
     newItemName: undefined,
-    selectedId: self.app.selectedDataPanelId,
-    selectedItem: DataPanels.findOne({_id: self.app.selectedDataPanelId}),
-    creatable: () => ! self.app.readOnly,
+    selectedId: self.app ? self.app.selectedDataPanelId : undefined,
+    selectedItem: self.app ? DataPanels.findOne({_id: self.app.selectedDataPanelId}) : undefined,
+    creatable: () => (self.app) && (! self.app.readOnly),
     switchItem: (selectedId) => {
       self.app.selectedDataPanelId = selectedId;
       Meteor.call('app.update', self.user.selectedIds.appId, self.app, (err, res) => {if (err) alert(err);}); //update user
@@ -53,9 +53,9 @@ function ($scope, $reactive, $state, readState, defaultDataSets) {
     itemType: "Data Set",
     clonable: false,
     newItemName: undefined,
-    selectedId: self.dataPanel.selectedDataSetId,
-    selectedItem: DataPanels.findOne({_id: self.app.selectedDataPanelId}),
-    creatable: () => ! self.app.readOnly,
+    selectedId: self.dataPanel ? self.dataPanel.selectedDataSetId : undefined,
+    selectedItem: self.dataPanel ? DataSets.findOne({_id: self.dataPanel.selectedDataSetId}) : undefined,
+    creatable: () => (self.app && self.dataPanel && (! self.app.readOnly)),
     switchItem: (selectedId) => {
       self.dataPanel.selectedDataSetId = selectedId;
       Meteor.call('dataPanel.update', self.dataPanel._id, self.dataPanel, (err, res) => {if (err) alert(err);}); //update datapanel

@@ -44,9 +44,6 @@ import dataPanelSideNavTemplate from '/imports/ui/pages/developer/app/datapanel/
 import dataPanelSideNavCtrl from '/imports/ui/pages/developer/app/datapanel/sidenav';
 import dataPanelMainContentTemplateUrl from '/imports/ui/pages/developer/app/datapanel/maincontent.html';
 import dataPanelMainContentCtrl from '/imports/ui/pages/developer/app/datapanel/maincontent.js';
-import dataSetCreatorTemplateUrl from '/imports/ui/pages/developer/app/datapanel/creator.html';
-import dataSetEditorTemplateUrl from '/imports/ui/pages/developer/app/datapanel/editor.html';
-import dataSetViewerTemplateUrl from '/imports/ui/pages/developer/app/datapanel/viewer.html';
 import '/imports/ui/pages/developer/app/datapanel/dataseteditors';
 
 import dashboardSideNavTemplateUrl from '/imports/ui/pages/developer/app/dashboard/sidenav.html';

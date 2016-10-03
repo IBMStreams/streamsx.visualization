@@ -17,17 +17,78 @@
   </p>
 
   <div class="row">
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="https://0.s3.envato.com/files/191460921/marino-theme-preview/03_dashboard.jpg" alt="Dashboard">
-      <div class="caption">
-        <h4>Create App</h4>
-        <p>Click on the App link <i class="fa fa-gears"></i>. Provide an app name (we recommend <code>Movies</code>).
-          Click create <i class="fa fa-arrow-circle-right"></i>.</p>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial1.1.png')">
+          <img src="/images/tutorial1.1.png" alt="App Creation"></img>
+        </a>
+        <div class="caption">
+          <h4>Create App</h4>
+          <p>Navigate to App <i class="fa fa-gears"></i>. Create <code>Movies</code> app. Uncheck private button to
+          make this app public.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial1.2.png')">
+          <img src="/images/tutorial1.2.png" alt="Dataset Creation"></img>
+        </a>
+        <div class="caption">
+          <h4>Create Data Panel & Data Set</h4>
+          <p>Navigate to Data Panel <i class="fa fa-th"></i>. Create <code>About Movies</code> data panel.
+            Switch to the Data Sets tab and create <code>Movie Ratings</code> dataset. Copy the
+            moving ratings JSON array from <a href="https://gist.github.com/sriumcp/633aaa08ba533cd72b85eb2cb8aaa7f8"
+            target="_blank">this gist</a> and paste into the data section of <code>Movie Ratings</code>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial1.3.png')">
+          <img src="/images/tutorial1.3.png" alt="Dashboard Creation"></img>
+        </a>
+        <div class="caption">
+          <h4>Create Dashboard</h4>
+          <p>Navigate to Dashboard <i class="fa fa-dashboard"></i>. Create <code>About Movies</code> dashboard.
+            Switch to the Visualizations tab and create <code>Movie Ratings</code> visualization. In the Data tab,
+            switch the Chart Type to <strong>Multibar Horizontal</strong>. Populate the basic options for this chart
+            from <a href="https://gist.github.com/sriumcp/f9928c13929fe2ec679861f2f198cdbe"
+            target="_blank">this gist</a>. Populate the advanced options for this chart
+            from <a href="https://gist.github.com/sriumcp/23f8f92fa7278b6621d5bcb9b9c7023f"
+            target="_blank">this gist</a>. View your chart in the Visualization tab. Resize your chart by switching to
+            the <kbd>layout</kbd> view.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial1.4.png')">
+          <img src="/images/tutorial1.4.png" alt="Dashboard Sharing"></img>
+        </a>
+        <div class="caption">
+          <h4>Share Dashboard</h4>
+          <p>Navigate to App <i class="fa fa-gears"></i>. Share your dashboard with the world
+            using the public link for your app.
+        </div>
       </div>
     </div>
   </div>
-</div>
+  <!-- row -->
+
+  <h3>Key Concepts</h3>
+  <blockquote>
+    <p>A READ App is a collection of data panels and dashboards, which are collections of datasets and visualizations
+      respectively. Set up each visualization in a dashboard using the appropriate data set, chart type, basic and advanced
+      options. Use gists to collaborate with other READ developers. Use the dashboard layout view to resize and drag
+      visualizations. Use the public link for the app to share READ dashboards with the world.
+    </p>
+  </blockquote>
+
+  </div>
 
 <nav>
    <ul class="pager">

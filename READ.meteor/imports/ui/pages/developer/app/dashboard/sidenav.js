@@ -32,7 +32,7 @@ export default sideNavCtrl = ['$scope', '$reactive', '$state', 'readState', func
     newItemName: undefined,
     selectedId: self.app.selectedDashboardId,
     selectedItem: Dashboards.findOne({_id: self.app.selectedDashboardId}),
-    creatable: () => true,
+    creatable: () => (self.app) && (! self.app.readOnly),
     switchItem: (selectedId) => {
       self.app.selectedDashboardId = selectedId;
       Meteor.call('app.update', self.user.selectedIds.appId, self.app, (err, res) => {if (err) alert(err);}); //update user
@@ -57,9 +57,9 @@ export default sideNavCtrl = ['$scope', '$reactive', '$state', 'readState', func
     itemType: "Visualization",
     clonable: false,
     newItemName: undefined,
-    selectedId: self.dashboard.selectedVisualizationId,
-    selectedItem: Visualizations.findOne({_id: self.dashboard.selectedVisualizationId}),
-    creatable: () => ((self.dataSets.length > 0) && (self.templates.length > 0)),
+    selectedId: self.dashboard ? self.dashboard.selectedVisualizationId : undefined,
+    selectedItem: self.dashboard ? Visualizations.findOne({_id: self.dashboard.selectedVisualizationId}) : undefined,
+    creatable: () => ((self.dashboard) && (self.dataSets.length > 0) && (self.templates.length > 0)),
     switchItem: (selectedId) => {
       self.dashboard.selectedVisualizationId = selectedId;
       Meteor.call('dashboard.update', self.app.selectedDashboardId, self.dashboard, (err, res) => {if (err) alert(err);}); // update dashboard

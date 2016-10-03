@@ -78,7 +78,6 @@ function ($scope, $reactive, readState) {
       readState.dependencies.removeNode(template._id);
     },
     changed: (newTemplate, oldTemplate) => { // we can optimize later... // this has to be based on fields not all changes...
-      console.log(newTemplate, oldTemplate);
       if (_.contains(['NVD3'], newTemplate.pluginType)) {
         if (
           (newTemplate.inputSchemaId !== oldTemplate.inputSchemaId) ||

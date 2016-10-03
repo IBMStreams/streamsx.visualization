@@ -10,12 +10,12 @@
             <a ng-click="vizDesignCtrl.selectedTab = 'basicOptions'">Basic Options
             <i ng-if="! vizDesignCtrl.validators.basicOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i></a>
           </li>
-          <li ng-class="{active: vizDesignCtrl.selectedTab === 'visualization'}">
-            <a ng-click="vizDesignCtrl.selectedTab = 'visualization'">Visualization</a>
-          </li>
           <li ng-class="{active: vizDesignCtrl.selectedTab === 'advancedOptions'}">
             <a ng-click="vizDesignCtrl.selectedTab = 'advancedOptions'">Advanced Options
             <i ng-if="! vizDesignCtrl.validators.advancedOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i></a>
+          </li>
+          <li ng-class="{active: vizDesignCtrl.selectedTab === 'visualization'}">
+            <a ng-click="vizDesignCtrl.selectedTab = 'visualization'">Visualization</a>
           </li>
           <li ng-class="{active: vizDesignCtrl.selectedTab === 'usageInfo'}">
             <a ng-click="vizDesignCtrl.selectedTab = 'usageInfo'">Usage Info</a>

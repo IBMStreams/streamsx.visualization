@@ -47,8 +47,10 @@ export class Dependency {
       return this.graph.filter(selector).outgoers().nodes().map(e => e.data());
     } else {
       let nodeIds = nodeIdOrIdArray;
-      let compoundSelector = nodeIds.map(nodeId => 'node[id = "nodeId"]'.replace('nodeId', nodeId)).join();
-      return this.graph.elements(compoundSelector).outgoers().nodes().map(e => e.data());
+      if (nodeIds.length > 0) {
+        let compoundSelector = nodeIds.map(nodeId => 'node[id = "nodeId"]'.replace('nodeId', nodeId)).join();
+        return this.graph.elements(compoundSelector).outgoers().nodes().map(e => e.data());
+      } else return [];
     }
   }
 }

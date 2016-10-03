@@ -6,7 +6,6 @@
     "postinstall": "node_modules/bower/bin/bower install"
   },
   "dependencies": {
-    "ace": "git+https://github.com/ajaxorg/ace.git#master",
     "ajv": "^4.5.0",
     "angular": "^1.5.8",
     "angular-messages": "^1.5.8",

@@ -77,7 +77,7 @@ function ($scope, $reactive, $state, $timeout, readState) {
   this.itemControls = {
     itemType: 'NVD3 Template',
     newItemName: undefined,
-    readOnlyable: false,
+    readOnlyable: true,
     validItem: () => true,
     updateItem: () => {
       self.updateDatabase(self.item);

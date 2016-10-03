@@ -22,7 +22,7 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory) {
     }
     self.item.url = self.item.url + '#/app/' + self.item._id;
   };
-  setAppUrl();
+  if (self.item) setAppUrl();
 
   // update database
   this.updateDatabase = (val) => {

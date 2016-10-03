@@ -49,6 +49,21 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, d
     self.itemStream.onNext(newVal);
   }, true);
 
+  this.updateDatabase = (val) => {
+    Meteor.call('dataSet.update', val._id, val, (err, res) => {
+      if (err) alert(err);
+    });
+  };
+
+  //update database
+  self.itemStream
+  .skip(1)
+  .filter(x => x.valid)
+  .map(x => x.item)
+  .doOnNext(x => {
+    self.updateDatabase(x);
+  }).subscribe(new Rx.ReplaySubject(0));
+
   this.rds = readState.pipeline.findReactiveData(self.dataSet._id);
 
   this.rds.stream.doOnNext(x => {
