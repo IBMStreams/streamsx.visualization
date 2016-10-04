@@ -178,11 +178,11 @@ export const reactiveDataFactory = ['$http', function ($http) {
 
       let injectSomething = (httpConfig) => {
         try {
-          $http(httpConfig).then(data => {
-            self.injectData(data);
-          }, (error, code) => {
+          $http(httpConfig).then(response => {
+            self.injectData(response.data);
+          }, (response) => {
             let x = {};
-            x[name] = "Error during HTTP with Status Code " + code + ": " + error.statusText;
+            x[name] = "Error during HTTP with status: " + response.status + " and statusText: " + response.statusText;
             self.injectError(x);
           })
         } catch (e) {
@@ -194,8 +194,6 @@ export const reactiveDataFactory = ['$http', function ($http) {
 
       if (! intervalSec) {
         self.intervalGen = Rx.Observable.just(0);
-
-
         reactiveData.stream.doOnNext(x => {
           if (x.isData) injectSomething(x.data);
           else console.log('reactiveData in ExtendedHTTP has error');

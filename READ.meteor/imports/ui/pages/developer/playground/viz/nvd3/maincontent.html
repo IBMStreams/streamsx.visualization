@@ -3,39 +3,39 @@
     <div class="panel with-nav-tabs panel-default">
       <div class="panel-heading">
         <ul class="nav nav-tabs">
-          <li ng-class="{active: mainContentCtrl.selectedTab === 'data'}">
-            <a ng-click="mainContentCtrl.selectedTab = 'data'">
+          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'data'}">
+            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.nvd3 = 'data'">
               Data <i ng-if="! mainContentCtrl.validators.testData" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
             </a>
           </li>
-          <li ng-class="{active: mainContentCtrl.selectedTab === 'basicOptions'}">
-            <a ng-click="mainContentCtrl.selectedTab = 'basicOptions'">
+          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'basicOptions'}">
+            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.nvd3 = 'basicOptions'">
               Basic Options <i ng-if="! mainContentCtrl.validators.basicOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
             </a>
           </li>
-          <li ng-class="{active: mainContentCtrl.selectedTab === 'canonicalData'}">
-            <a ng-click="mainContentCtrl.selectedTab = 'canonicalData'">
+          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'canonicalData'}">
+            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.nvd3 = 'canonicalData'">
               Canonical Data <i ng-if="! mainContentCtrl.validators.canonicalTransform" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
             </a>
           </li>
-          <li ng-class="{active: mainContentCtrl.selectedTab === 'advancedOptions'}">
-            <a ng-click="mainContentCtrl.selectedTab = 'advancedOptions'">
+          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'advancedOptions'}">
+            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.nvd3 = 'advancedOptions'">
               Advanced Options <i ng-if="! mainContentCtrl.validators.advancedOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
             </a>
           </li>
-          <li ng-class="{active: mainContentCtrl.selectedTab === 'visualization'}">
-            <a ng-click="mainContentCtrl.selectedTab = 'visualization'">
+          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'visualization'}">
+            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.nvd3 = 'visualization'">
               Visualization <i ng-if="! mainContentCtrl.canonicalDataObject.isData" class="fa fa-times-circle" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
             </a>
           </li>
-          <li ng-class="{active: mainContentCtrl.selectedTab === 'usageInfo'}">
-            <a ng-click="mainContentCtrl.selectedTab = 'usageInfo'">Usage Info</a>
+          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'usageInfo'}">
+            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.nvd3 = 'usageInfo'">Usage Info</a>
           </li>
         </ul>
       </div>
 
       <div class="panel-body">
-        <div ng-if="mainContentCtrl.selectedTab === 'data'">
+        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'data'">
           <form name="mainContentCtrl.testDataForm" novalidate>
             <div class="form-group">
               <label for="inputSchema">Input Schema</label>
@@ -55,7 +55,7 @@
           </form>
         </div>
 
-        <div ng-if="mainContentCtrl.selectedTab === 'basicOptions'">
+        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'basicOptions'">
           <form name="mainContentCtrl.basicOptionsForm" novalidate>
             <div class="form-group">
               <label for="basicOptionsSchema">Basic Options Schema</label>
@@ -78,7 +78,7 @@
           </form>
         </div>
 
-        <div ng-if="mainContentCtrl.selectedTab === 'canonicalData'">
+        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'canonicalData'">
           <form name="mainContentCtrl.canonicalForm" novalidate>
             <div class="form-group">
               <label for="canonicalSchema">Canonical Data Schema</label>
@@ -104,7 +104,7 @@
           </form>
         </div>
 
-        <div ng-if="mainContentCtrl.selectedTab === 'advancedOptions'">
+        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'advancedOptions'">
           <form name="mainContentCtrl.advancedOptionsForm" novalidate>
             <div class="form-group">
               <label for="advancedOptions">Advanced Options</label>
@@ -116,14 +116,14 @@
           </form>
         </div>
 
-        <div ng-if="mainContentCtrl.selectedTab === 'visualization'">
+        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'visualization'">
           <div class="playground-chart-container" dimensions="mainContentCtrl.dimensions">
             <nvd3-provider message="mainContentCtrl.canonicalDataObject"
             options="mainContentCtrl.advancedOptions" dim="mainContentCtrl.dimensions"></nvd3-provider>
           </div>
         </div>
 
-        <div ng-if="mainContentCtrl.selectedTab === 'usageInfo'">
+        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'usageInfo'">
           <form name="mainContentCtrl.usageInfoForm" ng-if="! mainContentCtrl.item.readOnly" novalidate>
             <div class="form-group">
               <label for="usageInfo">Usage Info Editor</label>

@@ -13,12 +13,11 @@ export default mainContentCtrl = ['$scope', '$reactive', '$timeout', '$state', '
 function ($scope, $reactive, $timeout, $state, readState, reactiveDataFactory, reactivePipelineService) {
   $reactive(this).attach($scope);
   let self = this;
+  this.readState = readState;
 
   this.aceJsonSchemaOptions = aceJsonSchemaOptions;
   this.aceJavaScriptOptions = aceJavaScriptOptions;
   this.aceHTMLOptions = aceHTMLOptions;
-
-  this.selectedTab = 'data';
 
   this.user = Users.findOne({});
   this.items = Playground.find({pluginType: 'NVD3'}).fetch();

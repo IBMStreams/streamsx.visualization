@@ -96,7 +96,7 @@ function ($scope, $reactive, $state, readState, defaultDataSets) {
       $state.reload('read.developer.app.datapanel');
     },
     deletable: () => {
-      if ((! self.app.private) || self.app.readOnly) return false;
+      if (self.app.readOnly) return false;
       let idsFromThisPanel = self.dataSets.map(x => x._id);
       let deps = readState.dependencies.getDerived(idsFromThisPanel);
       return (_.union(deps, idsFromThisPanel).length === idsFromThisPanel.length);
@@ -133,13 +133,13 @@ function ($scope, $reactive, $state, readState, defaultDataSets) {
       $state.reload('read.developer.app.datapanel');
     },
     deletable: () => {
-      return ((! self.app.readOnly) && self.app.private && (readState.dependencies.getDerived(self.dataSet._id).length === 0));
+      return ((! self.app.readOnly) && (readState.dependencies.getDerived(self.dataSet._id).length === 0));
     },
     deleteItem: () => {
       Meteor.call('dataSet.delete', self.dataSet._id, (err, res) => {
         if (err) alert(err);
         else {
-          let newSelectedDataSet = _.find(self.dataSets, x => (x._id !== self.dataSet._id));
+          let newSelectedDataSet = _.find(self.dataSets, x => (x._id !== self.dataPanel.selectedDataSetId));
           // we are updating dataPanel but avoiding update of items (or anything else here);
           if (newSelectedDataSet) self.dataPanel.selectedDataSetId = newSelectedDataSet._id;
           else delete self.dataPanel.selectedDataSetId;

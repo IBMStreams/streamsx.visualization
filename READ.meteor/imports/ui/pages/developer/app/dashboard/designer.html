@@ -3,28 +3,28 @@
     <div class="panel with-nav-tabs panel-default">
       <div class="panel-heading">
         <ul class="nav nav-tabs">
-          <li ng-class="{active: vizDesignCtrl.selectedTab === 'data'}">
-            <a ng-click="vizDesignCtrl.selectedTab = 'data'">Data</a>
+          <li ng-class="{active: vizDesignCtrl.readState.mainContentSelectedTab.dashboard === 'data'}">
+            <a ng-click="vizDesignCtrl.readState.mainContentSelectedTab.dashboard = 'data'">Data</a>
           </li>
-          <li ng-class="{active: vizDesignCtrl.selectedTab === 'basicOptions'}">
-            <a ng-click="vizDesignCtrl.selectedTab = 'basicOptions'">Basic Options
+          <li ng-class="{active: vizDesignCtrl.readState.mainContentSelectedTab.dashboard  === 'basicOptions'}">
+            <a ng-click="vizDesignCtrl.readState.mainContentSelectedTab.dashboard = 'basicOptions'">Basic Options
             <i ng-if="! vizDesignCtrl.validators.basicOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i></a>
           </li>
-          <li ng-class="{active: vizDesignCtrl.selectedTab === 'advancedOptions'}">
-            <a ng-click="vizDesignCtrl.selectedTab = 'advancedOptions'">Advanced Options
+          <li ng-class="{active: vizDesignCtrl.readState.mainContentSelectedTab.dashboard === 'advancedOptions'}">
+            <a ng-click="vizDesignCtrl.readState.mainContentSelectedTab.dashboard = 'advancedOptions'">Advanced Options
             <i ng-if="! vizDesignCtrl.validators.advancedOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i></a>
           </li>
-          <li ng-class="{active: vizDesignCtrl.selectedTab === 'visualization'}">
-            <a ng-click="vizDesignCtrl.selectedTab = 'visualization'">Visualization</a>
+          <li ng-class="{active: vizDesignCtrl.readState.mainContentSelectedTab.dashboard === 'visualization'}">
+            <a ng-click="vizDesignCtrl.readState.mainContentSelectedTab.dashboard = 'visualization'">Visualization</a>
           </li>
-          <li ng-class="{active: vizDesignCtrl.selectedTab === 'usageInfo'}">
-            <a ng-click="vizDesignCtrl.selectedTab = 'usageInfo'">Usage Info</a>
+          <li ng-class="{active: vizDesignCtrl.readState.mainContentSelectedTab.dashboard === 'usageInfo'}">
+            <a ng-click="vizDesignCtrl.readState.mainContentSelectedTab.dashboard = 'usageInfo'">Usage Info</a>
           </li>
         </ul>
       </div>
 
       <div class="panel-body">
-        <div ng-if="vizDesignCtrl.selectedTab === 'data'">
+        <div ng-if="vizDesignCtrl.readState.mainContentSelectedTab.dashboard === 'data'">
           <div class="row" ng-if="vizDesignCtrl.nameExtended">
             <div class="col-md-6 col-lg-4">
               <form name="vizDesignCtrl.dataForm">
@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        <div ng-if="vizDesignCtrl.selectedTab === 'basicOptions'">
+        <div ng-if="vizDesignCtrl.readState.mainContentSelectedTab.dashboard === 'basicOptions'">
           <form name="vizDesignCtrl.basicOptionsForm">
             <div class="form-group">
               <label for="basicOptions">Basic Options</label>
@@ -60,7 +60,7 @@
           </form>
         </div>
 
-        <div ng-if="vizDesignCtrl.selectedTab === 'visualization'">
+        <div ng-if="vizDesignCtrl.readState.mainContentSelectedTab.dashboard === 'visualization'">
           <div class="designer-chart-container" dimensions="vizDesignCtrl.dimensions">
             <visualization visualization="vizDesignCtrl.visualization" dim="vizDesignCtrl.dimensions"></visualization>
             <!-- <nvd3-provider message="vizDesignCtrl.canonicalDataObject"
@@ -68,7 +68,7 @@
           </div>
         </div>
 
-        <div ng-if="vizDesignCtrl.selectedTab === 'advancedOptions'">
+        <div ng-if="vizDesignCtrl.readState.mainContentSelectedTab.dashboard === 'advancedOptions'">
           <form name="vizDesignCtrl.advancedOptionsForm" novalidate>
             <div class="form-group">
               <label for="advancedOptions">Advanced Options</label>
@@ -87,7 +87,7 @@
           </dl>
         </div>
 
-        <div ng-if="vizDesignCtrl.selectedTab === 'usageInfo'">
+        <div ng-if="vizDesignCtrl.readState.mainContentSelectedTab.dashboard === 'usageInfo'">
           <div ng-bind-html="vizDesignCtrl.template.usageInfo"></div>
         </div>
 

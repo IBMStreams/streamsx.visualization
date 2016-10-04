@@ -14,11 +14,10 @@ export default mainContentCtrl = ['$scope', '$reactive', '$timeout', '$state', '
 function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, reactivePipelineService) {
   $reactive(this).attach($scope);
   let self = this;
-
+  this.readState = readState;
+  
   this.aceJsonSchemaOptions = aceJsonSchemaOptions;
   this.aceJavaScriptOptions = aceJavaScriptOptions;
-
-  this.selectedTab = 'schema';
 
   this.user = Users.findOne({});
   this.items = Playground.find({pluginType: 'Data Schema'}).fetch();

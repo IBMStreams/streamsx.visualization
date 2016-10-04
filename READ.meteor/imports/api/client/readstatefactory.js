@@ -10,6 +10,12 @@ export const readStateFactory = ['$q', 'reactivePipeline', ($q, reactivePipeline
       dataPanel: 'dataPanels',
       dashboard: 'dashboards'
     },
+    mainContentSelectedTab: {
+      dataPanel: 'editor',
+      dashboard: 'data',
+      dataSchema: 'schema',
+      nvd3: 'data'
+    },
     dashboardView: 'designer',
     deferredUser: $q.defer(),
     deferredApps: $q.defer(),

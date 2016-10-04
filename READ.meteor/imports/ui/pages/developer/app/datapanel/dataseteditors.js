@@ -1,6 +1,8 @@
 import angular from 'angular';
-import rawDataEditorTemplateUrl from './rawdataeditor.html';
 import Rx from 'rx/dist/rx.all';
+
+import rawDataEditorTemplateUrl from './rawdataeditor.html';
+import simpleHTTPDataEditorTemplateUrl from './simplehttpdataeditor.html';
 
 let name = 'read.dataSetEditors';
 
@@ -9,31 +11,33 @@ let angularModule = angular.module(name, []);
 angularModule.value('dataSetTypes', [{
   name: 'raw',
   displayName: 'Raw'
+}, {
+  name: 'simpleHTTP',
+  displayName: 'URL'
 }]);
 
 angularModule.value('defaultDataSets', {
   raw: {
     rawData: '{}'
+  },
+  simpleHTTP: {
+    url: 'http://properurl.org/jsondata',
+    poll: {
+      enabled: false,
+      intervalSec: 20
+    }
   }
 });
 
-let rawDataEditorCtrl = ['$scope', function($scope) {
-  //update database
-  $scope.dataSetCtrl.itemStream
-  .filter(x => x.valid)
-  .map(x => x.item)
-  .debounce(100)
-  .doOnNext(x => {
-    $scope.dataSetCtrl.updateDatabase(x);
-  }).subscribe(new Rx.ReplaySubject(0));
-
-}];
-
 angularModule.directive('rawDataEditor', function() {
   return {
-    templateUrl: rawDataEditorTemplateUrl,
-    controller: rawDataEditorCtrl,
-    controllerAs: 'dataSetEditorCtrl'
+    templateUrl: rawDataEditorTemplateUrl
+  }
+});
+
+angularModule.directive('simpleHttpDataEditor', function() {
+  return {
+    templateUrl: simpleHTTPDataEditorTemplateUrl
   }
 });
 

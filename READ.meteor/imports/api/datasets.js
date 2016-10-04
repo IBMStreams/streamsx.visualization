@@ -21,6 +21,34 @@ export const rawDataSchema = {
   additionalProperties: false
 };
 
+export const simpleHTTPDataSchema = {
+  $schema: "http://json-schema.org/schema#",
+  description: "Simple HTTP Data schema",
+  type: "object",
+  properties: {
+    userId: {type: "string"},
+    appId: {type: "string"},
+    dataPanelId: {type: "string"},
+    dataSetType: {constant: "simpleHTTP"},
+    name: {
+      type: "string",
+      minLength: 1,
+      maxLength: 20
+    },
+    url: {type: "string"},
+    poll: {
+      type: "object",
+      properties: {
+        enabled: {type: "boolean"},
+        intervalSec: {type: "number"}
+      },
+      required: ["enabled"]
+    }
+  },
+  required: ["userId", "appId", "dataPanelId", "dataSetType", "name", "url", "poll"],
+  additionalProperties: false
+};
+
 export const DataSets = new Mongo.Collection('datasets');
 
 let rawDataSchemaValidate = undefined;
@@ -32,9 +60,19 @@ catch (e) {
   throw new Error('Invalid JSON Schema: Raw Data Schema Compilation Error');
 }
 
+let simpleHTTPDataSchemaValidate = undefined;
+try {
+  simpleHTTPDataSchemaValidate = (new ajv({removeAdditional: true})).compile(simpleHTTPDataSchema);
+}
+catch (e) {
+  console.log(e);
+  throw new Error('Invalid JSON Schema: Simple HTTP Data Schema Compilation Error');
+}
+
 let getValidate = (dataSetType) => {
   switch (dataSetType) {
     case "raw": return rawDataSchemaValidate;
+    case "simpleHTTP": return simpleHTTPDataSchemaValidate;
     default: throw new Error("Unknown dataset type detected in getValidate");
   }
 }

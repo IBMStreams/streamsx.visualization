@@ -8,13 +8,14 @@ import {DataSets} from '/imports/api/datasets';
 
 import {aceJsonSchemaOptions, aceJavaScriptOptions, aceHTMLOptions} from '/imports/ui/partials/aceoptions';
 
-export const dataSetCtrl = ['$scope', '$reactive', '$timeout', '$state', 'reactiveDataFactory', 'readState',
-'dataSetTypes', 'reactivePipeline',
-function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, dataSetTypes) {
+export const dataSetCtrl = ['$scope', '$reactive', '$timeout', '$state', 'reactiveDataFactory',
+'readState', 'dataSetTypes', 'defaultDataSets',
+function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
+  readState, dataSetTypes, defaultDataSets) {
   $reactive(this).attach($scope);
   let self = this;
 
-  this.selectedTab = 'editor';
+  this.readState = readState;
 
   this.user = Users.findOne({});
   this.app = Apps.findOne({_id: self.user.selectedIds.appId});
@@ -53,6 +54,19 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, d
     Meteor.call('dataSet.update', val._id, val, (err, res) => {
       if (err) alert(err);
     });
+  };
+
+  this.updateDataSetType = () => {
+    let newDataSet = angular.merge({
+      _id: self.dataSet._id,
+      userId: 'guest',
+      appId: self.user.selectedIds.appId,
+      dataPanelId: self.app.selectedDataPanelId,
+      dataSetType: self.dataSet.dataSetType,
+      name: self.dataSet.name
+    }, defaultDataSets[self.dataSet.dataSetType]);
+    self.updateDatabase(newDataSet);
+    $state.reload('read.developer.app.datapanel');
   };
 
   //update database

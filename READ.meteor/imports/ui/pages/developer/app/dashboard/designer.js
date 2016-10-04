@@ -17,7 +17,7 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
   $reactive(this).attach($scope);
   let self = this;
 
-  this.selectedTab = 'data';
+  this.readState = readState;
 
   this.user = Users.findOne({});
   this.app = Apps.findOne({_id: self.user.selectedIds.appId});

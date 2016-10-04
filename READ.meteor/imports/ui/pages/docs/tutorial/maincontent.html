@@ -80,21 +80,150 @@
   <!-- row -->
 
   <h3>Key Concepts</h3>
+  <ul class="list-group">
+    <li class="list-group-item">A READ App is a collection of data panels and dashboards, which are collections of datasets and
+      visualizations respectively.
+    </li>
+    <li class="list-group-item">Set up visualizations using the appropriate data set, chart type, basic and advanced
+      options. See usage info for details on configuring
+      the visualization.
+    </li>
+    <li class="list-group-item">Use gists to collaborate with other READ developers.</li>
+    <li class="list-group-item">Use the layout view to resize and drag visualizations within a dashboard.</li>
+    <li class="list-group-item">Use the public link for the app to share READ dashboards with the world.</li>
+  </ul>
+
+  <div class="list-group">
+    <a href="javascript:void(0)" class="list-group-item list-group-item-success">
+      <h4 class="list-group-item-heading">Exercise</h4>
+      <p class="list-group-item-text">Modify the y-axis title to 'Top Movies in 2016' instead of 'Movie'. Of course,
+        we do not want the y-axis title to overlap with the movie names.
+      </p>
+    </a>
+    <a href="javascript:void(0)" class="list-group-item list-group-item-warning">
+      <h4 class="list-group-item-heading">Exercise</h4>
+      <p class="list-group-item-text">All these movies have a rating of over 5.00. Modify the x-axis range to be from 5.00 to 10.00
+        instead of the default range.
+      </p>
+    </a>
+  </div>
+
+  <nav>
+     <ul class="pager">
+       <!-- <li><a href="#">Previous</a></li> -->
+       <li><a href="javascript:void(0)" ng-click="readState.tutorialSection = 'simpleHTTP'">Next</a></li>
+     </ul>
+  </nav>
+</div>
+
+
+
+<div ng-if="readState.tutorialSection === 'simpleHTTP'">
+  <h3>Acquire and Transform HTTP Data</h3>
   <blockquote>
-    <p>A READ App is a collection of data panels and dashboards, which are collections of datasets and visualizations
-      respectively. Set up each visualization in a dashboard using the appropriate data set, chart type, basic and advanced
-      options. Use gists to collaborate with other READ developers. Use the dashboard layout view to resize and drag
-      visualizations. Use the public link for the app to share READ dashboards with the world.
+    <p>Do popular movies tend to have higher ratings? Do action movies tend to be more popular than movies
+      from other genres? We will create a simple scatter plot in this chapter which
+      throw light on these questions. For this chapter, you will need to sign up and get an API key from
+      <a href="https://www.themoviedb.org" target="_blank">The Movie DB</a>.
     </p>
   </blockquote>
 
+  <div class="row">
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial1.1.png')">
+          <img src="/images/tutorial1.1.png" alt="App Creation"></img>
+        </a>
+        <div class="caption">
+          <h4>Create App</h4>
+          <p>Navigate to App <i class="fa fa-gears"></i>. Create <code>Movies</code> app. Uncheck private button to
+          make this app public.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial1.2.png')">
+          <img src="/images/tutorial1.2.png" alt="Dataset Creation"></img>
+        </a>
+        <div class="caption">
+          <h4>Create Data Panel & Data Set</h4>
+          <p>Navigate to Data Panel <i class="fa fa-th"></i>. Create <code>About Movies</code> data panel.
+            Switch to the Data Sets tab and create <code>Movie Ratings</code> dataset. Copy the
+            moving ratings JSON array from <a href="https://gist.github.com/sriumcp/633aaa08ba533cd72b85eb2cb8aaa7f8"
+            target="_blank">this gist</a> and paste into the data section of <code>Movie Ratings</code>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial1.3.png')">
+          <img src="/images/tutorial1.3.png" alt="Dashboard Creation"></img>
+        </a>
+        <div class="caption">
+          <h4>Create Dashboard</h4>
+          <p>Navigate to Dashboard <i class="fa fa-dashboard"></i>. Create <code>About Movies</code> dashboard.
+            Switch to the Visualizations tab and create <code>Movie Ratings</code> visualization. In the Data tab,
+            switch the Chart Type to <strong>Multibar Horizontal</strong>. Populate the basic options for this chart
+            from <a href="https://gist.github.com/sriumcp/f9928c13929fe2ec679861f2f198cdbe"
+            target="_blank">this gist</a>. Populate the advanced options for this chart
+            from <a href="https://gist.github.com/sriumcp/23f8f92fa7278b6621d5bcb9b9c7023f"
+            target="_blank">this gist</a>. View your chart in the Visualization tab. Resize your chart by switching to
+            the <kbd>layout</kbd> view.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial1.4.png')">
+          <img src="/images/tutorial1.4.png" alt="Dashboard Sharing"></img>
+        </a>
+        <div class="caption">
+          <h4>Share Dashboard</h4>
+          <p>Navigate to App <i class="fa fa-gears"></i>. Share your dashboard with the world
+            using the public link for your app.
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- row -->
+
+  <h3>Key Concepts</h3>
+  <ul class="list-group">
+    <li class="list-group-item">A READ App is a collection of data panels and dashboards, which are collections of datasets and
+      visualizations respectively.
+    </li>
+    <li class="list-group-item">Set up visualizations using the appropriate data set, chart type, basic and advanced
+      options. See usage info for details on configuring
+      the visualization.
+    </li>
+    <li class="list-group-item">Use gists to collaborate with other READ developers.</li>
+    <li class="list-group-item">Use the layout view to resize and drag visualizations within a dashboard.</li>
+    <li class="list-group-item">Use the public link for the app to share READ dashboards with the world.</li>
+  </ul>
+
+  <div class="list-group">
+    <a href="javascript:void(0)" class="list-group-item list-group-item-success">
+      <h4 class="list-group-item-heading">Exercise</h4>
+      <p class="list-group-item-text">Modify the y-axis title to 'Top Movies in 2016' instead of 'Movie'. Of course,
+        we do not want the y-axis title to overlap with the movie names.
+      </p>
+    </a>
+    <a href="javascript:void(0)" class="list-group-item list-group-item-warning">
+      <h4 class="list-group-item-heading">Exercise</h4>
+      <p class="list-group-item-text">All these movies have a rating of over 5.00. Modify the x-axis range to be from 5.00 to 10.00
+        instead of the default range.
+      </p>
+    </a>
   </div>
 
-<nav>
-   <ul class="pager">
-     <!-- <li><a href="#">Previous</a></li> -->
-     <li><a href="javascript:void(0)">Next</a></li>
-   </ul>
-</nav>
-
+  <nav>
+     <ul class="pager">
+       <!-- <li><a href="#">Previous</a></li> -->
+       <li><a href="javascript:void(0)" ng-click="readState.tutorialSection = 'simpleHTTP'">Next</a></li>
+     </ul>
+  </nav>
 </div>

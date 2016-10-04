@@ -3,22 +3,23 @@
     <div class="panel with-nav-tabs panel-default">
       <div class="panel-heading">
         <ul class="nav nav-tabs">
-          <li ng-class="{active: dataSetCtrl.selectedTab === 'editor'}" ng-if="dataSetCtrl.dataSet">
-            <a ng-click="dataSetCtrl.selectedTab = 'editor'">Edit
+          <li ng-class="{active: dataSetCtrl.readState.mainContentSelectedTab.dataPanel === 'editor'}" ng-if="dataSetCtrl.dataSet">
+            <a ng-click="dataSetCtrl.readState.mainContentSelectedTab.dataPanel = 'editor'">Edit
             <i ng-if="! dataSetCtrl.validators.dataSetEditor" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
           </a>
           </li>
-          <li ng-class="{active: dataSetCtrl.selectedTab === 'viewer'}" ng-if="dataSetCtrl.lastDataObject">
-            <a ng-click="dataSetCtrl.selectedTab = 'viewer'">View </a>
+          <li ng-class="{active: dataSetCtrl.readState.mainContentSelectedTab.dataPanel === 'viewer'}" ng-if="dataSetCtrl.lastDataObject">
+            <a ng-click="dataSetCtrl.readState.mainContentSelectedTab.dataPanel = 'viewer'">View </a>
           </li>
         </ul>
       </div>
 
       <div class="panel-body">
-        <div ng-if="dataSetCtrl.selectedTab === 'editor'">
+        <div ng-if="dataSetCtrl.readState.mainContentSelectedTab.dataPanel === 'editor'">
           <raw-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'raw'"></raw-data-editor>
+          <simple-http-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'simpleHTTP'"></simple-http-data-editor>
         </div>
-        <div ng-if="dataSetCtrl.selectedTab === 'viewer'">
+        <div ng-if="dataSetCtrl.readState.mainContentSelectedTab.dataPanel === 'viewer'">
           <pre class="pre-scrollable" ng-if="dataSetCtrl.lastDataObject.isData">{{dataSetCtrl.lastDataObject.data | json:2}}</pre>
           <dl class="alert alert-danger" role="alert" ng-if="! dataSetCtrl.lastDataObject.isData">
             <dt ng-repeat-start="(key, value) in dataSetCtrl.lastDataObject.error">{{key}}</dt>

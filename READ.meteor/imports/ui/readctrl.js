@@ -102,7 +102,8 @@ function ($scope, $reactive, readState) {
       readState.pipeline.removeDataSet(dataSet._id);
     },
     changed: (newDataSet, oldDataSet) => { // we can optimize later... // this has to be based on fields not all changes...
-      if (newDataSet.dataSetType != 'raw') throw new Error('only raw dataset changes handled at the moment');
+      if (! _.contains(['raw', 'simpleHTTP'], newDataSet.dataSetType))
+      throw new Error('only raw and simpleHTTP dataset changes handled at the moment');
       else {
         readState.pipeline.changeDataSet(newDataSet);
       }
