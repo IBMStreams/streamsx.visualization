@@ -193,7 +193,6 @@ export const reactiveDataFactory = ['$http', function ($http) {
       };
 
       if (! intervalSec) {
-        self.intervalGen = Rx.Observable.just(0);
         reactiveData.stream.doOnNext(x => {
           if (x.isData) injectSomething(x.data);
           else console.log('reactiveData in ExtendedHTTP has error');
@@ -203,8 +202,8 @@ export const reactiveDataFactory = ['$http', function ($http) {
         x[name] = 'Invalid interval value: ' + interval;
         self.injectError(x);
       } else {
-        self.intervalGen = Rx.Observable.interval(intervalSec*1000);
-        Rx.Observable.zip(reactiveData.stream, self.intervalGen, (x, y) => {
+        self.intervalGen = Rx.Observable.merge(Rx.Observable.just(0), Rx.Observable.interval(intervalSec*1000));
+        self.intervalSubscription = Rx.Observable.combineLatest(reactiveData.stream, self.intervalGen, (x, y) => {
           return x;
         }).doOnNext(x => {
           if (x.isData) injectSomething(x.data);
