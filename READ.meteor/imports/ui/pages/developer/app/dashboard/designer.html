@@ -55,19 +55,6 @@
               </div>
             </div>
 
-            <!-- <div ng-if="vizDesignCtrl.readState.mainContentSelectedTab.dashboard === 'basicOptions'">
-              <form name="vizDesignCtrl.basicOptionsForm">
-                <div class="form-group">
-                  <label for="basicOptions">Basic Options</label>
-                  <div ui-ace=vizDesignCtrl.aceJavaScriptOptions ng-model=vizDesignCtrl.visualization.basicOptions
-                  valid-json json-schema="vizDesignCtrl.basicOptionsSchema"
-                  ng-model-options="{allowInvalid: true}"
-                  ng-readonly="vizDesignCtrl.visualization.readOnly" name="basicOptions">
-                  </div>
-                </div>
-              </form>
-            </div> -->
-
             <div ng-if="vizDesignCtrl.readState.mainContentSelectedTab.dashboard === 'advancedOptions'">
               <form name="vizDesignCtrl.advancedOptionsForm" novalidate>
                 <div class="form-group">
@@ -92,7 +79,7 @@
 
           <div class="col-md-7">
             <div class="designer-chart-container" dimensions="vizDesignCtrl.dimensions">
-              <visualization visualization="vizDesignCtrl.visualization" dim="vizDesignCtrl.dimensions"></visualization>
+              <visualization visualization="vizDesignCtrl.reactiveVisualization" dim="vizDesignCtrl.dimensions" ng-if="vizDesignCtrl.ready"></visualization>
             </div>
           </div>
 

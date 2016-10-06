@@ -80,8 +80,5 @@ export const visualizationComponent = {
     };
     let vcds = reactivePipeline.addDataSet(validatedCanonicalDataSet);
     vcds.stream.doOnNext(x => (self.canonicalDataObject = x)).subscribe(new Rx.ReplaySubject(0));
-
-
-
   }]
 }

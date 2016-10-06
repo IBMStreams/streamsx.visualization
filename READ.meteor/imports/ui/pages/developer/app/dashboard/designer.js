@@ -35,6 +35,19 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
     }
   });
 
+  this.reactiveVisualization = this.visualization;
+  this.ready = true;
+  let visualizationQuery = Visualizations.find({_id: self.dashboard.selectedVisualizationId});
+  let visualizationQueryHandle = visualizationQuery.observe({
+    changed: (newVisualization, oldVisualization) => {
+      this.ready = false;
+      $timeout(() => {
+        this.reactiveVisualization = newVisualization;
+        this.ready = true;
+      }, 0);
+    }
+  });
+
   this.nameExtended = false;
   this.dataSets.forEach(dataSet => {
     dataSet.dataPanelName = DataPanels.findOne({_id: dataSet.dataPanelId}).name;
@@ -81,7 +94,7 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
       Meteor.call('visualization.delete', self.visualization._id, (err, res) => {
         if (err) alert(err);
         else {
-          let newSelectedVisualization = _.find(self.visualizations, x => (x._id !== self.visualization._id));
+          let newSelectedVisualization = _.find(self.visualizations, x => (x._id !== self.dashboard.selectedVisualizationId));
           // we are updating dashboard but avoiding update of anything else
           if (newSelectedVisualization) self.dashboard.selectedVisualizationId = newSelectedVisualization._id;
           else delete self.dashboard.selectedVisualizationId;
