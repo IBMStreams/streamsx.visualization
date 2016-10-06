@@ -4,27 +4,34 @@
       <div class="panel-heading">
         <ul class="nav nav-tabs">
           <li ng-class="{active: dataSetCtrl.readState.mainContentSelectedTab.dataPanel === 'editor'}" ng-if="dataSetCtrl.dataSet">
-            <a ng-click="dataSetCtrl.readState.mainContentSelectedTab.dataPanel = 'editor'">Edit
+            <a ng-click="dataSetCtrl.readState.mainContentSelectedTab.dataPanel = 'editor'">Data Editor
             <i ng-if="! dataSetCtrl.validators.dataSetEditor" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
           </a>
-          </li>
-          <li ng-class="{active: dataSetCtrl.readState.mainContentSelectedTab.dataPanel === 'viewer'}" ng-if="dataSetCtrl.lastDataObject">
-            <a ng-click="dataSetCtrl.readState.mainContentSelectedTab.dataPanel = 'viewer'">View </a>
           </li>
         </ul>
       </div>
 
       <div class="panel-body">
-        <div ng-if="dataSetCtrl.readState.mainContentSelectedTab.dataPanel === 'editor'">
-          <raw-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'raw'"></raw-data-editor>
-          <simple-http-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'simpleHTTP'"></simple-http-data-editor>
-        </div>
-        <div ng-if="dataSetCtrl.readState.mainContentSelectedTab.dataPanel === 'viewer'">
-          <pre class="pre-scrollable" ng-if="dataSetCtrl.lastDataObject.isData">{{dataSetCtrl.lastDataObject.data | json:2}}</pre>
-          <dl class="alert alert-danger" role="alert" ng-if="! dataSetCtrl.lastDataObject.isData">
-            <dt ng-repeat-start="(key, value) in dataSetCtrl.lastDataObject.error">{{key}}</dt>
-            <dd ng-repeat-end>{{value}}</dd>
-          </dl>
+        <div class="row">
+          <div class="col-md-6" ng-if="dataSetCtrl.dataSet.dataSetType !== 'raw'">
+            <simple-http-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'simpleHTTP'"></simple-http-data-editor>
+            <transformed-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'transformed'"></transformed-data-editor>
+          </div>
+
+          <div class="col-md-6" ng-if="dataSetCtrl.dataSet.dataSetType !== 'raw'">
+            <label ng-if="dataSetCtrl.lastDataObject.isData">Data</label>
+            <pre class="pre-scrollable" ng-if="dataSetCtrl.lastDataObject.isData">{{dataSetCtrl.lastDataObject.data | json:2}}</pre>
+
+            <label ng-if="! dataSetCtrl.lastDataObject.isData">Data</label>
+            <dl class="alert alert-danger" role="alert" ng-if="! dataSetCtrl.lastDataObject.isData">
+              <dt ng-repeat-start="(key, value) in dataSetCtrl.lastDataObject.error">{{key}}</dt>
+              <dd ng-repeat-end>{{value}}</dd>
+            </dl>
+          </div>
+
+          <div class="col-md-12" ng-if="dataSetCtrl.dataSet.dataSetType === 'raw'">
+            <raw-data-editor></raw-data-editor>
+          </div>
         </div>
       </div>
     </div>

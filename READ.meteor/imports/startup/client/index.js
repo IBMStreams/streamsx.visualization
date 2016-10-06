@@ -22,7 +22,7 @@ import {dataSetCtrl} from '/imports/ui/pages/developer/app/datapanel/dataset';
 import {vizDesignCtrl} from '/imports/ui/pages/developer/app/dashboard/designer';
 import {dashboardCtrl} from '/imports/ui/pages/developer/app/dashboard/dashboard';
 
-import {validJsonDirective, validObjectDirective, validFunctionDirective} from '/imports/ui/partials/aceoptions';
+import {validJsonDirective, validObjectDirective, validStateObjectDirective, validFunctionDirective} from '/imports/ui/partials/aceoptions';
 import {dimensionsDirective} from '/imports/ui/partials/dimensions';
 
 import {headerNavComponent} from '/imports/ui/partials/common/headernav/headernav';
@@ -73,6 +73,7 @@ angularModule.factory('reactiveDataFactory', reactiveDataFactory)
 .factory('readState', readStateFactory)
 .directive('validJson', validJsonDirective)
 .directive('validObject', validObjectDirective)
+.directive('validStateObject', validStateObjectDirective)
 .directive('validFunction', validFunctionDirective)
 .directive('dimensions', dimensionsDirective)
 .component('headerNav', headerNavComponent)

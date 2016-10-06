@@ -95,6 +95,7 @@ function ($scope, $reactive, readState) {
   let dataSetQueryHandle = dataSetQuery.observe({
     added: (dataSet) => {
       readState.dependencies.addNode(dataSet._id);
+      if (dataSet.dataSetType === 'transformed') readState.dependencies.addParents(dataSet.parents, dataSet._id);
       readState.pipeline.addDataSet(dataSet);
     },
     removed: (dataSet) => {
@@ -102,9 +103,11 @@ function ($scope, $reactive, readState) {
       readState.pipeline.removeDataSet(dataSet._id);
     },
     changed: (newDataSet, oldDataSet) => { // we can optimize later... // this has to be based on fields not all changes...
-      if (! _.contains(['raw', 'simpleHTTP'], newDataSet.dataSetType))
-      throw new Error('only raw and simpleHTTP dataset changes handled at the moment');
+      if (! _.contains(['raw', 'simpleHTTP', 'transformed'], newDataSet.dataSetType))
+      throw new Error('only raw, simpleHTTP, and transformed dataset changes handled at the moment');
       else {
+        if (oldDataSet.dataSetType === 'transformed') readState.dependencies.removeParents(oldDataSet._id);
+        if (newDataSet.dataSetType === 'transformed') readState.dependencies.addParents(newDataSet.parents, newDataSet._id);
         readState.pipeline.changeDataSet(newDataSet);
       }
     }
@@ -135,7 +138,7 @@ function ($scope, $reactive, readState) {
       // if parents have changed
       if ((newVisualization.dataSetId !== oldVisualization.dataSetId) ||
       (newVisualization.templateId !== oldVisualization.templateId)) {
-        changeVisualizationParents(visualization);
+        changeVisualizationParents(newVisualization);
       }
     }
   });

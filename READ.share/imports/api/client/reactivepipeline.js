@@ -110,14 +110,14 @@ export const reactivePipeline = ['reactiveDataFactory', function (reactiveDataFa
           let reactiveData = _.find(self.reactiveDataSets, ds => (ds._id === dataSet.parentId));
           if (! reactiveData) throw new Error("Unable to find parent dataset in makeReativeData");
           let argArray = [dataSet._id, dataSet.name, reactiveData];
-          if (dataSet.intervalParams.enabled) argArray.push(intervalParams.intervalSec);
+          if (dataSet.poll.enabled) argArray.push(dataSet.poll.intervalSec);
           return reactiveDataFactory.extendedHTTPData(...argArray);
         }
         break;
         case "simpleHTTP": {
           let argArray = [dataSet._id, dataSet.name, dataSet.url];
-          if (dataSet.intervalParams.enabled) argArray.push(intervalParams.intervalSec);
-          return reactiveDataFactory.extendedHTTPData(...argArray);
+          if (dataSet.poll.enabled) argArray.push(dataSet.poll.intervalSec);
+          return reactiveDataFactory.simpleHTTPData(...argArray);
         }
         break;
         default: throw new Error('unknown dataSetType in makeReactiveData');

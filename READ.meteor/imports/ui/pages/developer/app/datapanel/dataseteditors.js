@@ -3,6 +3,7 @@ import Rx from 'rx/dist/rx.all';
 
 import rawDataEditorTemplateUrl from './rawdataeditor.html';
 import simpleHTTPDataEditorTemplateUrl from './simplehttpdataeditor.html';
+import transformedDataEditorTemplateUrl from './transformeddataeditor.html';
 
 let name = 'read.dataSetEditors';
 
@@ -14,6 +15,9 @@ angularModule.value('dataSetTypes', [{
 }, {
   name: 'simpleHTTP',
   displayName: 'URL'
+}, {
+  name: 'transformed',
+  displayName: 'Transform'
 }]);
 
 angularModule.value('defaultDataSets', {
@@ -26,6 +30,14 @@ angularModule.value('defaultDataSets', {
       enabled: false,
       intervalSec: 20
     }
+  },
+  transformed: {
+    parents: [],
+    transformFunction: 'x => x',
+    stateParams: {
+      enabled: false,
+      state: '{\n  initialValue: 17\n}'
+    }
   }
 });
 
@@ -33,12 +45,14 @@ angularModule.directive('rawDataEditor', function() {
   return {
     templateUrl: rawDataEditorTemplateUrl
   }
-});
-
-angularModule.directive('simpleHttpDataEditor', function() {
+}).directive('simpleHttpDataEditor', function() {
   return {
     templateUrl: simpleHTTPDataEditorTemplateUrl
   }
-});
+}).directive('transformedDataEditor', function() {
+  return {
+    templateUrl: transformedDataEditorTemplateUrl
+  }
+})
 
 export default angularModule;

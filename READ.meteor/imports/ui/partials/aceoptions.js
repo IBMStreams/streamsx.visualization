@@ -77,6 +77,22 @@ export const validObjectDirective = () => {
   return directiveDefinitionsObject;
 }
 
+export const validStateObjectDirective = () => {
+  let directiveDefinitionsObject = {
+    require: 'ngModel',
+    link: function($scope, $el, $attrs, $ctrl) {
+      $ctrl.$validators.validStateObject = function(modelValue, viewValue) { // object is javascript, not necessarily json
+        try {
+          return _.isObject(eval("(" + viewValue + ")")) || _.isNumber(eval("(" + viewValue + ")")) || _.isString(eval("(" + viewValue + ")"));
+        } catch(e) {
+          return false;
+        }
+      }
+    }
+  };
+  return directiveDefinitionsObject;
+}
+
 export const validFunctionDirective = () => {
   let directiveDefinitionsObject = {
     require: 'ngModel',

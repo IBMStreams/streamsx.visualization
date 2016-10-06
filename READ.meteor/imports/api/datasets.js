@@ -49,30 +49,58 @@ export const simpleHTTPDataSchema = {
   additionalProperties: false
 };
 
+export const transformedDataSchema = {
+  $schema: "http://json-schema.org/schema#",
+  description: "Transformed Data schema",
+  type: "object",
+  properties: {
+    userId: {type: "string"},
+    appId: {type: "string"},
+    dataPanelId: {type: "string"},
+    dataSetType: {constant: "transformed"},
+    name: {
+      type: "string",
+      minLength: 1,
+      maxLength: 20
+    },
+    parents: {
+      type: "array",
+      items: {type: "string"}
+    },
+    stateParams: {
+      type: "object",
+      properties: {
+        enabled: {type: "boolean"},
+        state: {type: "string"}
+      },
+      required: ["enabled"]
+    },
+    transformFunction: {type: "string"}
+  },
+  required: ["userId", "appId", "dataPanelId", "dataSetType", "name", "parents", "stateParams", "transformFunction"],
+  additionalProperties: false
+};
+
 export const DataSets = new Mongo.Collection('datasets');
 
 let rawDataSchemaValidate = undefined;
+let simpleHTTPDataSchemaValidate = undefined;
+let transformedDataSchemaValidate = undefined;
 try {
   rawDataSchemaValidate = (new ajv({removeAdditional: true})).compile(rawDataSchema);
-}
-catch (e) {
-  console.log(e);
-  throw new Error('Invalid JSON Schema: Raw Data Schema Compilation Error');
-}
-
-let simpleHTTPDataSchemaValidate = undefined;
-try {
   simpleHTTPDataSchemaValidate = (new ajv({removeAdditional: true})).compile(simpleHTTPDataSchema);
+  transformedDataSchemaValidate = (new ajv({removeAdditional: true})).compile(transformedDataSchema);
 }
 catch (e) {
   console.log(e);
-  throw new Error('Invalid JSON Schema: Simple HTTP Data Schema Compilation Error');
+  throw new Error('Invalid JSON Schema: Data Schema Compilation Error');
 }
 
 let getValidate = (dataSetType) => {
   switch (dataSetType) {
     case "raw": return rawDataSchemaValidate;
     case "simpleHTTP": return simpleHTTPDataSchemaValidate;
+    case "transformed": return transformedDataSchemaValidate;
     default: throw new Error("Unknown dataset type detected in getValidate");
   }
 }
@@ -90,7 +118,10 @@ Meteor.methods({
     return DataSets.remove({_id: dataSetId});
   },
   'dataSet.update'(dataSetId, dataSet) {
-    if (! getValidate(dataSet.dataSetType)(dataSet)) throw new Error("Schema Validation Failure: dataset object does not match dataset schema in dataset.update");
-    else return DataSets.update({_id: dataSetId}, dataSet);
+    let validate = getValidate(dataSet.dataSetType);
+    if (! validate(dataSet)) {
+      console.log(validate.errors);
+      throw new Error("Schema Validation Failure: dataset object does not match dataset schema in dataset.update");
+    } else return DataSets.update({_id: dataSetId}, dataSet);
   }
 });

@@ -45,8 +45,6 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', function($statePro
   // For any unmatched url, send to /home
   $urlRouterProvider.otherwise("/home");
 
-  console.log(dashboardMainContentTemplateUrl);
-
   $stateProvider
   .state('home', {
     url: "/home",

@@ -178,11 +178,11 @@ export const reactiveDataFactory = ['$http', function ($http) {
 
       let injectSomething = (httpConfig) => {
         try {
-          $http(httpConfig).then(data => {
-            self.injectData(data);
-          }, (error, code) => {
+          $http(httpConfig).then(response => {
+            self.injectData(response.data);
+          }, (response) => {
             let x = {};
-            x[name] = "Error during HTTP with Status Code " + code + ": " + error.statusText;
+            x[name] = "Error during HTTP with status: " + response.status + " and statusText: " + response.statusText;
             self.injectError(x);
           })
         } catch (e) {
@@ -193,9 +193,6 @@ export const reactiveDataFactory = ['$http', function ($http) {
       };
 
       if (! intervalSec) {
-        self.intervalGen = Rx.Observable.just(0);
-
-
         reactiveData.stream.doOnNext(x => {
           if (x.isData) injectSomething(x.data);
           else console.log('reactiveData in ExtendedHTTP has error');
@@ -205,8 +202,8 @@ export const reactiveDataFactory = ['$http', function ($http) {
         x[name] = 'Invalid interval value: ' + interval;
         self.injectError(x);
       } else {
-        self.intervalGen = Rx.Observable.interval(intervalSec*1000);
-        Rx.Observable.zip(reactiveData.stream, self.intervalGen, (x, y) => {
+        self.intervalGen = Rx.Observable.merge(Rx.Observable.just(0), Rx.Observable.interval(intervalSec*1000));
+        self.intervalSubscription = Rx.Observable.combineLatest(reactiveData.stream, self.intervalGen, (x, y) => {
           return x;
         }).doOnNext(x => {
           if (x.isData) injectSomething(x.data);

@@ -1,0 +1,50 @@
+<!-- dataSetType
+parents
+stateParams - enabled
+stateParams - state
+transform function -->
+
+<form name="dataSetCtrl.dataSetEditorForm" ng-if="dataSetCtrl.dataSet">
+  <div class="form-group">
+    <label for="inputSchema">Type</label>
+    <select class="form-control" ng-model="dataSetCtrl.dataSet.dataSetType" name="dataSetType"
+    ng-options="dsType.name as dsType.displayName for dsType in dataSetCtrl.dataSetTypes"
+    ng-change="dataSetCtrl.updateDataSetType()">
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="parentDataSets">Parent Dataset(s)</label>
+    <select class="form-control" multiple size="5" ng-model="dataSetCtrl.dataSet.parents" name="parentDataSets"
+    ng-options="dataSet._id as dataSet.name group by dataSet.dataPanelName for dataSet in dataSetCtrl.candidateParents">
+    </select>
+  </div>
+
+  <div class="form-group" ng-if="dataSetCtrl.dataSet.transformFunction">
+    <label for="transformFunction">Transform Function</label>
+    <div ui-ace="dataSetCtrl.aceJavaScriptOptions" ng-model="dataSetCtrl.dataSet.transformFunction"
+    valid-function ng-model-options="{allowInvalid: true}"
+    ng-readonly="dataSetCtrl.dataSet.readOnly" name="transformFunction">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Stateful Transformation</label>
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <input name="stateEnabled" type="checkbox" ng-model="dataSetCtrl.dataSet.stateParams.enabled"
+          ng-readonly="dataSetCtrl.dataSet.readOnly">Enable</input>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group" ng-if="dataSetCtrl.dataSet.stateParams.enabled">
+      <label for="state">State</label>
+      <div ui-ace="dataSetCtrl.aceJavaScriptOptions" ng-model="dataSetCtrl.dataSet.stateParams.state"
+      valid-state-object ng-model-options="{allowInvalid: true}"
+      ng-readonly="dataSetCtrl.dataSet.readOnly" name="state">
+      </div>
+    </div>
+  </div>
+</form>

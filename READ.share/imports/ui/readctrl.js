@@ -72,14 +72,10 @@ function ($scope, $reactive, readState, $location) {
       readState.pipeline.addDataSet(dataSet);
     },
     removed: (dataSet) => {
-      readState.dependencies.removeNode(dataSet._id);
       readState.pipeline.removeDataSet(dataSet._id);
     },
     changed: (newDataSet, oldDataSet) => { // we can optimize later... // this has to be based on fields not all changes...
-      if (newDataSet.dataSetType != 'raw') throw new Error('only raw dataset changes handled at the moment');
-      else {
-        readState.pipeline.changeDataSet(newDataSet);
-      }
+      readState.pipeline.changeDataSet(newDataSet);
     }
   });
 
@@ -87,7 +83,6 @@ function ($scope, $reactive, readState, $location) {
     readState.deferredDashboards.promise.then(function() {
       let db = Dashboards.findOne({appId: readState.app._id});
       readState.app.selectedDashboardId = (db ? db._id : undefined);
-//      console.log(Apps.find({}).fetch());
       readState.app.name = Apps.findOne({_id: readState.app._id}).name;
       readState.app.selectedDashboardName = db.name;
     });

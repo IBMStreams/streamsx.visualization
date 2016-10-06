@@ -98,7 +98,7 @@ function ($scope, $reactive, $state, readState, defaultDataSets) {
     deletable: () => {
       if (self.app.readOnly) return false;
       let idsFromThisPanel = self.dataSets.map(x => x._id);
-      let deps = readState.dependencies.getDerived(idsFromThisPanel);
+      let deps = readState.dependencies.getDerived(idsFromThisPanel).map(x => x.id); // node id vs _id
       return (_.union(deps, idsFromThisPanel).length === idsFromThisPanel.length);
     },
     deleteItem: () => {

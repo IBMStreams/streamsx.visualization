@@ -54,6 +54,8 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
 
   // update and reload
   this.updateAndReload = () => {
+    self.template = Playground.findOne({_id: self.visualization.templateId});
+    self.visualization.advancedOptions = self.template.advancedOptions;
     Meteor.call('visualization.update', self.visualization._id, self.visualization, (err, res) => {
       if (err) alert(err);
       $state.reload('read.developer.app.dashboard');
@@ -98,7 +100,7 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
   this.itemStream = new Rx.ReplaySubject(0);
   $scope.$watch('vizDesignCtrl.visualization', _.debounce(function(item) {
     $scope.$apply(function() {
-      if (self.basicOptionsForm) self.validators.basicOptions = self.basicOptionsForm.$valid;
+      if (self.dataForm) self.validators.basicOptions = self.dataForm.$valid;
       if (self.advancedOptionsForm) self.validators.advancedOptions = self.advancedOptionsForm.$valid;
       self.itemStream.onNext({
         valid: self.visualizationControls.validItem(),

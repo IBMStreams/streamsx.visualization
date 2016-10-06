@@ -11,7 +11,6 @@ export const nvd3ProviderComponent = {
   controller: ['$scope', '$rootScope', '$timeout', ($scope, $rootScope, $timeout) => {
     let self = this;
     $scope.ready = false;
-    $scope.data = $scope.nvd3Controller.message.data;
     $scope.options = {
       chart: {}
     };

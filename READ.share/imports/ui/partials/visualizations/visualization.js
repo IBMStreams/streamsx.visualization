@@ -79,9 +79,12 @@ export const visualizationComponent = {
       parentId: "canonicalData"
     };
     let vcds = reactivePipeline.addDataSet(validatedCanonicalDataSet);
-    vcds.stream.doOnNext(x => (self.canonicalDataObject = x)).subscribe(new Rx.ReplaySubject(0));
+    vcds.stream.doOnNext(x => {
+      console.log('visualization.js do on next', x);
+      self.canonicalDataObject = x;
+    }).subscribe(new Rx.ReplaySubject(0));
 
-
+    console.log('visualization.js', reactivePipeline);
 
   }]
 }

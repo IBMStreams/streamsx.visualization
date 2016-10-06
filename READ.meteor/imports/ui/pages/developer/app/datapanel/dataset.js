@@ -22,6 +22,15 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
   this.dataPanel = DataPanels.findOne({_id: self.app.selectedDataPanelId});
   this.dataSet = DataSets.findOne({_id: self.dataPanel.selectedDataSetId});
   this.dataSets = DataSets.findOne({dataPanelId: self.dataPanel._id});
+  this.descendants = readState.dependencies.getDescendants(self.dataPanel.selectedDataSetId).map(x => x.id); // not _id
+  this.candidateParents = DataSets.find({}).fetch().filter(ds => {
+    if (ds._id === self.dataSet._id) return false;
+    if (_.contains(self.descendants, ds._id)) return false;
+    return true;
+  }).map(ds => {
+    ds.dataPanelName = DataPanels.findOne({_id: ds.dataPanelId}).name;
+    return ds;
+  });
 
   this.dataSetTypes = dataSetTypes;
   this.aceJsonSchemaOptions = aceJsonSchemaOptions;

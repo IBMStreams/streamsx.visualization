@@ -40,6 +40,7 @@ export class Dependency {
     this.graph.remove(selector);
   }
 
+  // get children
   getDerived(nodeIdOrIdArray) {
     if (! _.isArray(nodeIdOrIdArray)) {
       let nodeId = nodeIdOrIdArray;
@@ -52,5 +53,11 @@ export class Dependency {
         return this.graph.elements(compoundSelector).outgoers().nodes().map(e => e.data());
       } else return [];
     }
+  }
+
+  // get descendants
+  getDescendants(nodeId) {
+    let selector = 'node[id = "nodeId"]'.replace('nodeId', nodeId);
+    return this.graph.filter(selector).descendants().nodes().map(e => e.data());
   }
 }
