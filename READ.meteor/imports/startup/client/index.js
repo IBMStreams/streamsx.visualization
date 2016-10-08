@@ -14,6 +14,10 @@ import nv from 'nvd3';
 import 'nvd3/build/nv.d3.css';
 import nvd3 from 'angular-nvd3';
 
+import leaflet from 'leaflet/dist/leaflet';
+import angularLeafletDirective from 'angular-leaflet-directive/dist/angular-leaflet-directive';
+import 'leaflet/dist/leaflet.css';
+
 import {reactiveDataFactory} from '/imports/api/client/reactivedatafactory.js';
 import {reactivePipeline} from '/imports/api/client/reactivepipeline';
 import {readStateFactory} from '/imports/api/client/readstatefactory.js';
@@ -57,6 +61,12 @@ import nvd3SideNavCtrl from '/imports/ui/pages/developer/playground/viz/nvd3/sid
 import nvd3MainContentTemplateUrl from '/imports/ui/pages/developer/playground/viz/nvd3/maincontent.html';
 import nvd3MainContentCtrl from '/imports/ui/pages/developer/playground/viz/nvd3/maincontent.js';
 import {nvd3ProviderComponent} from '/imports/ui/partials/visualizations/nvd3/nvd3provider';
+
+import leafletSideNavCtrl from '/imports/ui/pages/developer/playground/viz/leaflet/sidenav.js';
+import leafletMainContentTemplateUrl from '/imports/ui/pages/developer/playground/viz/leaflet/maincontent.html';
+import leafletMainContentCtrl from '/imports/ui/pages/developer/playground/viz/leaflet/maincontent.js';
+import {leafletProviderComponent} from '/imports/ui/partials/visualizations/leaflet/leafletprovider';
+
 import {visualizationComponent} from '/imports/ui/partials/visualizations/visualization';
 
 import tutorialSideNavTemplateUrl from '/imports/ui/pages/docs/tutorial/sidenav.html';
@@ -66,7 +76,7 @@ import tutorialMainContentCtrl from '/imports/ui/pages/docs/tutorial/maincontent
 let name = 'read';
 
 let angularModule = angular.module(name, [angularMeteor, uiRouter, ngMessages,
-  'ui.bootstrap', 'ngSanitize', 'rx', 'ui.ace', 'nvd3', 'ngclipboard', 'read.dataSetEditors']);
+  'ui.bootstrap', 'ngSanitize', 'rx', 'ui.ace', 'nvd3', 'ngclipboard', 'read.dataSetEditors', 'leaflet-directive']);
 
 angularModule.factory('reactiveDataFactory', reactiveDataFactory)
 .service('reactivePipeline', reactivePipeline)
@@ -79,6 +89,7 @@ angularModule.factory('reactiveDataFactory', reactiveDataFactory)
 .component('headerNav', headerNavComponent)
 .component('sideNav', sideNavComponent)
 .component('nvd3Provider', nvd3ProviderComponent)
+.component('leafletProvider', leafletProviderComponent)
 .component('visualization', visualizationComponent)
 .component('dashboard', dashboardComponent)
 .controller('readCtrl', readCtrl)
@@ -243,7 +254,19 @@ function($stateProvider, $urlRouterProvider, $httpProvider) {
     }]
   })
   .state('read.developer.playground.viz.leaflet', {
-    url: "/developer/playground/viz/leaflet",
+    url: "/developer/playground/leaflet",
+    views: {
+      'sidenav@': {
+        templateUrl: sideNavWrapperTemplateUrl,
+        controller: leafletSideNavCtrl,
+        controllerAs: 'sideNavCtrl'
+      },
+      'maincontent@': {
+        templateUrl: leafletMainContentTemplateUrl,
+        controller: leafletMainContentCtrl,
+        controllerAs: 'mainContentCtrl'
+      }
+    },
     onEnter: ['readState', function(readState) {
       readState.sidebar.isPresent();
     }]

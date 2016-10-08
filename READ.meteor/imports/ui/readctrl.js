@@ -68,7 +68,7 @@ function ($scope, $reactive, readState) {
   let playgroundQueryObserveHandle = playgroundQuery.observe({
     added: (template) => {
       readState.dependencies.addNode(template._id);
-      if (_.contains(['NVD3'], template.pluginType)) {
+      if (_.contains(['NVD3', 'leaflet'], template.pluginType)) {
         readState.deferredPlayground.promise.then(() => {
           readState.dependencies.addParents([template.inputSchemaId, template.basicOptionsSchemaId, template.canonicalSchemaId], template._id);
         });
@@ -78,7 +78,7 @@ function ($scope, $reactive, readState) {
       readState.dependencies.removeNode(template._id);
     },
     changed: (newTemplate, oldTemplate) => { // we can optimize later... // this has to be based on fields not all changes...
-      if (_.contains(['NVD3'], newTemplate.pluginType)) {
+      if (_.contains(['NVD3', 'leaflet'], newTemplate.pluginType)) {
         if (
           (newTemplate.inputSchemaId !== oldTemplate.inputSchemaId) ||
           (newTemplate.basicOptionsSchemaId !== oldTemplate.basicOptionsSchemaId) ||
