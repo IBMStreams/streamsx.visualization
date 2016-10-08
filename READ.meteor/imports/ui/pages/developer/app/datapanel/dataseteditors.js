@@ -4,6 +4,7 @@ import Rx from 'rx/dist/rx.all';
 import rawDataEditorTemplateUrl from './rawdataeditor.html';
 import simpleHTTPDataEditorTemplateUrl from './simplehttpdataeditor.html';
 import transformedDataEditorTemplateUrl from './transformeddataeditor.html';
+import extendedHTTPDataEditorTemplateUrl from './extendedhttpdataeditor.html';
 
 let name = 'read.dataSetEditors';
 
@@ -16,29 +17,45 @@ angularModule.value('dataSetTypes', [{
   name: 'simpleHTTP',
   displayName: 'URL'
 }, {
+  name: 'extendedHTTP',
+  displayName: 'HTTP Config'
+}, {
   name: 'transformed',
   displayName: 'Transform'
 }]);
 
-angularModule.value('defaultDataSets', {
-  raw: {
-    rawData: '{}'
-  },
-  simpleHTTP: {
-    url: 'http://properurl.org/jsondata',
-    poll: {
-      enabled: false,
-      intervalSec: 20
+// needs to be a factory with factory methods for getting default values...
+angularModule.factory('defaultDataSets', function() {
+  let myFactory = {
+    raw: {
+      rawData: '{}'
+    },
+    simpleHTTP: {
+      url: 'http://properurl.org/jsondata',
+      poll: {
+        enabled: false,
+        intervalSec: 20
+      }
+    },
+    transformed: {
+      parents: [],
+      transformFunction: 'x => x',
+      stateParams: {
+        enabled: false,
+        state: '{\n  initialValue: 17\n}'
+      }
+    },
+    extendedHTTP: function(parentId) {
+      return {
+        parentId: parentId,
+        poll: {
+          enabled: false,
+          intervalSec: 20
+        }
+      }
     }
-  },
-  transformed: {
-    parents: [],
-    transformFunction: 'x => x',
-    stateParams: {
-      enabled: false,
-      state: '{\n  initialValue: 17\n}'
-    }
-  }
+  };
+  return myFactory;
 });
 
 angularModule.directive('rawDataEditor', function() {
@@ -53,6 +70,10 @@ angularModule.directive('rawDataEditor', function() {
   return {
     templateUrl: transformedDataEditorTemplateUrl
   }
-})
+}).directive('extendedHttpDataEditor', function() {
+  return {
+    templateUrl: extendedHTTPDataEditorTemplateUrl
+  }
+});
 
 export default angularModule;

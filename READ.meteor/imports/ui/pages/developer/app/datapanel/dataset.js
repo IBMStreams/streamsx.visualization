@@ -32,7 +32,11 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
     return ds;
   });
 
-  this.dataSetTypes = dataSetTypes;
+  this.dataSetTypes = dataSetTypes.filter(dsType => {
+    if (! _.contains(['extendedHTTP', 'transformed'], dsType)) return true;
+    else return self.candidateParents.length > 0;
+  });
+
   this.aceJsonSchemaOptions = aceJsonSchemaOptions;
   this.aceJavaScriptOptions = aceJavaScriptOptions;
   this.aceHTMLOptions = aceHTMLOptions;
@@ -66,6 +70,11 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
   };
 
   this.updateDataSetType = () => {
+    let parentId = self.candidateParents[0]._id;
+
+    let defaultDataSet = (self.dataSet.dataSetType === 'extendedHTTP') ?
+    defaultDataSets.extendedHTTP(parentId) : defaultDataSets[self.dataSet.dataSetType];
+
     let newDataSet = angular.merge({
       _id: self.dataSet._id,
       userId: 'guest',
@@ -73,7 +82,7 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
       dataPanelId: self.app.selectedDataPanelId,
       dataSetType: self.dataSet.dataSetType,
       name: self.dataSet.name
-    }, defaultDataSets[self.dataSet.dataSetType]);
+    }, defaultDataSet);
     self.updateDatabase(newDataSet);
     $state.reload('read.developer.app.datapanel');
   };

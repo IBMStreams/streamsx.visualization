@@ -49,6 +49,34 @@ export const simpleHTTPDataSchema = {
   additionalProperties: false
 };
 
+export const extendedHTTPDataSchema = {
+  $schema: "http://json-schema.org/schema#",
+  description: "Extended HTTP Data schema",
+  type: "object",
+  properties: {
+    userId: {type: "string"},
+    appId: {type: "string"},
+    dataPanelId: {type: "string"},
+    dataSetType: {constant: "extendedHTTP"},
+    name: {
+      type: "string",
+      minLength: 1,
+      maxLength: 20
+    },
+    parentId: {type: "string"},
+    poll: {
+      type: "object",
+      properties: {
+        enabled: {type: "boolean"},
+        intervalSec: {type: "number"}
+      },
+      required: ["enabled"]
+    }
+  },
+  required: ["userId", "appId", "dataPanelId", "dataSetType", "name", "parentId", "poll"],
+  additionalProperties: false
+};
+
 export const transformedDataSchema = {
   $schema: "http://json-schema.org/schema#",
   description: "Transformed Data schema",
@@ -85,10 +113,12 @@ export const DataSets = new Mongo.Collection('datasets');
 
 let rawDataSchemaValidate = undefined;
 let simpleHTTPDataSchemaValidate = undefined;
+let extendedHTTPDataSchemaValidate = undefined;
 let transformedDataSchemaValidate = undefined;
 try {
   rawDataSchemaValidate = (new ajv({removeAdditional: true})).compile(rawDataSchema);
   simpleHTTPDataSchemaValidate = (new ajv({removeAdditional: true})).compile(simpleHTTPDataSchema);
+  extendedHTTPDataSchemaValidate = (new ajv({removeAdditional: true})).compile(extendedHTTPDataSchema);
   transformedDataSchemaValidate = (new ajv({removeAdditional: true})).compile(transformedDataSchema);
 }
 catch (e) {
@@ -100,6 +130,7 @@ let getValidate = (dataSetType) => {
   switch (dataSetType) {
     case "raw": return rawDataSchemaValidate;
     case "simpleHTTP": return simpleHTTPDataSchemaValidate;
+    case "extendedHTTP": return extendedHTTPDataSchemaValidate;
     case "transformed": return transformedDataSchemaValidate;
     default: throw new Error("Unknown dataset type detected in getValidate");
   }

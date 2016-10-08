@@ -86,8 +86,14 @@ angularModule.factory('reactiveDataFactory', reactiveDataFactory)
 .controller('vizDesignCtrl', vizDesignCtrl)
 .controller('dashboardCtrl', dashboardCtrl)
 
-angularModule.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
+function($stateProvider, $urlRouterProvider, $httpProvider) {
 
+  // needed to handle cors issues..
+//  $httpProvider.defaults.useXDomain = true;
+//  delete $httpProvider.defaults.headers.common['X-Requested-With'];
+/*  $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+  $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'; */
   // All of the these routes need to configured based on settings... we will get to this at some point
 
   // For any unmatched url, send to /home

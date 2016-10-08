@@ -122,8 +122,20 @@ pre {
   padding-top: 8px;
 }
 
+.grid-stack > .grid-stack-item > .grid-stack-item-content {
+  overflow-y: hidden;
+}
+
 .grid-stack-item-content > .panel > .panel-body {
   @include calc(height, '100% - 36px') // panel header height...
+}
+
+.thumbnail .caption .word-wrap {
+   white-space: pre-wrap;      /* CSS3 */
+   white-space: -moz-pre-wrap; /* Firefox */
+   white-space: -pre-wrap;     /* Opera <7 */
+   white-space: -o-pre-wrap;   /* Opera 7 */
+   word-wrap: break-word;      /* IE */
 }
 
 /*==========  Mobile First Method  ==========*/

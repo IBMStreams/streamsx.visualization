@@ -1,3 +1,6 @@
+import createAppTemplate from './createapp.html';
+import simpleHTTPTemplate from './simplehttp.html';
+
 export default mainContentCtrl = ['$scope', 'readState', '$uibModal', function ($scope, readState, $uibModal) {
   readState.tutorialSection = 'createApp';
 

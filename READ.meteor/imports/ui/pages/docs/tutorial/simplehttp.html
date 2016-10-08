@@ -1,0 +1,95 @@
+<h3>Acquire and Transform HTTP Data</h3>
+<blockquote>
+  <p>Have you ever sat through a highly rated movie only to conclude it wasn't so great after all?
+    In this chapter, we will get to the bottom of this matter. Specifically, we will create movie
+    datasets through multiple HTTP queries, combine these individual arrays into a single array, and
+    visualize this data by extracting key properties from this array.
+  </p>
+</blockquote>
+<h4>Before you begin</h4>
+<blockquote>
+  <p>You will need to 1) sign up, 2) request and 3) acquire an API key from <a href="https://www.themoviedb.org" target="_blank">The Movie DB (TMDB)</a>.</p>
+</blockquote>
+
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial2.1.png')">
+        <img src="/images/tutorial2.1.png" alt="Datasets Creation"></img>
+      </a>
+      <div class="caption">
+        <h4>Create Datasets from URLs</h4>
+        <p class="word-wrap">Create <code>Top Movies (1)</code> dataset. In the Data Editor tab,
+          switch the dataset type to <strong>URL</strong>. Use the following URL (modified with your TMDB api key)
+          to access the top movies dataset: https://api.themoviedb.org/3/movie/top_rated?api_key=yourtmdbapikey&language=en-US&page=1.
+          Create <code>Top Movies (2)</code> and <code>Top Movies (3)</code> datasets in the same manner
+          with the page parameter set to 2 and 3 respectively in the URL.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial2.2.png')">
+        <img src="/images/tutorial2.2.png" alt="Combining Data"></img>
+      </a>
+      <div class="caption">
+        <h4>Concatenate & Transform Datasets</h4>
+        <p>Create <code>Combined Ratings</code> data set. In the Data Editor tab,
+          switch the dataset type to <strong>Transform</strong>. Choose <code>Top Movies (1)</code>,
+          <code>Top Movies (2)</code>, and <code>Top Movies (3)</code> as the parent datasets. Copy the
+          function from <a href="https://gist.github.com/sriumcp/b3081dd6d70ed6ac230012a2f177a601"
+          target="_blank">this gist</a> and paste into transform function portion of <code>Combined Ratings</code>.</p>
+        <p>The transform function concatenates the three movie arrays, selects a few fields, and renames some
+          of the selected fields.</p></div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial2.3.png')">
+        <img src="/images/tutorial2.3.png" alt="Dashboard Creation"></img>
+      </a>
+      <div class="caption">
+        <h4>Create Scatterplot</h4>
+        <p>Create <code>Rating vs Popularity</code> visualization. In the Data tab,
+          choose <strong>Combined Ratings</strong> as your dataset and switch the Chart Type to
+          <strong>Scatter</strong>. Populate the basic options for this chart
+          from <a href="https://gist.github.com/sriumcp/9b49c14ff60800a3678e53454d186a68"
+          target="_blank">this gist</a>. Populate the advanced options for this chart
+          from <a href="https://gist.github.com/sriumcp/0a5f2a93226abac652e807ac05f95bb1"
+          target="_blank">this gist</a>. Resize your chart by switching to
+          the <kbd>layout</kbd> view.</p>
+          <p>Your shared dashboard will be automatically updated in the public link for the app.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- row -->
+
+<h3>Key Concepts</h3>
+<ul class="list-group">
+  <li class="list-group-item">You can create a READ dataset from any URL that returns a JSON response.</li>
+  <li class="list-group-item">You can create a transformed data set in READ. The transformed dataset can get
+    its input from multiple parent datasets. These inputs can be combined and transformed in any way you wish
+    based on the logic within the transform function.
+  </li>
+  <li class="list-group-item">READ dashboards are reactive. Changes made to the datasets and visualizations are
+  reflected instantaneously in shared dashboards.</li>
+</ul>
+
+<div class="list-group">
+  <a href="javascript:void(0)" class="list-group-item list-group-item-success">
+    <h4 class="list-group-item-heading">Exercise</h4>
+    <p class="list-group-item-text">Make the radius of the circle in the scatter plot proportional to the popularity of the movie.</p>
+  </a>
+</div>
+
+<nav>
+   <ul class="pager">
+     <!-- <li><a href="#">Previous</a></li> -->
+     <li><a href="javascript:void(0)" ng-click="readState.tutorialSection = 'createApp'">Previous</a></li>
+   </ul>
+</nav>
