@@ -68,9 +68,13 @@ function ($scope, $reactive, readState) {
   let playgroundQueryObserveHandle = playgroundQuery.observe({
     added: (template) => {
       readState.dependencies.addNode(template._id);
-      if (_.contains(['NVD3'], template.pluginType)) {
+      if (template.pluginType === 'NVD3') {
         readState.deferredPlayground.promise.then(() => {
           readState.dependencies.addParents([template.inputSchemaId, template.basicOptionsSchemaId, template.canonicalSchemaId], template._id);
+        });
+      } else if (template.pluginType === 'leaflet') {
+        readState.deferredPlayground.promise.then(() => {
+          readState.dependencies.addParents([template.inputSchemaId], template._id);
         });
       }
     },
@@ -78,15 +82,15 @@ function ($scope, $reactive, readState) {
       readState.dependencies.removeNode(template._id);
     },
     changed: (newTemplate, oldTemplate) => { // we can optimize later... // this has to be based on fields not all changes...
-      if (_.contains(['NVD3'], newTemplate.pluginType)) {
-        if (
-          (newTemplate.inputSchemaId !== oldTemplate.inputSchemaId) ||
-          (newTemplate.basicOptionsSchemaId !== oldTemplate.basicOptionsSchemaId) ||
-          (newTemplate.canonicalSchemaId !== oldTemplate.canonicalSchemaId)
-        )
-        readState.dependencies.removeParents(newTemplate._id);
-        // add all the 3 types of edges
-        readState.dependencies.addParents([newTemplate.inputSchemaId, newTemplate.basicOptionsSchemaId, newTemplate.canonicalSchemaId], newTemplate._id);
+      readState.dependencies.removeParents(newTemplate._id);
+      if (newTemplate.pluginType === 'NVD3') {
+        readState.deferredPlayground.promise.then(() => {
+          readState.dependencies.addParents([newTemplate.inputSchemaId, newTemplate.basicOptionsSchemaId, newTemplate.canonicalSchemaId], newTemplate._id);
+        });
+      } else if (newTemplate.pluginType === 'leaflet') {
+        readState.deferredPlayground.promise.then(() => {
+          readState.dependencies.addParents([newTemplate.inputSchemaId], newTemplate._id);
+        });
       }
     }
   });

@@ -48,13 +48,36 @@ export const nvd3TemplateSchema = {
   additionalProperties: false
 };
 
+export const leafletTemplateSchema = {
+  $schema: "http://json-schema.org/schema#",
+  description: "Leaflet template schema",
+  type: "object",
+  properties: {
+    userId: {type: "string"},
+    pluginType: {constant: "leaflet"},
+    name: {
+      type: "string",
+      minLength: 1,
+      maxLength: 20
+    },
+    readOnly: {type: "boolean"},
+    inputSchemaId: {type: "string"},
+    testData: {type: "string"},
+    usageInfo: {type: "string"}
+  },
+  required: ["userId", "pluginType", "name", "readOnly", "inputSchemaId", "testData", "usageInfo"],
+  additionalProperties: false
+};
+
 export const Playground = new Mongo.Collection('playground');
 
 let dataSchemaValidate = undefined;
 let nvd3Validate = undefined;
+let leafletValidate = undefined;
 try {
   dataSchemaValidate = (new ajv({removeAdditional: true})).compile(dataSchemaTemplateSchema);
   nvd3Validate = (new ajv({removeAdditional: true})).compile(nvd3TemplateSchema);
+  leafletValidate = (new ajv({removeAdditional: true})).compile(leafletTemplateSchema);
 }
 catch (e) {
   console.log(e);
@@ -65,6 +88,7 @@ let getValidate = (pluginType) => {
   switch (pluginType) {
     case "Data Schema": return dataSchemaValidate;
     case "NVD3": return nvd3Validate;
+    case "leaflet": return leafletValidate;
     default: throw new Error("Unknown plug in type detected in getValidate");
   }
 }

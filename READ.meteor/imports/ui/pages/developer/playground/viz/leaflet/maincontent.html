@@ -1,0 +1,67 @@
+<div ng-if="mainContentCtrl.item" class="main-content-panel-wrapper">
+  <div class="main-content-panel">
+    <div class="panel with-nav-tabs panel-default">
+      <div class="panel-heading">
+        <ul class="nav nav-tabs">
+          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.leaflet === 'data'}">
+            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.leaflet = 'data'">
+              Data <i ng-if="! mainContentCtrl.validators.testData" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+            </a>
+          </li>
+          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.leaflet === 'visualization'}">
+            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.leaflet = 'visualization'">
+              Visualization <i ng-if="! mainContentCtrl.dataObject.isData" class="fa fa-times-circle" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+            </a>
+          </li>
+          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.leaflet === 'usageInfo'}">
+            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.leaflet = 'usageInfo'">Usage Info</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="panel-body">
+        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.leaflet === 'data'">
+          <form name="mainContentCtrl.testDataForm" novalidate>
+            <div class="form-group">
+              <label for="inputSchema">Input Schema</label>
+              <select class="form-control" ng-model="mainContentCtrl.item.inputSchemaId" name="inputSchema"
+              ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas">
+              </select>
+            </div>
+
+            <hr/>
+            <div class="form-group">
+              <label for="testData">Data</label>
+              <div ui-ace=mainContentCtrl.aceJavaScriptOptions ng-model=mainContentCtrl.item.testData
+              valid-json ng-model-options="{allowInvalid: true}"
+              ng-readonly="mainContentCtrl.item.readOnly" name="testData">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.leaflet === 'visualization'">
+          <div class="playground-chart-container" dimensions="mainContentCtrl.dimensions">
+            <leaflet-provider message="mainContentCtrl.dataObject" dim="mainContentCtrl.dimensions"></leaflet-provider>
+          </div>
+        </div>
+
+        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.leaflet === 'usageInfo'">
+          <form name="mainContentCtrl.usageInfoForm" ng-if="! mainContentCtrl.item.readOnly" novalidate>
+            <div class="form-group">
+              <label for="usageInfo">Usage Info Editor</label>
+              <div ui-ace=mainContentCtrl.aceHTMLOptions ng-model=mainContentCtrl.item.usageInfo
+              ng-readonly="mainContentCtrl.item.readOnly" name="usageInfo">
+              </div>
+            </div>
+          </form>
+          <hr ng-if="! mainContentCtrl.item.readOnly" />
+
+          <div ng-bind-html="mainContentCtrl.item.usageInfo"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
