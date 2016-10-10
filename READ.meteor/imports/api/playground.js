@@ -61,17 +61,11 @@ export const leafletTemplateSchema = {
       maxLength: 20
     },
     readOnly: {type: "boolean"},
-    inputSchemaId: {type: "string"}, // schema for input data
+    inputSchemaId: {type: "string"},
     testData: {type: "string"},
-    basicOptionsSchemaId: {type: "string"},
-    basicOptions: {type: "string"}, // e.g., axis mappings
-    canonicalSchemaId: {type: "string"}, // canonicalTransform should output a result that maches this schema...
-    canonicalTransform: {type: "string"}, // transforms data from input schema (e.g., object array) to canonical schema (e.g., time-series)
-    advancedOptions: {type: "string"}, // nvd3 option generator with functions and all.. based on canonical data schema
     usageInfo: {type: "string"}
   },
-  required: ["userId", "pluginType", "name", "readOnly", "inputSchemaId", "testData",
-  "basicOptionsSchemaId", "basicOptions", "canonicalSchemaId", "canonicalTransform", "advancedOptions", "usageInfo"],
+  required: ["userId", "pluginType", "name", "readOnly", "inputSchemaId", "testData", "usageInfo"],
   additionalProperties: false
 };
 

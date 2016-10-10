@@ -1,5 +1,5 @@
-<nvd3 ng-if="ready && nvd3Controller.message.isData" data="nvd3Controller.message.data" options="options" api="api"></nvd3>
-<dl class="alert alert-danger" role="alert" ng-if="!nvd3Controller.message.isData">
-  <dt ng-repeat-start="(key, value) in nvd3Controller.message.error">{{key}}</dt>
+<leaflet-map ng-if="leafletController.message.isData" data="leafletController.message.data" dim="leafletController.dim"></leaflet-map>
+<dl class="alert alert-danger" role="alert" ng-if="!leafletController.message.isData">
+  <dt ng-repeat-start="(key, value) in leafletController.message.error">{{key}}</dt>
   <dd ng-repeat-end>{{value}}</dd>
 </dl>

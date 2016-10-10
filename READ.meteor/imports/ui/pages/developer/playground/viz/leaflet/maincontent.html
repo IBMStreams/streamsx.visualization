@@ -3,39 +3,24 @@
     <div class="panel with-nav-tabs panel-default">
       <div class="panel-heading">
         <ul class="nav nav-tabs">
-          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'data'}">
-            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.nvd3 = 'data'">
+          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.leaflet === 'data'}">
+            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.leaflet = 'data'">
               Data <i ng-if="! mainContentCtrl.validators.testData" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
             </a>
           </li>
-          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'basicOptions'}">
-            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.nvd3 = 'basicOptions'">
-              Basic Options <i ng-if="! mainContentCtrl.validators.basicOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.leaflet === 'visualization'}">
+            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.leaflet = 'visualization'">
+              Visualization <i ng-if="! mainContentCtrl.dataObject.isData" class="fa fa-times-circle" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
             </a>
           </li>
-          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'canonicalData'}">
-            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.nvd3 = 'canonicalData'">
-              Canonical Data <i ng-if="! mainContentCtrl.validators.canonicalTransform" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
-            </a>
-          </li>
-          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'advancedOptions'}">
-            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.nvd3 = 'advancedOptions'">
-              Advanced Options <i ng-if="! mainContentCtrl.validators.advancedOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
-            </a>
-          </li>
-          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'visualization'}">
-            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.nvd3 = 'visualization'">
-              Visualization <i ng-if="! mainContentCtrl.canonicalDataObject.isData" class="fa fa-times-circle" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
-            </a>
-          </li>
-          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'usageInfo'}">
-            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.nvd3 = 'usageInfo'">Usage Info</a>
+          <li ng-class="{active: mainContentCtrl.readState.mainContentSelectedTab.leaflet === 'usageInfo'}">
+            <a ng-click="mainContentCtrl.readState.mainContentSelectedTab.leaflet = 'usageInfo'">Usage Info</a>
           </li>
         </ul>
       </div>
 
       <div class="panel-body">
-        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'data'">
+        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.leaflet === 'data'">
           <form name="mainContentCtrl.testDataForm" novalidate>
             <div class="form-group">
               <label for="inputSchema">Input Schema</label>
@@ -55,75 +40,13 @@
           </form>
         </div>
 
-        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'basicOptions'">
-          <form name="mainContentCtrl.basicOptionsForm" novalidate>
-            <div class="form-group">
-              <label for="basicOptionsSchema">Basic Options Schema</label>
-              <select class="form-control" ng-model="mainContentCtrl.item.basicOptionsSchemaId"
-              name="basicOptionsSchema"
-              ng-change="mainContentCtrl.updateBasicOptionsSchema(mainContentCtrl.item.basicOptionsSchemaId)"
-              ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas">
-              </select>
-            </div>
-
-            <hr/>
-            <div class="form-group">
-              <label for="basicOptions">Basic Options</label>
-              <div ui-ace=mainContentCtrl.aceJavaScriptOptions ng-model=mainContentCtrl.item.basicOptions
-              valid-json json-schema="mainContentCtrl.basicOptionsSchema"
-              ng-model-options="{allowInvalid: true}"
-              ng-readonly="mainContentCtrl.item.readOnly" name="basicOptions">
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'canonicalData'">
-          <form name="mainContentCtrl.canonicalForm" novalidate>
-            <div class="form-group">
-              <label for="canonicalSchema">Canonical Data Schema</label>
-              <select class="form-control" ng-model="mainContentCtrl.item.canonicalSchemaId"
-              name="canonicalSchema" ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas">
-              </select>
-            </div>
-            <hr/>
-            <div class="form-group">
-              <label for="canonicalTransform">Canonical Transform</label>
-              <div ui-ace=mainContentCtrl.aceJavaScriptOptions ng-model=mainContentCtrl.item.canonicalTransform
-              valid-function ng-model-options="{allowInvalid: true}"
-              ng-readonly="mainContentCtrl.item.readOnly" name="canonicalTransform">
-              </div>
-            </div>
-            <hr/>
-            <label for="canonicalData">Canonical Data</label>
-            <pre class="pre-scrollable" ng-if="mainContentCtrl.canonicalDataObject.isData">{{mainContentCtrl.canonicalDataObject.data | json:2}}</pre>
-            <dl class="alert alert-danger" role="alert" ng-if="! mainContentCtrl.canonicalDataObject.isData">
-              <dt ng-repeat-start="(key, value) in mainContentCtrl.canonicalDataObject.error">{{key}}</dt>
-              <dd ng-repeat-end>{{value}}</dd>
-            </dl>
-          </form>
-        </div>
-
-        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'advancedOptions'">
-          <form name="mainContentCtrl.advancedOptionsForm" novalidate>
-            <div class="form-group">
-              <label for="advancedOptions">Advanced Options</label>
-              <div ui-ace=mainContentCtrl.aceJavaScriptOptions ng-model=mainContentCtrl.item.advancedOptions
-              valid-object ng-model-options="{allowInvalid: true}"
-              ng-readonly="mainContentCtrl.item.readOnly" name="advancedOptions">
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'visualization'">
+        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.leaflet === 'visualization'">
           <div class="playground-chart-container" dimensions="mainContentCtrl.dimensions">
-            <nvd3-provider message="mainContentCtrl.canonicalDataObject"
-            options="mainContentCtrl.advancedOptions" dim="mainContentCtrl.dimensions"></nvd3-provider>
+            <leaflet-provider message="mainContentCtrl.dataObject" dim="mainContentCtrl.dimensions"></leaflet-provider>
           </div>
         </div>
 
-        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'usageInfo'">
+        <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.leaflet === 'usageInfo'">
           <form name="mainContentCtrl.usageInfoForm" ng-if="! mainContentCtrl.item.readOnly" novalidate>
             <div class="form-group">
               <label for="usageInfo">Usage Info Editor</label>

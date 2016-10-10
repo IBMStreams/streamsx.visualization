@@ -22,8 +22,12 @@ export default sideNavCtrl = ['$scope', '$reactive', '$state', 'readState', func
     dashboard: () => Dashboards.findOne({_id: self.getReactively('app.selectedDashboardId')}),
     visualization: () => Visualizations.findOne({_id: self.getReactively('dashboard.selectedVisualizationId')}),
     dataSets: () => DataSets.find({appId: self.getReactively('user.selectedIds.appId')}).fetch(),
-    templates: () => Playground.find({pluginType: 'NVD3'}).fetch(),
-    template: () => Playground.findOne({pluginType: 'NVD3'}) // do a better job of this later...
+    templates: () => Playground.find({
+      $or: [
+        {pluginType: 'NVD3'},
+        {pluginType: 'leaflet'}
+      ]
+    }).fetch()
   });
 
   this.dashboardsControl = {
@@ -66,23 +70,26 @@ export default sideNavCtrl = ['$scope', '$reactive', '$state', 'readState', func
       $state.reload('read.developer.app.dashboard');
     },
     createItem: () => {
-      console.log('about to call visualization.create');
-      Meteor.call('visualization.create', {
+      let additionalFields = {};
+      if (self.templates[0].pluginType === 'NVD3') additionalFields = {
+        basicOptions: self.templates[0].basicOptions,
+        advancedOptions: self.templates[0].advancedOptions
+      };
+      Meteor.call('visualization.create', angular.merge({
         userId: 'guest',
         appId: self.user.selectedIds.appId,
         dashboardId: self.app.selectedDashboardId,
         name: self.visualizationsControl.newItemName,
         templateId: self.templates[0]._id,
+        pluginType: self.templates[0].pluginType,
         dataSetId: self.dataSets[0]._id,
-        basicOptions: self.template.basicOptions,
-        advancedOptions: self.template.advancedOptions,
         gridStack: {
           x: 0,
           y: 0,
           height: 3,
           width: 3
         }
-      }, (err, res) => {
+      }, additionalFields), (err, res) => {
         if (err) alert(err);
         else {
           self.visualizationsControl.newItemName = undefined;
@@ -137,9 +144,6 @@ export default sideNavCtrl = ['$scope', '$reactive', '$state', 'readState', func
     },
     deletable: () => self.app.private,
     deleteItem: () => {
-      console.log('about to delete visualization');
-      console.log(self.visualization);
-      console.log(self.getReactively('visualization._id'));
       Meteor.call('visualization.delete', self.visualization._id, (err, res) => {
         if (err) alert(err);
         else {
@@ -148,7 +152,6 @@ export default sideNavCtrl = ['$scope', '$reactive', '$state', 'readState', func
           if (newSelectedVisualization) self.dashboard.selectedVisualizationId = newSelectedVisualization._id;
           else {
             delete self.dashboard.selectedVisualizationId;
-            console.log('deleted visualization successfully and also selectedVisualizationId');
           }
           Meteor.call('dashboard.update', self.dashboard._id, self.dashboard, (err, res) => {if (err) alert(err);});
           $state.reload('read.developer.app.dashboard');

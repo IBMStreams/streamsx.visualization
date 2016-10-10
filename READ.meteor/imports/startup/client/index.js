@@ -24,6 +24,8 @@ import {readStateFactory} from '/imports/api/client/readstatefactory.js';
 import {readCtrl} from '/imports/ui/readctrl.js';
 import {dataSetCtrl} from '/imports/ui/pages/developer/app/datapanel/dataset';
 import {vizDesignCtrl} from '/imports/ui/pages/developer/app/dashboard/designer';
+import {nvd3VizDesignCtrl} from '/imports/ui/pages/developer/app/dashboard/nvd3designer';
+import {leafletVizDesignCtrl} from '/imports/ui/pages/developer/app/dashboard/leafletdesigner';
 import {dashboardCtrl} from '/imports/ui/pages/developer/app/dashboard/dashboard';
 
 import {validJsonDirective, validObjectDirective, validStateObjectDirective, validFunctionDirective} from '/imports/ui/partials/aceoptions';
@@ -65,9 +67,11 @@ import {nvd3ProviderComponent} from '/imports/ui/partials/visualizations/nvd3/nv
 import leafletSideNavCtrl from '/imports/ui/pages/developer/playground/viz/leaflet/sidenav.js';
 import leafletMainContentTemplateUrl from '/imports/ui/pages/developer/playground/viz/leaflet/maincontent.html';
 import leafletMainContentCtrl from '/imports/ui/pages/developer/playground/viz/leaflet/maincontent.js';
-import {leafletProviderComponent} from '/imports/ui/partials/visualizations/leaflet/leafletprovider';
+import {leafletProviderComponent, leafletMapDirective} from '/imports/ui/partials/visualizations/leaflet/leafletprovider';
 
 import {visualizationComponent} from '/imports/ui/partials/visualizations/visualization';
+import {nvd3VisualizationComponent} from '/imports/ui/partials/visualizations/nvd3/nvd3visualization';
+import {leafletVisualizationComponent} from '/imports/ui/partials/visualizations/leaflet/leafletvisualization';
 
 import tutorialSideNavTemplateUrl from '/imports/ui/pages/docs/tutorial/sidenav.html';
 import tutorialMainContentTemplateUrl from '/imports/ui/pages/docs/tutorial/maincontent.html';
@@ -89,24 +93,20 @@ angularModule.factory('reactiveDataFactory', reactiveDataFactory)
 .component('headerNav', headerNavComponent)
 .component('sideNav', sideNavComponent)
 .component('nvd3Provider', nvd3ProviderComponent)
+.directive('leafletMap', leafletMapDirective)
 .component('leafletProvider', leafletProviderComponent)
 .component('visualization', visualizationComponent)
+.component('nvd3Visualization', nvd3VisualizationComponent)
+.component('leafletVisualization', leafletVisualizationComponent)
 .component('dashboard', dashboardComponent)
 .controller('readCtrl', readCtrl)
 .controller('dataSetCtrl', dataSetCtrl)
 .controller('vizDesignCtrl', vizDesignCtrl)
+.controller('nvd3VizDesignCtrl', nvd3VizDesignCtrl)
+.controller('leafletVizDesignCtrl', leafletVizDesignCtrl)
 .controller('dashboardCtrl', dashboardCtrl)
 
-angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
-function($stateProvider, $urlRouterProvider, $httpProvider) {
-
-  // needed to handle cors issues..
-//  $httpProvider.defaults.useXDomain = true;
-//  delete $httpProvider.defaults.headers.common['X-Requested-With'];
-/*  $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-  $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'; */
-  // All of the these routes need to configured based on settings... we will get to this at some point
-
+angularModule.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   // For any unmatched url, send to /home
   $urlRouterProvider.otherwise("/developer/home");
 

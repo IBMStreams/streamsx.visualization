@@ -1,5 +1,5 @@
-<div ng-switch="$ctrl.template.pluginType">
-  <nvd3-provider message="$ctrl.canonicalDataObject" options="$ctrl.advancedOptions" dim="$ctrl.dim" ng-switch-when="NVD3"></nvd3-provider>
-  <leaflet-provider message="$ctrl.canonicalDataObject" options="$ctrl.advancedOptions" dim="$ctrl.dim" ng-switch-when="leaflet"></leaflet-provider>
+<div ng-switch="$ctrl.visualization.pluginType">
+  <nvd3-visualization visualization="$ctrl.visualization" dim="$ctrl.dim" ng-switch-when="NVD3"></nvd3-visualization>
+  <leaflet-visualization visualization="$ctrl.visualization" dim="$ctrl.dim" ng-switch-when="leaflet"></leaflet-visualization>
   <div class="alert alert-danger" role="alert" ng-switch-default>Unknown visualization plugin type</div>
 </div>

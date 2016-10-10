@@ -11,37 +11,32 @@ function ($scope, $reactive, $state, $timeout, readState) {
 
   this.helpers({
     user: () => Users.findOne({}),
-    items: () => Playground.find({pluginType: 'NVD3'}).fetch(),
-    item: () => Playground.findOne({_id: self.getReactively('user.selectedIds.nvd3Id')})
+    items: () => Playground.find({pluginType: 'leaflet'}).fetch(),
+    item: () => Playground.findOne({_id: self.getReactively('user.selectedIds.leafletId')})
   });
   this.dataSchemas = Playground.find({pluginType: 'Data Schema'}).fetch();
 
   this.itemsControl = {
-    itemType: "NVD3 Template",
+    itemType: "Leaflet Template",
     clonable: true,
     newItemName: undefined,
-    selectedId: self.user.selectedIds.nvd3Id,
+    selectedId: self.user.selectedIds.leafletId,
     selectedItem: self.item,
     creatable: () => (self.dataSchemas.length > 0),
-    whyNotCreatable: "NVD3 template creation disabled since no data schemas are available",
+    whyNotCreatable: "Leaflet template creation disabled since no data schemas are available",
     switchItem: (selectedId) => {
-      self.user.selectedIds.nvd3Id = selectedId;
+      self.user.selectedIds.leafletId = selectedId;
       Meteor.call('user.update', self.user, (err, res) => {if (err) alert(err);}); //update user
       $state.reload($state.$current.name);
     },
     createItem: () => {
       Meteor.call('playground.create', {
         userId: 'guest',
-        pluginType: 'NVD3',
+        pluginType: 'leaflet',
         name: self.itemsControl.newItemName,
         readOnly: false,
         inputSchemaId: self.dataSchemas[0]._id,
-        testData: "42",
-        basicOptionsSchemaId: self.dataSchemas[0]._id,
-        basicOptions: '{}',
-        canonicalSchemaId: self.dataSchemas[0]._id,
-        canonicalTransform: 'x => x',
-        advancedOptions: '{}',
+        testData: "{\n\tcenter: {\n\t\tlat: 51.505,\n\t\tlng: -0.09,\n\t\t\n\t\tzoom: 4\n\t}\n}",
         usageInfo: ''
       }, (err, res) => {
         if (err) alert(err);
@@ -56,16 +51,11 @@ function ($scope, $reactive, $state, $timeout, readState) {
       if (name.length > 20) name = self.item.name.substring(0, 14) + ' clone';
       Meteor.call('playground.create', {
         userId: 'guest',
-        pluginType: 'NVD3',
+        pluginType: 'leaflet',
         name: name,
         readOnly: false,
         inputSchemaId: self.item.inputSchemaId,
         testData: self.item.testData,
-        basicOptionsSchemaId: self.item.basicOptionsSchemaId,
-        basicOptions: self.item.basicOptions,
-        canonicalSchemaId: self.item.canonicalSchemaId,
-        canonicalTransform: self.item.canonicalTransform,
-        advancedOptions: self.item.advancedOptions,
         usageInfo: self.item.usageInfo
       }, (err, res) => {
         if (err) alert(err);
@@ -75,7 +65,7 @@ function ($scope, $reactive, $state, $timeout, readState) {
   };
 
   this.itemControls = {
-    itemType: 'NVD3 Template',
+    itemType: 'Leaflet Template',
     newItemName: undefined,
     readOnlyable: true,
     validItem: () => true,
@@ -89,15 +79,15 @@ function ($scope, $reactive, $state, $timeout, readState) {
       $state.reload($state.$current.name);
     },
     deletable: () => {
-      return (readState.dependencies.getDerived(self.user.selectedIds.nvd3Id).length === 0);
+      return (readState.dependencies.getDerived(self.user.selectedIds.leafletId).length === 0);
     },
     deleteItem: () => {
       Meteor.call('playground.delete', self.item._id, (err, res) => {
         if (err) alert(err);
         else {
           if (self.items.length > 0)
-            self.user.selectedIds.nvd3Id = _.find(self.items, x => (x._id !== self.user.selectedIds.nvd3Id))._id;
-          else delete self.user.selectedIds['nvd3Id'];
+            self.user.selectedIds.leafletId = _.find(self.items, x => (x._id !== self.user.selectedIds.leafletId))._id;
+          else delete self.user.selectedIds['leafletId'];
           Meteor.call('user.update', self.user, (err, res) => {if (err) alert(err);});
           $timeout.cancel(self.briefTimer);
           $state.reload($state.$current.name);
