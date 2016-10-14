@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import angular from 'angular';
-import _ from 'underscore';
+import _ from 'underscore/underscore';
 import ajv from 'ajv';
 import Rx from 'rx/dist/rx.all';
 
@@ -9,7 +9,7 @@ import {Playground} from '/imports/api/playground';
 import {reactiveDataFactory} from '/imports/api/client/reactivedatafactory'
 import {aceJsonSchemaOptions, aceJavaScriptOptions, aceHTMLOptions} from '/imports/ui/partials/aceoptions';
 
-export default mainContentCtrl = ['$scope', '$reactive', '$timeout', '$state', 'readState', 'reactiveDataFactory', 'reactivePipeline',
+export const nvd3MainContentCtrl = ['$scope', '$reactive', '$timeout', '$state', 'readState', 'reactiveDataFactory', 'reactivePipeline',
 function ($scope, $reactive, $timeout, $state, readState, reactiveDataFactory, reactivePipelineService) {
   $reactive(this).attach($scope);
   let self = this;

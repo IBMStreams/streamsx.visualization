@@ -1,5 +1,5 @@
-import _ from 'underscore';
-import Rx from 'rx/dist/rx.all'
+import _ from 'underscore/underscore';
+import Rx from 'rx/dist/rx.all';
 
 import {DataSets} from '/imports/api/datasets';
 import {Playground} from '/imports/api/playground';

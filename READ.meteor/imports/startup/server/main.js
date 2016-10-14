@@ -12,6 +12,8 @@ if (Users.find().count() === 0) {
   Users.insert(guestUser);
 }
 
-playground.map(template => {
-  Playground.upsert({_id: template._id}, template, {upsert: true});
-});
+if (Playground.find().count() === 0) {
+  playground.map(template => {
+    Playground.upsert({_id: template._id}, template, {upsert: true});
+  });
+}

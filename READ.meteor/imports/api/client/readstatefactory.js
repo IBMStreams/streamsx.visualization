@@ -6,21 +6,17 @@ export const readStateFactory = ['$q', 'reactivePipeline', ($q, reactivePipeline
   let myFactory = {
     sidebar: {
       present: true,
-      show: true,
-      dataPanel: 'dataPanels',
-      dashboard: 'dashboards'
+      show: true
     },
     mainContentSelectedTab: {
-      dataPanel: 'editor',
-      dashboard: 'data',
+      dataSet: 'editor',
+      designer: 'data',
       dataSchema: 'schema',
       nvd3: 'data',
       leaflet: 'data'
     },
-    dashboardView: 'designer',
     deferredUser: $q.defer(),
     deferredApps: $q.defer(),
-    deferredDataPanels: $q.defer(),
     deferredDashboards: $q.defer(),
     deferredPlayground: $q.defer(),
     deferredDataSets: $q.defer(),

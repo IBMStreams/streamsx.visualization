@@ -95,7 +95,6 @@ Meteor.methods({
     return Visualizations.insert(visualization);
   },
   'visualization.delete'(visualizationId) {
-    console.log('visualization.delete called with:' + visualizationId);
     return Visualizations.remove({_id: visualizationId});
   },
   'visualization.update'(visualizationId, visualization) {

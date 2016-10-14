@@ -1,6 +1,6 @@
 import cytoscape from "cytoscape";
 import angular from 'angular';
-import _ from 'underscore';
+import _ from 'underscore/underscore';
 
 export class Dependency {
   constructor() {

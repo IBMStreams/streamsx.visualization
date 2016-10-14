@@ -14,7 +14,6 @@ export const appSchema = {
     },
     private: {type: "boolean"},
     readOnly: {type: "boolean"},
-    selectedDataPanelId: {type: "string"},
     selectedDashboardId: {type: "string"}
   },
   required: ["userId", "name", "private", "readOnly"],

@@ -22,11 +22,6 @@ import {reactiveDataFactory} from '/imports/api/client/reactivedatafactory.js';
 import {reactivePipeline} from '/imports/api/client/reactivepipeline';
 import {readStateFactory} from '/imports/api/client/readstatefactory.js';
 import {readCtrl} from '/imports/ui/readctrl.js';
-import {dataSetCtrl} from '/imports/ui/pages/developer/app/datapanel/dataset';
-import {vizDesignCtrl} from '/imports/ui/pages/developer/app/dashboard/designer';
-import {nvd3VizDesignCtrl} from '/imports/ui/pages/developer/app/dashboard/nvd3designer';
-import {leafletVizDesignCtrl} from '/imports/ui/pages/developer/app/dashboard/leafletdesigner';
-import {dashboardCtrl} from '/imports/ui/pages/developer/app/dashboard/dashboard';
 
 import {validJsonDirective, validObjectDirective, validStateObjectDirective, validFunctionDirective} from '/imports/ui/partials/aceoptions';
 import {dimensionsDirective} from '/imports/ui/partials/dimensions';
@@ -38,35 +33,43 @@ import {dashboardComponent} from '/imports/ui/partials/dashboard/dashboard';
 
 import developerHomeTemplateUrl from '/imports/ui/pages/developer/home/home.html';
 
-import dasSideNavCtrl from '/imports/ui/pages/developer/app/share/sidenav.js';
-import dasMainContentTemplateUrl from '/imports/ui/pages/developer/app/share/maincontent.html';
-import dasMainContentCtrl from '/imports/ui/pages/developer/app/share/maincontent.js';
+import {appSideNavCtrl} from '/imports/ui/pages/developer/app/dashboard/app/sidenav.js';
+import appMainContentTemplateUrl from '/imports/ui/pages/developer/app/dashboard/app/maincontent.html';
+import {appCtrl} from '/imports/ui/pages/developer/app/dashboard/app/maincontent.js';
 
-import schemaSideNavCtrl from '/imports/ui/pages/developer/playground/dataschema/sidenav.js';
-import schemaMainContentTemplateUrl from '/imports/ui/pages/developer/playground/dataschema/maincontent.html';
-import schemaMainContentCtrl from '/imports/ui/pages/developer/playground/dataschema/maincontent.js';
-
-import dataPanelSideNavTemplate from '/imports/ui/pages/developer/app/datapanel/sidenav.html';
-import dataPanelSideNavCtrl from '/imports/ui/pages/developer/app/datapanel/sidenav';
-import dataPanelMainContentTemplateUrl from '/imports/ui/pages/developer/app/datapanel/maincontent.html';
-import dataPanelMainContentCtrl from '/imports/ui/pages/developer/app/datapanel/maincontent.js';
-import '/imports/ui/pages/developer/app/datapanel/dataseteditors';
+import '/imports/ui/pages/developer/app/dashboard/dataset/dataseteditors';
 
 import dashboardSideNavTemplateUrl from '/imports/ui/pages/developer/app/dashboard/sidenav.html';
-import dashboardSideNavCtrl from '/imports/ui/pages/developer/app/dashboard/sidenav.js';
+import {dashboardSideNavCtrl} from '/imports/ui/pages/developer/app/dashboard/sidenav.js';
 import dashboardMainContentTemplateUrl from '/imports/ui/pages/developer/app/dashboard/maincontent.html';
-import dashboardMainContentCtrl from '/imports/ui/pages/developer/app/dashboard/maincontent.js';
-import dashboardDesignerTemplateUrl from '/imports/ui/pages/developer/app/dashboard/designer.html';
-import dashboardViewerTemplateUrl from '/imports/ui/pages/developer/app/dashboard/dashboard.html';
+import {dashboardMainContentCtrl} from '/imports/ui/pages/developer/app/dashboard/maincontent.js';
 
-import nvd3SideNavCtrl from '/imports/ui/pages/developer/playground/viz/nvd3/sidenav.js';
+import {dashboardDashboardSideNavCtrl} from '/imports/ui/pages/developer/app/dashboard/dashboard/sidenav';
+import dashboardDashboardMainContentTemplateUrl from '/imports/ui/pages/developer/app/dashboard/dashboard/dashboard.html';
+import {dashboardDashboardCtrl} from '/imports/ui/pages/developer/app/dashboard/dashboard/dashboard';
+
+import {dashboardDesignerSideNavCtrl} from '/imports/ui/pages/developer/app/dashboard/designer/sidenav';
+import dashboardDesignerMainContentTemplateUrl from '/imports/ui/pages/developer/app/dashboard/designer/designer.html';
+import {dashboardDesignerCtrl} from '/imports/ui/pages/developer/app/dashboard/designer/designer';
+import {nvd3VizDesignCtrl} from '/imports/ui/pages/developer/app/dashboard/designer/nvd3designer';
+import {leafletVizDesignCtrl} from '/imports/ui/pages/developer/app/dashboard/designer/leafletdesigner';
+
+import {dashboardDataSetSideNavCtrl} from '/imports/ui/pages/developer/app/dashboard/dataset/sidenav';
+import dashboardDataSetMainContentTemplateUrl from '/imports/ui/pages/developer/app/dashboard/dataset/dataset.html';
+import {dashboardDataSetCtrl} from '/imports/ui/pages/developer/app/dashboard/dataset/dataset';
+
+import {schemaSideNavCtrl} from '/imports/ui/pages/developer/playground/dataschema/sidenav.js';
+import schemaMainContentTemplateUrl from '/imports/ui/pages/developer/playground/dataschema/maincontent.html';
+import {schemaMainContentCtrl} from '/imports/ui/pages/developer/playground/dataschema/maincontent.js';
+
+import {nvd3SideNavCtrl} from '/imports/ui/pages/developer/playground/viz/nvd3/sidenav.js';
 import nvd3MainContentTemplateUrl from '/imports/ui/pages/developer/playground/viz/nvd3/maincontent.html';
-import nvd3MainContentCtrl from '/imports/ui/pages/developer/playground/viz/nvd3/maincontent.js';
+import {nvd3MainContentCtrl} from '/imports/ui/pages/developer/playground/viz/nvd3/maincontent.js';
 import {nvd3ProviderComponent} from '/imports/ui/partials/visualizations/nvd3/nvd3provider';
 
-import leafletSideNavCtrl from '/imports/ui/pages/developer/playground/viz/leaflet/sidenav.js';
+import {leafletSideNavCtrl} from '/imports/ui/pages/developer/playground/viz/leaflet/sidenav.js';
 import leafletMainContentTemplateUrl from '/imports/ui/pages/developer/playground/viz/leaflet/maincontent.html';
-import leafletMainContentCtrl from '/imports/ui/pages/developer/playground/viz/leaflet/maincontent.js';
+import {leafletMainContentCtrl} from '/imports/ui/pages/developer/playground/viz/leaflet/maincontent.js';
 import {leafletProviderComponent, leafletMapDirective} from '/imports/ui/partials/visualizations/leaflet/leafletprovider';
 
 import {visualizationComponent} from '/imports/ui/partials/visualizations/visualization';
@@ -75,7 +78,7 @@ import {leafletVisualizationComponent} from '/imports/ui/partials/visualizations
 
 import tutorialSideNavTemplateUrl from '/imports/ui/pages/docs/tutorial/sidenav.html';
 import tutorialMainContentTemplateUrl from '/imports/ui/pages/docs/tutorial/maincontent.html';
-import tutorialMainContentCtrl from '/imports/ui/pages/docs/tutorial/maincontent';
+import {tutorialMainContentCtrl} from '/imports/ui/pages/docs/tutorial/maincontent';
 
 let name = 'read';
 
@@ -100,11 +103,12 @@ angularModule.factory('reactiveDataFactory', reactiveDataFactory)
 .component('leafletVisualization', leafletVisualizationComponent)
 .component('dashboard', dashboardComponent)
 .controller('readCtrl', readCtrl)
-.controller('dataSetCtrl', dataSetCtrl)
-.controller('vizDesignCtrl', vizDesignCtrl)
+.controller('appCtrl', appCtrl)
+.controller('dataSetCtrl', dashboardDataSetCtrl)
+.controller('dashboardCtrl', dashboardDashboardCtrl)
+.controller('designerCtrl', dashboardDesignerCtrl)
 .controller('nvd3VizDesignCtrl', nvd3VizDesignCtrl)
 .controller('leafletVizDesignCtrl', leafletVizDesignCtrl)
-.controller('dashboardCtrl', dashboardCtrl)
 
 angularModule.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   // For any unmatched url, send to /home
@@ -120,7 +124,6 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', function($statePro
       deferredUser: ['readState', (readState) => readState.deferredUser.promise],
       deferredApps: ['readState', (readState) => readState.deferredApps.promise],
       deferredPlayground: ['readState', (readState) => readState.deferredPlayground.promise],
-      deferredDataPanels: ['readState', (readState) => readState.deferredDataPanels.promise],
       deferredDataSets: ['readState', (readState) => readState.deferredDataSets.promise],
       deferredDashboards: ['readState', (readState) => readState.deferredDashboards.promise],
       deferredVisualizations: ['readState', (readState) => readState.deferredVisualizations.promise],
@@ -140,36 +143,18 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', function($statePro
   .state('read.developer.app', {
     abstract: true
   })
-  .state('read.developer.app.datapanel', {
-    url: "/developer/app/datapanel",
-    views: {
-      'sidenav@': {
-        templateUrl: dataPanelSideNavTemplate,
-        controller: dataPanelSideNavCtrl,
-        controllerAs: 'sideNavCtrl'
-      },
-      'maincontent@': {
-        templateUrl: dataPanelMainContentTemplateUrl,
-        controller: dataPanelMainContentCtrl,
-        controllerAs: 'mainContentCtrl'
-      }
-    },
-    onEnter: ['readState', function(readState) {
-      readState.sidebar.isPresent();
-    }]
-  })
   .state('read.developer.app.dashboard', {
     url: "/developer/app/dashboard",
     views: {
       'sidenav@': {
         templateUrl: dashboardSideNavTemplateUrl,
         controller: dashboardSideNavCtrl,
-        controllerAs: 'sideNavCtrl'
+        controllerAs: 'dashboardSideNavCtrl'
       },
       'maincontent@': {
         templateUrl: dashboardMainContentTemplateUrl,
         controller: dashboardMainContentCtrl,
-        controllerAs: 'mainContentCtrl'
+        controllerAs: 'dashboardMainContentCtrl'
       }
     },
     abstract: true,
@@ -177,33 +162,57 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', function($statePro
       readState.sidebar.isPresent();
     }]
   })
-  .state('read.developer.app.dashboard.designer', {
-    url: "/designer",
-    templateUrl: dashboardDesignerTemplateUrl
-  })
-  .state('read.developer.app.dashboard.viewer', {
-    url: "/viewer",
-    templateUrl: dashboardViewerTemplateUrl,
-    controller: dashboardCtrl,
-    controllerAs: 'dashboardCtrl'
-  })
-  .state('read.developer.app.share', {
-    url: "/developer/app/share",
+  .state('read.developer.app.dashboard.app', {
+    url: "/app",
     views: {
-      'sidenav@': {
+      'side': {
         templateUrl: sideNavWrapperTemplateUrl,
-        controller: dasSideNavCtrl,
+        controller: appSideNavCtrl,
         controllerAs: 'sideNavCtrl'
       },
-      'maincontent@': {
-        templateUrl: dasMainContentTemplateUrl,
-        controller: dasMainContentCtrl,
-        controllerAs: 'mainContentCtrl'
+      'main': {
+        templateUrl: appMainContentTemplateUrl
       }
-    },
-    onEnter: ['readState', function(readState) {
-      readState.sidebar.isPresent();
-    }]
+    }
+  })
+  .state('read.developer.app.dashboard.dashboard', {
+    url: "/dashboard",
+    views: {
+      'side': {
+        templateUrl: sideNavWrapperTemplateUrl,
+        controller: dashboardDashboardSideNavCtrl,
+        controllerAs: 'sideNavCtrl'
+      },
+      'main': {
+        templateUrl: dashboardDashboardMainContentTemplateUrl
+      }
+    }
+  })
+  .state('read.developer.app.dashboard.designer', {
+    url: "/designer",
+    views: {
+      'side': {
+        templateUrl: sideNavWrapperTemplateUrl,
+        controller: dashboardDesignerSideNavCtrl,
+        controllerAs: 'sideNavCtrl'
+      },
+      'main': {
+        templateUrl: dashboardDesignerMainContentTemplateUrl
+      }
+    }
+  })
+  .state('read.developer.app.dashboard.dataset', {
+    url: "/dataset",
+    views: {
+      'side': {
+        templateUrl: sideNavWrapperTemplateUrl,
+        controller: dashboardDataSetSideNavCtrl,
+        controllerAs: 'sideNavCtrl'
+      },
+      'main': {
+        templateUrl: dashboardDataSetMainContentTemplateUrl
+      }
+    }
   })
   .state('read.developer.playground', {
     abstract: true
@@ -228,12 +237,6 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', function($statePro
   })
   .state('read.developer.playground.viz', {
     abstract: true
-  })
-  .state('read.developer.playground.viz.chartjs', {
-    url: "/developer/playground/viz/chartjs",
-    onEnter: ['readState', function(readState) {
-      readState.sidebar.isPresent();
-    }]
   })
   .state('read.developer.playground.viz.nvd3', {
     url: "/developer/playground/nvd3",
@@ -271,43 +274,13 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', function($statePro
       readState.sidebar.isPresent();
     }]
   })
-  .state('read.developer.playground.viz.d3', {
-    url: "/developer/playground/viz/d3",
-    onEnter: ['readState', function(readState) {
-      readState.sidebar.isPresent();
-    }]
-  })
-  .state('read.developer.playground.viz.dcjs', {
-    url: "/developer/playground/viz/dcjs",
-    onEnter: ['readState', function(readState) {
-      readState.sidebar.isPresent();
-    }]
-  })
-  .state('read.developer.playground.apibridge', {
-    url: "/developer/playground/apibridge",
-    onEnter: ['readState', function(readState) {
-      readState.sidebar.isPresent();
-    }]
-  })
   .state('read.docs', {
     abstract: true
   })
-  .state('read.docs.apireference', {
-    url: "/docs/apireference",
-    onEnter: ['readState', function(readState) {
-      readState.sidebar.isPresent();
-    }]
-  })
-  .state('read.docs.getstarted', {
-    url: "/docs/getstarted",
+  .state('read.docs.gettingstarted', {
+    url: "/docs/gettingstarted",
     onEnter: ['readState', function(readState) {
       readState.sidebar.notPresent();
-    }]
-  })
-  .state('read.docs.guide', {
-    url: "/docs/guide",
-    onEnter: ['readState', function(readState) {
-      readState.sidebar.isPresent();
     }]
   })
   .state('read.docs.tutorial', {
@@ -322,21 +295,6 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', function($statePro
         controllerAs: 'mainContentCtrl'
       }
     },
-    onEnter: ['readState', function(readState) {
-      readState.sidebar.isPresent();
-    }]
-  })
-  .state('read.enduser', {
-    abstract: true
-  })
-  .state('read.enduser.embedviz', {
-    url: "/enduser/embedviz",
-    onEnter: ['readState', function(readState) {
-      readState.sidebar.notPresent();
-    }]
-  })
-  .state('read.enduser.dashboard', {
-    url: "/enduser/dashboard",
     onEnter: ['readState', function(readState) {
       readState.sidebar.isPresent();
     }]

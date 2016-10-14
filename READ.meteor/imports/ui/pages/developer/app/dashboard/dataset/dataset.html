@@ -1,0 +1,41 @@
+<div class="main-content-panel-wrapper" ng-if="dashboardMainContentCtrl.dataSet" ng-controller="dataSetCtrl as dataSetCtrl">
+  <div class="main-content-panel">
+    <div class="panel with-nav-tabs panel-default">
+      <div class="panel-heading">
+        <ul class="nav nav-tabs">
+          <li ng-class="{active: dataSetCtrl.readState.mainContentSelectedTab.dataSet === 'editor'}" ng-if="dataSetCtrl.dataSet">
+            <a ng-click="dataSetCtrl.readState.mainContentSelectedTab.dataSet = 'editor'">Data Editor
+            <i ng-if="! dataSetCtrl.validators.dataSetEditor" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+          </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-6" ng-if="dataSetCtrl.dataSet.dataSetType !== 'raw'">
+            <simple-http-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'simpleHTTP'"></simple-http-data-editor>
+            <extended-http-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'extendedHTTP'"></extended-http-data-editor>
+            <transformed-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'transformed'"></transformed-data-editor>
+          </div>
+
+          <div class="col-md-6" ng-if="dataSetCtrl.dataSet.dataSetType !== 'raw'">
+            <label ng-if="dataSetCtrl.lastDataObject.isData">Data</label>
+            <pre class="pre-scrollable" ng-if="dataSetCtrl.lastDataObject.isData">{{dataSetCtrl.lastDataObject.data | json:2}}</pre>
+
+            <label ng-if="! dataSetCtrl.lastDataObject.isData">Data</label>
+            <dl class="alert alert-danger" role="alert" ng-if="! dataSetCtrl.lastDataObject.isData">
+              <dt ng-repeat-start="(key, value) in dataSetCtrl.lastDataObject.error">{{key}}</dt>
+              <dd ng-repeat-end>{{value}}</dd>
+            </dl>
+          </div>
+
+          <div class="col-md-12" ng-if="dataSetCtrl.dataSet.dataSetType === 'raw'">
+            <raw-data-editor></raw-data-editor>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

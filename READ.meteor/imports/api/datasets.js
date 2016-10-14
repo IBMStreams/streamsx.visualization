@@ -8,7 +8,7 @@ export const rawDataSchema = {
   properties: {
     userId: {type: "string"},
     appId: {type: "string"},
-    dataPanelId: {type: "string"},
+    dashboardId: {type: "string"},
     dataSetType: {constant: "raw"},
     name: {
       type: "string",
@@ -17,7 +17,7 @@ export const rawDataSchema = {
     },
     rawData: {type: "string"}
   },
-  required: ["userId", "appId", "dataPanelId", "dataSetType", "name", "rawData"],
+  required: ["userId", "appId", "dashboardId", "dataSetType", "name", "rawData"],
   additionalProperties: false
 };
 
@@ -28,7 +28,7 @@ export const simpleHTTPDataSchema = {
   properties: {
     userId: {type: "string"},
     appId: {type: "string"},
-    dataPanelId: {type: "string"},
+    dashboardId: {type: "string"},
     dataSetType: {constant: "simpleHTTP"},
     name: {
       type: "string",
@@ -45,7 +45,7 @@ export const simpleHTTPDataSchema = {
       required: ["enabled"]
     }
   },
-  required: ["userId", "appId", "dataPanelId", "dataSetType", "name", "url", "poll"],
+  required: ["userId", "appId", "dashboardId", "dataSetType", "name", "url", "poll"],
   additionalProperties: false
 };
 
@@ -56,7 +56,7 @@ export const extendedHTTPDataSchema = {
   properties: {
     userId: {type: "string"},
     appId: {type: "string"},
-    dataPanelId: {type: "string"},
+    dashboardId: {type: "string"},
     dataSetType: {constant: "extendedHTTP"},
     name: {
       type: "string",
@@ -73,7 +73,7 @@ export const extendedHTTPDataSchema = {
       required: ["enabled"]
     }
   },
-  required: ["userId", "appId", "dataPanelId", "dataSetType", "name", "parentId", "poll"],
+  required: ["userId", "appId", "dashboardId", "dataSetType", "name", "parentId", "poll"],
   additionalProperties: false
 };
 
@@ -84,7 +84,7 @@ export const transformedDataSchema = {
   properties: {
     userId: {type: "string"},
     appId: {type: "string"},
-    dataPanelId: {type: "string"},
+    dashboardId: {type: "string"},
     dataSetType: {constant: "transformed"},
     name: {
       type: "string",
@@ -105,7 +105,7 @@ export const transformedDataSchema = {
     },
     transformFunction: {type: "string"}
   },
-  required: ["userId", "appId", "dataPanelId", "dataSetType", "name", "parents", "stateParams", "transformFunction"],
+  required: ["userId", "appId", "dashboardId", "dataSetType", "name", "parents", "stateParams", "transformFunction"],
   additionalProperties: false
 };
 
