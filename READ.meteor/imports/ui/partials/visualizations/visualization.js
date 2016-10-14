@@ -1,4 +1,3 @@
-import _ from 'underscore';
 import Rx from 'rx/dist/rx.all'
 
 import templateUrl from './visualization.html';

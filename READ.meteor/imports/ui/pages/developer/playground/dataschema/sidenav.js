@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
-import _ from 'underscore';
+import _ from 'underscore/underscore';
 
 import {Users} from '/imports/api/users';
 import {Playground} from '/imports/api/playground';
 
-export default sideNavCtrl = ['$scope', '$reactive', '$state', '$timeout', 'readState',
+export const schemaSideNavCtrl = ['$scope', '$reactive', '$state', '$timeout', 'readState',
 function ($scope, $reactive, $state, $timeout, readState) {
   $reactive(this).attach($scope);
   let self = this;
@@ -14,6 +14,8 @@ function ($scope, $reactive, $state, $timeout, readState) {
     items: () => Playground.find({pluginType: 'Data Schema'}).fetch(),
     item: () => Playground.findOne({_id: self.getReactively('user.selectedIds.dataSchemaId')})
   });
+
+  console.log(self.items, self.item);
 
   this.itemsControl = {
     itemType: "Data Schema",
@@ -31,7 +33,7 @@ function ($scope, $reactive, $state, $timeout, readState) {
       Meteor.call('playground.create', {
         userId: 'guest',
         pluginType: 'Data Schema',
-        name: self.itemsControl.newItemName,
+        name: self.itemsControl.itemType + ' ' + self.items.length,
         readOnly: false,
         jsonSchema: '{}',
         testData: "42"

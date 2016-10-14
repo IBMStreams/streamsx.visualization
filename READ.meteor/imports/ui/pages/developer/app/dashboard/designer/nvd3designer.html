@@ -1,0 +1,88 @@
+<div class="panel with-nav-tabs panel-default" ng-controller="nvd3VizDesignCtrl as nvd3VizDesignCtrl">
+  <div class="panel-heading">
+    <ul class="nav nav-tabs">
+      <li ng-class="{active: nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer === 'data'}">
+        <a ng-click="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer = 'data'">Data
+          <i ng-if="! nvd3VizDesignCtrl.validators.basicOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i></a>
+        </li>
+        <li ng-class="{active: nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer === 'advancedOptions'}">
+          <a ng-click="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer = 'advancedOptions'">Advanced Options
+            <i ng-if="! nvd3VizDesignCtrl.validators.advancedOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i></a>
+          </li>
+          <li ng-class="{active: nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer === 'canonicalData'}">
+            <a ng-click="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer = 'canonicalData'">Canonical Data</a>
+          </li>
+          <li ng-class="{active: nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer === 'usageInfo'}">
+            <a ng-click="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer = 'usageInfo'">Usage Info</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="panel-body">
+
+        <div class="row" ng-if="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer !== 'usageInfo'">
+          <div class="col-md-5">
+            <div ng-if="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer === 'data'">
+                <form name="nvd3VizDesignCtrl.dataForm">
+                  <div class="form-group">
+                    <label for="dataSet">Data Set</label>
+                    <select class="form-control" ng-model="designerCtrl.visualization.dataSetId" name="dataSet"
+                    ng-options="dataSet._id as dataSet.name for dataSet in designerCtrl.dataSets"
+                    ng-change="designerCtrl.updateAndReload()">
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="template">Chart Type</label>
+                  <select class="form-control" ng-model="designerCtrl.visualization.templateId" name="template"
+                  ng-options="template._id as template.name group by template.pluginType for template in designerCtrl.templates"
+                  ng-change="designerCtrl.updateChartTypeAndReload()">
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="basicOptions">Basic Options</label>
+                <div ui-ace="designerCtrl.aceJavaScriptOptions" ng-model="designerCtrl.visualization.basicOptions"
+                valid-json json-schema="nvd3VizDesignCtrl.basicOptionsSchema"
+                ng-model-options="{allowInvalid: true}"
+                ng-readonly="designerCtrl.visualization.readOnly" name="basicOptions">
+              </div>
+            </div>
+          </form>
+      </div>
+
+      <div ng-if="designerCtrl.readState.mainContentSelectedTab.designer === 'advancedOptions'">
+        <form name="nvd3VizDesignCtrl.advancedOptionsForm" novalidate>
+          <div class="form-group">
+            <label for="advancedOptions">Advanced Options</label>
+            <div ui-ace="designerCtrl.aceJavaScriptOptions" ng-model="designerCtrl.visualization.advancedOptions"
+            valid-object ng-model-options="{allowInvalid: true}"
+            ng-readonly="designerCtrl.visualization.readOnly" name="advancedOptions">
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div ng-if="designerCtrl.readState.mainContentSelectedTab.designer === 'canonicalData'">
+      <label>Canonical Data</label>
+      <pre class="pre-scrollable" ng-if="nvd3VizDesignCtrl.canonicalDataObject.isData">{{nvd3VizDesignCtrl.canonicalDataObject.data | json:2}}</pre>
+      <dl class="alert alert-danger" role="alert" ng-if="! nvd3VizDesignCtrl.canonicalDataObject.isData">
+        <dt ng-repeat-start="(key, value) in nvd3VizDesignCtrl.canonicalDataObject.error">{{key}}</dt>
+        <dd ng-repeat-end>{{value}}</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="col-md-7">
+    <div class="designer-chart-container" dimensions="designerCtrl.dimensions">
+      <visualization visualization="designerCtrl.reactiveVisualization" dim="designerCtrl.dimensions" ng-if="designerCtrl.ready"></visualization>
+    </div>
+  </div>
+
+</div>
+
+<div ng-if="designerCtrl.readState.mainContentSelectedTab.designer === 'usageInfo'" >
+  <div ng-bind-html="nvd3VizDesignCtrl.template.usageInfo"></div>
+</div>
+</div>
+</div>

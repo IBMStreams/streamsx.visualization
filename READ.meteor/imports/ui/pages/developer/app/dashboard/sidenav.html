@@ -1,13 +1,3 @@
-<ul class="nav nav-tabs">
-  <li role="presentation" ng-class="{active: sideNavCtrl.readState.sidebar.dashboard === 'dashboards'}"><a href="javascript:void(0)" ng-click="sideNavCtrl.readState.sidebar.dashboard = 'dashboards'">Dashboards</a></li>
-  <li role="presentation" ng-class="{active: sideNavCtrl.readState.sidebar.dashboard === 'visualizations'}"><a href="javascript:void(0)" ng-click="sideNavCtrl.readState.sidebar.dashboard = 'visualizations'">Visualizations</a></li>
-</ul>
-<br />
-<div ng-if="sideNavCtrl.readState.sidebar.dashboard === 'dashboards'">
-  <side-nav items="sideNavCtrl.dashboards" items-control="sideNavCtrl.dashboardsControl"
-  item="sideNavCtrl.dashboard" item-controls="sideNavCtrl.dashboardControls"></side-nav>
-</div>
-<div ng-if="sideNavCtrl.readState.sidebar.dashboard === 'visualizations'">
-  <side-nav items="sideNavCtrl.visualizations" items-control="sideNavCtrl.visualizationsControl"
-  item="sideNavCtrl.visualization" item-controls="sideNavCtrl.visualizationControls"></side-nav>
+<div ng-if="dashboardSideNavCtrl.app">
+  <div ui-view="side"></div>
 </div>

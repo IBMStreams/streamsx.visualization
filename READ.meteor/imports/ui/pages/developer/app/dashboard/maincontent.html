@@ -1,8 +1,10 @@
-<div ng-if="mainContentCtrl.dashboard">
-  <div class="btn-group">
-    <a class="btn btn-default" ui-sref="read.developer.app.dashboard.designer" ng-model="mainContentCtrl.readState.dashboardView" uib-btn-radio="'designer'">Design</a>
-    <a class="btn btn-default" ui-sref="read.developer.app.dashboard.viewer" ng-model="mainContentCtrl.readState.dashboardView" uib-btn-radio="'dashboard'">Layout</a>
-  </div>
+<ol class="breadcrumb">
+  <li><a ui-sref="read.developer.app.dashboard.app">Apps</a></li>
+  <li><a ui-sref="read.developer.app.dashboard.dashboard">Dashboards</a></li>
+  <li><a ui-sref="read.developer.app.dashboard.dataset">Datasets</a></li>
+  <li><a ui-sref="read.developer.app.dashboard.designer">Designers</a></li>
+</ol>
 
-  <div ui-view></div>
+<div ng-if="dashboardMainContentCtrl.app">
+  <div ui-view="main"></div>
 </div>

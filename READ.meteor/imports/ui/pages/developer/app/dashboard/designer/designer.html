@@ -1,0 +1,6 @@
+<div class="main-content-panel-wrapper" ng-controller="designerCtrl as designerCtrl">
+  <div class="main-content-panel" ng-if="designerCtrl.visualization">
+    <div ng-include="'/imports/ui/pages/developer/app/dashboard/designer/nvd3designer.html'" ng-if="designerCtrl.reactiveVisualization.pluginType==='NVD3'"></div>
+    <div ng-include="'/imports/ui/pages/developer/app/dashboard/designer/leafletdesigner.html'" ng-if="designerCtrl.reactiveVisualization.pluginType==='leaflet'"></div>
+  </div>
+</div>

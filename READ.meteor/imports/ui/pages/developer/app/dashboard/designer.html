@@ -1,6 +1,0 @@
-<div class="main-content-panel-wrapper after-button" ng-if="mainContentCtrl.dashboard.selectedVisualizationId" ng-controller="vizDesignCtrl as vizDesignCtrl">
-  <div class="main-content-panel" ng-if="vizDesignCtrl.visualization">
-    <div ng-include="'/imports/ui/pages/developer/app/dashboard/nvd3designer.html'" ng-if="vizDesignCtrl.reactiveVisualization.pluginType==='NVD3'"></div>
-    <div ng-include="'/imports/ui/pages/developer/app/dashboard/leafletdesigner.html'" ng-if="vizDesignCtrl.reactiveVisualization.pluginType==='leaflet'"></div>
-  </div>
-</div>

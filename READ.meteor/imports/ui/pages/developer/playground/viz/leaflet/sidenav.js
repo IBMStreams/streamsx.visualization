@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
-import _ from 'underscore';
+import _ from 'underscore/underscore';
 
 import {Users} from '/imports/api/users';
 import {Playground} from '/imports/api/playground';
 
-export default sideNavCtrl = ['$scope', '$reactive', '$state', '$timeout', 'readState',
+export const leafletSideNavCtrl = ['$scope', '$reactive', '$state', '$timeout', 'readState',
 function ($scope, $reactive, $state, $timeout, readState) {
   $reactive(this).attach($scope);
   let self = this;
@@ -33,7 +33,7 @@ function ($scope, $reactive, $state, $timeout, readState) {
       Meteor.call('playground.create', {
         userId: 'guest',
         pluginType: 'leaflet',
-        name: self.itemsControl.newItemName,
+        name: self.itemsControl.itemType + ' ' + self.items.length,
         readOnly: false,
         inputSchemaId: self.dataSchemas[0]._id,
         testData: "{\n\tcenter: {\n\t\tlat: 51.505,\n\t\tlng: -0.09,\n\t\t\n\t\tzoom: 4\n\t}\n}",

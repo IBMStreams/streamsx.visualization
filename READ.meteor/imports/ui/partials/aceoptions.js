@@ -1,5 +1,5 @@
 import angular from 'angular';
-import _ from 'underscore';
+import _ from 'underscore/underscore';
 import ajv from 'ajv';
 
 let aceOptions = {

@@ -1,0 +1,44 @@
+<div ng-controller="appCtrl as appCtrl">
+  <div ng-if="appCtrl.app">
+    <form name="appCtrl.privateAppForm" novalidate>
+      <div class="form-group">
+        <label>Settings for App Sharing</label>
+        <div class="form-group">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="appCtrl.app.private"> Private
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" ng-if="! appCtrl.app.private">
+        <label>Public Link for App</label>
+        <div class="input-group col-md-6">
+          <input type="url" class="form-control" ng-model="appCtrl.url" readonly name="appURL" id="appURL">
+          <span class="input-group-addon btn btn-default" ngclipboard data-clipboard-target="#appURL">
+            <i class="fa fa-clipboard"></i>
+          </span>
+        </div>
+      </div>
+
+    </form>
+
+    <hr />
+
+    <form name="globalConfigForm" novalidate>
+      <label>READ.Sharing service URL </label>
+      <div class="input-group col-md-6">
+        <input type="url" class="form-control" placeholder="http://localhost:3002/"
+        ng-model="appCtrl.user.shareServiceURL"
+        name="shareServiceURL" required>
+        <span class="input-group-addon btn btn-default" ng-class="{'disabled': globalConfigForm.shareServiceURL.$isEmpty(globalConfigForm.shareServiceURL.$modelValue) || globalConfigForm.shareServiceURL.$invalid || (globalConfigForm.shareServiceURL.$modelValue === user.shareServiceURL)}"
+        ng-click="(globalConfigForm.shareServiceURL.$invalid || appCtrl.updateUser())"><i class="fa fa-arrow-circle-right"></i></span>
+      </div>
+      <div ng-messages="globalConfigForm.shareServiceURL.$error" class="help-block">
+        <div ng-message="url">Valid URL is required</div>
+      </div>
+    </form>
+
+  </div>
+</div>
