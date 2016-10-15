@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import _ from 'underscore/underscore';
+import Rx from 'rx/dist/rx.all'
 
 import {Users} from '/imports/api/users';
 import {Apps} from '/imports/api/apps';
