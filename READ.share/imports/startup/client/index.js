@@ -13,18 +13,26 @@ import {reactiveDataFactory} from '/imports/api/client/reactivedatafactory.js';
 import {reactivePipeline} from '/imports/api/client/reactivepipeline';
 import {readStateFactory} from '/imports/api/client/readstatefactory.js';
 import {readCtrl} from '/imports/ui/readctrl.js';
+
 import {dimensionsDirective} from '/imports/ui/partials/dimensions';
+
 import {headerNavComponent} from '/imports/ui/partials/common/headernav/headernav';
 import {sideNavComponent} from '/imports/ui/partials/common/sidenav/sidenav';
 import sideNavWrapperTemplateUrl from '/imports/ui/partials/common/sidenav/sidenavwrapper.html';
 import {dashboardComponent} from '/imports/ui/partials/dashboard/dashboard';
+
 import developerHomeTemplateUrl from '/imports/ui/pages/developer/home/home.html';
-import {nvd3ProviderComponent} from '/imports/ui/partials/visualizations/nvd3/nvd3provider';
-import {visualizationComponent} from '/imports/ui/partials/visualizations/visualization';
 
 import {dashboardSideNavCtrl} from '/imports/ui/pages/enduser/dashboards/sidenav';
 import dashboardMainContentTemplateUrl from '/imports/ui/pages/enduser/dashboards/maincontent.html';
 import {dashboardMainContentCtrl} from '/imports/ui/pages/enduser/dashboards/maincontent';
+
+import {nvd3ProviderComponent} from '/imports/ui/partials/visualizations/nvd3/nvd3provider';
+import {leafletProviderComponent, leafletMapDirective} from '/imports/ui/partials/visualizations/leaflet/leafletprovider';
+
+import {nvd3VisualizationComponent} from '/imports/ui/partials/visualizations/nvd3/nvd3visualization';
+import {leafletVisualizationComponent} from '/imports/ui/partials/visualizations/leaflet/leafletvisualization';
+import {visualizationComponent} from '/imports/ui/partials/visualizations/visualization';
 
 let name = 'read';
 
@@ -37,7 +45,11 @@ angularModule.factory('reactiveDataFactory', reactiveDataFactory)
 .component('headerNav', headerNavComponent)
 .component('sideNav', sideNavComponent)
 .component('nvd3Provider', nvd3ProviderComponent)
+.directive('leafletMap', leafletMapDirective)
+.component('leafletProvider', leafletProviderComponent)
 .component('visualization', visualizationComponent)
+.component('nvd3Visualization', nvd3VisualizationComponent)
+.component('leafletVisualization', leafletVisualizationComponent)
 .component('dashboard', dashboardComponent)
 .controller('readCtrl', readCtrl)
 
@@ -75,7 +87,6 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', function($statePro
       deferredUser: ['readState', (readState) => readState.deferredUser.promise],
       deferredApps: ['readState', (readState) => readState.deferredApps.promise],
       deferredPlayground: ['readState', (readState) => readState.deferredPlayground.promise],
-      deferredDataPanels: ['readState', (readState) => readState.deferredDataPanels.promise],
       deferredDataSets: ['readState', (readState) => readState.deferredDataSets.promise],
       deferredDashboards: ['readState', (readState) => readState.deferredDashboards.promise],
       deferredVisualizations: ['readState', (readState) => readState.deferredVisualizations.promise],
