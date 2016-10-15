@@ -8,13 +8,11 @@ export const dashboardSideNavCtrl = ['$scope', '$state', 'readState', function (
   this.readState = readState;
 
   this.items = Dashboards.find({appId: self.readState.app._id}).fetch();
-
+  this.item = Dashboards.findOne({_id: self.readState.app.selectedDashboardId});
+  
   this.itemsControl = {
     itemType: "Dashboard",
-    clonable: false,
-    newItemName: undefined,
     selectedId: readState.app.selectedDashboardId,
-    creatable: () => false,
     switchItem: (selectedId) => {
       readState.app.selectedDashboardId = selectedId;
       readState.app.selectedDashboardName = Dashboards.findOne({_id: selectedId}).name;

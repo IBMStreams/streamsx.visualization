@@ -1,0 +1,5 @@
+<leaflet-map ng-if="leafletController.message.isData" data="leafletController.message.data" dim="leafletController.dim"></leaflet-map>
+<dl class="alert alert-danger" role="alert" ng-if="!leafletController.message.isData">
+  <dt ng-repeat-start="(key, value) in leafletController.message.error">{{key}}</dt>
+  <dd ng-repeat-end>{{value}}</dd>
+</dl>

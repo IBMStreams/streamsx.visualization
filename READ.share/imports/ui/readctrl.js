@@ -1,9 +1,8 @@
-import _ from 'underscore';
+import _ from 'underscore/underscore';
 
 /* read controller for root state */
 import {Users} from '/imports/api/users';
 import {Apps} from '/imports/api/apps';
-import {DataPanels} from '/imports/api/datapanels';
 import {DataSets} from '/imports/api/datasets';
 import {Playground} from '/imports/api/playground';
 import {Dashboards} from '/imports/api/dashboards';
@@ -41,12 +40,7 @@ function ($scope, $reactive, readState, $location) {
 
   this.autorun((c) => {
     if (self.getReactively('user', true)) {
-      self.subscribe('datapanels', () => [self.user.selectedIds.appId], {
-        onReady: () => {
-          readState.deferredDataPanels.resolve();
-        }
-      });
-      self.subscribe('dashboards', () => [self.user.selectedIds.appId], {
+      self.subscribe('dashboards', () => [self.getReactively('user.selectedIds.appId')], {
         onReady: () => {
           readState.deferredDashboards.resolve();
         }
