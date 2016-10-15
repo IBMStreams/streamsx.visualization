@@ -1,6 +1,5 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import rxAngular from 'rx-angular';
 import uiRouter from 'angular-ui-router';
 import ngMessages from 'angular-messages';
 import uiAce from 'angular-ui-ace';
@@ -83,7 +82,7 @@ import {tutorialMainContentCtrl} from '/imports/ui/pages/docs/tutorial/mainconte
 let name = 'read';
 
 let angularModule = angular.module(name, [angularMeteor, uiRouter, ngMessages,
-  'ui.bootstrap', 'ngSanitize', 'rx', 'ui.ace', 'nvd3', 'ngclipboard', 'read.dataSetEditors', 'leaflet-directive']);
+  'ui.bootstrap', 'ngSanitize', 'ui.ace', 'nvd3', 'ngclipboard', 'read.dataSetEditors', 'leaflet-directive']);
 
 angularModule.factory('reactiveDataFactory', reactiveDataFactory)
 .service('reactivePipeline', reactivePipeline)

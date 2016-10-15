@@ -1,6 +1,6 @@
 import Rx from 'rx/dist/rx.all'
 import ajv from 'ajv';
-import _ from 'underscore';
+import _ from 'underscore/underscore';
 
 // define the various reactive classes here...
 class Message {

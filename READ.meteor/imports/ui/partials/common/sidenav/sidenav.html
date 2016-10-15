@@ -16,12 +16,23 @@
 <form name="sideNavForm" novalidate ng-if="$ctrl.item">
 <div class="form-group" ng-if="$ctrl.items.length > 0">
   <label for="selectedItemId">Select {{$ctrl.itemsControl.itemType}}</label>
-  <div class="radio" ng-repeat="item in $ctrl.items">
-    <label>
-      <input type="radio" ng-model="$ctrl.itemsControl.selectedId" value="{{item._id}}"
-      ng-change="$ctrl.itemsControl.switchItem($ctrl.itemsControl.selectedId)"/>
-      {{item.name}}
-    </label>
+  <div ng-repeat="_item in $ctrl.items" ng-mouseleave="$ctrl.renameInProgress = false">
+    <div class="input-group sidenav-item" >
+      <span class="input-group-addon"><input type="radio" ng-model="$ctrl.itemsControl.selectedId"
+        value="{{_item._id}}" ng-change="$ctrl.itemsControl.switchItem($ctrl.itemsControl.selectedId)"/>
+      </span>
+      <!-- ng-if the below based on renameInProgress or not...  -->
+      <input type="text" class="form-control" readonly ng-if="(! $ctrl.renameInProgress) || (_item._id !== $ctrl.itemsControl.selectedId)"
+      ng-model="_item.name" ng-click="(_item._id !== $ctrl.itemsControl.selectedId) || ($ctrl.item.readOnly === true) || ($ctrl.renameInProgress = true)"></input>
+
+      <input type="text" class="form-control" name="renamedItemName" minlength=1 maxlength=20
+      ng-if="$ctrl.renameInProgress && (_item._id === $ctrl.itemsControl.selectedId) && (! $ctrl.item.readOnly)" ng-model="$ctrl.itemControls.newItemName"></input>
+      <span class="input-group-btn" ng-if="(_item._id === $ctrl.itemsControl.selectedId) && ($ctrl.renameInProgress) && (! $ctrl.item.readOnly)">
+        <button class="btn btn-default" type="button"
+        ng-class="{'disabled': sideNavForm.renamedItemName.$isEmpty(sideNavForm.renamedItemName.$modelValue) || sideNavForm.renamedItemName.$invalid || (sideNavForm.renamedItemName.$modelValue === $ctrl.item.name)}"
+        ng-click="(sideNavForm.renamedItemName.$isEmpty(sideNavForm.renamedItemName.$modelValue) || sideNavForm.newItemName.$invalid || $ctrl.itemControls.renameItem())">Rename</button>
+      </span>
+    </div>
   </div>
 </div>
 
@@ -37,19 +48,6 @@
       </div>
     </div>
   </div>
-
-  <div class="form-group" ng-if="$ctrl.item && ! $ctrl.item.readOnly && $ctrl.settingsToggle"
-  ng-class="{'has-error': sideNavForm.renamedItemName.$dirty && sideNavForm.renamedItemName.$invalid }">
-  <label for="renamedItemName">Rename {{$ctrl.itemControls.itemType}}</label>
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="newest" ng-model="$ctrl.itemControls.newItemName" name="renamedItemName" minlength=1 maxlength=20>
-    <span class="input-group-addon btn btn-default" ng-class="{'disabled': sideNavForm.renamedItemName.$isEmpty(sideNavForm.renamedItemName.$modelValue) || sideNavForm.renamedItemName.$invalid || (sideNavForm.renamedItemName.$modelValue === $ctrl.item.name)}"
-    ng-click="(sideNavForm.renamedItemName.$isEmpty(sideNavForm.renamedItemName.$modelValue) || sideNavForm.newItemName.$invalid || $ctrl.itemControls.renameItem())"><i class="fa fa-arrow-circle-right"></i></span>
-  </div>
-  <div ng-messages="sideNavForm.newItemName.$error" class="help-block">
-    <div ng-message="minlength">{{$ctrl.itemControls.itemType}} name must have at least 1 character</div>
-  </div>
-</div>
 
 <div class="form-group" >
   <div>
