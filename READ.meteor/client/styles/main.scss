@@ -58,7 +58,7 @@ body {
 }
 
 .sidenav .sidenav-content .breadcrumb {
-  background-color: $navbar-header-background-color;  
+  background-color: $navbar-header-background-color;
 }
 
 .panel.with-nav-tabs .panel-heading {
@@ -140,6 +140,11 @@ pre {
    white-space: -pre-wrap;     /* Opera <7 */
    white-space: -o-pre-wrap;   /* Opera 7 */
    word-wrap: break-word;      /* IE */
+}
+
+.sidenav-item {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 /*==========  Mobile First Method  ==========*/
