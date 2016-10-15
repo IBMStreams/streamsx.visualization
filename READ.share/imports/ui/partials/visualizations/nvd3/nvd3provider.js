@@ -17,6 +17,8 @@ export const nvd3ProviderComponent = {
 
     // handle options change
     $scope.$watch('nvd3Controller.options', x => {
+      delete x.chart.height;
+      delete x.chart.width;
       angular.extend($scope.options, x);
       if ($scope.options.chart.type && $scope.options.chart.height) $scope.ready = true;
     }, true);
