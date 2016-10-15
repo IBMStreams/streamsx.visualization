@@ -184,7 +184,6 @@ export const reactiveDataFactory = ['$http', function ($http) {
             let x = {};
             x[name] = "Error during HTTP with status: " + response.status + " and statusText: " + response.statusText;
             self.injectError(x);
-            console.log(name, response);
           })
         } catch (e) {
           let x = {};
