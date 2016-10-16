@@ -25,7 +25,7 @@
         "type": "function",
         "z": "31f156fd.ce0eaa",
         "name": "sinandcos",
-        "func": "/*Random Data Generator */\nfunction sinAndCos() {\n    var sin = [],sin2 = [], cos = [];\n    var data = [];\n\n    //Data is represented as an array of {x,y} pairs.\n    for (var i = 0; i < 100; i++) {\n        data.push({\n            time: i + 's',\n            sin: Math.sin(i/10),\n            sin2: Math.sin(i/10) *0.25 + 0.5,\n            cos: 0.5 * Math.cos(i/10+ 2) + Math.random() / 2\n        });\n    }\n    return data;\n}\n\nvar dataObject = sinAndCos();\n\nreturn msg.res.status(200).send(dataObject);",
+        "func": "/*Random Data Generator */\nfunction sinAndCos() {\n    var sin = [],sin2 = [], cos = [];\n    var data = [];\n\n    //Data is represented as an array of {x,y} pairs.\n    for (var i = 0; i < 100; i++) {\n        data.push({\n            time: i,\n            sin: Math.sin(i/10),\n            sin2: Math.sin(i/10) *0.25 + 0.5,\n            cos: 0.5 * Math.cos(i/10+ 2) + Math.random() / 2\n        });\n    }\n    return data;\n}\n\nvar dataObject = sinAndCos();\n\nreturn msg.res.status(200).send(dataObject);",
         "outputs": 1,
         "noerr": 0,
         "x": 444,
@@ -43,6 +43,47 @@
         "name": "sinandcos",
         "x": 662,
         "y": 127,
+        "wires": []
+    },
+    {
+        "id": "ab7cd64b.e8b208",
+        "type": "http in",
+        "z": "31f156fd.ce0eaa",
+        "name": "sincosmissing",
+        "url": "/sampleapp/sincosmissing",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 199,
+        "y": 235,
+        "wires": [
+            [
+                "c882b568.93faf8"
+            ]
+        ]
+    },
+    {
+        "id": "c882b568.93faf8",
+        "type": "function",
+        "z": "31f156fd.ce0eaa",
+        "name": "sincosmissing",
+        "func": "/*Random Data Generator */\nfunction sinAndCos() {\n    var sin = [],sin2 = [], cos = [];\n    var data = [];\n\n    //Data is represented as an array of {x,y} pairs.\n    for (var i = 0; i < 100; i++) {\n        let obj = {};\n        if (Math.random() > 0.05) obj.time = i;\n        if (Math.random() > 0.05) obj.sin = Math.sin(i/10);\n        if (Math.random() > 0.05) obj.sin2 = Math.sin(i/10) *0.25 + 0.5;\n        if (Math.random() > 0.05) obj.cos = 0.5 * Math.cos(i/10+ 2) + Math.random() / 2;\n        data.push(obj);\n    }\n    return data;\n}\n\nvar dataObject = sinAndCos();\n\nreturn msg.res.status(200).send(dataObject);",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 445,
+        "y": 235,
+        "wires": [
+            [
+                "ccddb9d7.c5e998"
+            ]
+        ]
+    },
+    {
+        "id": "ccddb9d7.c5e998",
+        "type": "http response",
+        "z": "31f156fd.ce0eaa",
+        "name": "sincosmissing",
+        "x": 663,
+        "y": 234,
         "wires": []
     }
 ]
