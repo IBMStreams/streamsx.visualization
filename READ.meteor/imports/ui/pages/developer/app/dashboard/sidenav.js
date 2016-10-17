@@ -8,6 +8,7 @@ import {Dashboards} from '/imports/api/dashboards';
 export const dashboardSideNavCtrl = ['$scope', '$reactive', '$state', 'readState', function ($scope, $reactive, $state, readState) {
   $reactive(this).attach($scope);
   let self = this;
+  this.readState = readState;
 
   this.helpers({
     user: () => Users.findOne({}),

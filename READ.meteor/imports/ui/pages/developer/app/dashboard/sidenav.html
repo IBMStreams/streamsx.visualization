@@ -1,3 +1,3 @@
-<div ng-if="dashboardSideNavCtrl.app">
+<div ng-if="dashboardSideNavCtrl.app || (dashboardSideNavCtrl.readState.mainContentSelectedTab.dashboard === 'app')">
   <div ui-view="side"></div>
 </div>

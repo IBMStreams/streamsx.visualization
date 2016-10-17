@@ -73,10 +73,8 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
   };
 
   this.updateDataSetType = () => {
-    let parentId = self.candidateParents[0]._id;
-
     let defaultDataSet = (self.dataSet.dataSetType === 'extendedHTTP') ?
-    defaultDataSets.extendedHTTP(parentId) : defaultDataSets[self.dataSet.dataSetType];
+    defaultDataSets.extendedHTTP(self.candidateParents[0]._id) : defaultDataSets[self.dataSet.dataSetType];
 
     let newDataSet = angular.merge({
       _id: self.dataSet._id,
