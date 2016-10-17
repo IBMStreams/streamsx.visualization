@@ -36,9 +36,11 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
   });
 
   this.dataSetTypes = dataSetTypes.filter(dsType => {
-    if (! _.contains(['extendedHTTP', 'transformed'], dsType)) return true;
-    else return self.candidateParents.length > 0;
+    if (! _.contains(['extendedHTTP', 'transformed'], dsType.name)) return true;
+    return self.candidateParents.length > 0;
   });
+
+  console.log(this.dataSetTypes, self.candidateParents);
 
   this.aceJsonSchemaOptions = aceJsonSchemaOptions;
   this.aceJavaScriptOptions = aceJavaScriptOptions;
