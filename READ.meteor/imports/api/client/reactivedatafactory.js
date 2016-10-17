@@ -110,13 +110,11 @@ class TransformedData extends ReactiveData {
       else try {
         // inputs seem ok. We will try applying the transformFunction now.
         let data = undefined;
+        let transformFunctionArgs = latestArgs.map((x) => x.data);
         if (stateEnabled) {
-          // the transformFunction can do what it wants to the state
-          // the transformFunction can return any result based on inputs and state
-          data = transformFunction(...(latestArgs.map((x) => x.data), self.state));
-        } else {
-          data = transformFunction(...(latestArgs.map((x) => x.data)));
+          transformFunctionArgs.push(self.state);
         }
+        data = transformFunction(...transformFunctionArgs);
         if (data) self.injectData(data);
         else { // got no data
           let z = {};

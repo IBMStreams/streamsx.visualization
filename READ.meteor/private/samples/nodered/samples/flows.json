@@ -126,5 +126,46 @@
                 "e2508ab.1907f78"
             ]
         ]
+    },
+    {
+        "id": "af04236a.eecb",
+        "type": "http in",
+        "z": "31f156fd.ce0eaa",
+        "name": "",
+        "url": "/sampleapp/dynamicsine",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 263,
+        "y": 393,
+        "wires": [
+            [
+                "31a2067e.72916a"
+            ]
+        ]
+    },
+    {
+        "id": "31a2067e.72916a",
+        "type": "function",
+        "z": "31f156fd.ce0eaa",
+        "name": "dynamicsine",
+        "func": "let time = 2*Math.PI * ((new Date()).valueOf() % 20000) / 20000;\nmsg.payload = {\n    time: new Date(),\n    sin: Math.sin(time),\n    cos: Math.cos(time)\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 531,
+        "y": 393,
+        "wires": [
+            [
+                "3451f54c.7f64ca"
+            ]
+        ]
+    },
+    {
+        "id": "3451f54c.7f64ca",
+        "type": "http response",
+        "z": "31f156fd.ce0eaa",
+        "name": "dynamicsine",
+        "x": 749,
+        "y": 393,
+        "wires": []
     }
 ]

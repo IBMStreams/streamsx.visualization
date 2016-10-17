@@ -1,0 +1,91 @@
+<h3>Stateful Transform</h3>
+<blockquote>
+  <p>In this section, we will consider streaming data. In this scenario,
+    we have a REST API that updates its continuously. We will poll this API every second,
+  accumulate the recent twenty data values, and plot the current window of data. Our plot will update dynamically every second.</p>
+</blockquote>
+<blockquote>
+  <p>These instructions assume that you have <a href="https://nodejs.org/en/" target="_blank">NodeJS</a> installed.
+    Commands <code>node</code> and <code>npm</code> will work if NodeJS is installed.</p>
+</blockquote>
+
+<div class="row">
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial/advancedusecases/statefultransform.1.png')">
+        <img src="/images/tutorial/advancedusecases/statefultransform.1.png" alt="node-RED flow"></img>
+      </a>
+      <div class="caption">
+        <h4>Node-RED Flow</h4>
+        <ul>
+          <li><code class="word-wrap">cd streamsx.visualization/READ.meteor/private/samples/nodered</code></li>
+          <li><code class="word-wrap">node ../../../node_modules/node-red/red.js -s settings.js -u samples</code></li>
+        </ul>
+        <p class="word-wrap">This starts a node-RED
+        instance at http://127.0.0.1:9000/ and exposes a dynamic data API at
+        http://127.0.0.1:9000/sampleapp/dynamicsine</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial/advancedusecases/statefultransform.2.png')">
+        <img src="/images/tutorial/advancedusecases/statefultransform.2.png" alt="Dataset Creation"></img>
+      </a>
+      <div class="caption">
+        <h4>Create Dynamic Dataset</h4>
+        <p>Switch to the <a href="javascript:void(0)">Dashboards</a> tab.
+          Create Dashboard <i class="fa fa-plus-circle"></i> and rename it as <code>Stateful Transform</code>.</p>
+        <p class="word-wrap">Switch to the <a href="javascript:void(0)">Datasets</a> tab.
+          Create dataset <i class="fa fa-plus-circle"></i> and rename it as <code>Dynamic Sine</code>.
+          Switch the dataset type to <strong>URL</strong> and set the URL to
+          http://localhost:9000/sampleapp/dynamicsine. Enable polling and set the
+        polling interval to one second.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial/advancedusecases/statefultransform.3.png')">
+        <img src="/images/tutorial/advancedusecases/statefultransform.3.png" alt="Dataset Creation"></img>
+      </a>
+      <div class="caption">
+        <h4>Create Stateful Dataset</h4>
+        <p class="word-wrap">Create dataset <i class="fa fa-plus-circle"></i> and rename it as <code>Stateful Sine</code>.
+          Switch the dataset type to <strong>Transform</strong> and set <code>Dynamic Sine</code> as the parent.
+          Use <a href="https://gist.githubusercontent.com/sriumcp/6eeb5a9cd7fd5648b17721396e03f10d/raw/c6fa7d6f9746a6b0fff9f70ea72927deabe2d4da/statefultransform.js" target="_blank">this function</a>
+          as the transform function. Enable state and set empty array <code>[]</code> as the initial state.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial/advancedusecases/statefultransform.4.png')">
+        <img src="/images/tutorial/advancedusecases/statefultransform.4.png" alt="Visualization Creation"></img>
+      </a>
+      <div class="caption">
+        <h4>Create Visualization</h4>
+        <p class="word-wrap">Switch to the <a href="javascript:void(0)">Visualizations</a> tab.
+          Create visualization <i class="fa fa-plus-circle"></i> and rename it to <code>Stateful Sine</code>.
+          Choose <code>Stateful Sine</code> as the dataset.
+          Use <a target="_blank" href="https://gist.githubusercontent.com/sriumcp/d99573ac404510648889ee9502ee252f/raw/2615dc74390c571248abc00150ba35fae0127fe7/statefulsinebasic.js">this</a>
+          as basic options for the chart. Use <a target="_blank" href="https://gist.githubusercontent.com/sriumcp/17acf94e92db5557fa33e75e00c2b2aa/raw/c10b7e9bcd29d2350927f701cac61aeeba450da4/statefultransformadvanced.js">this</a> as the advanced options.</p>
+          You should now see the dynamic chart updates.
+      </div>
+    </div>
+  </div>
+</div> <!-- row -->
+
+<h3>Key Concepts</h3>
+<ul class="list-group">
+  <li class="list-group-item">You can enable state in a <strong>transform</strong> dataset, and initialize it to any valid javascript
+    object (i.e., array or object).
+  </li>
+  <li class="list-group-item">Stateful transforms are best used in conjuction with <strong>URL</strong> datasets that are polled.</li>
+  <li class="list-group-item">If state is enabled, the last argument to the transform function is the state object. The rest
+  of the arguments are the latest data value(s) from the parent dataset(s). The transform function updates the state as well as returns the
+  current data value of the transform dataset.</li>
+</ul>

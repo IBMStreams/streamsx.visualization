@@ -1,8 +1,13 @@
-import carsSideNavTemplate from './cars/maincontent.html';
-import moviesSideNavTemplate from './movies/maincontent.html';
-import timeSeriesSideNavTemplate from './timeseries/maincontent.html';
+import './cars/maincontent.html';
+import './movies/maincontent.html';
+import './timeseries/maincontent.html';
+import './advancedusecases/maincontent.html';
+
 import './timeseries/createapp.html';
 import './timeseries/timeseriescharts.html';
+
+import './advancedusecases/statefultransform.html';
+
 
 export const tutorialMainContentCtrl = ['$scope', 'readState', '$uibModal', function ($scope, readState, $uibModal) {
   this.readState = readState;

@@ -40,8 +40,6 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
     return self.candidateParents.length > 0;
   });
 
-  console.log(this.dataSetTypes, self.candidateParents);
-
   this.aceJsonSchemaOptions = aceJsonSchemaOptions;
   this.aceJavaScriptOptions = aceJavaScriptOptions;
   this.aceHTMLOptions = aceHTMLOptions;
