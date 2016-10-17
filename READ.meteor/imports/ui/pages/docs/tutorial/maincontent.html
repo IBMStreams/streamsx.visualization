@@ -3,9 +3,10 @@
   <div class="lead">Rapidly build and share real-time dashboards. Learn advanced concepts and techniques.</div>
   <ul class="breadcrumb">
     <li><a href="javascript:void(0)" ng-click="mainContentCtrl.switch('timeseries', 'createApp')">Time Series</a></li>
-    <li><a href="javascript:void(0)" ng-click="mainContentCtrl.switch('cars', 'createApp')">Cars</a></li>
+    <li>Cars</li>
     <li>Maps</li>
     <li>Movies</li>
+    <li><a href="javascript:void(0)" ng-click="mainContentCtrl.switch('advancedUseCases', 'statefulTransform')">Advanced Usecases</a></li>
   </ul>
   <hr />
 </div>
@@ -17,4 +18,7 @@
 </div>
 
 <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.tutorial === 'timeseries'" ng-include="'/imports/ui/pages/docs/tutorial/timeseries/maincontent.html'">
+</div>
+
+<div ng-if="mainContentCtrl.readState.mainContentSelectedTab.tutorial === 'advancedUseCases'" ng-include="'/imports/ui/pages/docs/tutorial/advancedusecases/maincontent.html'">
 </div>
