@@ -3,9 +3,7 @@
 ## Synopsis
 READ is a developer playground for advanced visual analytics.
 
-Use READ to create Real-time Visualizations, 
-Responsive Sharable Dashboards, REST API Dataflows, and for rapid prototyping and customization advanced
-real-time visual analytics.
+Use READ to rapidly prototype real-time visualizations, responsive sharable dashboards, REST API dataflows, and new types of data visualizations.
 
 ## Getting Started
 1. Prerequisites
