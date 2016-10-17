@@ -117,12 +117,12 @@ angularModule.factory('reactiveDataFactory', reactiveDataFactory)
 
 angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
   // handle CORS business
-  $httpProvider.defaults.useXDomain = true;
+/*  $httpProvider.defaults.useXDomain = true;
   delete $httpProvider.defaults.headers.common["X-Requested-With"];
 
   $httpProvider.defaults.withCredentials = true;
   $httpProvider.defaults.headers.common["Accept"] = "application/json";
-  $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
+  $httpProvider.defaults.headers.common["Content-Type"] = "application/json"; */
 
   // For any unmatched url, send to /home
   $urlRouterProvider.otherwise("/developer/home");
