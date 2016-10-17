@@ -80,6 +80,11 @@ import {tutorialSideNavCtrl} from '/imports/ui/pages/docs/tutorial/sidenav';
 import tutorialMainContentTemplateUrl from '/imports/ui/pages/docs/tutorial/maincontent.html';
 import {tutorialMainContentCtrl} from '/imports/ui/pages/docs/tutorial/maincontent';
 
+import helpTopicsSideNavTemplateUrl from '/imports/ui/pages/docs/helptopics/sidenav.html';
+import {helpTopicsSideNavCtrl} from '/imports/ui/pages/docs/helptopics/sidenav.js';
+import helpTopicsMainContentTemplateUrl from '/imports/ui/pages/docs/helptopics/maincontent.html';
+import {helpTopicsMainContentCtrl} from '/imports/ui/pages/docs/helptopics/maincontent';
+
 let name = 'read';
 
 let angularModule = angular.module(name, [angularMeteor, uiRouter, ngMessages,
@@ -110,7 +115,15 @@ angularModule.factory('reactiveDataFactory', reactiveDataFactory)
 .controller('nvd3VizDesignCtrl', nvd3VizDesignCtrl)
 .controller('leafletVizDesignCtrl', leafletVizDesignCtrl)
 
-angularModule.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
+  // handle CORS business
+  $httpProvider.defaults.useXDomain = true;
+  delete $httpProvider.defaults.headers.common["X-Requested-With"];
+
+  $httpProvider.defaults.withCredentials = true;
+  $httpProvider.defaults.headers.common["Accept"] = "application/json";
+  $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
+
   // For any unmatched url, send to /home
   $urlRouterProvider.otherwise("/developer/home");
 
@@ -306,6 +319,24 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', function($statePro
       'maincontent@': {
         templateUrl: tutorialMainContentTemplateUrl,
         controller: tutorialMainContentCtrl,
+        controllerAs: 'mainContentCtrl'
+      }
+    },
+    onEnter: ['readState', function(readState) {
+      readState.sidebar.isPresent();
+    }]
+  })
+  .state('read.docs.helptopics', {
+    url: "/docs/helptopics",
+    views: {
+      'sidenav@': {
+        templateUrl: helpTopicsSideNavTemplateUrl,
+        controller: helpTopicsSideNavCtrl,
+        controllerAs: 'sideNavCtrl'
+      },
+      'maincontent@': {
+        templateUrl: helpTopicsMainContentTemplateUrl,
+        controller: helpTopicsMainContentCtrl,
         controllerAs: 'mainContentCtrl'
       }
     },

@@ -7,7 +7,8 @@ export const readStateFactory = ['$q', 'reactivePipeline', ($q, reactivePipeline
     sidebar: {
       present: true,
       show: true,
-      tutorial: 'createApp'
+      tutorial: 'createApp',
+      helpTopics: 'dashboardSharing'
     },
     mainContentSelectedTab: {
       dataSet: 'editor',
