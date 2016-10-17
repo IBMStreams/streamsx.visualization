@@ -5,9 +5,10 @@ import {Apps} from '/imports/api/apps';
 import {Dashboards} from '/imports/api/dashboards';
 import {DataSets} from '/imports/api/datasets';
 
-export const dashboardMainContentCtrl = ['$scope', '$reactive', function($scope, $reactive) {
+export const dashboardMainContentCtrl = ['$scope', '$reactive', 'readState', function($scope, $reactive, readState) {
   $reactive(this).attach($scope);
   let self = this;
+  this.readState = readState;
 
   this.helpers({
     user: () => Users.findOne({}),

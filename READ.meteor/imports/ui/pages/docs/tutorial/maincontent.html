@@ -1,11 +1,20 @@
 <div class="text-center">
   <h1>Tutorial</h1>
   <div class="lead">Rapidly build and share real-time dashboards. Learn advanced concepts and techniques.</div>
+  <ul class="breadcrumb">
+    <li><a href="javascript:void(0)" ng-click="mainContentCtrl.switch('timeseries', 'createapp')">Time Series</a></li>
+    <li><a href="javascript:void(0)" ng-click="mainContentCtrl.switch('cars', 'createapp')">Cars</a></li>
+    <li>Maps</li>
+    <li>Movies</li>
+  </ul>
   <hr />
 </div>
 
-<div ng-if="readState.tutorialSection === 'createApp'" ng-include="'/imports/ui/pages/docs/tutorial/createapp.html'">
+<div ng-if="mainContentCtrl.readState.mainContentSelectedTab.tutorial === 'cars'" ng-include="'/imports/ui/pages/docs/tutorial/cars/maincontent.html'">
 </div>
 
-<div ng-if="readState.tutorialSection === 'simpleHTTP'" ng-include="'/imports/ui/pages/docs/tutorial/simplehttp.html'">
+<div ng-if="mainContentCtrl.readState.mainContentSelectedTab.tutorial === 'movies'" ng-include="'/imports/ui/pages/docs/tutorial/movies/maincontent.html'">
+</div>
+
+<div ng-if="mainContentCtrl.readState.mainContentSelectedTab.tutorial === 'timeseries'" ng-include="'/imports/ui/pages/docs/tutorial/timeseries/maincontent.html'">
 </div>
