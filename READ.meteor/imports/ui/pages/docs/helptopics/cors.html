@@ -14,15 +14,15 @@
     <code>cd streamsx.visualization/READ.meteor</code>
   </li>
   <li class="list-group-item">
-    <code>node_modules/corsproxy/bin/corsproxy</code>
+    <code>CORSPROXY_PORT=3003 ./node_modules/corsproxy/bin/corsproxy</code>
   </li>
-  <li class="list-group-item">The above command should start the CORS proxy at port 1337. Get the <strong>public</strong> IP
+  <li class="list-group-item">The above command should start the CORS proxy at port 3003. Get the <strong>public</strong> IP
     address for your machine; say 8.74.12.82.
     While creating a READ data set with another URL, say http://my.domain.com:2912/path/to/resource,
-    use the following proxied URL instead: http://8.74.12.32:1337/my.domain.com:2912/path/to/resource
+    use the following proxied URL instead: http://8.74.12.32:3003/my.domain.com:2912/path/to/resource
   </li>
   <li class="list-group-item"> It is important that you use the <strong>public</strong> IP address as the
-    URL prefix while CORS proxying. Otherwise, if you use http://localhost:1337/my.domain.com:2912/path/to/resource
+    URL prefix while CORS proxying. Otherwise, if you use http://localhost:3003/my.domain.com:2912/path/to/resource
     instead, it is possible that you will be able to access the data during development, but your end-users may not
     be able to access the data while viewing your shared dashboards.
   </li>
