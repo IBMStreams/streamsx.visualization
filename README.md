@@ -18,7 +18,7 @@ Use READ to rapidly prototype real-time visualizations, responsive sharable dash
   * ```cd streamsx.visualization/READ.meteor```
   * ```meteor```
   * Visit READ playground at http://localhost:3000
-4. Start READ.share
+4. Start READ.share (after READ.meteor starts running at http://localhost:3000)
   * ```cd streamsx.visualization/READ.share```
   * ```export MONGO_URL="mongodb://localhost:3001/meteor"```
   * ```meteor --port 3002```
