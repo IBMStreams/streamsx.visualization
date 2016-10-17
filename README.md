@@ -1,7 +1,11 @@
 # READ: Real-Time Visual Analytics
 
 ## Synopsis
-READ is a cloud-ready developer-centric API-friendly playground for visual analytics. Use READ to rapidly create advanced, reactive, interactive, and real-time visualizations and dashboards by combining data from Streams based APIs, Watson APIs, and any other APIs of your choice.
+READ is a developer playground for advanced visual analytics.
+
+Use READ to create Real-time Visualizations, 
+Responsive Sharable Dashboards, REST API Dataflows, and for rapid prototyping and customization advanced
+real-time visual analytics.
 
 ## Getting Started
 1. Prerequisites
