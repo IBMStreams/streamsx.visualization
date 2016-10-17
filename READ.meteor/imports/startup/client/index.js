@@ -76,6 +76,7 @@ import {nvd3VisualizationComponent} from '/imports/ui/partials/visualizations/nv
 import {leafletVisualizationComponent} from '/imports/ui/partials/visualizations/leaflet/leafletvisualization';
 
 import tutorialSideNavTemplateUrl from '/imports/ui/pages/docs/tutorial/sidenav.html';
+import {tutorialSideNavCtrl} from '/imports/ui/pages/docs/tutorial/sidenav';
 import tutorialMainContentTemplateUrl from '/imports/ui/pages/docs/tutorial/maincontent.html';
 import {tutorialMainContentCtrl} from '/imports/ui/pages/docs/tutorial/maincontent';
 
@@ -172,7 +173,10 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', function($statePro
       'main': {
         templateUrl: appMainContentTemplateUrl
       }
-    }
+    },
+    onEnter: ['readState', function(readState) {
+      readState.mainContentSelectedTab.dashboard = 'app';
+    }]
   })
   .state('read.developer.app.dashboard.dashboard', {
     url: "/dashboard",
@@ -185,7 +189,10 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', function($statePro
       'main': {
         templateUrl: dashboardDashboardMainContentTemplateUrl
       }
-    }
+    },
+    onEnter: ['readState', function(readState) {
+      readState.mainContentSelectedTab.dashboard = 'dashboard';
+    }]
   })
   .state('read.developer.app.dashboard.designer', {
     url: "/designer",
@@ -198,7 +205,10 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', function($statePro
       'main': {
         templateUrl: dashboardDesignerMainContentTemplateUrl
       }
-    }
+    },
+    onEnter: ['readState', function(readState) {
+      readState.mainContentSelectedTab.dashboard = 'designer';
+    }]
   })
   .state('read.developer.app.dashboard.dataset', {
     url: "/dataset",
@@ -211,7 +221,10 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', function($statePro
       'main': {
         templateUrl: dashboardDataSetMainContentTemplateUrl
       }
-    }
+    },
+    onEnter: ['readState', function(readState) {
+      readState.mainContentSelectedTab.dashboard = 'dataset';
+    }]
   })
   .state('read.developer.playground', {
     abstract: true
@@ -286,7 +299,9 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', function($statePro
     url: "/docs/tutorial",
     views: {
       'sidenav@': {
-        templateUrl: tutorialSideNavTemplateUrl
+        templateUrl: tutorialSideNavTemplateUrl,
+        controller: tutorialSideNavCtrl,
+        controllerAs: 'sideNavCtrl'
       },
       'maincontent@': {
         templateUrl: tutorialMainContentTemplateUrl,
