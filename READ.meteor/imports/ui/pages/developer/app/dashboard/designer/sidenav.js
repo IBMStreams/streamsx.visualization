@@ -83,7 +83,7 @@ function($scope, $reactive, $state, readState) {
       self.itemControls.newItemName = undefined;
       $state.reload($state.$current.name);
     },
-    deletable: () => self.app.private,
+    deletable: () => true,
     deleteItem: () => {
       Meteor.call('visualization.delete', self.item._id, (err, res) => {
         if (err) alert(err);

@@ -59,7 +59,7 @@ export const appSideNavCtrl = ['$scope', '$reactive', '$state', function ($scope
       self.updateDatabase(self.item);
       $state.reload($state.$current.name);
     },
-    deletable: () => self.item.private,
+    deletable: () => true,
     deleteItem: () => {
       // start by deleting visualizations
       Visualizations.find({appId: self.item._id}).fetch().forEach(visualization => {

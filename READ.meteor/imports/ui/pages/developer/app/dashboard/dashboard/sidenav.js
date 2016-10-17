@@ -21,6 +21,7 @@ function ($scope, $reactive, $state, readState) {
     items: () => Dashboards.find({appId: self.getReactively('user.selectedIds.appId')}).fetch(),
     item: () => self.getReactively('app') ? Dashboards.findOne({_id: self.getReactively('app.selectedDashboardId')}) : undefined,
     dataSets: () => self.getReactively('item') ? DataSets.find({dashboardId: self.item._id}).fetch() : [],
+    visualizations: () => self.getReactively('item') ? Visualizations.find({dashboardId: self.item._id}).fetch() : [],
     templates: () => Playground.find({
       $or: [
         {pluginType: 'NVD3'},
@@ -69,9 +70,10 @@ function ($scope, $reactive, $state, readState) {
     },
     deletable: () => {
       if (self.app.readOnly) return false;
-      if (! self.app.private) return false;
       let idsFromThisDashboard = self.dataSets.map(x => x._id);
       let deps = readState.dependencies.getDerived(idsFromThisDashboard).map(x => x.id); // node id vs _id
+      // also remove viz ids from deps
+      deps = _.difference(deps, self.visualizations.map(x => x._id));
       return (_.union(deps, idsFromThisDashboard).length === idsFromThisDashboard.length);
     },
     deleteItem: () => {
@@ -79,7 +81,11 @@ function ($scope, $reactive, $state, readState) {
       Visualizations.find({dashboardId: self.item._id}).fetch().forEach(visualization => {
         Meteor.call('visualization.delete', visualization._id, (err, res) => {if (err) alert(err);})
       });
-      // delete dashboard next
+      // delete dataSets next
+      DataSets.find({dashboardId: self.item._id}).fetch().forEach(dataSet => {
+        Meteor.call('dataSet.delete', dataSet._id, (err, res) => {if (err) alert(err);})
+      });
+      // delete dashboard last
       Meteor.call('dashboard.delete', self.item._id, (err, res) => {
         if (err) alert(err);
         else {
