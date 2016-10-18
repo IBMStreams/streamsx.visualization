@@ -93,7 +93,9 @@ function ($scope, $reactive, readState) {
   let dataSetQueryHandle = dataSetQuery.observe({
     added: (dataSet) => {
       readState.dependencies.addNode(dataSet._id);
-      if (dataSet.dataSetType === 'transformed') readState.dependencies.addParents(dataSet.parents, dataSet._id);
+      if (dataSet.dataSetType === 'transformed') {
+        readState.dependencies.addParents(dataSet.parents, dataSet._id)
+      };
       readState.pipeline.addDataSet(dataSet);
     },
     removed: (dataSet) => {
