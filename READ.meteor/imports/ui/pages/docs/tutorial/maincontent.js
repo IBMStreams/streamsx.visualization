@@ -1,12 +1,12 @@
 import './cars/maincontent.html';
 import './movies/maincontent.html';
 import './timeseries/maincontent.html';
-import './advancedusecases/maincontent.html';
+import './dynamicrealtimecharts/maincontent.html';
 
 import './timeseries/createapp.html';
 import './timeseries/timeseriescharts.html';
 
-import './advancedusecases/statefultransform.html';
+import './dynamicrealtimecharts/dynamiccharts.html';
 
 
 export const tutorialMainContentCtrl = ['$scope', 'readState', '$uibModal', function ($scope, readState, $uibModal) {
