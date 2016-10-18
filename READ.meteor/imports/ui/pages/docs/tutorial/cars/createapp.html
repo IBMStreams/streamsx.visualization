@@ -1,104 +1,53 @@
-<h3>Create your READ App</h3>
+<h3>Cars App</h3>
 <blockquote>
-  <p>In this chapter, we will create and share a READ app with a responsive dashboard.</p>
-  <p>Opening this tutorial in a separate browser tab while you work on your READ app is recommended.</p>
+  <p>In this chapter, we will work with a variety of chart types in READ such as scatter plot, networks,
+     parallel coordinates, and box plot. We will also create a variety of transforms for cleaning and formatting
+  data.</p>
 </blockquote>
 
 <div class="row">
-  <div class="col-sm-6 col-md-3">
+  <div class="col-sm-6 col-md-6">
     <div class="thumbnail">
-      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial1.1.png')">
-        <img src="/images/tutorial1.1.png" alt="App Creation"></img>
+      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial/cars/createapp.1.png')">
+        <img src="/images/tutorial/cars/createapp.1.png" alt="App Creation"></img>
       </a>
       <div class="caption">
-        <h4>Create App</h4>
-        <p>Navigate to App <i class="fa fa-gears"></i>. Create <code>Movies</code> app. Uncheck private button to
-        make this app public.</p>
+        <h4>Create App, Dashboard, Dataset</h4>
+        <p class="word-wrap">Create <code>Cars</code> dashboard. Create <code>Cars</code> dataset within the dashboard
+          of type <strong>URL</strong> with its url set to
+          https://gist.githubusercontent.com/sriumcp/ebe66fbd4bb1f5b16feb0a9e7543f1b5/raw/5fda9a1537b75b1c059b9ce89ee309858dcba737/cars</p>
       </div>
     </div>
   </div>
 
-  <div class="col-sm-6 col-md-3">
+  <div class="col-sm-6 col-md-6">
     <div class="thumbnail">
-      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial1.2.png')">
-        <img src="/images/tutorial1.2.png" alt="Dataset Creation"></img>
+      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial/cars/createapp.2.png')">
+        <img src="/images/tutorial/cars/createapp.2.png" alt="Visualization Creation"></img>
       </a>
       <div class="caption">
-        <h4>Create Data Panel & Data Set</h4>
-        <p>Navigate to Data Panel <i class="fa fa-th"></i>. Create <code>About Movies</code> data panel.
-          Switch to the Data Sets tab and create <code>Movie Ratings</code> dataset. Copy the
-          moving ratings JSON array from <a href="https://gist.github.com/sriumcp/633aaa08ba533cd72b85eb2cb8aaa7f8"
-          target="_blank">this gist</a> and paste into the data section of <code>Movie Ratings</code>.</p>
+        <h4>Create Scatter Plot</h4>
+        <p class="word-wrap">Switch to the <a href="javascript:void(0)">Visualizations</a> tab.
+          Create visualization <i class="fa fa-plus-circle"></i> and rename it to <code>Sine and Cos Lines</code>.
+          Switch to the <a href="javascript:void(0)">Dashboards</a> tab and resize the visualization
+          appropriately by expanding with bottom right corner. Navigate to <a href="javascript:void(0)">Apps</a> tab.
+          You are now ready to share your app and dashboard using the public link for your app.</p>
       </div>
     </div>
   </div>
-
-  <div class="col-sm-6 col-md-3">
-    <div class="thumbnail">
-      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial1.3.png')">
-        <img src="/images/tutorial1.3.png" alt="Dashboard Creation"></img>
-      </a>
-      <div class="caption">
-        <h4>Create Dashboard</h4>
-        <p>Navigate to Dashboard <i class="fa fa-dashboard"></i>. Create <code>About Movies</code> dashboard.
-          Switch to the Visualizations tab and create <code>Movie Ratings</code> visualization. In the Data tab,
-          switch the Chart Type to <strong>Multibar Horizontal</strong>. Populate the basic options for this chart
-          from <a href="https://gist.github.com/sriumcp/f9928c13929fe2ec679861f2f198cdbe"
-          target="_blank">this gist</a>. Populate the advanced options for this chart
-          from <a href="https://gist.github.com/sriumcp/23f8f92fa7278b6621d5bcb9b9c7023f"
-          target="_blank">this gist</a>. Resize your chart by switching to
-          the <kbd>layout</kbd> view.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-sm-6 col-md-3">
-    <div class="thumbnail">
-      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial1.4.png')">
-        <img src="/images/tutorial1.4.png" alt="Dashboard Sharing"></img>
-      </a>
-      <div class="caption">
-        <h4>Share Dashboard</h4>
-        <p>Navigate to App <i class="fa fa-gears"></i>. Share your dashboard with the world
-          using the public link for your app.
-      </div>
-    </div>
-  </div>
-</div>
-<!-- row -->
+</div> <!-- row -->
 
 <h3>Key Concepts</h3>
 <ul class="list-group">
-  <li class="list-group-item">A READ App is a collection of data panels and dashboards, which are collections of datasets and
-    visualizations respectively.
+  <li class="list-group-item">A READ App is a collection of dashboards. A dashboard is a collection of datasets and
+    visualizations.
   </li>
-  <li class="list-group-item">Set up visualizations using the appropriate data set, chart type, basic and advanced
-    options. See usage info for details on configuring
-    the visualization.
-  </li>
-  <li class="list-group-item">Use gists to collaborate with other READ developers.</li>
-  <li class="list-group-item">Use the layout view to resize and drag visualizations within a dashboard.</li>
-  <li class="list-group-item">Use the public link for the app to share READ dashboards with the world.</li>
+  <li class="list-group-item">Make an app public to create a publicly sharable link for the app.</li>
 </ul>
-
-<div class="list-group">
-  <a href="javascript:void(0)" class="list-group-item list-group-item-success">
-    <h4 class="list-group-item-heading">Exercise</h4>
-    <p class="list-group-item-text">Modify the y-axis title to 'Top Movies in 2016' instead of 'Movie'. Of course,
-      we do not want the y-axis title to overlap with the movie names.
-    </p>
-  </a>
-  <a href="javascript:void(0)" class="list-group-item list-group-item-warning">
-    <h4 class="list-group-item-heading">Exercise</h4>
-    <p class="list-group-item-text">All these movies have a rating of over 5.00. Modify the x-axis range to be from 5.00 to 10.00
-      instead of the default range.
-    </p>
-  </a>
-</div>
 
 <nav>
    <ul class="pager">
      <!-- <li><a href="#">Previous</a></li> -->
-     <li><a href="javascript:void(0)" ng-click="readState.tutorialSection = 'simpleHTTP'">Next</a></li>
+     <li><a href="javascript:void(0)" ng-click="mainContentCtrl.readState.sidebar.tutorial = 'timeSeriesCharts'">Next</a></li>
    </ul>
 </nav>

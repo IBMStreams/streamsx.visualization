@@ -8,6 +8,9 @@ import './timeseries/timeseriescharts.html';
 
 import './dynamicrealtimecharts/dynamiccharts.html';
 
+import './cars/createapp.html';
+import './cars/datacleaning.html';
+
 
 export const tutorialMainContentCtrl = ['$scope', 'readState', '$uibModal', function ($scope, readState, $uibModal) {
   this.readState = readState;
