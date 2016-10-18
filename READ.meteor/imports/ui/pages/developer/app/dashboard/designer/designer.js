@@ -42,13 +42,14 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
   this.ready = true;
   let visualizationQuery = Visualizations.find({_id: self.dashboard.selectedVisualizationId});
   let visualizationQueryHandle = visualizationQuery.observe({
-    changed: (newVisualization, oldVisualization) => {
-      this.ready = false;
+    changed: _.debounce((newVisualization, oldVisualization) => {
+      self.ready = false;
       $timeout(() => {
-        this.reactiveVisualization = newVisualization;
-        this.ready = true;
+        self.reactiveVisualization = newVisualization;
+        self.ready = true;
       }, 0);
-    }
+      $scope.$apply();
+    }, 200)
   });
 
   this.aceJsonSchemaOptions = aceJsonSchemaOptions;
