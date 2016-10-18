@@ -6,7 +6,7 @@ import uiAce from 'angular-ui-ace';
 import angularSanitize from 'angular-sanitize';
 import angularUi from 'angular-ui-bootstrap';
 import clipBoard from 'clipboard';
-import ngclipBoard from 'ngclipBoard/dist/ngclipboard';
+import ngClipBoard from 'ngclipboard/dist/ngclipboard';
 
 import d3 from 'd3';
 import nv from 'nvd3';
