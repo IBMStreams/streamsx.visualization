@@ -15,8 +15,7 @@ Use READ to rapidly prototype real-time visualizations, responsive sharable dash
   * ```cd streamsx.visualization/READ.meteor```
   * ```meteor npm install```
   * ```meteor```
-  * Wait for the message *=> App running at: http://localhost:3000/*
-  * Visit READ developer playground at http://localhost:3000
+  * You should see the message *=> App running at: http://localhost:3000/*
 
 ## Next steps
 Follow the tutorial: http://localhost:3000/#/docs/tutorial
