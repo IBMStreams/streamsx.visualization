@@ -110,13 +110,11 @@ class TransformedData extends ReactiveData {
       else try {
         // inputs seem ok. We will try applying the transformFunction now.
         let data = undefined;
+        let transformFunctionArgs = latestArgs.map((x) => x.data);
         if (stateEnabled) {
-          // the transformFunction can do what it wants to the state
-          // the transformFunction can return any result based on inputs and state
-          data = transformFunction(...(latestArgs.map((x) => x.data), self.state));
-        } else {
-          data = transformFunction(...(latestArgs.map((x) => x.data)));
+          transformFunctionArgs.push(self.state);
         }
+        data = transformFunction(...transformFunctionArgs);
         if (data) self.injectData(data);
         else { // got no data
           let z = {};
@@ -130,8 +128,12 @@ class TransformedData extends ReactiveData {
       }
     }
 
-    this.combiner = Rx.Observable.combineLatest(...reactiveStreams)
-    .doOnNext((latestArgs) => {injectSomething(latestArgs);}).subscribe(new Rx.ReplaySubject(0));
+    if (reactiveStreams.length > 0) {
+      self.combiner = Rx.Observable.combineLatest(...reactiveStreams)
+      .doOnNext((latestArgs) => {injectSomething(latestArgs);}).subscribe(new Rx.ReplaySubject(0));
+    } else {
+      self.combiner = Rx.Observable.just([]).doOnNext((latestArgs) => {injectSomething(latestArgs);}).subscribe(new Rx.ReplaySubject(0));
+    }
   }
 
   dispose() {
@@ -180,7 +182,7 @@ export const reactiveDataFactory = ['$http', function ($http) {
         try {
           $http(httpConfig).then(response => {
             self.injectData(response.data);
-          }, (response) => {
+          }, response => {
             let x = {};
             x[name] = "Error during HTTP with status: " + response.status + " and statusText: " + response.statusText;
             self.injectError(x);
