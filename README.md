@@ -12,7 +12,7 @@ Use READ to rapidly prototype real-time visualizations, responsive sharable dash
 2. Download READ
   * ```git clone https://github.com/IBMStreams/streamsx.visualization.git``` (or download from [here](https://github.com/IBMStreams/streamsx.visualization/archive/master.zip)). This creates the  `streamsx.visualization` folder on your machine.
 3. Build READ
-  * ```cd streamsx.visualization/READ.meteor```
+  * Go to ```streamsx.visualization/READ.meteor```
   * ```meteor npm install```
   * ```cd ../READ.share```
   * ```meteor npm install```
