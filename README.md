@@ -21,7 +21,7 @@ Use READ to rapidly prototype real-time visualizations, responsive sharable dash
   * ```meteor```
   * Wait for READ.meteor to build and run. You should see the message *=> App running at: http://localhost:3000/*
   * Visit READ developer playground at http://localhost:3000
-5. After step 3 finishes, start READ.share in a new terminal
+5. After READ.meteor has started running, start READ.share in a new terminal
   * Go to ```streamsx.visualization/READ.share```
   * ```export MONGO_URL="mongodb://localhost:3001/meteor"```
   * ```meteor --port localhost:3002```
