@@ -7,7 +7,8 @@ Use READ to rapidly prototype real-time visualizations, responsive sharable dash
 
 ## Getting Started
 1. Prerequisites
-  * Meteor: https://www.meteor.com
+  * Install Meteor: https://www.meteor.com ; Command <code>meteor</code> will work if Meteor is installed
+  * Install NodeJS: https://nodejs.org/en/ ; Commands <code>node</code> and <code>npm</code> will work if Meteor is installed
 2. Install
   * ```git clone https://github.com/IBMStreams/streamsx.visualization.git``` (or download from [here](https://github.com/IBMStreams/streamsx.visualization/archive/master.zip))
   * ```cd streamsx.visualization/READ.meteor```
