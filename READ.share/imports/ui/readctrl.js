@@ -1,4 +1,5 @@
 import _ from 'underscore/underscore';
+import toposort from 'toposort';
 
 /* read controller for root state */
 import {Users} from '/imports/api/users';
@@ -63,22 +64,11 @@ function ($scope, $reactive, readState, $location) {
           changeDataSetParents(dataSet);
         };
       });
-      // bfs and then add to reactivePipeline as you visit nodes...
-      let graphNodes = readState.dependencies.graph.elements().nodes().filter((i, e) => {
-        return _.contains(_.pluck(dataSets, '_id'), e.data().id);
-      });
-      // works because dataSets only have other dataSets as incoming edges..
-      // and we're considering all dataSets belonging to the app here...
-      // top sort and add
-      let bfsRoots = graphNodes.roots();
-      readState.dependencies.graph.elements().bfs({
-        roots: bfsRoots,
-        visit: function (i, depth, v, e, u) {
-          if (_.contains(_.pluck(dataSets, '_id'), v.id())) {
-            readState.pipeline.addDataSet(_.find(dataSets, dataSet => (dataSet._id === v.id())));
-          }
-        },
-        directed: true
+      //toposort
+      let nodes = dataSets.map(d => d._id);
+      let edges = readState.dependencies.graph.elements().edges().map(e => e.data()).map(o => [o.source, o.target]);
+      toposort.array(nodes, edges).map(_id => {
+        readState.pipeline.addDataSet(_.find(dataSets, ds => ds._id === _id));
       });
       // finally resolve
       readState.deferredDataSets.resolve();
