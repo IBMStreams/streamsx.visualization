@@ -20,8 +20,10 @@
     "bower": "^1.7.9",
     "corsproxy": "^1.5.0",
     "cytoscape": "^2.7.9",
+    "matches-selector": "^1.0.0",
     "meteor-node-stubs": "^0.2.3",
     "ngclipboard": "^1.1.1",
+    "query": "^0.2.0",
     "rx": "^4.1.0",
     "underscore": "^1.8.3"
   },

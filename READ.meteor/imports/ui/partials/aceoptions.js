@@ -24,7 +24,7 @@ export const aceHTMLOptions = angular.merge({
   mode: 'html'
 }, aceOptions);
 
-export const validJsonDirective = () => {
+export function validJsonDirective() {
   return {
     restrict: 'A',
     require: '?ngModel',
@@ -61,7 +61,7 @@ export const validJsonDirective = () => {
   };
 }
 
-export const validObjectDirective = () => {
+export function validObjectDirective() {
   let directiveDefinitionsObject = {
     require: 'ngModel',
     link: function($scope, $el, $attrs, $ctrl) {
@@ -77,7 +77,7 @@ export const validObjectDirective = () => {
   return directiveDefinitionsObject;
 }
 
-export const validStateObjectDirective = () => {
+export function validStateObjectDirective() {
   let directiveDefinitionsObject = {
     require: 'ngModel',
     link: function($scope, $el, $attrs, $ctrl) {
@@ -93,11 +93,12 @@ export const validStateObjectDirective = () => {
   return directiveDefinitionsObject;
 }
 
-export const validFunctionDirective = () => {
+export function validFunctionDirective() {
   let directiveDefinitionsObject = {
     require: 'ngModel',
     link: function($scope, $el, $attrs, $ctrl) {
       $ctrl.$validators.validFunction = function(modelValue, viewValue) { // valid js function
+        if (_.isEmpty(viewValue)) return false;
         try {
           return _.isFunction(eval("(" + viewValue + ")"));
         } catch(e) {

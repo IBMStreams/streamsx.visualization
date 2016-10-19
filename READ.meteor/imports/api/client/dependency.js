@@ -18,9 +18,15 @@ export class Dependency {
     });
   }
 
+  findNode(nodeId) {
+    let selector = 'node[id = "nodeId"]'.replace('nodeId', nodeId);
+    return this.graph.filter(selector).map(e => e.data());
+  }
+
   addParents(sourceIds, targetId) { // sourceIds is array of parent ids
+    let self = this;
     sourceIds.forEach(sourceId => {
-      this.graph.add({
+      self.graph.add({
         group: 'edges',
         data: {
           source: sourceId,
@@ -58,6 +64,6 @@ export class Dependency {
   // get descendants
   getDescendants(nodeId) {
     let selector = 'node[id = "nodeId"]'.replace('nodeId', nodeId);
-    return this.graph.filter(selector).descendants().nodes().map(e => e.data());
+    return this.graph.filter(selector).successors().nodes().map(e => e.data());
   }
 }

@@ -7,7 +7,8 @@ import {Dashboards} from '/imports/api/dashboards';
 import {Visualizations} from '/imports/api/visualizations';
 import {DataSets} from '/imports/api/datasets';
 
-export const appSideNavCtrl = ['$scope', '$reactive', '$state', function ($scope, $reactive, $state) {
+export const appSideNavCtrl = ['$scope', '$reactive', '$state', 'readState', '$q',
+function ($scope, $reactive, $state, readState, $q) {
   $reactive(this).attach($scope);
   let self = this;
 
@@ -26,6 +27,11 @@ export const appSideNavCtrl = ['$scope', '$reactive', '$state', function ($scope
     creatable: () => true,
     switchItem: (selectedId) => {
       self.user.selectedIds.appId = selectedId;
+      // reset all deferredPromises...
+      readState.deferredDashboards = $q.defer();
+      readState.deferredDataSets = $q.defer();
+      readState.deferredVisualizations = $q.defer();
+      // now we're ready to update and resubscribe in readCtrl
       Meteor.call('user.update', self.user, (err, res) => {if (err) alert(err);}); //update user
       $state.reload($state.$current.name);
     },
