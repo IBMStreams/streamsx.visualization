@@ -128,8 +128,12 @@ class TransformedData extends ReactiveData {
       }
     }
 
-    this.combiner = Rx.Observable.combineLatest(...reactiveStreams)
-    .doOnNext((latestArgs) => {injectSomething(latestArgs);}).subscribe(new Rx.ReplaySubject(0));
+    if (reactiveStreams.length > 0) {
+      self.combiner = Rx.Observable.combineLatest(...reactiveStreams)
+      .doOnNext((latestArgs) => {injectSomething(latestArgs);}).subscribe(new Rx.ReplaySubject(0));
+    } else {
+      self.combiner = Rx.Observable.just([]).doOnNext((latestArgs) => {injectSomething(latestArgs);}).subscribe(new Rx.ReplaySubject(0));
+    }
   }
 
   dispose() {
@@ -178,7 +182,7 @@ export const reactiveDataFactory = ['$http', function ($http) {
         try {
           $http(httpConfig).then(response => {
             self.injectData(response.data);
-          }, (response) => {
+          }, response => {
             let x = {};
             x[name] = "Error during HTTP with status: " + response.status + " and statusText: " + response.statusText;
             self.injectError(x);

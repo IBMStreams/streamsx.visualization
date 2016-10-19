@@ -18,6 +18,11 @@ export class Dependency {
     });
   }
 
+  findNode(nodeId) {
+    let selector = 'node[id = "nodeId"]'.replace('nodeId', nodeId);
+    return this.graph.filter(selector).map(e => e.data());
+  }
+
   addParents(sourceIds, targetId) { // sourceIds is array of parent ids
     let self = this;
     sourceIds.forEach(sourceId => {

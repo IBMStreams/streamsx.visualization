@@ -14,10 +14,10 @@
     </select>
   </div>
 
-  <div class="form-group" ng-if="dataSetCtrl.dataSet.transformFunction">
+  <div class="form-group">
     <label for="transformFunction">Transform Function</label>
     <div ui-ace="dataSetCtrl.aceJavaScriptOptions" ng-model="dataSetCtrl.dataSet.transformFunction"
-    valid-function ng-model-options="{allowInvalid: true}"
+    valid-function required ng-model-options="{allowInvalid: true}"
     ng-readonly="dataSetCtrl.dataSet.readOnly" name="transformFunction">
     </div>
   </div>

@@ -19,9 +19,9 @@ export const readStateFactory = ['$q', 'reactivePipeline', ($q, reactivePipeline
       tutorial: 'timeseries'
     },
     deferredUser: $q.defer(),
+    deferredPlayground: $q.defer(),
     deferredApps: $q.defer(),
     deferredDashboards: $q.defer(),
-    deferredPlayground: $q.defer(),
     deferredDataSets: $q.defer(),
     deferredVisualizations: $q.defer(),
     dependencies: new Dependency(),

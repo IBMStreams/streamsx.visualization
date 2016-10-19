@@ -8,8 +8,8 @@ import {Playground} from '/imports/api/playground';
 import {Dashboards} from '/imports/api/dashboards';
 import {Visualizations} from '/imports/api/visualizations';
 
-export const readCtrl = ['$scope', '$reactive', 'readState',
-function ($scope, $reactive, readState) {
+export const readCtrl = ['$scope', '$reactive', 'readState', '$timeout',
+function ($scope, $reactive, readState, $timeout) {
   $reactive(this).attach($scope);
   $scope.readState = readState;
   let self = this;
@@ -36,6 +36,7 @@ function ($scope, $reactive, readState) {
     user: () => Users.findOne({})
   });
 
+  // this seems pretty superfluous .. why not make it like dataSets or visualizations?
   this.autorun((c) => {
     if (self.getReactively('user', true)) {
       self.subscribe('dashboards', () => [self.user.selectedIds.appId], {
@@ -46,8 +47,43 @@ function ($scope, $reactive, readState) {
     }
   });
 
+  let changeDataSetParents = (dataSet) => {
+    if (! _.contains(['extendedHTTP', 'transformed'], dataSet.dataSetType))
+    throw new Error('only extendedHTTP and transformed datasets can have parents');
+    readState.dependencies.removeParents(dataSet._id);
+    if (dataSet.dataSetType === 'transformed') readState.dependencies.addParents(dataSet.parents, dataSet._id);
+    else if (dataSet.dataSetType === 'extendedHTTP') readState.dependencies.addParents([dataSet.parentId], dataSet._id);
+  };
+
   this.subscribe('datasets', () => [self.getReactively('user.selectedIds.appId')], {
     onReady: () => {
+      let dataSets = DataSets.find({appId: self.getReactively('user.selectedIds.appId')}).fetch();
+      dataSets.map(dataSet => {
+        readState.dependencies.addNode(dataSet._id);
+      });
+      dataSets.map(dataSet => {
+        if (_.contains(['extendedHTTP', 'transformed'], dataSet.dataSetType)) {
+          changeDataSetParents(dataSet);
+        };
+      });
+      // bfs and then add to reactivePipeline as you visit nodes...
+      let graphNodes = readState.dependencies.graph.elements().nodes().filter((i, e) => {
+        return _.contains(_.pluck(dataSets, '_id'), e.data().id);
+      });
+      // works because dataSets only have other dataSets as incoming edges..
+      // and we're considering all dataSets belonging to the app here...
+      // top sort and add
+      let bfsRoots = graphNodes.roots();
+      readState.dependencies.graph.elements().bfs({
+        roots: bfsRoots,
+        visit: function (i, depth, v, e, u) {
+          if (_.contains(_.pluck(dataSets, '_id'), v.id())) {
+            readState.pipeline.addDataSet(_.find(dataSets, dataSet => (dataSet._id === v.id())));
+          }
+        },
+        directed: true
+      });
+      // finally resolve
       readState.deferredDataSets.resolve();
     }
   });
@@ -90,13 +126,19 @@ function ($scope, $reactive, readState) {
   });
 
   let dataSetQuery = DataSets.find({});
+
   let dataSetQueryHandle = dataSetQuery.observe({
     added: (dataSet) => {
-      readState.dependencies.addNode(dataSet._id);
-      if (dataSet.dataSetType === 'transformed') {
-        readState.dependencies.addParents(dataSet.parents, dataSet._id)
-      };
-      readState.pipeline.addDataSet(dataSet);
+      readState.deferredDataSets.promise.then(() => {
+        // if you cannot find dataset in readState.dependencies... you gotta do all the work here...
+        if (readState.dependencies.findNode(dataSet._id).length === 0) {
+          readState.dependencies.addNode(dataSet._id);
+          if (_.contains(['extendedHTTP', 'transformed'], dataSet.dataSetType)) {
+            throw new Error('extendedHTTP and transformed datasets cannot be added directly');
+          };
+          readState.pipeline.addDataSet(dataSet);
+        }
+      });
     },
     removed: (dataSet) => {
       readState.dependencies.removeNode(dataSet._id);
@@ -106,8 +148,8 @@ function ($scope, $reactive, readState) {
       if (! _.contains(['raw', 'simpleHTTP', 'extendedHTTP', 'transformed'], newDataSet.dataSetType))
       throw new Error('only raw, simpleHTTP, extendedHTTP, and transformed dataset changes handled at the moment');
       else {
-        if (oldDataSet.dataSetType === 'transformed') readState.dependencies.removeParents(oldDataSet._id);
-        if (newDataSet.dataSetType === 'transformed') readState.dependencies.addParents(newDataSet.parents, newDataSet._id);
+        if (_.contains(['extendedHTTP', 'transformed'], oldDataSet.dataSetType)) readState.dependencies.removeParents(oldDataSet._id);
+        if (_.contains(['extendedHTTP', 'transformed'], newDataSet.dataSetType)) changeDataSetParents(newDataSet);
         readState.pipeline.changeDataSet(newDataSet);
       }
     }
