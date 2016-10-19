@@ -14,12 +14,15 @@ export const nvd3ProviderComponent = {
     $scope.options = {
       chart: {}
     };
+    $scope.dimensions = {
+      height: undefined,
+      width: undefined
+    };
 
     // handle options change
     $scope.$watch('nvd3Controller.options', x => {
-      delete x.chart.height;
-      delete x.chart.width;
       angular.extend($scope.options, x);
+      angular.extend($scope.options.chart, $scope.dimensions);
       if ($scope.options.chart.type && $scope.options.chart.height) $scope.ready = true;
     }, true);
 
@@ -35,6 +38,7 @@ export const nvd3ProviderComponent = {
     });
 
     $scope.$watch('nvd3Controller.dim', (newVal, oldVal) => {
+      angular.extend($scope.dimensions, newVal);
       angular.extend($scope.options.chart, newVal);
       if ($scope.options.chart.type && $scope.options.chart.height) $scope.ready = true;
       if ($scope.ready && $scope.api.update) $scope.api.update();
