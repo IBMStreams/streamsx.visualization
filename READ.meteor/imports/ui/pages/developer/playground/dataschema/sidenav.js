@@ -20,7 +20,6 @@ function ($scope, $reactive, $state, $timeout, readState) {
   this.itemsControl = {
     itemType: "Data Schema",
     clonable: true,
-    newItemName: undefined,
     selectedId: self.user.selectedIds.dataSchemaId,
     selectedItem: self.item,
     creatable: () => true,
@@ -40,7 +39,6 @@ function ($scope, $reactive, $state, $timeout, readState) {
       }, (err, res) => {
         if (err) alert(err);
         else {
-          self.itemsControl.newItemName = undefined;
           self.itemsControl.switchItem(res);
         }
       });
@@ -64,17 +62,15 @@ function ($scope, $reactive, $state, $timeout, readState) {
 
   this.itemControls = {
     itemType: 'Data Schema',
-    newItemName: undefined,
     readOnlyable: true,
     validItem: () => true,
     updateItem: () => {
       self.updateDatabase(self.item);
       $state.reload($state.$current.name);
     },
-    renameItem: () => {
-      self.item.name = self.itemControls.newItemName;
-      self.itemControls.updateItem();
-      $state.reload($state.$current.name);
+    renameItem: (newName) => {
+      self.item.name = newName;
+      self.updateDatabase(self.item);
     },
     deletable: () => {
       return (readState.dependencies.getDerived(self.user.selectedIds.dataSchemaId).length === 0);
