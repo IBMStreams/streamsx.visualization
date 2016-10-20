@@ -43,7 +43,6 @@ function($scope, $reactive, $state, readState) {
     parentItems: parentItems,
     itemType: "Visualization",
     clonable: false,
-    newItemName: undefined,
     selectedId: self.item ? self.item._id : undefined,
     selectedItem: self.item,
     creatable: () => ((self.dashboard) && (self.dataSets.length > 0) && (self.templates.length > 0)),
@@ -75,7 +74,6 @@ function($scope, $reactive, $state, readState) {
       }, additionalFields), (err, res) => {
         if (err) alert(err);
         else {
-          self.itemsControl.newItemName = undefined;
           self.itemsControl.switchItem(res);
         }
       });
@@ -84,14 +82,11 @@ function($scope, $reactive, $state, readState) {
 
   this.itemControls = {
     itemType: 'Visualization',
-    newItemName: undefined,
     readOnlyable: false,
     validItem: () => true,
-    renameItem: () => {
-      self.item.name = self.itemControls.newItemName;
+    renameItem: (newName) => {
+      self.item.name = newName;
       self.updateDatabase(self.item);
-      self.itemControls.newItemName = undefined;
-      $state.reload($state.$current.name);
     },
     deletable: () => true,
     deleteItem: () => {

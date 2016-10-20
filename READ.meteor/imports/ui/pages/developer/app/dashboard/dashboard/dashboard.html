@@ -1,8 +1,9 @@
-<div class="alert alert-danger" role="alert" ng-if="! dashboardMainContentCtrl.app">
-  Please create an app
-</div>
+<div class="dashboard-wrapper" ng-controller="dashboardCtrl as dashboardCtrl">
+  <div class="alert alert-danger" role="alert" ng-if="! dashboardCtrl.dashboard">
+    Please create a dashboard
+  </div>
 
-<div class="dashboard-wrapper" ng-if="dashboardMainContentCtrl.app" ng-controller="dashboardCtrl as dashboardCtrl">
   <dashboard dashboard-id="dashboardCtrl.dashboard._id" gs-options="dashboardCtrl.gsOptions" ng-if="dashboardCtrl.dashboard"></dashboard>
 </div>
+
 <br>

@@ -16,6 +16,10 @@
   <li ng-if="dashboardMainContentCtrl.readState.mainContentSelectedTab.dashboard === 'designer'">Visualizations</li>
 </ol>
 
+<div class="alert alert-danger" role="alert" ng-if="! dashboardMainContentCtrl.app">
+  Please create an app
+</div>
+
 <div ng-if="dashboardMainContentCtrl.app">
   <div ui-view="main"></div>
 </div>

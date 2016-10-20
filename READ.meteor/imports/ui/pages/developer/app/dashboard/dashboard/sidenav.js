@@ -39,9 +39,8 @@ function ($scope, $reactive, $state, readState) {
     parentItems: parentItems,
     itemType: "Dashboard",
     clonable: false,
-    newItemName: undefined,
-    selectedId: self.app.selectedDashboardId,
-    selectedItem: Dashboards.findOne({_id: self.app.selectedDashboardId}),
+    selectedId: self.app ? self.app.selectedDashboardId: undefined,
+    selectedItem: self.app ? Dashboards.findOne({_id: self.app.selectedDashboardId}) : undefined,
     creatable: () => (self.app) && (! self.app.readOnly),
     switchItem: (selectedId) => {
       self.app.selectedDashboardId = selectedId;
@@ -56,7 +55,6 @@ function ($scope, $reactive, $state, readState) {
       }, (err, res) => {
         if (err) alert(err);
         else {
-          self.itemsControl.newItemName = undefined;
           self.itemsControl.switchItem(res);
         }
       });
@@ -65,14 +63,11 @@ function ($scope, $reactive, $state, readState) {
 
   this.itemControls = {
     itemType: 'Dashboard',
-    newItemName: undefined,
     readOnlyable: false,
     validItem: () => true,
-    renameItem: () => {
-      self.item.name = self.itemControls.newItemName;
+    renameItem: (newName) => {
+      self.item.name = newName;
       self.updateDatabase(self.item);
-      self.itemControls.newItemName = undefined;
-      $state.reload($state.$current.name);
     },
     deletable: () => {
       if (self.app.readOnly) return false;

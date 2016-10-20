@@ -34,7 +34,6 @@ function ($scope, $reactive, $state, readState, defaultDataSets) {
     parentItems: parentItems,
     itemType: "Data Set",
     clonable: false,
-    newItemName: undefined,
     selectedId: self.dashboard ? self.dashboard.selectedDataSetId : undefined,
     selectedItem: self.dashboard ? DataSets.findOne({_id: self.dashboard.selectedDataSetId}) : undefined,
     creatable: () => (self.app && self.dashboard && (! self.app.readOnly)),
@@ -58,7 +57,6 @@ function ($scope, $reactive, $state, readState, defaultDataSets) {
         Meteor.call('dataSet.create', dataSet, (err, res) => {
           if (err) alert(err);
           else {
-            self.itemsControl.newItemName = undefined;
             self.itemsControl.switchItem(res);
           }
         });
@@ -68,14 +66,11 @@ function ($scope, $reactive, $state, readState, defaultDataSets) {
 
   this.itemControls = {
     itemType: 'Data Set',
-    newItemName: undefined,
     readOnlyable: false,
     validItem: () => true,
-    renameItem: () => {
-      self.item.name = self.itemControls.newItemName;
+    renameItem: (newName) => {
+      self.item.name = newName;
       self.updateDatabase(self.item);
-      self.itemControls.newItemName = undefined;
-      $state.reload($state.$current.name);
     },
     deletable: () => {
       return ((! self.app.readOnly) && (self.item) && (readState.dependencies.getDerived(self.item._id).length === 0));

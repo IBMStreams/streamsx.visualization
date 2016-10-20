@@ -1,9 +1,9 @@
-<div class="alert alert-danger" role="alert" ng-if="! dashboardMainContentCtrl.app">
-  Please create an app
+<div class="alert alert-danger" role="alert" ng-if="! dashboardMainContentCtrl.dashboard">
+  Please create a dashboard
 </div>
 
-<div class="alert alert-danger" role="alert" ng-if="dashboardMainContentCtrl.app && ! (dashboardMainContentCtrl.dashboard)">
-  Please create a dashboard
+<div class="alert alert-danger" role="alert" ng-if="dashboardMainContentCtrl.dashboard && (! dashboardMainContentCtrl.dataSet)">
+  Please create a dataset
 </div>
 
 <div class="main-content-panel-wrapper" ng-if="dashboardMainContentCtrl.dataSet" ng-controller="dataSetCtrl as dataSetCtrl">

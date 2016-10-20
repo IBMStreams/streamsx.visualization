@@ -21,7 +21,6 @@ function ($scope, $reactive, $state, readState, $q) {
   this.itemsControl = {
     itemType: "App",
     clonable: false,
-    newItemName: undefined,
     selectedId: self.user.selectedIds.appId,
     selectedItem: Apps.findOne({_id: self.user.selectedIds.appId}),
     creatable: () => true,
@@ -44,7 +43,6 @@ function ($scope, $reactive, $state, readState, $q) {
       }, (err, res) => {
         if (err) alert(err);
         else {
-          self.itemsControl.newItemName = undefined;
           self.itemsControl.switchItem(res);
         }
       });
@@ -53,13 +51,11 @@ function ($scope, $reactive, $state, readState, $q) {
 
   this.itemControls = {
     itemType: 'App',
-    newItemName: undefined,
     readOnlyable: false,
     validItem: () => true,
-    renameItem: () => {
-      self.item.name = self.itemControls.newItemName;
-      self.itemControls.updateItem();
-      $state.reload($state.$current.name);
+    renameItem: (newName) => {
+      self.item.name = newName;
+      self.updateDatabase(self.item);
     },
     updateItem: () => {
       self.updateDatabase(self.item);

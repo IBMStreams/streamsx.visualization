@@ -19,7 +19,6 @@ function ($scope, $reactive, $state, $timeout, readState) {
   this.itemsControl = {
     itemType: "Leaflet Template",
     clonable: true,
-    newItemName: undefined,
     selectedId: self.user.selectedIds.leafletId,
     selectedItem: self.item,
     creatable: () => (self.dataSchemas.length > 0),
@@ -41,7 +40,6 @@ function ($scope, $reactive, $state, $timeout, readState) {
       }, (err, res) => {
         if (err) alert(err);
         else {
-          self.itemsControl.newItemName = undefined;
           self.itemsControl.switchItem(res);
         }
       });
@@ -66,17 +64,15 @@ function ($scope, $reactive, $state, $timeout, readState) {
 
   this.itemControls = {
     itemType: 'Leaflet Template',
-    newItemName: undefined,
     readOnlyable: true,
     validItem: () => true,
     updateItem: () => {
       self.updateDatabase(self.item);
       $state.reload($state.$current.name);
     },
-    renameItem: () => {
-      self.item.name = self.itemControls.newItemName;
-      self.itemControls.updateItem();
-      $state.reload($state.$current.name);
+    renameItem: (newName) => {
+      self.item.name = newName;
+      self.updateDatabase(self.item);
     },
     deletable: () => {
       return (readState.dependencies.getDerived(self.user.selectedIds.leafletId).length === 0);
