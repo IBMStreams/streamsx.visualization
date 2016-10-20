@@ -30,7 +30,13 @@ function ($scope, $reactive, $state, readState) {
     }).fetch()
   });
 
+  let parentItems = [];
+  if (self.app) parentItems.push({
+    itemType: 'App',
+    name: self.app.name
+  });
   this.itemsControl = {
+    parentItems: parentItems,
     itemType: "Dashboard",
     clonable: false,
     newItemName: undefined,
