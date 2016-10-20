@@ -64,12 +64,13 @@
     </div>
 
     <div ng-if="designerCtrl.readState.mainContentSelectedTab.designer === 'canonicalData'">
-      <label>Canonical Data</label>
+      <label ng-if="dataSetCtrl.lastDataObject.isData">Canonical Data</label>
       <pre class="pre-scrollable" ng-if="nvd3VizDesignCtrl.canonicalDataObject.isData">{{nvd3VizDesignCtrl.canonicalDataObject.data | json:2}}</pre>
-      <dl class="alert alert-danger" role="alert" ng-if="! nvd3VizDesignCtrl.canonicalDataObject.isData">
-        <dt ng-repeat-start="(key, value) in nvd3VizDesignCtrl.canonicalDataObject.error">{{key}}</dt>
-        <dd ng-repeat-end>{{value}}</dd>
-      </dl>
+
+      <label ng-if="! dataSetCtrl.lastDataObject.isData">Error</label>
+      <div class="alert alert-danger" role="alert" ng-if="! nvd3VizDesignCtrl.canonicalDataObject.isData">
+        Input data has error
+      </div>
     </div>
   </div>
 

@@ -97,10 +97,9 @@
             <hr/>
             <label for="canonicalData">Canonical Data</label>
             <pre class="pre-scrollable" ng-if="mainContentCtrl.canonicalDataObject.isData">{{mainContentCtrl.canonicalDataObject.data | json:2}}</pre>
-            <dl class="alert alert-danger" role="alert" ng-if="! mainContentCtrl.canonicalDataObject.isData">
-              <dt ng-repeat-start="(key, value) in mainContentCtrl.canonicalDataObject.error">{{key}}</dt>
-              <dd ng-repeat-end>{{value}}</dd>
-            </dl>
+            <div class="alert alert-danger" role="alert" ng-if="! mainContentCtrl.canonicalDataObject.isData">
+              {{mainContentCtrl.canonicalDataObject.error}}
+            </div>
           </form>
         </div>
 

@@ -48,10 +48,9 @@
           <div class="alert alert-success" role="alert" ng-if="mainContentCtrl.lastDataObject.isData">
             Valid Data
           </div>
-          <dl class="alert alert-danger" role="alert" ng-if="! mainContentCtrl.lastDataObject.isData">
-            <dt ng-repeat-start="(key, value) in mainContentCtrl.lastDataObject.error">{{key}}</dt>
-            <dd ng-repeat-end>{{value}}</dd>
-          </dl>
+          <div class="alert alert-danger" role="alert" ng-if="! mainContentCtrl.lastDataObject.isData">
+            {{mainContentCtrl.lastDataObject.error}}
+          </div>
         </div>
       </div>  <!-- panel-body -->
     </div>

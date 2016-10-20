@@ -19,9 +19,7 @@ class ReactiveData {
     this.name = name;
     this.type = "abstract";
     this.stream = new Rx.ReplaySubject(1);
-    let x = {};
-    x[name] = 'Data Unavailable';
-    this.injectError(x);
+    this.injectError('Data Unavailable');
   }
 
   injectData(data) {
@@ -56,9 +54,7 @@ class RawData extends ReactiveData {
     this.type = "raw";
     if (data) this.injectData(data);
     else {
-      let x = {};
-      x[name] = 'Data Undefined';
-      this.injectError(x);
+      this.injectError('Data Undefined');
     }
   }
 
@@ -70,9 +66,7 @@ class IntervalData extends ReactiveData {
     super(_id, name);
     this.type = "interval";
     if (! ((intervalSec) && (_.isNumber(intervalSec)) && (intervalSec >= 1))) {
-      let x = {};
-      x[name] = 'Invalid interval value: ' + interval;
-      this.injectError(x);
+      this.injectError('Invalid interval value: ' + interval);
     } else {
       let self = this;
       this.intervalSubscription = Rx.Observable.interval(intervalSec*1000).timeInterval().doOnNext(x => {
@@ -100,31 +94,17 @@ class TransformedData extends ReactiveData {
 
     let injectSomething = (latestArgs) => {
       // one or more of the input streams contain error(s)
-      if (_.some(latestArgs, (arg) => ! arg.isData)) {
-        let y = _.filter(latestArgs, arg => ! arg.isData).map(a => a.error);
-        let z = {};
-        z[self.name] = 'Transform function inputs contain error(s)';
-        let x = angular.merge({}, ...y, z);
-        self.injectError(x);
-      }
+      if (_.some(latestArgs, (arg) => ! arg.isData)) self.injectError('Transform function inputs contain error(s)');
       else try {
         // inputs seem ok. We will try applying the transformFunction now.
         let data = undefined;
         let transformFunctionArgs = latestArgs.map((x) => x.data);
-        if (stateEnabled) {
-          transformFunctionArgs.push(self.state);
-        }
+        if (stateEnabled) transformFunctionArgs.push(self.state);
         data = transformFunction(...transformFunctionArgs);
-        if (data) self.injectData(data);
-        else { // got no data
-          let z = {};
-          z[self.name] = 'Transform function evaluation did not yield data';
-          self.injectError(z);
-        }
+        if (! (_.isUndefined(data) || _.isNull(data))) self.injectData(data);
+        else self.injectError('Transform function evaluation did not yield data');
       } catch (e) { // ran into errors during transformFunction application
-        let z = {};
-        z[self.name] = e.message;
-        self.injectError(z);
+        self.injectError('Error during transform function evaluation: ' + e.message);
       }
     }
 
@@ -183,26 +163,20 @@ export const reactiveDataFactory = ['$http', function ($http) {
           $http(httpConfig).then(response => {
             self.injectData(response.data);
           }, response => {
-            let x = {};
-            x[name] = "Error during HTTP with status: " + response.status + " and statusText: " + response.statusText;
-            self.injectError(x);
+            self.injectError("Error during HTTP with status: " + response.status + " and statusText: " + response.statusText);
           })
         } catch (e) {
-          let x = {};
-          x[name] = "Error during HTTP: " + e.message;
-          self.injectError(x);
+          self.injectError("Error during HTTP: " + e.message);
         }
       };
 
       if (! intervalSec) {
         reactiveData.stream.doOnNext(x => {
           if (x.isData) injectSomething(x.data);
-          else console.log('reactiveData in ExtendedHTTP has error');
+          else self.injectError("ExtendedHTTP parent dataset has error");
         }).subscribe();
       } else if (! ((_.isNumber(intervalSec)) && (intervalSec >= 1))) {
-        let x = {};
-        x[name] = 'Invalid interval value: ' + interval;
-        self.injectError(x);
+        self.injectError('Invalid interval value: ' + interval);
       } else {
         self.intervalGen = Rx.Observable.merge(Rx.Observable.just(0), Rx.Observable.interval(intervalSec*1000));
         self.intervalSubscription = Rx.Observable.combineLatest(reactiveData.stream, self.intervalGen, (x, y) => {
@@ -210,9 +184,7 @@ export const reactiveDataFactory = ['$http', function ($http) {
         }).doOnNext(x => {
           if (x.isData) injectSomething(x.data);
           if (! x.isData) {
-            let err = {};
-            err[name] = "Error in HTTP Config stream";
-            self.injectError(err);
+            self.injectError("ExtendedHTTP parent dataset has error");
           }
         }).subscribe(new Rx.ReplaySubject(0));
       }
