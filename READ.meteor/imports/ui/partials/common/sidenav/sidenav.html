@@ -1,4 +1,4 @@
-<ol class="breadcrumb" ng-if="$ctrl.itemsControl.creatable() || $ctrl.itemsControl.selectedItem">
+<ol class="breadcrumb">
   <li ng-if="$ctrl.itemsControl.creatable()" ng-click="$ctrl.itemsControl.createItem()">
     <a href="javascript:void(0)" uib-tooltip="{{'Create ' + $ctrl.itemsControl.itemType}}" tooltip-placement="bottom-left"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
   </li>
@@ -11,7 +11,16 @@
   <li ng-if="$ctrl.itemsControl.selectedItem && (! $ctrl.item.readOnly) && ($ctrl.itemControls.deletable())" ng-click="$ctrl.brieflyShowAreYouSure()">
     <a href="javascript:void(0)" uib-tooltip="{{'Delete ' + $ctrl.itemsControl.itemType}}" tooltip-placement="bottom-left"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
   </li>
+  <!-- Below is only to preserve space -->
+  <li class="ng-hide"> 
+    <a href="javascript:void(0)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+  </li>
 </ol>
+
+<div class="form-group" ng-repeat="parentItem in $ctrl.itemsControl.parentItems">
+  <label for="selectedParentItemId">Selected {{parentItem.itemType}}</label>
+  <input type="text" class="form-control" readonly ng-model="parentItem.name"></input>
+</div>
 
 <form name="sideNavForm" novalidate ng-if="$ctrl.item">
 <div class="form-group" ng-if="$ctrl.items.length > 0">

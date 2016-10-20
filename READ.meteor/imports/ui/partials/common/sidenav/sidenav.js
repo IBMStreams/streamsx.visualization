@@ -13,7 +13,7 @@ export const sideNavComponent = {
     (this.init = () => {
       self.showAreYouSure = false; // no we do not want to delete this... and we don't want to see deletion option...
     })();
-
+    
     this.settingsToggle = false;
 
     this.brieflyShowAreYouSure = () => {

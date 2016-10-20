@@ -21,7 +21,17 @@ function ($scope, $reactive, $state, readState, defaultDataSets) {
     item: () => self.getReactively('dashboard') ? DataSets.findOne({_id: self.getReactively('dashboard.selectedDataSetId')}) : undefined,
   });
 
+  let parentItems = [];
+  if (self.app) parentItems.push({
+    itemType: 'App',
+    name: self.app.name
+  });
+  if (self.dashboard) parentItems.push({
+    itemType: 'Dashboard',
+    name: self.dashboard.name
+  });
   this.itemsControl = {
+    parentItems: parentItems,
     itemType: "Data Set",
     clonable: false,
     newItemName: undefined,
