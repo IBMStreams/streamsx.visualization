@@ -18,8 +18,6 @@ export const sideNavComponent = {
 
     this.createTooltipIsOpen = (self.items.length === 0);
 
-    this.settingsToggle = false;
-
     this.brieflyShowAreYouSure = () => {
       self.showAreYouSure = true;
       self.briefTimer = $timeout(() => {

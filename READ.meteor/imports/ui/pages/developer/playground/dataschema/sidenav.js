@@ -62,7 +62,6 @@ function ($scope, $reactive, $state, $timeout, readState) {
 
   this.itemControls = {
     itemType: 'Data Schema',
-    readOnlyable: true,
     validItem: () => true,
     updateItem: () => {
       self.updateDatabase(self.item);

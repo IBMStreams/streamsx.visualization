@@ -7,9 +7,6 @@
   <li ng-show="$ctrl.itemsControl.selectedItem && $ctrl.itemsControl.clonable" ng-click="$ctrl.itemsControl.cloneItem()">
     <a href="javascript:void(0)" uib-tooltip="{{'Clone ' + $ctrl.itemsControl.itemType}}" tooltip-placement="bottom-left"><i class="fa fa-clone" aria-hidden="true"></i></a>
   </li>
-  <li ng-show="$ctrl.itemsControl.selectedItem" ng-click="$ctrl.settingsToggle = ! $ctrl.settingsToggle">
-    <a href="javascript:void(0)" uib-tooltip="{{$ctrl.itemsControl.itemType + ' Settings'}}" tooltip-placement="bottom-left"><i class="fa fa-edit" aria-hidden="true"></i></a>
-  </li>
   <li ng-show="$ctrl.itemsControl.selectedItem && (! $ctrl.item.readOnly) && ($ctrl.itemControls.deletable())" ng-click="$ctrl.brieflyShowAreYouSure()">
     <a href="javascript:void(0)" uib-tooltip="{{'Delete ' + $ctrl.itemsControl.itemType}}"
     tooltip-placement="bottom-left"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
@@ -50,20 +47,5 @@
       ng-change="sideNavForm.newItemName.$invalid || $ctrl.itemControls.renameItem($ctrl.newItemName)"></input>
     </div>
   </div>
-</div>
-
-<div ng-if="$ctrl.item">
-  <div ng-if="$ctrl.itemControls.readOnlyable && $ctrl.settingsToggle">
-    <label>Readonly settings for {{$ctrl.itemControls.itemType}}</label>
-    <div class="form-group">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" ng-model="$ctrl.item.readOnly" ng-disabled="! $ctrl.itemControls.validItem()"
-          ng-change="$ctrl.itemControls.updateItem()"> Read only
-        </label>
-      </div>
-    </div>
-  </div>
-
 </div>
 </form>
