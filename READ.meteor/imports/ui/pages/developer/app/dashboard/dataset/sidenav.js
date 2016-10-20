@@ -66,7 +66,6 @@ function ($scope, $reactive, $state, readState, defaultDataSets) {
 
   this.itemControls = {
     itemType: 'Data Set',
-    readOnlyable: false,
     validItem: () => true,
     renameItem: (newName) => {
       self.item.name = newName;

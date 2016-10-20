@@ -82,7 +82,6 @@ function($scope, $reactive, $state, readState) {
 
   this.itemControls = {
     itemType: 'Visualization',
-    readOnlyable: false,
     validItem: () => true,
     renameItem: (newName) => {
       self.item.name = newName;

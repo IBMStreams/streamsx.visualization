@@ -63,7 +63,6 @@ function ($scope, $reactive, $state, readState) {
 
   this.itemControls = {
     itemType: 'Dashboard',
-    readOnlyable: false,
     validItem: () => true,
     renameItem: (newName) => {
       self.item.name = newName;

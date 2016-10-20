@@ -51,7 +51,6 @@ function ($scope, $reactive, $state, readState, $q) {
 
   this.itemControls = {
     itemType: 'App',
-    readOnlyable: false,
     validItem: () => true,
     renameItem: (newName) => {
       self.item.name = newName;

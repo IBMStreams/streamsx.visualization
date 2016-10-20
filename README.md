@@ -18,3 +18,6 @@
 
 ## Next steps
 Follow the tutorial: http://localhost:3000/#/docs/tutorial
+
+## Sharing READ Dashboards
+Refer to help topics: http://localhost:3000/#/docs/helptopics
