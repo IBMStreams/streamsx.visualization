@@ -38,19 +38,21 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
     }).fetch()
   });
 
-  this.reactiveVisualization = Visualizations.findOne({_id: self.dashboard.selectedVisualizationId});
-  this.ready = true;
-  let visualizationQuery = Visualizations.find({_id: self.dashboard.selectedVisualizationId});
-  let visualizationQueryHandle = visualizationQuery.observe({
-    changed: _.debounce((newVisualization, oldVisualization) => {
-      self.ready = false;
-      $timeout(() => {
-        self.reactiveVisualization = newVisualization;
-        self.ready = true;
-      }, 0);
-      $scope.$apply();
-    }, 200)
-  });
+  if (self.dashboard) {
+    this.reactiveVisualization = Visualizations.findOne({_id: self.dashboard.selectedVisualizationId});
+    this.ready = true;
+    let visualizationQuery = Visualizations.find({_id: self.dashboard.selectedVisualizationId});
+    let visualizationQueryHandle = visualizationQuery.observe({
+      changed: _.debounce((newVisualization, oldVisualization) => {
+        self.ready = false;
+        $timeout(() => {
+          self.reactiveVisualization = newVisualization;
+          self.ready = true;
+        }, 0);
+        $scope.$apply();
+      }, 200)
+    });
+  }
 
   this.aceJsonSchemaOptions = aceJsonSchemaOptions;
   this.aceJavaScriptOptions = aceJavaScriptOptions;

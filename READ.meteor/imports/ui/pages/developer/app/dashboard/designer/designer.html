@@ -1,4 +1,17 @@
 <div class="main-content-panel-wrapper" ng-controller="designerCtrl as designerCtrl">
+  <div class="alert alert-danger" role="alert" ng-if="! designerCtrl.app">
+    Please create an app
+  </div>
+
+  <div class="alert alert-danger" role="alert" ng-if="designerCtrl.app && ! (designerCtrl.dashboard)">
+    Please create a dashboard
+  </div>
+
+  <div class="alert alert-danger" role="alert"
+  ng-if="designerCtrl.app && designerCtrl.dashboard && (designerCtrl.dataSets.length === 0)">
+    Please create a dataset
+  </div>
+
   <div class="main-content-panel" ng-if="designerCtrl.visualization">
     <div ng-include="'/imports/ui/pages/developer/app/dashboard/designer/nvd3designer.html'" ng-if="designerCtrl.reactiveVisualization.pluginType==='NVD3'"></div>
     <div ng-include="'/imports/ui/pages/developer/app/dashboard/designer/leafletdesigner.html'" ng-if="designerCtrl.reactiveVisualization.pluginType==='leaflet'"></div>
