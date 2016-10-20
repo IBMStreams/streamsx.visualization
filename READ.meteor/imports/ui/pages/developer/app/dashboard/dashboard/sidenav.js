@@ -18,7 +18,7 @@ function ($scope, $reactive, $state, readState) {
   this.helpers({
     user: () => Users.findOne({}),
     app: () => Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
-    items: () => Dashboards.find({appId: self.getReactively('user.selectedIds.appId')}).fetch(),
+    items: () => self.app ? Dashboards.find({appId: self.getReactively('user.selectedIds.appId')}).fetch() : [],
     item: () => self.getReactively('app') ? Dashboards.findOne({_id: self.getReactively('app.selectedDashboardId')}) : undefined,
     dataSets: () => self.getReactively('item') ? DataSets.find({dashboardId: self.item._id}).fetch() : [],
     visualizations: () => self.getReactively('item') ? Visualizations.find({dashboardId: self.item._id}).fetch() : [],

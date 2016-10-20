@@ -1,18 +1,22 @@
 <ol class="breadcrumb">
-  <li ng-if="$ctrl.itemsControl.creatable()" ng-click="$ctrl.itemsControl.createItem()">
-    <a href="javascript:void(0)" uib-tooltip="{{'Create ' + $ctrl.itemsControl.itemType}}" tooltip-placement="bottom-left"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+  <li ng-show="$ctrl.itemsControl.creatable()" ng-click="$ctrl.itemsControl.createItem()">
+    <a href="javascript:void(0)" uib-tooltip="{{'Create ' + $ctrl.itemsControl.itemType}}"
+    tooltip-is-open="$ctrl.createTooltipIsOpen" tooltip-placement="bottom-left">
+    <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
   </li>
-  <li ng-if="$ctrl.itemsControl.selectedItem && $ctrl.itemsControl.clonable" ng-click="$ctrl.itemsControl.cloneItem()">
+  <li ng-show="$ctrl.itemsControl.selectedItem && $ctrl.itemsControl.clonable" ng-click="$ctrl.itemsControl.cloneItem()">
     <a href="javascript:void(0)" uib-tooltip="{{'Clone ' + $ctrl.itemsControl.itemType}}" tooltip-placement="bottom-left"><i class="fa fa-clone" aria-hidden="true"></i></a>
   </li>
-  <li ng-if="$ctrl.itemsControl.selectedItem" ng-click="$ctrl.settingsToggle = ! $ctrl.settingsToggle">
+  <li ng-show="$ctrl.itemsControl.selectedItem" ng-click="$ctrl.settingsToggle = ! $ctrl.settingsToggle">
     <a href="javascript:void(0)" uib-tooltip="{{$ctrl.itemsControl.itemType + ' Settings'}}" tooltip-placement="bottom-left"><i class="fa fa-edit" aria-hidden="true"></i></a>
   </li>
-  <li ng-if="$ctrl.itemsControl.selectedItem && (! $ctrl.item.readOnly) && ($ctrl.itemControls.deletable())" ng-click="$ctrl.brieflyShowAreYouSure()">
-    <a href="javascript:void(0)" uib-tooltip="{{'Delete ' + $ctrl.itemsControl.itemType}}" tooltip-placement="bottom-left"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+  <li ng-show="$ctrl.itemsControl.selectedItem && (! $ctrl.item.readOnly) && ($ctrl.itemControls.deletable())" ng-click="$ctrl.brieflyShowAreYouSure()">
+    <a href="javascript:void(0)" uib-tooltip="{{'Delete ' + $ctrl.itemsControl.itemType}}"
+    tooltip-placement="bottom-left"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+    <button ng-if="$ctrl.showAreYouSure" class="btn btn-danger btn-xs" ng-click="$ctrl.deleteItem()">Confirm</button>
   </li>
   <!-- Below is only to preserve space -->
-  <li class="ng-hide"> 
+  <li class="space-preserver ng-hide">
     <a href="javascript:void(0)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
   </li>
 </ol>
@@ -58,10 +62,5 @@
     </div>
   </div>
 
-<div class="form-group" >
-  <div>
-    <button ng-if="$ctrl.showAreYouSure" class="btn btn-danger" ng-click="$ctrl.deleteItem()">Confirm Deletion</button>
-  </div>
-</div>
 </div>
 </form>

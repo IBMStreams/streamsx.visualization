@@ -17,7 +17,7 @@ function ($scope, $reactive, $state, readState, defaultDataSets) {
     user: () => Users.findOne({}),
     app: () => Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
     dashboard: () => self.getReactively('app') ? Dashboards.findOne({_id: self.getReactively('app.selectedDashboardId')}) : undefined,
-    items: () => self.getReactively('dashboard') ? DataSets.find({dashboardId: self.getReactively('app.selectedDashboardId')}) : undefined,
+    items: () => self.getReactively('dashboard') ? DataSets.find({dashboardId: self.getReactively('app.selectedDashboardId')}) : [],
     item: () => self.getReactively('dashboard') ? DataSets.findOne({_id: self.getReactively('dashboard.selectedDataSetId')}) : undefined,
   });
 

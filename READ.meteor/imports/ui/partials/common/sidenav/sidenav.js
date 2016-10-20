@@ -13,6 +13,8 @@ export const sideNavComponent = {
     (this.init = () => {
       self.showAreYouSure = false; // no we do not want to delete this... and we don't want to see deletion option...
     })();
+
+    this.createTooltipIsOpen = (self.items.length === 0);
     
     this.settingsToggle = false;
 
