@@ -1,8 +1,23 @@
 <ol class="breadcrumb">
-  <li><a ui-sref="read.developer.app.dashboard.app">Apps</a></li>
-  <li><a ui-sref="read.developer.app.dashboard.dashboard">Dashboards</a></li>
-  <li><a ui-sref="read.developer.app.dashboard.dataset">Datasets</a></li>
-  <li><a ui-sref="read.developer.app.dashboard.designer">Visualizations</a></li>
+  <li ng-if="dashboardMainContentCtrl.readState.mainContentSelectedTab.dashboard !== 'app'">
+    <a ui-sref="read.developer.app.dashboard.app">Apps</a>
+  </li>
+  <li ng-if="dashboardMainContentCtrl.readState.mainContentSelectedTab.dashboard === 'app'">Apps</li>
+
+  <li ng-if="dashboardMainContentCtrl.readState.mainContentSelectedTab.dashboard !== 'dashboard'">
+    <a ui-sref="read.developer.app.dashboard.dashboard">Dashboards</a>
+  </li>
+  <li ng-if="dashboardMainContentCtrl.readState.mainContentSelectedTab.dashboard === 'dashboard'">Dashboards</li>
+
+  <li ng-if="dashboardMainContentCtrl.readState.mainContentSelectedTab.dashboard !== 'dataset'">
+    <a ui-sref="read.developer.app.dashboard.dataset">Datasets</a>
+  </li>
+  <li ng-if="dashboardMainContentCtrl.readState.mainContentSelectedTab.dashboard === 'dataset'">Datasets</li>
+
+  <li ng-if="dashboardMainContentCtrl.readState.mainContentSelectedTab.dashboard !== 'designer'">
+    <a ui-sref="read.developer.app.dashboard.designer">Visualizations</a>
+  </li>
+  <li ng-if="dashboardMainContentCtrl.readState.mainContentSelectedTab.dashboard === 'designer'">Visualizations</li>
 </ol>
 
 <div ng-if="dashboardMainContentCtrl.app">
