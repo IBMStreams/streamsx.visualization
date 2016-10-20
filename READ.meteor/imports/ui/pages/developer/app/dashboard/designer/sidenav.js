@@ -19,7 +19,7 @@ function($scope, $reactive, $state, readState) {
     user: () => Users.findOne({}),
     app: () => Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
     dashboard: () => Dashboards.findOne({_id: self.getReactively('app.selectedDashboardId')}),
-    items: () => Visualizations.find({dashboardId: self.getReactively('app.selectedDashboardId')}).fetch(),
+    items: () => self.dashboard ? Visualizations.find({dashboardId: self.getReactively('app.selectedDashboardId')}).fetch() : [],
     item: () => Visualizations.findOne({_id: self.getReactively('dashboard.selectedVisualizationId')}),
     dataSets: () => DataSets.find({dashboardId: self.getReactively('app.selectedDashboardId')}).fetch(),
     templates: () => Playground.find({
