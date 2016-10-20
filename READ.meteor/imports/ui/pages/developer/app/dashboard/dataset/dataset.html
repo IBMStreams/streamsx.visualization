@@ -31,11 +31,10 @@
             <label ng-if="dataSetCtrl.lastDataObject.isData">Data</label>
             <pre class="pre-scrollable" ng-if="dataSetCtrl.lastDataObject.isData">{{dataSetCtrl.lastDataObject.data | json:2}}</pre>
 
-            <label ng-if="! dataSetCtrl.lastDataObject.isData">Data</label>
-            <dl class="alert alert-danger" role="alert" ng-if="! dataSetCtrl.lastDataObject.isData">
-              <dt ng-repeat-start="(key, value) in dataSetCtrl.lastDataObject.error">{{key}}</dt>
-              <dd ng-repeat-end>{{value}}</dd>
-            </dl>
+            <label ng-if="! dataSetCtrl.lastDataObject.isData">Error</label>
+            <div class="alert alert-danger" role="alert" ng-if="! dataSetCtrl.lastDataObject.isData">
+              {{dataSetCtrl.lastDataObject.error}}
+            </div>
           </div>
 
           <div class="col-md-12" ng-if="dataSetCtrl.dataSet.dataSetType === 'raw'">
