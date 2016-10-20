@@ -1,10 +1,6 @@
 # READ: Real-Time Visual Analytics
 
-
-## Synopsis
 > **READ is a developer and data scientist playground for advanced visual analytics**
-
-
 > Use READ to rapidly prototype real-time visualizations, responsive sharable dashboards, REST API dataflows, and new types of data visualizations.
 
 ## Getting Started
