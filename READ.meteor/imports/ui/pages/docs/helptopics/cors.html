@@ -1,29 +1,20 @@
 <h3>CORS</h3>
 <blockquote>
-  CORS stands for Cross-Origin Resource Sharing. There are situations when READ attempts to access a REST end-point
-  through the browser / front-end mechanisms, but the access fails since the REST service is not configured for
-  cross-origin data transfers. The following steps provide a possible workaround in these situations.
+  There are situations when READ attempts to access a REST API but the access fails since the REST service
+  is not configured for Cross Origin Resource Sharing (CORS). The following steps provide a possible workaround
+  in these situations.
 </blockquote>
 
 <h4>CORS Proxying</h4>
 <ul class="list-group">
-  <li class="list-group-item">Install <a href="https://nodejs.org/en/" target="_blank">NodeJS</a>.
-    Commands <code>node</code> and <code>npm</code> will work if NodeJS is installed.
-  </li>
   <li class="list-group-item">
-    <code>cd streamsx.visualization/READ.meteor</code>
-  </li>
-  <li class="list-group-item">
-    Get the <strong>public</strong> IP address for your machine; say 8.74.12.82. Then, <code>CORSPROXY_HOST=8.74.12.82 CORSPROXY_PORT=3003 ./node_modules/corsproxy/bin/corsproxy</code>
+    Navigate to <code>streamsx.visualization/READ.meteor</code>.
+    Get the <strong>public</strong> IP address for your machine; say 8.74.12.82.
+    Then, <code>CORSPROXY_HOST=8.74.12.82 CORSPROXY_PORT=3003 ./node_modules/corsproxy/bin/corsproxy</code>
   </li>
   <li class="list-group-item">The above command should start the CORS proxy at port 3003.
     While creating a READ data set with another URL, say http://my.domain.com:2912/path/to/resource,
     use the following proxied URL instead: http://8.74.12.32:3003/my.domain.com:2912/path/to/resource
-  </li>
-  <li class="list-group-item"> It is important that you use the <strong>public</strong> IP address as the
-    URL prefix while CORS proxying. Otherwise, if you use http://localhost:3003/my.domain.com:2912/path/to/resource
-    instead, it is possible that you will be able to access the data during development, but your end-users may not
-    be able to access the data while viewing your shared dashboards.
   </li>
   <li class="list-group-item">
     Refer to the <a href="https://github.com/gr2m/CORS-Proxy" target="_blank">CORS-proxy</a> project page for further

@@ -100,8 +100,12 @@ pre {
   margin-right: 15px;
 }
 
-.docs ul.sidebar-nav.toplevel > li {
-  height: 3em;
+// .docs ul.sidebar-nav.toplevel > li {
+//   height: 3em;
+// }
+
+.docs ul.second-level > li a {
+  padding-left: 30px;
 }
 
 //.sidenav-content .docs .nav a,

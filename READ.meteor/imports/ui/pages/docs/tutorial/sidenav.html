@@ -1,11 +1,23 @@
-<div ng-if="sideNavCtrl.readState.mainContentSelectedTab.tutorial === 'cars'" ng-include="'/imports/ui/pages/docs/tutorial/cars/sidenav.html'">
-</div>
-
-<div ng-if="sideNavCtrl.readState.mainContentSelectedTab.tutorial === 'movies'" ng-include="'/imports/ui/pages/docs/tutorial/movies/sidenav.html'">
-</div>
-
-<div ng-if="sideNavCtrl.readState.mainContentSelectedTab.tutorial === 'timeseries'" ng-include="'/imports/ui/pages/docs/tutorial/timeseries/sidenav.html'">
-</div>
-
-<div ng-if="sideNavCtrl.readState.mainContentSelectedTab.tutorial === 'dynamicRealTimeCharts'" ng-include="'/imports/ui/pages/docs/tutorial/dynamicrealtimecharts/sidenav.html'">
+<div class="docs">
+  <ul class="row top-level nav">
+    <li><a href="javascript:void(0)" ng-click="sideNavCtrl.switch('timeseries', 'createApp')">Time Series</a></li>
+    <li>
+      <ul class="nav second-level">
+        <li><a href="javascript:void(0)" ng-click="sideNavCtrl.switch('timeseries', 'createApp')">READ App and Dashboard</a></li>
+        <li><a href="javascript:void(0)" ng-click="sideNavCtrl.switch('timeseries', 'timeSeriesCharts')">Time Series Charts</a></li>
+      </ul>
+    </li>
+    <li><a href="javascript:void(0)" ng-click="sideNavCtrl.switch('dynamicRealTimeCharts', 'dynamicCharts')">Dynamic Real-time Charts</a></li>
+    <li>
+      <ul class="nav second-level">
+        <li><a href="javascript:void(0)" ng-click="sideNavCtrl.switch('dynamicRealTimeCharts', 'dynamicCharts')">Dynamic Visualizations</a></li>
+      </ul>
+    </li>
+    <li><a href="javascript:void(0)" ng-click="sideNavCtrl.switch('cars', 'createApp')">Cars</a></li>
+    <li>
+      <ul class="nav second-level">
+        <li><a href="javascript:void(0)" ng-click="sideNavCtrl.switch('cars', 'createApp')">Cars App</a></li>
+      </ul>
+    </li>
+  </ul>
 </div>
