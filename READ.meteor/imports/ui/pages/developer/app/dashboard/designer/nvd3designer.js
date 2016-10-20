@@ -36,19 +36,6 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
 
   this.itemStream = new Rx.ReplaySubject(0);
 
-/* // We will eventually get rid of this after testing the new watcher sufficiently
-  $scope.$watch('designerCtrl.visualization', _.debounce(function(item) {
-    $scope.$apply(function() {
-      if (self.dataForm) self.validators.basicOptions = self.dataForm.$valid;
-      if (self.advancedOptionsForm) self.validators.advancedOptions = self.advancedOptionsForm.$valid;
-      self.itemStream.onNext({
-        valid: self.validItem(),
-        item: item
-      });
-    });
-  }, 2), true); // the 2 milli second debounce is for validators and reactive computes to kick in.
-  */
-
   $scope.$watch(() => { // because of crummy ui-ace not working with ng-show
     if (self.dataForm) self.validators.basicOptions = self.dataForm.$valid;
     if (self.advancedOptionsForm) self.validators.advancedOptions = self.advancedOptionsForm.$valid;
