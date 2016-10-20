@@ -21,17 +21,22 @@
           </span>
         </div>
       </div>
+
     </form>
 
     <hr />
 
     <form name="globalConfigForm" novalidate>
-      <label>READ.Sharing service URL </label>
-      <i ng-if="! globalConfigForm.$valid" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
-      <div class="col-md-6">
-        <input type="url" class="form-control" placeholder="http://localhost:3002/"
-        ng-model="appCtrl.user.shareServiceURL"
-        name="shareServiceURL" required ng-change="(globalConfigForm.shareServiceURL.$invalid || appCtrl.updateUser())">
+      <div class="form-group">
+        <div class="input-group col-md-6">
+          <label>READ.Sharing service URL </label>
+          <i ng-if="! globalConfigForm.$valid" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+          <div>
+            <input type="url" class="form-control" placeholder="http://localhost:3002/"
+            ng-model="appCtrl.user.shareServiceURL"
+            name="shareServiceURL" required ng-change="(globalConfigForm.shareServiceURL.$invalid || appCtrl.updateUser())">
+          </div>
+        </div>
       </div>
     </form>
 
