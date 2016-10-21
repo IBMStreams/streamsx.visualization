@@ -34,7 +34,6 @@ function($scope, $reactive, $state, readState, $q) {
         switchItem: (selectedId) => {
           self.user.selectedIds.appId = selectedId;
           // reset all deferredPromises...
-          readState.deferredApps = $q.defer();
           readState.deferredDashboards = $q.defer();
           readState.deferredDataSets = $q.defer();
           readState.deferredVisualizations = $q.defer();
