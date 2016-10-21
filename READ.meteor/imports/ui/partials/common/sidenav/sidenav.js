@@ -5,7 +5,8 @@ export const sideNavComponent = {
     items: '=',
     itemsControl: '=',
     item: '=',
-    itemControls: '='
+    itemControls: '=',
+    parentItems: '='
   },
   templateUrl: sideNavTemplate,
   controller: ['$timeout', '$scope', function($timeout, $scope) {
@@ -14,9 +15,9 @@ export const sideNavComponent = {
       self.showAreYouSure = false; // no we do not want to delete this... and we don't want to see deletion option...
     })();
 
-    if (this.item) this.newItemName = this.item.name;
-
-    this.createTooltipIsOpen = (self.items.length === 0);
+    $scope.$watch('$ctrl.item.name', (newVal) => {
+      self.newItemName = newVal;
+    });
 
     this.brieflyShowAreYouSure = () => {
       self.showAreYouSure = true;

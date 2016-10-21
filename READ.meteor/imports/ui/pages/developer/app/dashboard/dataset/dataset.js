@@ -83,7 +83,7 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
       name: self.dataSet.name
     }, defaultDataSet);
     self.updateDatabase(newDataSet);
-    $state.reload($state.$current.name);
+    $state.reload('read.developer.app.dashboard');
   };
 
   //update database

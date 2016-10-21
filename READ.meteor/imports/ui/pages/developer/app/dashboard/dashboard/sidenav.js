@@ -8,8 +8,8 @@ import {Visualizations} from '/imports/api/visualizations';
 import {DataSets} from '/imports/api/datasets';
 import {Playground} from '/imports/api/playground';
 
-export const dashboardDashboardSideNavCtrl = ['$scope', '$reactive', '$state', 'readState',
-function ($scope, $reactive, $state, readState) {
+export const dashboardDashboardSideNavCtrl = ['$scope', '$reactive', '$state', 'readState', '$q',
+function ($scope, $reactive, $state, readState, $q) {
   $reactive(this).attach($scope);
   let self = this;
 
@@ -17,49 +17,64 @@ function ($scope, $reactive, $state, readState) {
 
   this.helpers({
     user: () => Users.findOne({}),
+    apps: () => Apps.find().fetch(),
     app: () => Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
     items: () => self.app ? Dashboards.find({appId: self.getReactively('user.selectedIds.appId')}).fetch() : [],
     item: () => self.getReactively('app') ? Dashboards.findOne({_id: self.getReactively('app.selectedDashboardId')}) : undefined,
     dataSets: () => self.getReactively('item') ? DataSets.find({dashboardId: self.item._id}).fetch() : [],
     visualizations: () => self.getReactively('item') ? Visualizations.find({dashboardId: self.item._id}).fetch() : [],
+    parentItems: () => {
+      let pi = [];
+      if (self.getReactively('app')) pi.push({
+        itemType: 'App',
+        selectedId: self.app._id,
+        items: self.apps,
+        switchItem: (selectedId) => {
+          self.user.selectedIds.appId = selectedId;
+          // reset all deferredPromises...
+          readState.deferredDashboards = $q.defer();
+          readState.deferredDataSets = $q.defer();
+          readState.deferredVisualizations = $q.defer();
+          // now we're ready to update and resubscribe in readCtrl
+          Meteor.call('user.update', self.user, (err, res) => {if (err) alert(err);}); //update user
+          $state.reload('read.developer');
+        }
+      });
+      return pi;
+    },
     templates: () => Playground.find({
       $or: [
         {pluginType: 'NVD3'},
         {pluginType: 'leaflet'}
       ]
-    }).fetch()
-  });
-
-  let parentItems = [];
-  if (self.app) parentItems.push({
-    itemType: 'App',
-    name: self.app.name
-  });
-  this.itemsControl = {
-    parentItems: parentItems,
-    itemType: "Dashboard",
-    clonable: false,
-    selectedId: self.app ? self.app.selectedDashboardId: undefined,
-    selectedItem: self.app ? Dashboards.findOne({_id: self.app.selectedDashboardId}) : undefined,
-    creatable: () => (self.app) && (! self.app.readOnly),
-    switchItem: (selectedId) => {
-      self.app.selectedDashboardId = selectedId;
-      Meteor.call('app.update', self.user.selectedIds.appId, self.app, (err, res) => {if (err) alert(err);}); //update user
-      $state.reload($state.$current.name);
-    },
-    createItem: () => {
-      Meteor.call('dashboard.create', {
-        userId: 'guest',
-        appId: self.user.selectedIds.appId,
-        name: self.itemsControl.itemType + ' ' + self.items.length,
-      }, (err, res) => {
-        if (err) alert(err);
-        else {
-          self.itemsControl.switchItem(res);
+    }).fetch(),
+    itemsControl: () => {
+      return {
+        itemType: "Dashboard",
+        clonable: false,
+        selectedId: self.getReactively('app') ? self.getReactively('app.selectedDashboardId'): undefined,
+        selectedItem: self.getReactively('app') ? Dashboards.findOne({_id: self.getReactively('app.selectedDashboardId')}) : undefined,
+        creatable: () => (self.app) && (! self.app.readOnly),
+        switchItem: (selectedId) => {
+          self.app.selectedDashboardId = selectedId;
+          Meteor.call('app.update', self.user.selectedIds.appId, self.app, (err, res) => {if (err) alert(err);}); //update user
+          $state.reload('read.developer.app.dashboard');
+        },
+        createItem: () => {
+          Meteor.call('dashboard.create', {
+            userId: 'guest',
+            appId: self.user.selectedIds.appId,
+            name: self.itemsControl.itemType + ' ' + self.items.length,
+          }, (err, res) => {
+            if (err) alert(err);
+            else {
+              self.itemsControl.switchItem(res);
+            }
+          });
         }
-      });
+      }
     }
-  };
+  });
 
   this.itemControls = {
     itemType: 'Dashboard',
@@ -94,7 +109,7 @@ function ($scope, $reactive, $state, readState) {
           if (newSelectedDashboard) self.app.selectedDashboardId = newSelectedDashboard._id;
           else delete self.app.selectedDashboardlId;
           Meteor.call('app.update', self.app._id, self.app, (err, res) => {if (err) alert(err);});
-          $state.reload($state.$current.name);
+          $state.reload('read.developer.app.dashboard');
         }
       });
     }

@@ -12,7 +12,10 @@ export const readStateFactory = ['$q', 'reactivePipeline', ($q, reactivePipeline
     },
     mainContentSelectedTab: {
       dataSet: 'editor',
-      designer: 'data',
+      designer: {
+        nvd3: 'basicOptions',
+        leaflet: 'basicOptions'
+      },
       dataSchema: 'schema',
       nvd3: 'data',
       leaflet: 'data',

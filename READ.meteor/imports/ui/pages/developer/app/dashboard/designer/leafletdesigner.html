@@ -1,28 +1,20 @@
 <div class="panel with-nav-tabs panel-default" ng-controller="leafletVizDesignCtrl as leafletVizDesignCtrl">
   <div class="panel-heading">
     <ul class="nav nav-tabs">
-      <li ng-class="{active: leafletVizDesignCtrl.readState.mainContentSelectedTab.dashboard === 'data'}">
-        <a ng-click="leafletVizDesignCtrl.readState.mainContentSelectedTab.dashboard = 'data'">Data</a>
+      <li ng-class="{active: leafletVizDesignCtrl.readState.mainContentSelectedTab.designer.leaflet === 'basicOptions'}">
+        <a ng-click="leafletVizDesignCtrl.readState.mainContentSelectedTab.designer.leaflet = 'basicOptions'">Basic Options</a>
       </li>
-      <li ng-class="{active: leafletVizDesignCtrl.readState.mainContentSelectedTab.dashboard === 'usageInfo'}">
-        <a ng-click="leafletVizDesignCtrl.readState.mainContentSelectedTab.dashboard = 'usageInfo'">Usage Info</a>
+      <li ng-class="{active: leafletVizDesignCtrl.readState.mainContentSelectedTab.designer.leaflet === 'usageInfo'}">
+        <a ng-click="leafletVizDesignCtrl.readState.mainContentSelectedTab.designer.leaflet = 'usageInfo'">Usage Info</a>
       </li>
     </ul>
   </div>
 
   <div class="panel-body">
-    <div class="row" ng-if="leafletVizDesignCtrl.readState.mainContentSelectedTab.dashboard !== 'usageInfo'">
+    <div class="row" ng-if="leafletVizDesignCtrl.readState.mainContentSelectedTab.designer.leaflet !== 'usageInfo'">
       <div class="col-md-5">
-        <div ng-if="leafletVizDesignCtrl.readState.mainContentSelectedTab.dashboard === 'data'">
+        <div ng-if="leafletVizDesignCtrl.readState.mainContentSelectedTab.designer.leaflet === 'basicOptions'">
             <form name="leafletVizDesignCtrl.dataForm">
-              <div class="form-group">
-                <label for="dataSet">Data Set</label>
-                <select class="form-control" ng-model="designerCtrl.visualization.dataSetId" name="dataSet"
-                ng-options="dataSet._id as dataSet.name for dataSet in designerCtrl.dataSets"
-                ng-change="designerCtrl.updateAndReload()">
-                </select>
-              </div>
-
               <div class="form-group">
                 <label for="template">Chart Type</label>
                 <select class="form-control" ng-model="designerCtrl.visualization.templateId" name="template"
@@ -41,7 +33,7 @@
       </div>
     </div>
 
-    <div ng-if="leafletVizDesignCtrl.readState.mainContentSelectedTab.dashboard === 'usageInfo'" >
+    <div ng-if="leafletVizDesignCtrl.readState.mainContentSelectedTab.designer.leaflet === 'usageInfo'" >
       <div ng-bind-html="leafletVizDesignCtrl.template.usageInfo"></div>
     </div>
   </div>

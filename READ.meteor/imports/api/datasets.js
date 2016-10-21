@@ -15,6 +15,7 @@ export const rawDataSchema = {
       minLength: 1,
       maxLength: 20
     },
+    selectedVisualizationId: {type: "string"},
     rawData: {type: "string"}
   },
   required: ["userId", "appId", "dashboardId", "dataSetType", "name", "rawData"],
@@ -35,6 +36,7 @@ export const simpleHTTPDataSchema = {
       minLength: 1,
       maxLength: 20
     },
+    selectedVisualizationId: {type: "string"},
     url: {type: "string"},
     poll: {
       type: "object",
