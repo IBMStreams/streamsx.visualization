@@ -39,11 +39,8 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
     }).fetch()
   });
 
-  console.log('self.dataSet?', self.dataSet);
   if (self.dataSet) {
-    console.log('yes self.dataSet', self.dataSet);
     self.reactiveVisualization = Visualizations.findOne({_id: self.dataSet.selectedVisualizationId});
-    console.log('self.reactiveVisualization?', self.reactiveVisualization);
     self.ready = true;
     self.visualizationQuery = Visualizations.find({_id: self.dataSet.selectedVisualizationId});
     self.visualizationQueryHandle = self.visualizationQuery.observe({
@@ -91,5 +88,4 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
     height: undefined,
     width: undefined
   };
-
 }];
