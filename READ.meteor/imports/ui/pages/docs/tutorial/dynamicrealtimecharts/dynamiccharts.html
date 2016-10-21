@@ -19,8 +19,7 @@
           <li><code class="word-wrap">cd streamsx.visualization/READ.meteor/private/samples/nodered</code></li>
           <li><code class="word-wrap">node ../../../node_modules/node-red/red.js -s settings.js -u samples</code></li>
         </ul>
-        <p class="word-wrap">This exposes a dynamic data API at
-        http://localhost:9000/sampleapp/dynamicsine</p>
+        <p class="word-wrap">This creates a dynamic data API on your machine</p>
       </div>
     </div>
   </div>
@@ -35,7 +34,8 @@
         <p>Create Dashboard <i class="fa fa-plus-circle"></i> and rename it as <code>Stateful Transform</code>.</p>
         <p class="word-wrap">Create dataset <i class="fa fa-plus-circle"></i> and rename it as <code>Dynamic Sine</code>.
           Switch the dataset type to <strong>URL</strong> and set the URL to
-          http://localhost:9000/sampleapp/dynamicsine. Enable polling and set the
+          <a href="http://localhost:9000/sampleapp/dynamicsine" target="_blank">
+            http://localhost:9000/sampleapp/dynamicsine</a>. Enable polling and set the
         polling interval to one second.
       </p></div>
     </div>
@@ -64,9 +64,10 @@
       <div class="caption">
         <h4>Create Dynamic Visualization</h4>
         <p class="word-wrap">Create visualization <i class="fa fa-plus-circle"></i> and rename it to <code>Stateful Sine</code>.
-          Choose <code>Stateful Sine</code> as the dataset.
+          Choose <code>Stateful Sine</code> as the dataset. Set the chart type as <strong>Multibar</strong>.
           Use <a target="_blank" href="https://gist.githubusercontent.com/sriumcp/d99573ac404510648889ee9502ee252f/raw/2615dc74390c571248abc00150ba35fae0127fe7/statefulsinebasic.js">this</a>
-          as basic options for the visualization. Use <a target="_blank" href="https://gist.githubusercontent.com/sriumcp/17acf94e92db5557fa33e75e00c2b2aa/raw/c10b7e9bcd29d2350927f701cac61aeeba450da4/statefultransformadvanced.js">this</a> as advanced options.</p>
+          as basic options for the visualization. Use
+          <a target="_blank" href="https://gist.githubusercontent.com/sriumcp/17acf94e92db5557fa33e75e00c2b2aa/raw/578324d7d5d8f8c97d17bad265e2b443a6e1a15c/statefultransformadvanced.js">this</a> as advanced options.</p>
           You should now see the visualization updating dynamically.
       </div>
     </div>
