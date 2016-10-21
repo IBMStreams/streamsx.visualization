@@ -1,5 +1,9 @@
 import {Mongo} from 'meteor/mongo';
+import _ from 'underscore/underscore';
 import ajv from 'ajv';
+
+// populate this first and use this for extending the rest...
+// let dataSchema = {}
 
 export const rawDataSchema = {
   $schema: "http://json-schema.org/schema#",
@@ -66,6 +70,7 @@ export const extendedHTTPDataSchema = {
       maxLength: 20
     },
     parentId: {type: "string"},
+    selectedVisualizationId: {type: "string"},
     poll: {
       type: "object",
       properties: {
@@ -97,6 +102,7 @@ export const transformedDataSchema = {
       type: "array",
       items: {type: "string"}
     },
+    selectedVisualizationId: {type: "string"},
     stateParams: {
       type: "object",
       properties: {
