@@ -79,8 +79,10 @@ function($scope, $reactive, $state, readState, $q) {
         creatable: () => ((self.dataSet) && (self.templates.length > 0)),
         switchItem: (selectedId) => {
           self.dataSet.selectedVisualizationId = selectedId;
-          Meteor.call('dataSet.update', self.dataSet._id, self.dataSet, (err, res) => {if (err) alert(err);}); // update dashboard
-          $state.reload('read.developer.app.dashboard');
+          Meteor.call('dataSet.update', self.dataSet._id, self.dataSet, (err, res) => {
+            if (err) alert(err);
+            else $state.reload('read.developer.app.dashboard');
+          });
         },
         createItem: () => {
           let additionalFields = {};
