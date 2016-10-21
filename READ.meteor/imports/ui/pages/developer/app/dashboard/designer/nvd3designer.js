@@ -4,7 +4,6 @@ import Rx from 'rx/dist/rx.all'
 
 import {Users} from '/imports/api/users';
 import {Apps} from '/imports/api/apps';
-import {Dashboards} from '/imports/api/dashboards';
 import {Visualizations} from '/imports/api/visualizations';
 import {DataSets} from '/imports/api/datasets';
 import {Playground} from '/imports/api/playground';

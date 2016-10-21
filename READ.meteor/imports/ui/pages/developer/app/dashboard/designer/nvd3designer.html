@@ -1,37 +1,29 @@
 <div class="panel with-nav-tabs panel-default" ng-controller="nvd3VizDesignCtrl as nvd3VizDesignCtrl">
   <div class="panel-heading">
     <ul class="nav nav-tabs">
-      <li ng-class="{active: nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer === 'data'}">
-        <a ng-click="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer = 'data'">Data
+      <li ng-class="{active: nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer.nvd3 === 'basicOptions'}">
+        <a ng-click="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer.nvd3 = 'basicOptions'">Basic Options
           <i ng-if="! nvd3VizDesignCtrl.validators.basicOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i></a>
         </li>
-        <li ng-class="{active: nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer === 'advancedOptions'}">
-          <a ng-click="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer = 'advancedOptions'">Advanced Options
+        <li ng-class="{active: nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer.nvd3 === 'advancedOptions'}">
+          <a ng-click="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer.nvd3 = 'advancedOptions'">Advanced Options
             <i ng-if="! nvd3VizDesignCtrl.validators.advancedOptions" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i></a>
           </li>
-          <li ng-class="{active: nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer === 'canonicalData'}">
-            <a ng-click="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer = 'canonicalData'">Canonical Data</a>
+          <li ng-class="{active: nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer.nvd3 === 'canonicalData'}">
+            <a ng-click="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer.nvd3 = 'canonicalData'">Canonical Data</a>
           </li>
-          <li ng-class="{active: nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer === 'usageInfo'}">
-            <a ng-click="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer = 'usageInfo'">Usage Info</a>
+          <li ng-class="{active: nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer.nvd3 === 'usageInfo'}">
+            <a ng-click="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer.nvd3 = 'usageInfo'">Usage Info</a>
           </li>
         </ul>
       </div>
 
       <div class="panel-body">
 
-        <div class="row" ng-if="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer !== 'usageInfo'">
+        <div class="row" ng-if="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer.nvd3 !== 'usageInfo'">
           <div class="col-md-5">
-            <div ng-if="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer === 'data'">
+            <div ng-if="nvd3VizDesignCtrl.readState.mainContentSelectedTab.designer.nvd3 === 'basicOptions'">
                 <form name="nvd3VizDesignCtrl.dataForm">
-                  <div class="form-group">
-                    <label for="dataSet">Data Set</label>
-                    <select class="form-control" ng-model="designerCtrl.visualization.dataSetId" name="dataSet"
-                    ng-options="dataSet._id as dataSet.name for dataSet in designerCtrl.dataSets"
-                    ng-change="designerCtrl.updateAndReload()">
-                  </select>
-                </div>
-
                 <div class="form-group">
                   <label for="template">Chart Type</label>
                   <select class="form-control" ng-model="designerCtrl.visualization.templateId" name="template"
@@ -51,7 +43,7 @@
           </form>
       </div>
 
-      <div ng-if="designerCtrl.readState.mainContentSelectedTab.designer === 'advancedOptions'">
+      <div ng-if="designerCtrl.readState.mainContentSelectedTab.designer.nvd3 === 'advancedOptions'">
         <form name="nvd3VizDesignCtrl.advancedOptionsForm" novalidate>
           <div class="form-group">
             <label for="advancedOptions">Advanced Options</label>
@@ -63,11 +55,10 @@
       </form>
     </div>
 
-    <div ng-if="designerCtrl.readState.mainContentSelectedTab.designer === 'canonicalData'">
-      <label ng-if="dataSetCtrl.lastDataObject.isData">Canonical Data</label>
+    <div ng-if="designerCtrl.readState.mainContentSelectedTab.designer.nvd3 === 'canonicalData'">
+      <label>Canonical Data</label>
       <pre class="pre-scrollable" ng-if="nvd3VizDesignCtrl.canonicalDataObject.isData">{{nvd3VizDesignCtrl.canonicalDataObject.data | json:2}}</pre>
 
-      <label ng-if="! dataSetCtrl.lastDataObject.isData">Error</label>
       <div class="alert alert-danger" role="alert" ng-if="! nvd3VizDesignCtrl.canonicalDataObject.isData">
         Input data has error
       </div>
@@ -82,7 +73,7 @@
 
 </div>
 
-<div ng-if="designerCtrl.readState.mainContentSelectedTab.designer === 'usageInfo'" >
+<div ng-if="designerCtrl.readState.mainContentSelectedTab.designer.nvd3 === 'usageInfo'" >
   <div ng-bind-html="nvd3VizDesignCtrl.template.usageInfo"></div>
 </div>
 </div>

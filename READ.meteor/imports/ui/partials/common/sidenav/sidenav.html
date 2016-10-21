@@ -1,8 +1,7 @@
 <ol class="breadcrumb">
   <li ng-show="$ctrl.itemsControl.creatable()" ng-click="$ctrl.itemsControl.createItem()">
     <a href="javascript:void(0)" uib-tooltip="{{'Create ' + $ctrl.itemsControl.itemType}}"
-    tooltip-is-open="$ctrl.createTooltipIsOpen" tooltip-placement="bottom-left">
-    <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+    tooltip-placement="bottom-left"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
   </li>
   <li ng-show="$ctrl.itemsControl.selectedItem && $ctrl.itemsControl.clonable" ng-click="$ctrl.itemsControl.cloneItem()">
     <a href="javascript:void(0)" uib-tooltip="{{'Clone ' + $ctrl.itemsControl.itemType}}" tooltip-placement="bottom-left"><i class="fa fa-clone" aria-hidden="true"></i></a>
@@ -18,9 +17,12 @@
   </li>
 </ol>
 
-<div class="form-group" ng-repeat="parentItem in $ctrl.itemsControl.parentItems">
+<div class="form-group" ng-repeat="parentItem in $ctrl.parentItems">
   <label for="selectedParentItemId">Selected {{parentItem.itemType}}</label>
-  <input type="text" class="form-control" readonly ng-model="parentItem.name"></input>
+  <select class="form-control" ng-model="parentItem.selectedId"
+  ng-options="item._id as item.name for item in parentItem.items"
+  ng-change="parentItem.switchItem(parentItem.selectedId)">
+  </select>
 </div>
 
 <form name="sideNavForm" novalidate ng-if="$ctrl.item">

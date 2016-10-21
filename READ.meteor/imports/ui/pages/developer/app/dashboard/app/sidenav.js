@@ -15,39 +15,40 @@ function ($scope, $reactive, $state, readState, $q) {
   this.helpers({
     user: () => Users.findOne({}),
     items: () => Apps.find({}).fetch(),
-    item: () => Apps.findOne({_id: self.user.selectedIds.appId})
-  });
-
-  this.itemsControl = {
-    itemType: "App",
-    clonable: false,
-    selectedId: self.user.selectedIds.appId,
-    selectedItem: Apps.findOne({_id: self.user.selectedIds.appId}),
-    creatable: () => true,
-    switchItem: (selectedId) => {
-      self.user.selectedIds.appId = selectedId;
-      // reset all deferredPromises...
-      readState.deferredDashboards = $q.defer();
-      readState.deferredDataSets = $q.defer();
-      readState.deferredVisualizations = $q.defer();
-      // now we're ready to update and resubscribe in readCtrl
-      Meteor.call('user.update', self.user, (err, res) => {if (err) alert(err);}); //update user
-      $state.reload($state.$current.name);
-    },
-    createItem: () => {
-      Meteor.call('app.create', {
-        userId: 'guest',
-        name: self.itemsControl.itemType + self.items.length,
-        private: true,
-        readOnly: false
-      }, (err, res) => {
-        if (err) alert(err);
-        else {
-          self.itemsControl.switchItem(res);
+    item: () => Apps.findOne({_id: self.user.selectedIds.appId}),
+    itemsControl: () => {
+      return {
+        itemType: "App",
+        clonable: false,
+        selectedId: self.getReactively('user.selectedIds.appId'),
+        selectedItem: Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
+        creatable: () => true,
+        switchItem: (selectedId) => {
+          self.user.selectedIds.appId = selectedId;
+          // reset all deferredPromises...
+          readState.deferredDashboards = $q.defer();
+          readState.deferredDataSets = $q.defer();
+          readState.deferredVisualizations = $q.defer();
+          // now we're ready to update and resubscribe in readCtrl
+          Meteor.call('user.update', self.user, (err, res) => {if (err) alert(err);}); //update user
+          $state.reload('read.developer');
+        },
+        createItem: () => {
+          Meteor.call('app.create', {
+            userId: 'guest',
+            name: self.itemsControl.itemType + self.items.length,
+            private: true,
+            readOnly: false
+          }, (err, res) => {
+            if (err) alert(err);
+            else {
+              self.itemsControl.switchItem(res);
+            }
+          });
         }
-      });
+      }
     }
-  };
+  });
 
   this.itemControls = {
     itemType: 'App',
@@ -58,7 +59,7 @@ function ($scope, $reactive, $state, readState, $q) {
     },
     updateItem: () => {
       self.updateDatabase(self.item);
-      $state.reload($state.$current.name);
+      $state.reload('read.developer.app.dashboard');
     },
     deletable: () => true,
     deleteItem: () => {
@@ -83,7 +84,7 @@ function ($scope, $reactive, $state, readState, $q) {
           if (newSelectedItem) self.user.selectedIds.appId = newSelectedItem._id;
           else delete self.user.selectedIds['appId'];
           Meteor.call('user.update', self.user, (err, res) => {if (err) alert(err);});
-          $state.reload($state.$current.name);
+          $state.reload('read.developer.app.dashboard');
         }
       });
     }

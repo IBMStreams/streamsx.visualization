@@ -37,14 +37,9 @@ function ($scope, $reactive, readState, $timeout) {
     user: () => Users.findOne({})
   });
 
-  // this seems pretty superfluous .. why not make it like dataSets or visualizations?
-  this.autorun((c) => {
-    if (self.getReactively('user', true)) {
-      self.subscribe('dashboards', () => [self.user.selectedIds.appId], {
-        onReady: () => {
-          readState.deferredDashboards.resolve();
-        }
-      });
+  this.subscribe('dashboards', () => [self.getReactively('user.selectedIds.appId')], {
+    onReady: () => {
+      readState.deferredDashboards.resolve();
     }
   });
 

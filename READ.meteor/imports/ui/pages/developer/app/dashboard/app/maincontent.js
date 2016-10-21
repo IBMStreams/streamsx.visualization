@@ -31,7 +31,6 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory) {
   // update database
   this.updateDatabase = (val) => {
     Meteor.call('app.update', val._id, val, (err, res) => {
-      console.log('updating app', val);
       if (err) alert(err);
     });
   };

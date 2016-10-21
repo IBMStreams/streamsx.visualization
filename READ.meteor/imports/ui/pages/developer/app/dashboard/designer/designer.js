@@ -24,12 +24,13 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
     user: () => Users.findOne({}),
     app: () => Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
     dashboard: () => Dashboards.findOne({_id: self.getReactively('app.selectedDashboardId')}),
+    dataSets: () => DataSets.find({dashboardId: self.getReactively('dashboard._id')}).fetch(),
+    dataSet: () => DataSets.findOne({_id: self.getReactively('dashboard.selectedDataSetId')}),
     visualization: () => {
-      let viz = Visualizations.findOne({_id: self.getReactively('dashboard.selectedVisualizationId')});
+      let viz = Visualizations.findOne({_id: self.getReactively('dataSet.selectedVisualizationId')});
       if (viz) viz.readOnly = self.app.readOnly;
       return viz;
     },
-    dataSets: () => DataSets.find({dashboardId: self.getReactively('dashboard._id')}).fetch(),
     templates: () => Playground.find({
       $or: [
         {pluginType: 'NVD3'},
@@ -38,11 +39,14 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
     }).fetch()
   });
 
-  if (self.dashboard) {
-    this.reactiveVisualization = Visualizations.findOne({_id: self.dashboard.selectedVisualizationId});
-    this.ready = true;
-    let visualizationQuery = Visualizations.find({_id: self.dashboard.selectedVisualizationId});
-    let visualizationQueryHandle = visualizationQuery.observe({
+  console.log('self.dataSet?', self.dataSet);
+  if (self.dataSet) {
+    console.log('yes self.dataSet', self.dataSet);
+    self.reactiveVisualization = Visualizations.findOne({_id: self.dataSet.selectedVisualizationId});
+    console.log('self.reactiveVisualization?', self.reactiveVisualization);
+    self.ready = true;
+    self.visualizationQuery = Visualizations.find({_id: self.dataSet.selectedVisualizationId});
+    self.visualizationQueryHandle = self.visualizationQuery.observe({
       changed: _.debounce((newVisualization, oldVisualization) => {
         self.ready = false;
         $timeout(() => {

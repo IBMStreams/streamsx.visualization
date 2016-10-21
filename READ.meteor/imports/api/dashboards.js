@@ -13,8 +13,7 @@ export const dashboardSchema = {
       minLength: 1,
       maxLength: 20
     },
-    selectedDataSetId: {type: "string"},
-    selectedVisualizationId: {type: "string"}
+    selectedDataSetId: {type: "string"}
   },
   required: ["userId", "appId", "name"],
   additionalProperties: false
