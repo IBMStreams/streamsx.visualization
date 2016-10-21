@@ -45,7 +45,7 @@
 
       <input type="text" ng-if="! $ctrl.item.readOnly" class="form-control"
       ng-model="$ctrl.newItemName" name="newItemName" minlength=1 maxlength=20 required
-      ng-model-options='{ debounce: 2000 }'
+      ng-model-options='{ debounce: 1000 }'
       ng-change="sideNavForm.newItemName.$invalid || $ctrl.itemControls.renameItem($ctrl.newItemName)"></input>
     </div>
   </div>
