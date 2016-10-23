@@ -1,41 +1,94 @@
 <h3>Variety</h3>
 <blockquote>
-  <p>In this section, we will work with more ways of visualizing and transforming data</p>
+  <p>In this section, we will explore more types of visualizations and data transforms</p>
 </blockquote>
 
 <div class="row">
-  <div class="col-sm-6 col-md-6">
-    <div class="thumbnail">
-      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial/cars/createapp.1.png')">
-        <img src="/images/tutorial/cars/createapp.1.png" alt="App Creation"></img>
-      </a>
-      <div class="caption">
-        <h4>Create Cars Dataset</h4>
-        <p class="word-wrap">Create <code>Cars</code> dashboard. Create <code>Cars</code> dataset within the dashboard
+  <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial/cars/createapp.1.png')">
+          <img src="/images/tutorial/cars/createapp.1.png" alt="Visualization Creation"></img>
+        </a>
+        <h4>Scatter Plot</h4>
+        <p class="word-wrap">Create <code>Variety</code> dashboard. Create <code>Cars</code> dataset within the dashboard
           using <a target="_blank" href="https://gist.githubusercontent.com/sriumcp/ebe66fbd4bb1f5b16feb0a9e7543f1b5/raw/5fda9a1537b75b1c059b9ce89ee309858dcba737/cars">this url</a>.
-        </p></div>
-    </div>
-  </div>
-
-  <div class="col-sm-6 col-md-6">
-    <div class="thumbnail">
-      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial/cars/createapp.2.png')">
-        <img src="/images/tutorial/cars/createapp.2.png" alt="Visualization Creation"></img>
-      </a>
-      <div class="caption">
-        <h4>Create Scatter Plot</h4>
+        </p>
         <p class="word-wrap">Create visualization <code>Horsepower vs. Weight</code> of type <strong>scatter</strong>.
           Use <a target="_blank" href="https://gist.githubusercontent.com/sriumcp/bcd3b4130cf2cd1bb5a2140d7d807d71/raw/779269b6c5f23824da9cc468d8e6278533d7033c/basicoptions.js">this</a> as the basic options for the chart and use
           <a target="_blank" href="https://gist.githubusercontent.com/sriumcp/b85d0c195617e35ff9463e6fb4cd34fd/raw/a93a90c98e3020844052e4d11c404aeb4a179bd1/advancedoptions.js">this</a> as the advanced options for the chart.
         </p>
       </div>
     </div>
+
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial/cars/createapp.2.png')">
+        <img src="/images/tutorial/cars/createapp.2.png" alt="Parallel Coordinates"></img>
+      </a>
+      <div class="caption">
+        <h4>Parallel Coordinates</h4>
+        <p class="word-wrap">Create visualization <code>Filtered Cars</code> of type <strong>parallel coordinates</strong>.
+          Use the javascript object from <a target="_blank" href="https://gist.github.com/sriumcp/645553aef784e44665139b9d951632bb">this gist</a> as the advanced options for the chart.
+          Try cross filtering across dimensions by setting the ranges for each dimension.
+        </p>
+      </div>
+    </div>
   </div>
+
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial/cars/createapp.3.png')">
+        <img src="/images/tutorial/cars/createapp.3.png" alt="Transform function"></img>
+      </a>
+      <div class="caption">
+        <h4>Candlestick and OHLC charts</h4>
+        <p class="word-wrap">Create dataset <code>HP over Years</code> of type <strong>transform</strong>.
+          Set <code>Cars</code> as its parent. Use function from <a target="_blank" href="https://gist.github.com/sriumcp/21db48f113b4726d011725000bfe98c7">this gist</a> as
+          the transform function. Leave state as disabled.</p>
+        <p class="word-wrap">Create Visualization <code>HP Candlesticks</code> of type
+          <strong>Candlesticks Bar</strong> using basic options
+          from <a href="https://gist.github.com/sriumcp/7d4cd7e2a22ff6a835cdc60d63045ba9" target="_blank">this gist</a>
+          and advanced options from
+          <a target="_blank" href="https://gist.github.com/sriumcp/f18443e67bbdeb6b2f2caddb9d919df6">this gist</a>.
+          Create Visualization <code>HP OHLC</code> of type <strong>OHLC Bar</strong>
+           using basic options from <a href="https://gist.github.com/sriumcp/7d4cd7e2a22ff6a835cdc60d63045ba9" target="_blank">this gist</a> and
+            advanced options from <a target="_blank" href="https://gist.github.com/sriumcp/c9a78aa0b9e465fa3a248a81da53a81d">this gist</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial/cars/createapp.4.png')">
+        <img src="/images/tutorial/cars/createapp.4.png" alt="Transform function"></img>
+      </a>
+      <div class="caption">
+        <h4>Pie and Donut charts</h4>
+        <p class="word-wrap">Create dataset <code>Cars by Year</code> of type <strong>transform</strong>.
+          Set <code>Cars</code> as its parent. Use function from
+          <a target="_blank" href="https://gist.github.com/sriumcp/9b9791f232ea93b0b423dfc57f44cf25">this gist</a>
+          as the transform function. Leave state as disabled. Similarly, create dataset <code>Cars by Origin</code> using
+          transform function from <a target="_blank" href="https://gist.github.com/sriumcp/4a284b2a5b9f1e89737ce048d48b6c96">this gist.</a></p>
+        <p class="word-wrap">Create Visualization <code>Cars by Year</code> of type <strong>Pie</strong> for the
+          <code>Cars by Year</code> dataset using basic options from
+          <a target="_blank" href="https://gist.github.com/sriumcp/e670d5e2ffeb93cfecf88896013b82e8">this gist</a> and
+        advanced options from
+        <a target="_blank" href="https://gist.github.com/sriumcp/3872291a8bafde7359a07ea7601f34cf">this gist</a>.</p>
+        <p class="word-wrap">Create Visualization <code>Cars by Origin</code> of type <strong>Pie</strong> for the
+          <code>Cars by Origin</code> dataset using basic options from
+          <a target="_blank" href="https://gist.github.com/sriumcp/f9f0a1e2921e74348e228a617f9ebeca">this gist</a>
+          and advanced options from
+          <a target="_blank" href="https://gist.github.com/sriumcp/eff81eabfae8b33505d377307f95490c">this gist</a>.</p>
+      </div>
+    </div>
+  </div>
+
 </div> <!-- row -->
 
 <nav>
    <ul class="pager">
      <li><a href="javascript:void(0)" ng-click="mainContentCtrl.switch('dynamicRealTimeCharts', 'dynamicCharts')">Previous</a></li>
+     <li><a href="javascript:void(0)" ng-click="mainContentCtrl.switch('cars', 'exercises')">Next</a></li>
    </ul>
 </nav>
 
