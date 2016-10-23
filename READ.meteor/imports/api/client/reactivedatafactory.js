@@ -137,10 +137,11 @@ class ValidatedData extends TransformedData {
     return ((data) => {
       if (validate(data)) return data;
       if (validate.errors.length > 5) {
-        console.log(validate.errors);
         throw new Error('Schema validation failure (limiting to 5 errors)- '.concat(myjv.errorsText(_.first(validate.errors, 5))));
       }
-      else throw new Error('Schema validation failure - '.concat(myjv.errorsText(validate.errors)));
+      else {
+        throw new Error('Schema validation failure - '.concat(myjv.errorsText(validate.errors)))
+      };
     });
   }
 
