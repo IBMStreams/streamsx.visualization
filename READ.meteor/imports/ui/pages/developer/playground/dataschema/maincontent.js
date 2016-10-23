@@ -47,7 +47,7 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
 
   this.itemStream = new Rx.ReplaySubject(0);
   $scope.$watch(() => { // because of crummy ui-ace not working with ng-show
-    if (self.schemaForm) self.validators.jsonSchema = self.wellDefinedJSONSchema(self.item.jsonSchema);
+    if (self.schemaForm) self.validators.jsonSchema = self.schemaForm.$valid && self.wellDefinedJSONSchema(self.item.jsonSchema);
     if (self.dataForm) self.validators.testData = self.dataForm.$valid;
     return {
       valid: self.validators.testData && self.validators.jsonSchema,
