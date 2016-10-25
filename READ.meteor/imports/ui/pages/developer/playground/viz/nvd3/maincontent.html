@@ -127,7 +127,7 @@
             <div class="form-group">
               <label for="usageInfo">Usage Info Editor</label>
               <div ui-ace=mainContentCtrl.aceHTMLOptions ng-model=mainContentCtrl.item.usageInfo
-              ng-readonly="mainContentCtrl.item.readOnly" name="usageInfo">
+              ng-readonly="mainContentCtrl.item.readOnly" ng-model-options="{debounce: 500}"name="usageInfo">
               </div>
             </div>
           </form>

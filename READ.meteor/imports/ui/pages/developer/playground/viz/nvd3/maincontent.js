@@ -19,19 +19,34 @@ function ($scope, $reactive, $timeout, $state, readState, reactiveDataFactory, r
   this.aceJavaScriptOptions = aceJavaScriptOptions;
   this.aceHTMLOptions = aceHTMLOptions;
 
-  this.user = Users.findOne({});
-  this.items = Playground.find({pluginType: 'NVD3'}).fetch();
-  this.item = Playground.findOne({_id: self.user.selectedIds.nvd3Id});
-  this.dataSchemas = Playground.find({pluginType: 'Data Schema'}).fetch();
-  this.inputSchemaObject = Playground.findOne({_id: self.item.inputSchemaId});
-  this.basicOptionsSchemaObject = Playground.findOne({_id: self.item.basicOptionsSchemaId});
-  this.canonicalSchemaObject = Playground.findOne({_id: self.item.canonicalSchemaId});
-  this.advancedOptions = eval("(" + self.item.advancedOptions + ")");
+  this.validators = {
+    testData: true,
+    basicOptions: true,
+    canonicalTransform: true,
+    advancedOptions: true
+  };
 
   this.helpers({
+    user: () => Users.findOne({}),
+    items: () => Playground.find({pluginType: 'NVD3'}).fetch(),
+    item: () => Playground.findOne({_id: self.getReactively('user.selectedIds.nvd3Id')}),
+    dataSchemas: () => Playground.find({pluginType: 'Data Schema'}).fetch(),
+    inputSchemaObject: () => Playground.findOne({_id: self.getReactively('item.inputSchemaId')}),
+    basicOptionsSchemaObject: () => Playground.findOne({_id: self.getReactively('item.basicOptionsSchemaId')}),
     basicOptionsSchema: () => {
-      self.basicOptionsSchemaObject = Playground.findOne({_id: self.item.basicOptionsSchemaId});
-      return eval("(" + self.basicOptionsSchemaObject.jsonSchema + ")");
+      let bo = (self.getReactively('basicOptionsSchemaObject') ?
+      eval("(" + self.getReactively('basicOptionsSchemaObject.jsonSchema') + ")") : undefined);
+      return bo;
+    },
+    canonicalSchemaObject: () => Playground.findOne({_id: self.getReactively('item.canonicalSchemaId')}),
+    advancedOptions: () => {
+      let ao = undefined;
+      try {
+        ao = eval("(" + self.getReactively('item.advancedOptions') + ")");
+      } catch(e) {
+        return undefined;
+      }
+      return ao;
     }
   });
 
@@ -40,13 +55,6 @@ function ($scope, $reactive, $timeout, $state, readState, reactiveDataFactory, r
     self.validators.basicOptions &&
     self.validators.canonicalTransform &&
     self.validators.advancedOptions;
-  };
-
-  this.validators = {
-    testData: true,
-    basicOptions: true,
-    canonicalTransform: true,
-    advancedOptions: true
   };
 
   // update database
@@ -61,24 +69,21 @@ function ($scope, $reactive, $timeout, $state, readState, reactiveDataFactory, r
     width: undefined
   };
 
-  $scope.$watch('mainContentCtrl.item.basicOptionsSchemaId', (newVal) => {
-    self.basicOptionsSchemaObject = Playground.findOne({_id: self.item.basicOptionsSchemaId});
-    self.basicOptionsSchema = eval("(" + self.basicOptionsSchemaObject.jsonSchema + ")");
-  });
-
   this.itemStream = new Rx.ReplaySubject(0);
-  $scope.$watch('mainContentCtrl.item', _.debounce(function(item) {
-    $scope.$apply(function() {
-      if (self.testDataForm) self.validators.testData = self.testDataForm.$valid;
-      if (self.basicOptionsForm) self.validators.basicOptions = self.basicOptionsForm.$valid;
-      if (self.canonicalForm) self.validators.canonicalTransform = self.canonicalForm.$valid;
-      if (self.advancedOptionsForm) self.validators.advancedOptions = self.advancedOptionsForm.$valid;
-      self.itemStream.onNext({
-        valid: self.validItem(),
-        item: item
-      });
-    });
-  }, 2), true); // the 2 milli second debounce is for validators and reactive computes to kick in.
+  $scope.$watch(() => { // because of crummy ui-ace not working with ng-show
+    if (self.testDataForm) self.validators.testData = self.testDataForm.$valid;
+    if (self.basicOptionsForm) {
+      self.validators.basicOptions = self.basicOptionsForm.$valid
+    };
+    if (self.canonicalForm) self.validators.canonicalTransform = self.canonicalForm.$valid;
+    if (self.advancedOptionsForm) self.validators.advancedOptions = self.advancedOptionsForm.$valid;
+    return {
+      valid: self.validItem(),
+      item: self.item
+    };
+  }, _.debounce((newVal) => {
+    self.itemStream.onNext(newVal);
+  }, 2), true);
 
   //update database
   self.itemStream
@@ -205,15 +210,6 @@ function ($scope, $reactive, $timeout, $state, readState, reactiveDataFactory, r
     self.canonicalSchemaObject = Playground.findOne({_id: x});
     validatedCanonicalDataSet.jsonSchema = self.canonicalSchemaObject.jsonSchema;
     reactivePipeline.changeDataSet(validatedCanonicalDataSet);
-  }).subscribe(new Rx.ReplaySubject(0));
-
-  //update advancedOptions
-  self.itemStream
-  .filter(x => self.validators.advancedOptions)
-  .map(x => x.item.advancedOptions)
-  .distinctUntilChanged() // should this be object compare for performance?
-  .doOnNext(x => {
-    self.advancedOptions = eval("(" + x + ")");
   }).subscribe(new Rx.ReplaySubject(0));
 
 }];
