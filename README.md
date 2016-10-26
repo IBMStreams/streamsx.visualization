@@ -1,8 +1,8 @@
 # READ: Real-Time Visual Analytics
 
-> **READ is a developer and data scientist playground for advanced visual analytics**
+> **READ is a developer playground for advanced visual analytics**
 
-> Use READ to rapidly prototype real-time visualizations, responsive sharable dashboards, REST API dataflows, and new types of visualizations.
+> Use READ to rapidly create real-time visualizations, responsive sharable dashboards, REST API dataflows, and new types of visualizations.
 
 ## Getting Started
 1. Prerequisites
@@ -17,7 +17,9 @@
   * You should see the message *=> App running at: http://localhost:3000/*
 
 ## Next steps
-Follow the tutorial: http://localhost:3000/#/docs/tutorial
+* Play with the sample app, dashboards, datasets, and tutorial bundled with READ
+* Follow the tutorial: http://localhost:3000/#/docs/tutorial
+
 
 ## Sharing READ Dashboards
 Refer to help topics: http://localhost:3000/#/docs/helptopics

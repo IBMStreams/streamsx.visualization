@@ -71,7 +71,6 @@ function ($scope, $reactive, $timeout, $state, readState, reactiveDataFactory, r
 
   this.itemStream = new Rx.ReplaySubject(0);
   $scope.$watch('mainContentCtrl.item', _.debounce((newVal) => {
-    console.log('mainContentCtrl.item watch fired');
     if (self.testDataForm) self.validators.testData = self.testDataForm.$valid;
     if (self.basicOptionsForm) {
       self.validators.basicOptions = self.basicOptionsForm.$valid
@@ -151,7 +150,6 @@ function ($scope, $reactive, $timeout, $state, readState, reactiveDataFactory, r
   let vcds = reactivePipeline.addDataSet(validatedCanonicalDataSet);
 
   vcds.stream.doOnNext(x => {
-    console.log(x);
     self.canonicalDataObject = x;
   }).subscribe(new Rx.ReplaySubject(0));
 
@@ -201,7 +199,6 @@ function ($scope, $reactive, $timeout, $state, readState, reactiveDataFactory, r
   .map(x => x.item.canonicalTransform)
   .distinctUntilChanged() // should this be object compare for performance?
   .doOnNext(x => {
-    console.log(canonicalDataSet.transformFunction.x);
     canonicalDataSet.transformFunction = x;
     reactivePipeline.changeDataSet(canonicalDataSet);
   }).subscribe(new Rx.ReplaySubject(0));

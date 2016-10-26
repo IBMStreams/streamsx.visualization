@@ -57,7 +57,6 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
 
   this.itemStream = new Rx.ReplaySubject(0);
   $scope.$watch('dataSetCtrl.dataSet', _.debounce((newVal) => {
-    console.log('dataset watch firing');
     if (self.dataSetEditorForm) self.validators.dataSetEditor = self.dataSetEditorForm.$valid;
     self.itemStream.onNext({
       valid: self.validators.dataSetEditor,

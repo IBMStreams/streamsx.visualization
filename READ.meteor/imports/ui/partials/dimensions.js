@@ -17,11 +17,10 @@ export const dimensionsDirective = ['$window', '$timeout', function($window, $ti
         $scope.$apply();
       });
 
-      $scope.$watch(_.debounce(() => {
-        console.log('dimensions watch firing');
+      $scope.$watch(() => {
         dimensions.height = $el.height();
         dimensions.width = $el.width();
-      }, 100), () => {});
+      }, () => {});
 
     }
   };
