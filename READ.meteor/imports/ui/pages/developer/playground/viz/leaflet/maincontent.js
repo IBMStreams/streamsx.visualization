@@ -29,8 +29,6 @@ function ($scope, $reactive, $timeout, $state, readState, reactiveDataFactory, r
     Playground.findOne({_id: self.item.inputSchemaId}) : undefined
   });
 
-  console.log('leaflet', self.user, self.item);
-
   this.validItem = () => { // because of crummy ui-ace not working with ng-show; would rather use $valid
     return self.validators.testData
   };
