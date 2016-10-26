@@ -19,9 +19,12 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
   this.aceJsonSchemaOptions = aceJsonSchemaOptions;
   this.aceJavaScriptOptions = aceJavaScriptOptions;
 
-  this.user = Users.findOne({});
-  this.items = Playground.find({pluginType: 'Data Schema'}).fetch();
-  this.item = Playground.findOne({_id: self.user.selectedIds.dataSchemaId});
+  this.helpers({
+    user: () => Users.findOne({}),
+    items: () => Playground.find({pluginType: 'Data Schema'}).fetch(),
+    item: () => self.getReactively('user.selectedIds.dataSchemaId') ?
+    Playground.findOne({_id: self.user.selectedIds.dataSchemaId}) : undefined
+  });
 
   this.validators = {
     testData: true,

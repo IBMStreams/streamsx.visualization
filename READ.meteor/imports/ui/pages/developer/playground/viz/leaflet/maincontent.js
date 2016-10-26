@@ -19,11 +19,15 @@ function ($scope, $reactive, $timeout, $state, readState, reactiveDataFactory, r
   this.aceJavaScriptOptions = aceJavaScriptOptions;
   this.aceHTMLOptions = aceHTMLOptions;
 
-  this.user = Users.findOne({});
-  this.items = Playground.find({pluginType: 'leaflet'}).fetch();
-  this.item = Playground.findOne({_id: self.user.selectedIds.leafletId});
-  this.dataSchemas = Playground.find({pluginType: 'Data Schema'}).fetch();
-  this.inputSchemaObject = Playground.findOne({_id: self.item.inputSchemaId});
+  this.helpers({
+    user: () => Users.findOne({}),
+    items: () => Playground.find({pluginType: 'leaflet'}).fetch(),
+    item: () => self.getReactively('user.selectedIds.leafletId') ?
+    Playground.findOne({_id: self.user.selectedIds.leafletId}) : undefined,
+    dataSchemas: () => Playground.find({pluginType: 'Data Schema'}).fetch(),
+    inputSchemaObject: () => self.getReactively('item.inputSchemaId') ?
+    Playground.findOne({_id: self.item.inputSchemaId}) : undefined
+  });
 
   this.validItem = () => { // because of crummy ui-ace not working with ng-show; would rather use $valid
     return self.validators.testData

@@ -100,8 +100,8 @@ pre {
   margin-right: 15px;
 }
 
-.docs ul.sidebar-nav.toplevel > li {
-  height: 3em;
+.docs ul.second-level > li a {
+  padding-left: 30px;
 }
 
 //.sidenav-content .docs .nav a,
@@ -113,6 +113,11 @@ pre {
 .sidenav-content .docs .nav .active > a {
   color: #555;
   background-color: #efefef;
+}
+
+.space-preserver.ng-hide {
+  visibility: hidden!important;
+  display: inline-block!important;
 }
 
 .grid-stack-item-content > .panel {
@@ -132,6 +137,7 @@ pre {
 
 .grid-stack-item-content > .panel > .panel-body {
   @include calc(height, '100% - 36px') // panel header height...
+  padding: 0px;
 }
 
 .thumbnail .caption .word-wrap {

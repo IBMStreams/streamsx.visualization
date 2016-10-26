@@ -15,8 +15,6 @@ function ($scope, $reactive, $state, $timeout, readState) {
     item: () => Playground.findOne({_id: self.getReactively('user.selectedIds.dataSchemaId')})
   });
 
-  console.log(self.items, self.item);
-
   this.itemsControl = {
     itemType: "Data Schema",
     clonable: true,

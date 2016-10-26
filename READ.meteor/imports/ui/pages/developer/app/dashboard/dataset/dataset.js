@@ -18,19 +18,21 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
 
   this.readState = readState;
 
-  this.user = Users.findOne({});
-  this.app = Apps.findOne({_id: self.user.selectedIds.appId});
-  this.dashboard = Dashboards.findOne({_id: self.app.selectedDashboardId});
-  this.dataSet = DataSets.findOne({_id: self.dashboard.selectedDataSetId});
-  this.dataSets = DataSets.find({dashboardId: self.dashboard._id}).fetch();
-  this.descendants = readState.dependencies.getDescendants(self.dashboard.selectedDataSetId).map(x => x.id);
-  this.candidateParents = DataSets.find({}).fetch().filter(ds => {
-    if (ds._id === self.dataSet._id) return false;
-    if (_.contains(self.descendants, ds._id)) return false;
-    return true;
-  }).map(ds => {
-    ds.dashboardName = Dashboards.findOne({_id: ds.dashboardId}).name;
-    return ds;
+  this.helpers({
+    user: () => Users.findOne({}),
+    app: () => Apps.findOne({_id: self.user.selectedIds.appId}),
+    dashboard: () => Dashboards.findOne({_id: self.app.selectedDashboardId}),
+    dataSet: () => DataSets.findOne({_id: self.dashboard.selectedDataSetId}),
+    dataSets: () => DataSets.find({dashboardId: self.dashboard._id}).fetch(),
+    descendants: () => readState.dependencies.getDescendants(self.dashboard.selectedDataSetId).map(x => x.id),
+    candidateParents: () => DataSets.find({}).fetch().filter(ds => {
+      if (ds._id === self.dataSet._id) return false;
+      if (_.contains(self.descendants, ds._id)) return false;
+      return true;
+    }).map(ds => {
+      ds.dashboardName = Dashboards.findOne({_id: ds.dashboardId}).name;
+      return ds;
+    })
   });
 
   this.dataSetTypes = dataSetTypes.filter(dsType => {
@@ -54,15 +56,13 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
   };
 
   this.itemStream = new Rx.ReplaySubject(0);
-  $scope.$watch(() => { // because of crummy ui-ace not working with ng-show
+  $scope.$watch('dataSetCtrl.dataSet', _.debounce((newVal) => {
     if (self.dataSetEditorForm) self.validators.dataSetEditor = self.dataSetEditorForm.$valid;
-    return {
+    self.itemStream.onNext({
       valid: self.validators.dataSetEditor,
       item: self.dataSet
-    };
-  }, (newVal) => {
-    self.itemStream.onNext(newVal);
-  }, true);
+    });
+  }, 100), true);
 
   this.updateDatabase = (val) => {
     Meteor.call('dataSet.update', val._id, val, (err, res) => {

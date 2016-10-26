@@ -94,7 +94,9 @@ class TransformedData extends ReactiveData {
 
     let injectSomething = (latestArgs) => {
       // one or more of the input streams contain error(s)
-      if (_.some(latestArgs, (arg) => ! arg.isData)) self.injectError('Transform function inputs contain error(s)');
+      if (_.some(latestArgs, (arg) => ! arg.isData)) {
+        self.injectError('Transform function inputs contain error(s)');
+      }
       else try {
         // inputs seem ok. We will try applying the transformFunction now.
         let data = undefined;
