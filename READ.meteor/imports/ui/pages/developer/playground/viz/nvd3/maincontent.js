@@ -70,19 +70,19 @@ function ($scope, $reactive, $timeout, $state, readState, reactiveDataFactory, r
   };
 
   this.itemStream = new Rx.ReplaySubject(0);
-  $scope.$watch(() => { // because of crummy ui-ace not working with ng-show
+  $scope.$watch('mainContentCtrl.item', _.debounce((newVal) => {
+    console.log('mainContentCtrl.item watch fired');
     if (self.testDataForm) self.validators.testData = self.testDataForm.$valid;
     if (self.basicOptionsForm) {
       self.validators.basicOptions = self.basicOptionsForm.$valid
     };
     if (self.canonicalForm) self.validators.canonicalTransform = self.canonicalForm.$valid;
     if (self.advancedOptionsForm) self.validators.advancedOptions = self.advancedOptionsForm.$valid;
-    return {
+
+    self.itemStream.onNext({
       valid: self.validItem(),
       item: self.item
-    };
-  }, _.debounce((newVal) => {
-    self.itemStream.onNext(newVal);
+    });
   }, 2), true);
 
   //update database
@@ -150,7 +150,10 @@ function ($scope, $reactive, $timeout, $state, readState, reactiveDataFactory, r
   };
   let vcds = reactivePipeline.addDataSet(validatedCanonicalDataSet);
 
-  vcds.stream.doOnNext(x => (self.canonicalDataObject = x)).subscribe(new Rx.ReplaySubject(0));
+  vcds.stream.doOnNext(x => {
+    console.log(x);
+    self.canonicalDataObject = x;
+  }).subscribe(new Rx.ReplaySubject(0));
 
   //update test data
   self.itemStream
@@ -198,6 +201,7 @@ function ($scope, $reactive, $timeout, $state, readState, reactiveDataFactory, r
   .map(x => x.item.canonicalTransform)
   .distinctUntilChanged() // should this be object compare for performance?
   .doOnNext(x => {
+    console.log(canonicalDataSet.transformFunction.x);
     canonicalDataSet.transformFunction = x;
     reactivePipeline.changeDataSet(canonicalDataSet);
   }).subscribe(new Rx.ReplaySubject(0));

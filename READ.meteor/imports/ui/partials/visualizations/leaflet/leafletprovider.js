@@ -16,7 +16,12 @@ export const leafletMapDirective = function($compile) {
       dim: '<'
     },
     link: function($scope, $element) {
-      let template = '<leaflet height="{{dim.height}}"></leaflet>';
+      let templateOptions = [];
+      if ($scope.data.center) templateOptions.push('lf-center="data.center"');
+      if ($scope.data.markers) templateOptions.push('markers="data.markers"');
+      if ($scope.data.layers) templateOptions.push('layers="data.layers"');
+
+      let template = '<leaflet ' + templateOptions.join(' ') + ' ' + 'height="{{dim.height}}"></leaflet>';
       let content = $compile(template)($scope);
       $element.append(content);
     }

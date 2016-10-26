@@ -56,15 +56,14 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
   };
 
   this.itemStream = new Rx.ReplaySubject(0);
-  $scope.$watch(() => { // because of crummy ui-ace not working with ng-show
+  $scope.$watch('dataSetCtrl.dataSet', _.debounce((newVal) => {
+    console.log('dataset watch firing');
     if (self.dataSetEditorForm) self.validators.dataSetEditor = self.dataSetEditorForm.$valid;
-    return {
+    self.itemStream.onNext({
       valid: self.validators.dataSetEditor,
       item: self.dataSet
-    };
-  }, (newVal) => {
-    self.itemStream.onNext(newVal);
-  }, true);
+    });
+  }, 100), true);
 
   this.updateDatabase = (val) => {
     Meteor.call('dataSet.update', val._id, val, (err, res) => {

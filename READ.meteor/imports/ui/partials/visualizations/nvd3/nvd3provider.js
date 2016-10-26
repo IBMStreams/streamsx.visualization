@@ -21,6 +21,7 @@ export const nvd3ProviderComponent = {
 
     // handle options change
     $scope.$watch('nvd3Controller.options', x => {
+      console.log('nvd3Cotnroller.options watch fired');
       angular.extend($scope.options, x);
       angular.extend($scope.options.chart, $scope.dimensions);
       if ($scope.options.chart.type && $scope.options.chart.height) $scope.ready = true;
@@ -38,6 +39,7 @@ export const nvd3ProviderComponent = {
     });
 
     $scope.$watch('nvd3Controller.dim', (newVal, oldVal) => {
+      console.log('nvd3Cotnroller.dim watch fired');
       angular.extend($scope.dimensions, newVal);
       angular.extend($scope.options.chart, newVal);
       if ($scope.options.chart.type && $scope.options.chart.height) $scope.ready = true;
