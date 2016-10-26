@@ -17,9 +17,8 @@
   * You should see the message *=> App running at: http://localhost:3000/*
 
 ## Next steps
-* Play with the sample app, dashboards, datasets, and tutorial bundled with READ
+* Play with the sample app, dashboards, datasets and visualizations bundled with READ
 * Follow the tutorial: http://localhost:3000/#/docs/tutorial
-
 
 ## Sharing READ Dashboards
 Refer to help topics: http://localhost:3000/#/docs/helptopics
