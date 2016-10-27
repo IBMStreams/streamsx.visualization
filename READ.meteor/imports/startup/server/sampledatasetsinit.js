@@ -157,5 +157,35 @@ export default datasets =
 	"name": "Legend",
 	"rawData": "{\n    center: {\n        lat: 51.505,\n        lng: -0.09,\n        zoom: 12\n    },\n    legend: {\n        position: 'bottomleft',\n        colors: [ '#ff0000', '#28c9ff', '#0000ff', '#ecf386' ],\n        labels: [ 'National Cycle Route', 'Regional Cycle Route', 'Local Cycle Network', 'Cycleway' ]\n    },\n    defaults: {\n        tileLayer: \"http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png\"\n    }\n}",
 	"selectedVisualizationId": "crPBxsBKaeroW6yGq"
+},
+{
+	"_id": "DxX8kK4KRPXjhJ5kJ",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"dataSetType": "simpleHTTP",
+	"name": "Japan GeoJSON",
+	"url": "http://tombatossals.github.io/angular-leaflet-directive/examples/json/JPN.geo.json",
+	"poll": {
+		"enabled": false,
+		"intervalSec": 20
+	}
+},
+{
+	"_id": "XtsxDSh3BL8pGvqNQ",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"dataSetType": "transformed",
+	"name": "Geo JSON",
+	"parents": [
+		"DxX8kK4KRPXjhJ5kJ"
+	],
+	"transformFunction": "x =\u003e {\n    return {\n        center: {\n            lat: 38.51,\n            lng: 139,\n            zoom: 4\n        },\n        defaults: {\n            scrollWheelZoom: false\n        },\n        geojson: {\n            data: x,\n            style: {\n                fillColor: \"green\",\n                weight: 2,\n                opacity: 1,\n                color: 'white',\n                dashArray: '3',\n                fillOpacity: 0.7\n            }\n        }\n    }\n}",
+	"stateParams": {
+		"enabled": false,
+		"state": "{\n  initialValue: 17\n}"
+	},
+	"selectedVisualizationId": "gpvzLtxTvTLCxADfR"
 }]
 
