@@ -322,5 +322,69 @@ export default visualizations =
 	},
 	"basicOptions": "{}",
 	"advancedOptions": "{\n    chart: {\n        type: 'sunburstChart',\n        margin: {\n            top: 30,\n            bottom: 0, \n            left: 0,\n            right: 0\n        },\n        color: d3.scale.category20c(),\n        showLabels: true,\n        labelThreshold: 0.5,\n        duration: 250\n    }\n}"
+},
+{
+	"_id": "v2xoZNpfdBBHM2Ett",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"name": "Toner",
+	"templateId": "8Y4beRBmJvL9dFJLt",
+	"pluginType": "leaflet",
+	"dataSetId": "JhLqiLWZMxis3LxJP",
+	"gridStack": {
+		"x": 6,
+		"y": 0,
+		"height": 8,
+		"width": 6
+	}
+},
+{
+	"_id": "77pPJDTYnGGc8dXcv",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"name": "Terrain",
+	"templateId": "8Y4beRBmJvL9dFJLt",
+	"pluginType": "leaflet",
+	"dataSetId": "wm4dSc6Fc5NR3LgpG",
+	"gridStack": {
+		"x": 0,
+		"y": 16,
+		"height": 5,
+		"width": 12
+	}
+},
+{
+	"_id": "DjWrieXCPZuqxpFpz",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"name": "Water Color",
+	"templateId": "8Y4beRBmJvL9dFJLt",
+	"pluginType": "leaflet",
+	"dataSetId": "YvWS38emFZgZ92DRN",
+	"gridStack": {
+		"x": 0,
+		"y": 0,
+		"height": 8,
+		"width": 6
+	}
+},
+{
+	"_id": "crPBxsBKaeroW6yGq",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"name": "Legend",
+	"templateId": "8Y4beRBmJvL9dFJLt",
+	"pluginType": "leaflet",
+	"dataSetId": "6gZNShwCFcMCptQ2H",
+	"gridStack": {
+		"x": 0,
+		"y": 8,
+		"height": 8,
+		"width": 6
+	}
 }]
 
