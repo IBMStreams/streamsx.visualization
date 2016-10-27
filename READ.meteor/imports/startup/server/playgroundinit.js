@@ -237,7 +237,7 @@ export default playground =
 	"name": "Leaflet Map",
 	"readOnly": false,
 	"inputSchemaId": "a5Py9LwfzM3TdjKYr",
-	"testData": "{\n    center: {\n        lat: 52.52,\n        lng: 13.40,\n        zoom: 14\n    },\n    markers: {\n        m1: {\n            lat: 52.52,\n            lng: 13.40\n        }\n    }\n}",
+	"testData": "{\n    center: {\n        lat: 52.52,\n        lng: 13.40,\n        zoom: 4\n    },\n    markers: {\n        m1: {\n            lat: 52.52,\n            lng: 13.40\n        }\n    },\n    defaults: {\n        tileLayer: \"http://tile.stamen.com/toner/{z}/{x}/{y}.png\",\n        zoomControlPosition: 'topright',\n        tileLayerOptions: {\n            attribution: '\u003ca href=\"http://www.stamen.com\" target=\"_blank\"\u003eStamen\u003c/a\u003e',\n            opacity: 0.9,\n            detectRetina: true,\n            reuseTiles: true,\n        },\n        scrollWheelZoom: false\n    }\n}",
 	"usageInfo": ""
 },
 {
