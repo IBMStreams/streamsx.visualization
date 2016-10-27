@@ -22,6 +22,7 @@ export const leafletMapDirective = function($compile) {
       if ($scope.data.layers) templateOptions.push('layers="data.layers"');
       if ($scope.data.defaults) templateOptions.push('defaults="data.defaults"');
       if ($scope.data.legend) templateOptions.push('legend="data.legend"');
+      if ($scope.data.geojson) templateOptions.push('geojson="data.geojson"');
 
       let template = '<leaflet ' + templateOptions.join(' ') + ' ' + 'height="{{dim.height}}"></leaflet>';
       let content = $compile(template)($scope);

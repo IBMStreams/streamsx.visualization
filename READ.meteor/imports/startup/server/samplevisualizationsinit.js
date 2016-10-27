@@ -365,8 +365,8 @@ export default visualizations =
 	"pluginType": "leaflet",
 	"dataSetId": "YvWS38emFZgZ92DRN",
 	"gridStack": {
-		"x": 0,
-		"y": 0,
+		"x": 6,
+		"y": 8,
 		"height": 8,
 		"width": 6
 	}
@@ -383,6 +383,22 @@ export default visualizations =
 	"gridStack": {
 		"x": 0,
 		"y": 8,
+		"height": 8,
+		"width": 6
+	}
+},
+{
+	"_id": "gpvzLtxTvTLCxADfR",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"name": "Geo JSON",
+	"templateId": "8Y4beRBmJvL9dFJLt",
+	"pluginType": "leaflet",
+	"dataSetId": "XtsxDSh3BL8pGvqNQ",
+	"gridStack": {
+		"x": 0,
+		"y": 0,
 		"height": 8,
 		"width": 6
 	}
