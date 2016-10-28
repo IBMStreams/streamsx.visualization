@@ -9,9 +9,10 @@ import clipBoard from 'clipboard';
 import ngClipBoard from 'ngclipboard/dist/ngclipboard';
 
 import d3 from 'd3';
-import nv from 'nvd3';
+
+import 'nvd3/build/nv.d3.js';
+import 'angular-nvd3/dist/angular-nvd3';
 import 'nvd3/build/nv.d3.css';
-import nvd3 from 'angular-nvd3';
 
 import leaflet from 'leaflet/dist/leaflet';
 import angularLeafletDirective from 'angular-leaflet-directive/dist/angular-leaflet-directive';
@@ -89,6 +90,7 @@ let name = 'read';
 
 let angularModule = angular.module(name, [angularMeteor, uiRouter, ngMessages,
   'ui.bootstrap', 'ngSanitize', 'ui.ace', 'nvd3', 'ngclipboard', 'read.dataSetEditors', 'leaflet-directive']);
+  //  'ui.bootstrap', 'ngSanitize', 'ui.ace', 'nvd3', 'ngclipboard', 'read.dataSetEditors', 'leaflet-directive']);
 
 angularModule.factory('reactiveDataFactory', reactiveDataFactory)
 .service('reactivePipeline', reactivePipeline)

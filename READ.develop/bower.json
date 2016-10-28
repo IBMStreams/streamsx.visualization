@@ -23,5 +23,6 @@
   ],
   "dependencies": {
     "ace-builds": "^1.2.5"
-  }
+  },
+  "devDependencies": {}
 }
