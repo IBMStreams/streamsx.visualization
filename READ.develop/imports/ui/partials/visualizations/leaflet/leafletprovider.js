@@ -6,6 +6,15 @@ export const leafletProviderComponent = {
     message: '<',
     dim: '<'
   },
+  controller: ['$scope', '$rootScope', '$timeout', function($scope, $rootScope, $timeout) {
+    $scope.ready = true;
+    $rootScope.$on('sidebar-toggled', () => {
+      $scope.ready = false;
+      $timeout(() => {
+        $scope.ready = true;
+      }, 10);
+    });
+  }],
   controllerAs: 'leafletController'
 };
 

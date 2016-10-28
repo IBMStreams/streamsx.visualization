@@ -333,7 +333,7 @@ export default visualizations =
 	"pluginType": "leaflet",
 	"dataSetId": "JhLqiLWZMxis3LxJP",
 	"gridStack": {
-		"x": 6,
+		"x": 0,
 		"y": 0,
 		"height": 8,
 		"width": 6
@@ -366,7 +366,7 @@ export default visualizations =
 	"dataSetId": "YvWS38emFZgZ92DRN",
 	"gridStack": {
 		"x": 6,
-		"y": 8,
+		"y": 0,
 		"height": 8,
 		"width": 6
 	}
@@ -381,7 +381,7 @@ export default visualizations =
 	"pluginType": "leaflet",
 	"dataSetId": "6gZNShwCFcMCptQ2H",
 	"gridStack": {
-		"x": 0,
+		"x": 6,
 		"y": 8,
 		"height": 8,
 		"width": 6
@@ -398,7 +398,7 @@ export default visualizations =
 	"dataSetId": "XtsxDSh3BL8pGvqNQ",
 	"gridStack": {
 		"x": 0,
-		"y": 0,
+		"y": 8,
 		"height": 8,
 		"width": 6
 	}

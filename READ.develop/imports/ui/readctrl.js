@@ -50,8 +50,6 @@ function ($scope, $reactive, readState, $timeout) {
       readState.deferredApps.promise.then(() => {
         self.subscribe('dashboards', () => [self.getReactively('user.selectedIds.appId')], {
           onReady: () => {
-            console.log('ready with Dashboards', JSON.stringify(Dashboards.find().fetch()));
-            console.log(readState.deferredDashboards.promise.$$state.status);
             readState.deferredDashboards.resolve();
           }
         });
