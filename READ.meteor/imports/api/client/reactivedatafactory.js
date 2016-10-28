@@ -79,6 +79,7 @@ class IntervalData extends ReactiveData {
     this.intervalSubscription.dispose();
   }
 }
+
 // reactiveDataArray (array of parent reactives)
 // stateParams: is this stateful + initial state
 class TransformedData extends ReactiveData {
@@ -165,7 +166,7 @@ export const reactiveDataFactory = ['$http', function ($http) {
         try {
           $http(httpConfig).then(response => {
             self.injectData(response.data);
-          }, response => {
+        }, response => {
             self.injectError("Error during HTTP with status: " + response.status + " and statusText: " + response.statusText);
           })
         } catch (e) {
@@ -176,20 +177,20 @@ export const reactiveDataFactory = ['$http', function ($http) {
       if (! intervalSec) {
         reactiveData.stream.doOnNext(x => {
           if (x.isData) injectSomething(x.data);
-          else self.injectError("ExtendedHTTP parent dataset has error");
-        }).subscribe();
+      else self.injectError("ExtendedHTTP parent dataset has error");
+      }).subscribe();
       } else if (! ((_.isNumber(intervalSec)) && (intervalSec >= 1))) {
         self.injectError('Invalid interval value: ' + interval);
       } else {
         self.intervalGen = Rx.Observable.merge(Rx.Observable.just(0), Rx.Observable.interval(intervalSec*1000));
         self.intervalSubscription = Rx.Observable.combineLatest(reactiveData.stream, self.intervalGen, (x, y) => {
-          return x;
-        }).doOnNext(x => {
+              return x;
+      }).doOnNext(x => {
           if (x.isData) injectSomething(x.data);
-          if (! x.isData) {
-            self.injectError("ExtendedHTTP parent dataset has error");
-          }
-        }).subscribe(new Rx.ReplaySubject(0));
+        if (! x.isData) {
+          self.injectError("ExtendedHTTP parent dataset has error");
+        }
+      }).subscribe(new Rx.ReplaySubject(0));
       }
     }
 
@@ -208,6 +209,53 @@ export const reactiveDataFactory = ['$http', function ($http) {
     }
   }
 
+  class WebsocketData extends ReactiveData { // HTTP GET method
+    constructor(_id, name, reactiveData) { // size of buffer for emitted events// reactiveData provides the config
+      super(_id, name);
+      this.type = "websocket";
+      let self = this;
+
+        self.socketEvents = Rx.Observable.merge(Rx.Observable.just(0), Rx.Observable);
+
+
+
+      let injectSomething = (wsConfig) => {
+        try {
+          $ws(wsConfig).then(response => {
+            self.injectData(response.data);
+        }, response => {
+            self.injectError("Error establishing websocket with status: " + response.status + " and statusText: " + response.statusText);
+          })
+        } catch (e) {
+          self.injectError("Error during WS: " + e.message);
+        }
+      };
+
+      // if (! intervalSec) {
+      //   reactiveData.stream.doOnNext(x => {
+      //     if (x.isData) injectSomething(x.data);
+      // else self.injectError("ExtendedHTTP parent dataset has error");
+      // }).subscribe();
+      // } else if (! ((_.isNumber(intervalSec)) && (intervalSec >= 1))) {
+      //   self.injectError('Invalid interval value: ' + interval);
+      // } else {
+      //   self.intervalGen = Rx.Observable.merge(Rx.Observable.just(0), Rx.Observable.interval(intervalSec*1000));
+      //   self.intervalSubscription = Rx.Observable.combineLatest(reactiveData.stream, self.intervalGen, (x, y) => {
+      //         return x;
+      // }).doOnNext(x => {
+      //     if (x.isData) injectSomething(x.data);
+      //   if (! x.isData) {
+      //     self.injectError("ExtendedHTTP parent dataset has error");
+      //   }
+      // }).subscribe(new Rx.ReplaySubject(0));
+      // }
+    }
+
+    dispose() {
+      if (this.intervalSubscription) this.intervalSubscription.dispose();
+    }
+  }
+
   let myFactory = {};
   myFactory.rawData = (_id, name, data) => new RawData(_id, name, data);
   myFactory.intervalData = (_id, name, intervalSec) => new IntervalData(_id, name, intervalSec);
@@ -215,6 +263,7 @@ export const reactiveDataFactory = ['$http', function ($http) {
   myFactory.validatedData = (_id, name, reactiveData, schema) => new ValidatedData(_id, name, reactiveData, schema);
   myFactory.extendedHTTPData = (_id, name, reactiveData, intervalSec) => new ExtendedHTTPData(_id, name, reactiveData, intervalSec);
   myFactory.simpleHTTPData = (_id, name, url, intervalSec) => new SimpleHTTPData(_id, name, url, intervalSec);
+  myFactory.websocketData = (_id, name, url) => new WebsocketData(_id, name, url);
 
   return myFactory;
 }];

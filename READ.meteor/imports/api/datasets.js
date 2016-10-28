@@ -26,6 +26,28 @@ export const rawDataSchema = {
   additionalProperties: false
 };
 
+export const wsDataSchema = {
+  $schema: "http://json-schema.org/schema#",
+  description: "Websocket Data schema",
+  type: "object",
+  properties: {
+    userId: {type: "string"},
+    appId: {type: "string"},
+    dashboardId: {type: "string"},
+    dataSetType: {constant: "websocket"},
+    name: {
+      type: "string",
+      minLength: 1,
+      maxLength: 20
+    },
+    selectedVisualizationId: {type: "string"},
+    url: {type: "string"},
+    bufferSize: {type: "number"}
+  },
+  required: ["userId", "appId", "dashboardId", "dataSetType", "name", "url", "bufferSize"],
+  additionalProperties: false
+};
+
 export const simpleHTTPDataSchema = {
   $schema: "http://json-schema.org/schema#",
   description: "Simple HTTP Data schema",
@@ -122,11 +144,13 @@ export const DataSets = new Mongo.Collection('datasets');
 let rawDataSchemaValidate = undefined;
 let simpleHTTPDataSchemaValidate = undefined;
 let extendedHTTPDataSchemaValidate = undefined;
+let wsDataSchemaValidate = undefined;
 let transformedDataSchemaValidate = undefined;
 try {
   rawDataSchemaValidate = (new ajv({removeAdditional: true})).compile(rawDataSchema);
   simpleHTTPDataSchemaValidate = (new ajv({removeAdditional: true})).compile(simpleHTTPDataSchema);
   extendedHTTPDataSchemaValidate = (new ajv({removeAdditional: true})).compile(extendedHTTPDataSchema);
+  wsDataSchemaValidate = (new ajv({removeAdditional: true})).compile(wsDataSchema);
   transformedDataSchemaValidate = (new ajv({removeAdditional: true})).compile(transformedDataSchema);
 }
 catch (e) {
@@ -138,6 +162,7 @@ let getValidate = (dataSetType) => {
   switch (dataSetType) {
     case "raw": return rawDataSchemaValidate;
     case "simpleHTTP": return simpleHTTPDataSchemaValidate;
+    case "websocket": return wsDataSchemaValidate;
     case "extendedHTTP": return extendedHTTPDataSchemaValidate;
     case "transformed": return transformedDataSchemaValidate;
     default: throw new Error("Unknown dataset type detected in getValidate");

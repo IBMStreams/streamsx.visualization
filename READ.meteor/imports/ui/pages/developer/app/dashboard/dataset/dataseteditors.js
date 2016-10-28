@@ -3,6 +3,7 @@ import Rx from 'rx/dist/rx.all';
 
 import rawDataEditorTemplateUrl from './rawdataeditor.html';
 import simpleHTTPDataEditorTemplateUrl from './simplehttpdataeditor.html';
+import websocketDataEditorTemplateUrl from './websocketdataeditor.html';
 import transformedDataEditorTemplateUrl from './transformeddataeditor.html';
 import extendedHTTPDataEditorTemplateUrl from './extendedhttpdataeditor.html';
 
@@ -16,6 +17,9 @@ angularModule.value('dataSetTypes', [{
 }, {
   name: 'simpleHTTP',
   displayName: 'URL'
+}, {
+  name: 'websocket',
+  displayName: 'Websocket'
 }, {
   name: 'extendedHTTP',
   displayName: 'HTTP Config'
@@ -36,6 +40,9 @@ angularModule.factory('defaultDataSets', function() {
         enabled: false,
         intervalSec: 20
       }
+    },websocket: {
+      url: 'ws://websocket_address',
+      bufferSize: 20
     },
     transformed: {
       parents: [],
@@ -65,6 +72,10 @@ angularModule.directive('rawDataEditor', function() {
 }).directive('simpleHttpDataEditor', function() {
   return {
     templateUrl: simpleHTTPDataEditorTemplateUrl
+  }
+}).directive('websocketDataEditor', function() {
+  return {
+    templateUrl: websocketDataEditorTemplateUrl
   }
 }).directive('transformedDataEditor', function() {
   return {

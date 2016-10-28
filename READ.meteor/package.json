@@ -23,6 +23,7 @@
     "meteor-node-stubs": "^0.2.3",
     "ngclipboard": "^1.1.1",
     "rx": "^4.1.0",
+    "rx-dom": "^7.0.3", 
     "toposort": "^1.0.0",
     "underscore": "^1.8.3"
   },
