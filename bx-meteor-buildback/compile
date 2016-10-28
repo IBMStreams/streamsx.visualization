@@ -1,0 +1,94 @@
+#!/bin/bash
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+METEOR_HOME=$BUILD_DIR/.meteor/local
+PATH=$METEOR_HOME/usr/bin:$METEOR_HOME/usr/lib/meteor/bin:$PATH
+
+indent() {
+  c='s/^/       /'
+  case $(uname) in
+    Darwin) sed -l "$c";; # mac/bsd sed: -l buffers on line boundaries
+    *)      sed -u "$c";; # unix/gnu sed: -u unbuffered (arbitrary) chunks of data
+  esac
+}
+
+status() {
+  echo "-----> $*"
+}
+
+node_version=$(curl --silent --get https://semver.io/node/resolve/0.10.x)
+
+install_node() {
+  if [ -f "$BUILD_DIR/.vendor/node/bin/node" ] ; then
+    status "Skipping Node installation. Already installed."
+    return
+  fi
+
+  # Download node from Heroku's S3 mirror of nodejs.org/dist
+  status "Downloading and installing node $node_version"
+  NODE_INSTALLER=node-installer.tar.gz
+  NODE_URL="http://s3pository.heroku.com/node/v$node_version/node-v$node_version-linux-x64.tar.gz"
+  curl $NODE_URL > $NODE_INSTALLER
+  tar xzf $NODE_INSTALLER -C $BUILD_DIR
+
+  # Move node (and npm) into ./.vendor and make them executable
+  mkdir -p $BUILD_DIR/.vendor
+  mv $BUILD_DIR/node-v$node_version-linux-x64 $BUILD_DIR/.vendor/node
+  chmod +x $BUILD_DIR/.vendor/node/bin/*
+  PATH=$BUILD_DIR/.vendor/node/bin:$PATH
+}
+
+install_meteor() {
+  if [ -f "$METEOR_HOME/usr/bin/meteor" ] ; then
+    status "Skipping Meteor installation. Already installed."
+    return
+  fi
+
+  # status "Install Meteor"
+  # export PATH=/usr/bin:$PATH # necessary for install script to run from URL
+  # curl https://install.meteor.com | sh
+  status "Downloading Meteor install script"
+  METEOR_INSTALL_SCRIPT=install_meteor.sh
+  curl https://install.meteor.com/ > $METEOR_INSTALL_SCRIPT
+
+  status "Installing Meteor connected to $MONGO_URL"
+  sed -e '/^#!\/bin\/sh/ s/$/ -x/' \
+    -e 's/set -/#set -/' \
+    -e 's/curl --progress-bar --fail.*/curl "$TARBALL_URL" > meteor-bundle.tgz; tar -xzf meteor-bundle.tgz -C "$INSTALL_TMPDIR" -o/' \
+    $METEOR_INSTALL_SCRIPT > install-meteor-verbose.sh
+  chmod +x install-meteor-verbose.sh
+
+  status "Execute ./install-meteor-verbose.sh"
+  ./install-meteor-verbose.sh
+  status "Done"
+
+  status "Updating PATH with Meteor"
+  PATH=$HOME/.meteor:$PATH
+}
+
+build() {
+  (
+    cd $BUILD_DIR
+    status "Building meteor bundle"
+    meteor build --directory deploy --server http://localhost:3000
+    cd deploy/bundle/programs/server
+    status "Installing npm dependencies"
+    npm install 2>&1 | indent
+    mv $BUILD_DIR/.vendor $BUILD_DIR/vendor
+  )
+}
+
+[ ! -d $BUILD_DIR ] && mkdir $BUILD_DIR
+[ ! -d $CACHE_DIR ] && mkdir $CACHE_DIR
+
+install_node
+install_meteor
+build
+
+status "Checking for post_compile script"
+if [ -f $BUILD_DIR/bin/post_compile ] ; then
+    status "Running post_compile hook"
+    chmod +x $BUILD_DIR/bin/post_compile
+    $BUILD_DIR/bin/post_compile
+fi
