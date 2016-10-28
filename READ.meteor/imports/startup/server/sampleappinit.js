@@ -5,6 +5,6 @@ export default app =
 	"name": "Sample",
 	"private": true,
 	"readOnly": false,
-	"selectedDashboardId": "CTyzoHgRxeFpnK29Y"
+	"selectedDashboardId": "ruHbJhctjLhCYZiof"
 }]
 

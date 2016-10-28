@@ -37,12 +37,6 @@ function ($scope, $reactive, readState, $timeout) {
     user: () => Users.findOne({})
   });
 
-  this.subscribe('dashboards', () => [self.getReactively('user.selectedIds.appId')], {
-    onReady: () => {
-      readState.deferredDashboards.resolve();
-    }
-  });
-
   let changeDataSetParents = (dataSet) => {
     if (! _.contains(['extendedHTTP', 'transformed'], dataSet.dataSetType))
     throw new Error('only extendedHTTP and transformed datasets can have parents');
@@ -51,33 +45,48 @@ function ($scope, $reactive, readState, $timeout) {
     else if (dataSet.dataSetType === 'extendedHTTP') readState.dependencies.addParents([dataSet.parentId], dataSet._id);
   };
 
-  this.subscribe('datasets', () => [self.getReactively('user.selectedIds.appId')], {
-    onReady: () => {
-      let dataSets = DataSets.find({appId: self.getReactively('user.selectedIds.appId')}).fetch();
-      dataSets.map(dataSet => {
-        readState.dependencies.addNode(dataSet._id);
+  readState.deferredUser.promise.then(() => {
+    readState.deferredPlayground.promise.then(() => {
+      readState.deferredApps.promise.then(() => {
+        self.subscribe('dashboards', () => [self.getReactively('user.selectedIds.appId')], {
+          onReady: () => {
+            console.log('ready with Dashboards', JSON.stringify(Dashboards.find().fetch()));
+            console.log(readState.deferredDashboards.promise.$$state.status);
+            readState.deferredDashboards.resolve();
+          }
+        });
+
+        self.subscribe('datasets', () => [self.getReactively('user.selectedIds.appId')], {
+          onReady: () => {
+            let dataSets = DataSets.find({appId: self.getReactively('user.selectedIds.appId')}).fetch();
+            dataSets.map(dataSet => {
+              readState.dependencies.addNode(dataSet._id);
+            });
+            dataSets.map(dataSet => {
+              if (_.contains(['extendedHTTP', 'transformed'], dataSet.dataSetType)) {
+                changeDataSetParents(dataSet);
+              };
+            });
+            //toposort
+            let nodes = dataSets.map(d => d._id);
+            let edges = readState.dependencies.graph.elements().edges().map(e => e.data()).map(o => [o.source, o.target]);
+            toposort.array(nodes, edges).map(_id => {
+              readState.pipeline.addDataSet(_.find(dataSets, ds => ds._id === _id));
+            });
+            // finally resolve
+            readState.deferredDataSets.resolve();
+          }
+        });
+
+        self.subscribe('visualizations', () => [self.getReactively('user.selectedIds.appId')], {
+          onReady: () => {
+            readState.deferredVisualizations.resolve();
+          }
+        });
       });
-      dataSets.map(dataSet => {
-        if (_.contains(['extendedHTTP', 'transformed'], dataSet.dataSetType)) {
-          changeDataSetParents(dataSet);
-        };
-      });
-      //toposort
-      let nodes = dataSets.map(d => d._id);
-      let edges = readState.dependencies.graph.elements().edges().map(e => e.data()).map(o => [o.source, o.target]);
-      toposort.array(nodes, edges).map(_id => {
-        readState.pipeline.addDataSet(_.find(dataSets, ds => ds._id === _id));
-      });
-      // finally resolve
-      readState.deferredDataSets.resolve();
-    }
+    });
   });
 
-  this.subscribe('visualizations', () => [self.getReactively('user.selectedIds.appId')], {
-    onReady: () => {
-      readState.deferredVisualizations.resolve();
-    }
-  });
 
   let playgroundQuery = Playground.find({});
   let playgroundQueryObserveHandle = playgroundQuery.observe({
@@ -111,7 +120,6 @@ function ($scope, $reactive, readState, $timeout) {
   });
 
   let dataSetQuery = DataSets.find({});
-
   let dataSetQueryHandle = dataSetQuery.observe({
     added: (dataSet) => {
       readState.deferredDataSets.promise.then(() => {
