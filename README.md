@@ -11,7 +11,7 @@
 2. Download READ
   * ```git clone https://github.com/IBMStreams/streamsx.visualization.git``` (or download from [here](https://github.com/IBMStreams/streamsx.visualization/archive/master.zip)). This creates the  `streamsx.visualization` folder on your machine.
 3. Build and run READ
-  * ```cd streamsx.visualization/READ.meteor```
+  * ```cd streamsx.visualization/READ.develop```
   * ```meteor npm install```
   * ```meteor```
   * You should see the message *=> App running at: http://localhost:3000/*
