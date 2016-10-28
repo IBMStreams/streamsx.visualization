@@ -36,7 +36,7 @@ export default datasets =
 	"parents": [
 		"QWF74B2tAs5LRspSz"
 	],
-	"transformFunction": "(x, s) =\u003e {\n    if (s.length === 20) s.splice(0, 1)\n    s.push(x);\n    return s;\n}",
+	"transformFunction": "(x, s) =\u003e {\n    if (s.length === 20) s.splice(0, 1)\n    x.hello = 'world';\n    s.push(x);\n    return s;\n}",
 	"stateParams": {
 		"enabled": true,
 		"state": "[]"
@@ -187,5 +187,18 @@ export default datasets =
 		"state": "{\n  initialValue: 17\n}"
 	},
 	"selectedVisualizationId": "gpvzLtxTvTLCxADfR"
+},
+{
+	"_id": "jcWntKtSzTubiCypn",
+	"userId": "guest",
+	"appId": "qr6yb78p2tfvbYM4G",
+	"dashboardId": "in2fmd939pFSkLM6c",
+	"dataSetType": "simpleHTTP",
+	"name": "Cors TEST",
+	"url": "http://129.40.36.132:1234/129.40.36.136:36010/Metrics.Totals/ports/input/0/tuples",
+	"poll": {
+		"enabled": true,
+		"intervalSec": 1
+	}
 }]
 

@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import _ from 'underscore/underscore';
+import exportAppModal from './exportappmodal.html';
 
 import {Users} from '/imports/api/users';
 import {Apps} from '/imports/api/apps';
@@ -7,8 +8,8 @@ import {Dashboards} from '/imports/api/dashboards';
 import {Visualizations} from '/imports/api/visualizations';
 import {DataSets} from '/imports/api/datasets';
 
-export const appSideNavCtrl = ['$scope', '$reactive', '$state', 'readState', '$q',
-function ($scope, $reactive, $state, readState, $q) {
+export const appSideNavCtrl = ['$scope', '$reactive', '$state', 'readState', '$q', '$uibModal',
+function ($scope, $reactive, $state, readState, $q, $uibModal) {
   $reactive(this).attach($scope);
   let self = this;
 
@@ -16,12 +17,48 @@ function ($scope, $reactive, $state, readState, $q) {
     user: () => Users.findOne({}),
     items: () => Apps.find({}).fetch(),
     item: () => Apps.findOne({_id: self.user.selectedIds.appId}),
+    exportedItem: () => {
+      let exportedApp = {
+        version: "0.5.0",
+        app: Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
+        dashboards: Dashboards.find({appId: self.getReactively('user.selectedIds.appId')}).fetch(),
+        dataSets: DataSets.find({appId: self.getReactively('user.selectedIds.appId')}).fetch(),
+        visualizations: Visualizations.find({appId: self.getReactively('user.selectedIds.appId')}).fetch(),
+      };
+      // instead of alert, we want to use ngclipboard to copy stringified json to clipboard here...
+      return exportedApp;
+    },
     itemsControl: () => {
       return {
         itemType: "App",
         clonable: false,
         selectedId: self.getReactively('user.selectedIds.appId'),
         selectedItem: Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
+        exportable: () => ! _.isUndefined(self.getReactively('user.selectedIds.appId')),
+        exportItem: () => {
+          let modalInstance = $uibModal.open({
+            resolve: {
+              exportedItem: function() {
+                return self.getReactively('exportedItem');
+              }
+            },
+            controller: ['$scope', 'exportedItem', '$uibModalInstance',
+            function($scope, exportedItem, $uibModalInstance) {
+              $scope.exportedItem = JSON.stringify(exportedItem, undefined, 2);
+              this.cancel = function() {
+                $uibModalInstance.dismiss('cancel');
+              };
+              $scope.copied = false;
+              this.copy = function() {
+                $scope.copied = true;
+              }
+            }],
+            controllerAs: 'modalCtrl',
+            size: 'lg',
+            templateUrl: exportAppModal
+          });
+//          alert(JSON.stringify(self.getReactively('exportedItem')));
+        },
         creatable: () => true,
         switchItem: (selectedId) => {
           self.user.selectedIds.appId = selectedId;
