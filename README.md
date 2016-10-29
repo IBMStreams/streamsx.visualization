@@ -8,13 +8,12 @@
 1. Prerequisites
   * Install [Meteor](https://www.meteor.com)
   * Install [MongoDB](https://www.mongodb.com)
-  * Install [NodeJS](https://nodejs.org/) (optional)
-2. Download [READ](https://github.com/IBMStreams/streamsx.visualization/archive/v0.5.1-alpha.zip)
+2. Download [READ](https://github.com/IBMStreams/streamsx.visualization/archive/v0.5.2-alpha.zip)
 3. Create your READ database folder: `mkdir /my/read/database/folder`
 4. Start MongoDB in a terminal: `mongod --port 3001 --dbpath /my/read/database/folder`
 5. Build and run READ in a new terminal
   * `export MONGO_URL="mongodb://localhost:3001/readdb"`
-  * `cd streamsx.visualization-0.5.1-alpha/READ.develop`
+  * `cd streamsx.visualization-0.5.2-alpha/READ.develop`
   * `meteor npm install`
   * `meteor`
   * You should see the message *=> App running at: http://localhost:3000/*
