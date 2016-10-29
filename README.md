@@ -14,7 +14,7 @@
   * [v0.5.1-alpha](https://github.com/IBMStreams/streamsx.visualization/archive/v0.5.1-alpha.zip). Uncompress this file to create the  `streamsx.visualization-0.5.1-alpha` folder on your machine.
 3. Create your READ database folder
   * `mkdir /my/read/database/folder`
-  * We recommend that your READ database folder to be outside the `streamsx.visualization` folder for ease of upgrading to future versions of READ.
+  * We recommend that you create your READ database folder outside the `streamsx.visualization-0.5.1-alpha` folder for ease of upgrading READ in the future.
 4. Start MongoDB in a terminal
   * `mongod --port 3001 --dbpath /my/read/database/folder`. This starts MongoDB at the URL localhost:3001.
 5. Build and run READ in a new terminal
