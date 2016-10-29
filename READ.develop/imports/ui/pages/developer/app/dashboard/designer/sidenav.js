@@ -101,8 +101,8 @@ function($scope, $reactive, $state, readState, $q) {
             gridStack: {
               x: 0,
               y: 0,
-              height: 3,
-              width: 3
+              height: 4,
+              width: 4
             }
           }, additionalFields), (err, res) => {
             if (err) alert(err);

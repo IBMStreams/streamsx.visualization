@@ -181,11 +181,71 @@ export default datasets =
 	"parents": [
 		"DxX8kK4KRPXjhJ5kJ"
 	],
-	"transformFunction": "x =\u003e {\n    return {\n        center: {\n            lat: 38.51,\n            lng: 139,\n            zoom: 4\n        },\n        defaults: {\n            scrollWheelZoom: false\n        },\n        geojson: {\n            data: x,\n            style: {\n                fillColor: \"green\",\n                weight: 2,\n                opacity: 1,\n                color: 'white',\n                dashArray: '3',\n                fillOpacity: 0.7\n            }\n        }\n    }\n}",
+	"transformFunction": "x =\u003e {\n    return {\n        center: {\n            lat: 38.51,\n            lng: 139,\n            zoom: 4\n        },\n        defaults: {\n            scrollWheelZoom: false\n        },\n        geojson: {\n            data: x,\n            style: {\n                fillColor: \"#ccfa12\",\n                weight: 2,\n                opacity: 1,\n                color: 'white',\n                dashArray: '3',\n                fillOpacity: 0.7\n            }\n        }\n    }\n}",
 	"stateParams": {
 		"enabled": false,
 		"state": "{\n  initialValue: 17\n}"
 	},
 	"selectedVisualizationId": "gpvzLtxTvTLCxADfR"
+},
+{
+	"_id": "NNQ9r4tYyXLJfWzyK",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"dataSetType": "transformed",
+	"name": "Bounds",
+	"parents": [],
+	"transformFunction": "() =\u003e {\n    return {\n        bounds: leafletBoundsHelpers.createBoundsFromArray([\n            [ 51.508742458803326, -0.087890625 ],\n            [ 51.508742458803326, -0.087890625 ]\n        ])\n    };\n}",
+	"stateParams": {
+		"enabled": false,
+		"state": "{\n  initialValue: 17\n}"
+	},
+	"selectedVisualizationId": "7nptNJ6b9XKgdedYu"
+},
+{
+	"_id": "tEheoTBzYnS3ZBKpQ",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"dataSetType": "transformed",
+	"name": "Max Bounds",
+	"parents": [],
+	"transformFunction": "() =\u003e {\n    return {\n        center: {\n            lat: 40.743,\n            lng: -75.176,\n            zoom: 12\n        },\n        maxbounds: leafletBoundsHelpers.createBoundsFromArray([\n            [40.712, -74.227],\n            [40.774, -74.125]\n        ])\n    };\n}",
+	"stateParams": {
+		"enabled": false,
+		"state": "{\n  initialValue: 17\n}"
+	},
+	"selectedVisualizationId": "oQxMgFJvH68gXJArZ"
+},
+{
+	"_id": "sTfgygBHQn5KnHtv7",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"dataSetType": "simpleHTTP",
+	"name": "IP Geo",
+	"url": "http://freegeoip.net/json/",
+	"poll": {
+		"enabled": false,
+		"intervalSec": 20
+	}
+},
+{
+	"_id": "hXmDDYqcTet6XwhKa",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"dataSetType": "transformed",
+	"name": "IP Geo Location",
+	"parents": [
+		"sTfgygBHQn5KnHtv7"
+	],
+	"transformFunction": "x =\u003e {\n    return {\n        center: {\n            lat: x.latitude,\n            lng: x.longitude,\n            zoom: 16\n        },\n        markers: {\n            m1: {\n                lat: x.latitude,\n                lng: x.longitude\n            }\n        }\n    }\n}",
+	"stateParams": {
+		"enabled": false,
+		"state": "{\n  initialValue: 17\n}"
+	},
+	"selectedVisualizationId": "PZ57T6FWLmkNQ8SYE"
 }]
 

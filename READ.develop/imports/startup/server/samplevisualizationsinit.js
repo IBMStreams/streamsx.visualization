@@ -334,7 +334,7 @@ export default visualizations =
 	"dataSetId": "JhLqiLWZMxis3LxJP",
 	"gridStack": {
 		"x": 0,
-		"y": 0,
+		"y": 19,
 		"height": 8,
 		"width": 6
 	}
@@ -350,7 +350,7 @@ export default visualizations =
 	"dataSetId": "wm4dSc6Fc5NR3LgpG",
 	"gridStack": {
 		"x": 0,
-		"y": 16,
+		"y": 27,
 		"height": 5,
 		"width": 12
 	}
@@ -398,8 +398,56 @@ export default visualizations =
 	"dataSetId": "XtsxDSh3BL8pGvqNQ",
 	"gridStack": {
 		"x": 0,
-		"y": 8,
+		"y": 0,
 		"height": 8,
+		"width": 6
+	}
+},
+{
+	"_id": "7nptNJ6b9XKgdedYu",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"name": "Bounds",
+	"templateId": "8Y4beRBmJvL9dFJLt",
+	"pluginType": "leaflet",
+	"dataSetId": "NNQ9r4tYyXLJfWzyK",
+	"gridStack": {
+		"x": 6,
+		"y": 16,
+		"height": 8,
+		"width": 6
+	}
+},
+{
+	"_id": "oQxMgFJvH68gXJArZ",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"name": "Max Bounds",
+	"templateId": "8Y4beRBmJvL9dFJLt",
+	"pluginType": "leaflet",
+	"dataSetId": "tEheoTBzYnS3ZBKpQ",
+	"gridStack": {
+		"x": 0,
+		"y": 13,
+		"height": 6,
+		"width": 6
+	}
+},
+{
+	"_id": "PZ57T6FWLmkNQ8SYE",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"name": "IP Geo Location",
+	"templateId": "8Y4beRBmJvL9dFJLt",
+	"pluginType": "leaflet",
+	"dataSetId": "hXmDDYqcTet6XwhKa",
+	"gridStack": {
+		"x": 0,
+		"y": 8,
+		"height": 5,
 		"width": 6
 	}
 }]
