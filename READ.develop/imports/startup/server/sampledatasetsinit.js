@@ -20,10 +20,10 @@ export default datasets =
 	"dashboardId": "YPHGTDAsaursHHfPQ",
 	"dataSetType": "simpleHTTP",
 	"name": "Dynamic Sine",
-	"url": "http://localhost:9000/sampleapp/dynamicsine",
+	"url": "http://readnodered.mybluemix.net/sampleapp/dynamicsine",
 	"poll": {
 		"enabled": true,
-		"intervalSec": 1
+		"intervalSec": 4
 	}
 },
 {
