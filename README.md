@@ -8,7 +8,7 @@
 1. Prerequisites
   * Install [Meteor](https://www.meteor.com). Command `meteor` will work if Meteor is installed
   * Install [MongoDB](https://www.mongodb.com). Commands `mongod`, `mongo`, and `mongoexport` will work if MongoDB is installed
-  * Optionally, install [NodeJS](https://nodejs.org/). Commands `node` and `npm` will work if NodeJS is installed. NodeJS is necessary if you wish to run the `CORS proxy` bundled with READ, or if you wish create the
+  * Install [NodeJS](https://nodejs.org/) (optional). Commands `node` and `npm` will work if NodeJS is installed. NodeJS is necessary if you wish to run the `CORS proxy` bundled with READ, or if you wish create the
   dynamic API needed by the `Dynamics` dashboard of the `Sample` app bundled with READ.
 2. Download READ
   * [v0.5.1-alpha pre-release](https://github.com/IBMStreams/streamsx.visualization/archive/v0.5.1-alpha.zip). Uncompressing this creates the  `streamsx.visualization` folder on your machine.
