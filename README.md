@@ -12,9 +12,9 @@
   dynamic API needed by the `Dynamics` dashboard of the `Sample` app bundled with READ.
 2. Download READ
   * [v0.5.1-alpha pre-release](https://github.com/IBMStreams/streamsx.visualization/archive/v0.5.1-alpha.zip). Uncompressing this creates the  `streamsx.visualization` folder on your machine.
-3. Create your read database folder
+3. Create your READ database folder
   * ```mkdir /my/read/database/folder```
-  * We recommend that your read database folder is outside the `streamsx.visualization` folder for ease of upgrading to future versions of READ.
+  * We recommend that your READ database folder is outside the `streamsx.visualization` folder for ease of upgrading to future versions of READ.
 4. Start MongoDB in a terminal
   * ```mongod --port 3001 --dbpath /my/read/database/folder```
 5. Build and run READ in a new terminal
