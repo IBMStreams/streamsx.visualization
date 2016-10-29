@@ -125,7 +125,7 @@ export default datasets =
 	"dashboardId": "ruHbJhctjLhCYZiof",
 	"dataSetType": "raw",
 	"name": "Toner",
-	"rawData": "{\n    center: {\n        lat: 52.52,\n        lng: 13.40,\n        zoom: 4\n    },\n    markers: {\n        m1: {\n            lat: 52.52,\n            lng: 13.40\n        }\n    },\n    defaults: {\n        tileLayer: \"http://tile.stamen.com/toner/{z}/{x}/{y}.png\",\n        zoomControlPosition: 'topright',\n        tileLayerOptions: {\n            opacity: 0.9,\n            detectRetina: true,\n            reuseTiles: true,\n        },\n        scrollWheelZoom: false\n    }\n}",
+	"rawData": "{\n    center: {\n        lat: 52.52,\n        lng: 13.40,\n        zoom: 4\n    },\n    markers: {\n        m1: {\n            lat: 52.52,\n            lng: 13.40\n        }\n    },\n    defaults: {\n        tileLayer: \"http://tile.stamen.com/toner/{z}/{x}/{y}.png\",\n        zoomControlPosition: 'topright',\n        tileLayerOptions: {\n            opacity: 0.9,\n            detectRetina: true,\n            reuseTiles: true,\n            attribution: '\u003ca href=\"http://www.stamen.com/\"\u003eStamen\u003c/a\u003e'\n        },\n        scrollWheelZoom: false\n    }\n}",
 	"selectedVisualizationId": "v2xoZNpfdBBHM2Ett"
 },
 {
@@ -135,7 +135,7 @@ export default datasets =
 	"dashboardId": "ruHbJhctjLhCYZiof",
 	"dataSetType": "raw",
 	"name": "Terrain",
-	"rawData": "{\n    center: {\n        lat: 52.52,\n        lng: 13.40,\n        zoom: 4\n    },\n    markers: {\n        m1: {\n            lat: 52.52,\n            lng: 13.40\n        }\n    },\n    defaults: {\n        tileLayer: \"http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg\",\n        tileLayerOptions: {\n            attribution: '© \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors'\n        },\n        zoomControlPosition: 'topright',\n        tileLayerOptions: {\n            opacity: 0.9,\n            detectRetina: true,\n            reuseTiles: true,\n        },\n        scrollWheelZoom: false\n    }\n}",
+	"rawData": "{\n    center: {\n        lat: 52.52,\n        lng: 13.40,\n        zoom: 4\n    },\n    markers: {\n        m1: {\n            lat: 52.52,\n            lng: 13.40\n        }\n    },\n    defaults: {\n        tileLayer: \"http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg\",\n        zoomControlPosition: 'topright',\n        tileLayerOptions: {\n            opacity: 0.9,\n            detectRetina: true,\n            reuseTiles: true,\n            attribution: '\u003ca href=\"http://www.stamen.com/\"\u003eStamen\u003c/a\u003e'\n        },\n        scrollWheelZoom: false\n    }\n}",
 	"selectedVisualizationId": "77pPJDTYnGGc8dXcv"
 },
 {
@@ -145,7 +145,7 @@ export default datasets =
 	"dashboardId": "ruHbJhctjLhCYZiof",
 	"dataSetType": "raw",
 	"name": "Water Color",
-	"rawData": "{\n    center: {\n        lat: 52.52,\n        lng: 13.40,\n        zoom: 4\n    },\n    markers: {\n        m1: {\n            lat: 52.52,\n            lng: 13.40\n        }\n    },\n    defaults: {\n        tileLayer: \"http://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg\",\n        zoomControlPosition: 'topright',\n        tileLayerOptions: {\n            opacity: 0.9,\n            detectRetina: true,\n            reuseTiles: true,\n        },\n        scrollWheelZoom: false\n    }\n}",
+	"rawData": "{\n    center: {\n        lat: 52.52,\n        lng: 13.40,\n        zoom: 4\n    },\n    markers: {\n        m1: {\n            lat: 52.52,\n            lng: 13.40\n        }\n    },\n    defaults: {\n        tileLayer: \"http://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg\",\n        zoomControlPosition: 'topright',\n        tileLayerOptions: {\n            opacity: 0.9,\n            detectRetina: true,\n            reuseTiles: true,\n            attribution: '\u003ca href=\"http://www.stamen.com/\"\u003eStamen\u003c/a\u003e'\n        },\n        scrollWheelZoom: false\n    }\n}",
 	"selectedVisualizationId": "DjWrieXCPZuqxpFpz"
 },
 {
@@ -155,7 +155,7 @@ export default datasets =
 	"dashboardId": "ruHbJhctjLhCYZiof",
 	"dataSetType": "raw",
 	"name": "Legend",
-	"rawData": "{\n    center: {\n        lat: 51.505,\n        lng: -0.09,\n        zoom: 12\n    },\n    legend: {\n        position: 'bottomleft',\n        colors: [ '#ff0000', '#28c9ff', '#0000ff', '#ecf386' ],\n        labels: [ 'National Cycle Route', 'Regional Cycle Route', 'Local Cycle Network', 'Cycleway' ]\n    },\n    defaults: {\n        tileLayer: \"http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png\"\n    }\n}",
+	"rawData": "{\n    center: {\n        lat: 51.505,\n        lng: -0.09,\n        zoom: 12\n    },\n    legend: {\n        position: 'bottomleft',\n        colors: [ '#ff0000', '#28c9ff', '#0000ff', '#ecf386' ],\n        labels: [ 'National Cycle Route', 'Regional Cycle Route', 'Local Cycle Network', 'Cycleway' ]\n    },\n    defaults: {\n        tileLayer: \"http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png\",\n        tileLayerOptions: {\n            attribution: '\u003ca href=\"http://www.opencyclemap.org/\"\u003eOpen Cycle Map\u003c/a\u003e'\n        },\n    }\n}",
 	"selectedVisualizationId": "crPBxsBKaeroW6yGq"
 },
 {
@@ -247,5 +247,40 @@ export default datasets =
 		"state": "{\n  initialValue: 17\n}"
 	},
 	"selectedVisualizationId": "PZ57T6FWLmkNQ8SYE"
+},
+{
+	"_id": "5oJFX5SxWexTCD9ca",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"dataSetType": "raw",
+	"name": "Layers",
+	"rawData": "{\n    layers: {\n        baselayers: {\n            osm: {\n                name: 'OpenStreetMap',\n                url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',\n                type: 'xyz'\n            },\n            Stamen: {\n                name: 'Stamen',\n                type: 'xyz',\n                url: \"http://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg\"\n            }\n        }\n    }\n}",
+	"selectedVisualizationId": "ecDTkT9PC7rfQoCSY"
+},
+{
+	"_id": "iEahWn8fycZDsGjfZ",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"dataSetType": "transformed",
+	"name": "Paths",
+	"parents": [],
+	"transformFunction": "() =\u003e {\n    let europeCapitals = {\n        Madrid: {\n            lat: 40.4,\n            lng: -3.6833333\n        },\n        Rome: {\n            lat: 41.9,\n            lng: 12.4833333\n        },\n        London: {\n            lat: 51.5,\n            lng: -0.116667\n        },\n        Lisbon: {\n            lat: 38.7166667,\n            lng: -9.1333333\n        },\n        Berlin: {\n            lat: 52.5166667,\n            lng: 13.4\n        },\n        Paris: {\n            lat: 48.866667,\n            lng: 2.333333\n        },\n        Brussels: {\n            lat: 50.8333,\n            lng: 4\n        }\n    };\n\n    let pathsDict = {\n        polyline: {\n            type: \"polyline\",\n            latlngs: [ europeCapitals.London, europeCapitals.Madrid, europeCapitals.Rome]\n        },\n        multiPolyline: {\n            type: \"multiPolyline\",\n            latlngs: [\n                [ europeCapitals.London, europeCapitals.Lisbon ],\n                [ europeCapitals.Paris, europeCapitals.Madrid ],\n                [ europeCapitals.Rome, europeCapitals.Berlin ]\n                ]\n        },\n        polygon: {\n            type: \"polygon\",\n            latlngs: [ europeCapitals.London, europeCapitals.Lisbon , europeCapitals.Madrid, europeCapitals.Paris ]\n        },\n        multiPolygon: {\n            type: \"multiPolygon\",\n            latlngs: [\n                [europeCapitals.London, europeCapitals.Lisbon , europeCapitals.Madrid, europeCapitals.Paris ],\n                [ europeCapitals.Berlin, europeCapitals.Rome, europeCapitals.Brussels ]\n            ]\n        },\n        rectangle: {\n            type: \"rectangle\",\n            latlngs: [ europeCapitals.Berlin, europeCapitals.Lisbon ]\n        },\n        circle: {\n            type: \"circle\",\n            radius: 500 * 1000,\n            latlngs: europeCapitals.Brussels\n        },\n        circleMarker: {\n            type: \"circleMarker\",\n            radius: 50,\n            latlngs: europeCapitals.Rome\n        }\n    };\n    \n    return {\n        center: {\n            lat: 51.505,\n            lng: -0.09,\n            zoom: 3            \n        },\n        paths: {\n            multiPolygon: pathsDict.multiPolygon\n        }\n    }\n}",
+	"stateParams": {
+		"enabled": false,
+		"state": "{\n  initialValue: 17\n}"
+	},
+	"selectedVisualizationId": "4Fy3fG8Xjpa7SGEvD"
+},
+{
+	"_id": "oZF4xTTraiir4avX6",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"dataSetType": "raw",
+	"name": "Tiles",
+	"rawData": "{\n    url: \"http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png\",\n    options: {\n        attribution: '\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors'\n    }\n}",
+	"selectedVisualizationId": "fNxikntSNTPpnunKj"
 }]
 

@@ -334,7 +334,7 @@ export default visualizations =
 	"dataSetId": "JhLqiLWZMxis3LxJP",
 	"gridStack": {
 		"x": 0,
-		"y": 19,
+		"y": 11,
 		"height": 8,
 		"width": 6
 	}
@@ -350,7 +350,7 @@ export default visualizations =
 	"dataSetId": "wm4dSc6Fc5NR3LgpG",
 	"gridStack": {
 		"x": 0,
-		"y": 27,
+		"y": 28,
 		"height": 5,
 		"width": 12
 	}
@@ -398,8 +398,8 @@ export default visualizations =
 	"dataSetId": "XtsxDSh3BL8pGvqNQ",
 	"gridStack": {
 		"x": 0,
-		"y": 0,
-		"height": 8,
+		"y": 19,
+		"height": 9,
 		"width": 6
 	}
 },
@@ -430,7 +430,7 @@ export default visualizations =
 	"dataSetId": "tEheoTBzYnS3ZBKpQ",
 	"gridStack": {
 		"x": 0,
-		"y": 13,
+		"y": 5,
 		"height": 6,
 		"width": 6
 	}
@@ -446,8 +446,56 @@ export default visualizations =
 	"dataSetId": "hXmDDYqcTet6XwhKa",
 	"gridStack": {
 		"x": 0,
-		"y": 8,
+		"y": 0,
 		"height": 5,
+		"width": 6
+	}
+},
+{
+	"_id": "ecDTkT9PC7rfQoCSY",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"name": "Layers",
+	"templateId": "8Y4beRBmJvL9dFJLt",
+	"pluginType": "leaflet",
+	"dataSetId": "5oJFX5SxWexTCD9ca",
+	"gridStack": {
+		"x": 6,
+		"y": 33,
+		"height": 6,
+		"width": 6
+	}
+},
+{
+	"_id": "4Fy3fG8Xjpa7SGEvD",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"name": "Paths",
+	"templateId": "8Y4beRBmJvL9dFJLt",
+	"pluginType": "leaflet",
+	"dataSetId": "iEahWn8fycZDsGjfZ",
+	"gridStack": {
+		"x": 0,
+		"y": 33,
+		"height": 5,
+		"width": 6
+	}
+},
+{
+	"_id": "fNxikntSNTPpnunKj",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "ruHbJhctjLhCYZiof",
+	"name": "Tiles",
+	"templateId": "8Y4beRBmJvL9dFJLt",
+	"pluginType": "leaflet",
+	"dataSetId": "oZF4xTTraiir4avX6",
+	"gridStack": {
+		"x": 6,
+		"y": 24,
+		"height": 4,
 		"width": 6
 	}
 }]

@@ -22,7 +22,8 @@
     "tests"
   ],
   "dependencies": {
-    "ace-builds": "^1.2.5"
+    "ace-builds": "^1.2.5",
+    "leaflet": "^1.0.1"
   },
   "devDependencies": {}
 }
