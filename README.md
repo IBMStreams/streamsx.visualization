@@ -11,15 +11,15 @@
   * Install [NodeJS](https://nodejs.org/) (optional). Commands `node` and `npm` will work if NodeJS is installed. NodeJS is necessary if you wish to run the `CORS proxy` bundled with READ, or if you wish create the
   dynamic API needed by the `Dynamics` dashboard of the `Sample` app bundled with READ.
 2. Download READ
-  * [v0.5.1-alpha pre-release](https://github.com/IBMStreams/streamsx.visualization/archive/v0.5.1-alpha.zip). Uncompressing this file creates the  `streamsx.visualization` folder on your machine.
+  * [v0.5.1-alpha](https://github.com/IBMStreams/streamsx.visualization/archive/v0.5.1-alpha.zip). Uncompress this file to create the  `streamsx.visualization-0.5.1-alpha` folder on your machine.
 3. Create your READ database folder
-  * ```mkdir /my/read/database/folder```
+  * `mkdir /my/read/database/folder`
   * We recommend that your READ database folder to be outside the `streamsx.visualization` folder for ease of upgrading to future versions of READ.
 4. Start MongoDB in a terminal
   * `mongod --port 3001 --dbpath /my/read/database/folder`. This starts MongoDB at the URL localhost:3001.
 5. Build and run READ in a new terminal
-  * ```export MONGO_URL="mongodb://localhost:3001/readdb"```. This tells READ to use `readdb` as the READ database.
-  * ```cd streamsx.visualization/READ.develop```
+  * `export MONGO_URL="mongodb://localhost:3001/readdb"`. This tells READ to use `readdb` as the READ database.
+  * `cd streamsx.visualization-0.5.1-alpha/READ.develop`
   * `meteor npm install`. This installs all the dependencies needed by READ.
   * `meteor`. This builds and runs READ at http://localhost:3000.
   * You should see the message *=> App running at: http://localhost:3000/*
