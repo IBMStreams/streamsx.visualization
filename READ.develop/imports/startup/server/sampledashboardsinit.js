@@ -25,6 +25,6 @@ export default dashboards =
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Maps",
-	"selectedDataSetId": "XtsxDSh3BL8pGvqNQ"
+	"selectedDataSetId": "oZF4xTTraiir4avX6"
 }]
 
