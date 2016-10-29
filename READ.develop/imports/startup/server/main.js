@@ -17,13 +17,13 @@ import visualizations from './samplevisualizationsinit';
 if (Apps.find().count() === 0) {
   apps.map(app => {
     Apps.upsert({_id: app._id}, app, {upsert: true}, (err, res) => {
-      dashboards.map(dashboard => {
+      dashboards.filter(d => d.appId === app._id).map(dashboard => {
         Dashboards.upsert({_id: dashboard._id}, dashboard, {upsert: true});
       });
-      datasets.map(dataset => {
+      datasets.filter(d => d.appId === app._id).map(dataset => {
         DataSets.upsert({_id: dataset._id}, dataset, {upsert: true});
       });
-      visualizations.map(visualization => {
+      visualizations.filter(d => d.appId === app._id).map(visualization => {
         Visualizations.upsert({_id: visualization._id}, visualization, {upsert: true});
       });
     });

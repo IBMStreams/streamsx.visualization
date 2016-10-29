@@ -26,12 +26,5 @@ export default dashboards =
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Maps",
 	"selectedDataSetId": "XtsxDSh3BL8pGvqNQ"
-},
-{
-	"_id": "in2fmd939pFSkLM6c",
-	"userId": "guest",
-	"appId": "qr6yb78p2tfvbYM4G",
-	"name": "CORS",
-	"selectedDataSetId": "jcWntKtSzTubiCypn"
 }]
 

@@ -187,18 +187,5 @@ export default datasets =
 		"state": "{\n  initialValue: 17\n}"
 	},
 	"selectedVisualizationId": "gpvzLtxTvTLCxADfR"
-},
-{
-	"_id": "jcWntKtSzTubiCypn",
-	"userId": "guest",
-	"appId": "qr6yb78p2tfvbYM4G",
-	"dashboardId": "in2fmd939pFSkLM6c",
-	"dataSetType": "simpleHTTP",
-	"name": "Cors TEST",
-	"url": "http://129.40.36.132:1234/129.40.36.136:36010/Metrics.Totals/ports/input/0/tuples",
-	"poll": {
-		"enabled": true,
-		"intervalSec": 1
-	}
 }]
 
