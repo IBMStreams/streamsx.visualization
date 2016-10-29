@@ -21,7 +21,7 @@
   * ```export MONGO_URL="mongodb://localhost:3001/readdb"```. This tells READ to use `readdb` as the READ database.
   * ```cd streamsx.visualization/READ.develop```
   * `meteor npm install`. This installs all the dependencies needed by READ.
-  * `meteor`. This builds and starts READ.
+  * `meteor`. This builds and starts READ at http://localhost:3000.
   * You should see the message *=> App running at: http://localhost:3000/*
 
 ## Next steps
