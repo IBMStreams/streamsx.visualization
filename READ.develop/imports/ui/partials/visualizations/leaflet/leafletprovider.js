@@ -32,6 +32,8 @@ export const leafletMapDirective = function($compile) {
       if ($scope.data.defaults) templateOptions.push('defaults="data.defaults"');
       if ($scope.data.legend) templateOptions.push('legend="data.legend"');
       if ($scope.data.geojson) templateOptions.push('geojson="data.geojson"');
+      if ($scope.data.bounds) templateOptions.push('bounds="data.bounds"');
+      if ($scope.data.maxbounds) templateOptions.push('maxbounds="data.maxbounds"');
 
       let template = '<leaflet ' + templateOptions.join(' ') + ' ' + 'height="{{dim.height}}"></leaflet>';
       let content = $compile(template)($scope);
