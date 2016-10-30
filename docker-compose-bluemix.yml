@@ -1,0 +1,29 @@
+readdevelop:
+  image: registry.ng.bluemix.net/bcharts/readdevelop
+  ports:
+    - "3000:3000"
+  links:
+    - mongo
+  environment:
+    - ROOT_URL=http://localhost
+    - MONGO_URL=mongodb://mongo:27017/readdb
+    - PORT=3000
+  mem_limit: 512
+
+readshare:
+  image: registry.ng.bluemix.net/bcharts/readshare
+  ports:
+    - "3002:3002"
+  links:
+    - mongo
+  environment:
+    - ROOT_URL=http://localhost
+    - MONGO_URL=mongodb://mongo:27017/readdb
+    - PORT=3002
+  mem_limit: 512
+
+mongo:
+  image: registry.ng.bluemix.net/bcharts/mongo
+  expose:
+    - "27017"
+  mem_limit: 256
