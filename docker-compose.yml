@@ -1,0 +1,24 @@
+readdevelop:
+  image: sriumcp/readdevelop:latest
+  ports:
+    - "3000:3000"
+  links:
+    - mongo
+  environment:
+    - ROOT_URL=http://localhost
+    - MONGO_URL=mongodb://mongo:27017/readdb
+    - PORT=3000
+
+readshare:
+  image: sriumcp/readshare:latest
+  ports:
+    - "3002:3002"
+  links:
+    - mongo
+  environment:
+    - ROOT_URL=http://localhost
+    - MONGO_URL=mongodb://mongo:27017/readdb
+    - PORT=3002
+
+mongo:
+  image: mongo:latest
