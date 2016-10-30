@@ -5,9 +5,14 @@ import ngMessages from 'angular-messages';
 import angularUi from 'angular-ui-bootstrap';
 
 import d3 from 'd3';
-import nv from 'nvd3';
+
+import 'nvd3/build/nv.d3.js';
+import 'angular-nvd3/dist/angular-nvd3';
 import 'nvd3/build/nv.d3.css';
-import nvd3 from 'angular-nvd3';
+
+import leaflet from 'leaflet/dist/leaflet';
+import angularLeafletDirective from 'angular-leaflet-directive/dist/angular-leaflet-directive';
+import 'leaflet/dist/leaflet.css';
 
 import {reactiveDataFactory} from '/imports/api/client/reactivedatafactory.js';
 import {reactivePipeline} from '/imports/api/client/reactivepipeline';
@@ -36,7 +41,7 @@ import {visualizationComponent} from '/imports/ui/partials/visualizations/visual
 
 let name = 'read';
 
-let angularModule = angular.module(name, [angularMeteor, uiRouter, ngMessages, 'ui.bootstrap', 'nvd3']);
+let angularModule = angular.module(name, [angularMeteor, uiRouter, ngMessages, 'ui.bootstrap', 'nvd3', 'leaflet-directive']);
 
 angularModule.factory('reactiveDataFactory', reactiveDataFactory)
 .service('reactivePipeline', reactivePipeline)
