@@ -5,9 +5,7 @@
 > Use READ to rapidly create real-time visualizations, responsive sharable dashboards, REST API dataflows, and new types of visualizations.
 
 ## Demo
-* [READ Sample App](http://169.44.119.88:3002/#/app/jetLpRfQ3BCRGiMxe) with multiple dashboards
-with a variety of maps and geo visualizations, dynamic real-time charts, time series visualizations,
-and a variety of other chart types such as sunburst and parallel coordinates.
+* [READ Sample App](http://169.44.119.88:3002/#/app/jetLpRfQ3BCRGiMxe) with a variety of maps and geo visualizations, dynamic real-time charts, time series charts, and other chart types such as sunburst and parallel coordinates.
 
 ## Getting Started
 1. Prerequisites
