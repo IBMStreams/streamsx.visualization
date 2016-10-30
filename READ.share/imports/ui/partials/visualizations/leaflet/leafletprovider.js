@@ -18,7 +18,7 @@ export const leafletProviderComponent = {
   controllerAs: 'leafletController'
 };
 
-export const leafletMapDirective = function($compile) {
+export const leafletMapDirective = ['$compile', function($compile) {
   return {
     scope: {
       data: '<',
@@ -41,4 +41,4 @@ export const leafletMapDirective = function($compile) {
       $element.append(content);
     }
   }
-}
+}];
