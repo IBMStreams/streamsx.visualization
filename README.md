@@ -26,7 +26,7 @@
 * Follow the tutorial: http://localhost:3000/#/docs/tutorial
 
 ## Sharing READ Dashboards
-[READ Sample App](http://169.44.119.88:3002/#/app/jetLpRfQ3BCRGiMxe) is an example of shared READ dashboards. Refer to help topics: http://localhost:3000/#/docs/helptopics for sharing your READ dashboards.
+For sharing your dashboards, refer to help topics: http://localhost:3000/#/docs/helptopics. 
 
 ## Running the CORS Proxy service
 Refer to help topics: http://localhost:3000/#/docs/helptopics
