@@ -1,5 +1,5 @@
 readdevelop:
-  image: sriumcp/readdevelop:latest
+  image: sriumcp/readdevelop
   ports:
     - "3000:3000"
   links:
@@ -8,9 +8,10 @@ readdevelop:
     - ROOT_URL=http://localhost
     - MONGO_URL=mongodb://mongo:27017/readdb
     - PORT=3000
+  mem_limit: 512
 
 readshare:
-  image: sriumcp/readshare:latest
+  image: sriumcp/readshare
   ports:
     - "3002:3002"
   links:
@@ -19,6 +20,10 @@ readshare:
     - ROOT_URL=http://localhost
     - MONGO_URL=mongodb://mongo:27017/readdb
     - PORT=3002
+  mem_limit: 512
 
 mongo:
   image: mongo:latest
+  expose:
+    - "27017"
+  mem_limit: 256
