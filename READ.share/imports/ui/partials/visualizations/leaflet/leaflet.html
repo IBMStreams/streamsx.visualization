@@ -1,4 +1,4 @@
-<leaflet-map ng-if="leafletController.message.isData" data="leafletController.message.data" dim="leafletController.dim"></leaflet-map>
+<leaflet-map ng-if="leafletController.message.isData && ready" data="leafletController.message.data" dim="leafletController.dim"></leaflet-map>
 <div class="alert alert-danger" role="alert" ng-if="!leafletController.message.isData">
   Input data has error
 </div>

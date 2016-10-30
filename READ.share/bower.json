@@ -1,0 +1,28 @@
+{
+  "name": "READ.share",
+  "description": "READ.share",
+  "main": "",
+  "authors": [
+    "SRINIVASAN PARTHASARATHY <spartha@us.ibm.com>"
+  ],
+  "license": "Unlicense",
+  "keywords": [
+    "READ",
+    "Visualization",
+    "REST"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "leaflet": "^1.0.1"
+  },
+  "devDependencies": {}
+}
