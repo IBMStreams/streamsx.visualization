@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import angular from 'angular';
 import _ from 'underscore/underscore';
 import exportAppModal from './exportappmodal.html';
 
@@ -42,9 +43,17 @@ function ($scope, $reactive, $state, readState, $q, $uibModal) {
                 return self.getReactively('exportedItem');
               }
             },
-            controller: ['$scope', 'exportedItem', '$uibModalInstance',
-            function($scope, exportedItem, $uibModalInstance) {
+            controller: ['$scope', 'exportedItem', '$uibModalInstance', '$timeout',
+            function($scope, exportedItem, $uibModalInstance, $timeout) {
               $scope.exportedItem = JSON.stringify(exportedItem, undefined, 2);
+              $uibModalInstance.rendered.then(() => {
+                $timeout(() => {
+                  if ($scope.exportedItem.length > 0) {
+                    angular.element('#exportedItem').scrollTop(0);
+                  }
+                });
+              });
+
               this.cancel = function() {
                 $uibModalInstance.dismiss('cancel');
               };
