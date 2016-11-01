@@ -35,7 +35,7 @@ export class Pipeline {
 }
 
 // angular wrapper service for the pipeline
-export const reactivePipeline = ['reactiveDataFactory', function (reactiveDataFactory) {
+export const reactivePipeline = ['reactiveDataFactory', "leafletData", "leafletBoundsHelpers", function (reactiveDataFactory, leafletData, leafletBoundsHelpers) {
   class ReactivePipeline extends Pipeline {
     constructor() {
       super();

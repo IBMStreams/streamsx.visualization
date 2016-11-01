@@ -79,78 +79,82 @@ class IntervalData extends ReactiveData {
     this.intervalSubscription.dispose();
   }
 }
-// reactiveDataArray (array of parent reactives)
-// stateParams: is this stateful + initial state
-class TransformedData extends ReactiveData {
-  constructor(_id, name, reactiveDataArray, transformFunction, state) {
-    super(_id, name);
-    this.type = "transformed";
-    let self = this;
-
-    let stateEnabled = state ? true: false;
-    if (stateEnabled) this.state = state;
-
-    let reactiveStreams = _.pluck(reactiveDataArray, 'stream');
-
-    let injectSomething = (latestArgs) => {
-      // one or more of the input streams contain error(s)
-      if (_.some(latestArgs, (arg) => ! arg.isData)) self.injectError('Transform function inputs contain error(s)');
-      else try {
-        // inputs seem ok. We will try applying the transformFunction now.
-        let data = undefined;
-        let transformFunctionArgs = latestArgs.map((x) => x.data);
-        if (stateEnabled) transformFunctionArgs.push(self.state);
-        data = transformFunction(...transformFunctionArgs);
-        if (! (_.isUndefined(data) || _.isNull(data))) self.injectData(data);
-        else self.injectError('Transform function evaluation did not yield data');
-      } catch (e) { // ran into errors during transformFunction application
-        self.injectError('Error during transform function evaluation: ' + e.message);
-      }
-    }
-
-    if (reactiveStreams.length > 0) {
-      self.combiner = Rx.Observable.combineLatest(...reactiveStreams)
-      .doOnNext((latestArgs) => {injectSomething(latestArgs);}).subscribe(new Rx.ReplaySubject(0));
-    } else {
-      self.combiner = Rx.Observable.just([]).doOnNext((latestArgs) => {injectSomething(latestArgs);}).subscribe(new Rx.ReplaySubject(0));
-    }
-  }
-
-  dispose() {
-    this.combiner.dispose();
-  }
-}
-
-class ValidatedData extends TransformedData {
-  static getValidator(jsonSchema) {
-    let myjv = (new ajv({
-      allErrors: true
-    }));
-    let validate = undefined;
-    try {
-      validate = myjv.compile(jsonSchema);
-    }
-    catch (e) {
-      throw new Error('JSON Schema Compilation Error during ValidatedData construction');
-    }
-
-    return ((data) => {
-      if (validate(data)) return data;
-      if (validate.errors.length > 5) {
-        console.log(validate.errors);
-        throw new Error('Schema validation failure (limiting to 5 errors)- '.concat(myjv.errorsText(_.first(validate.errors, 5))));
-      }
-      else throw new Error('Schema validation failure - '.concat(myjv.errorsText(validate.errors)));
-    });
-  }
-
-  constructor(_id, name, reactiveData, jsonSchema) {
-    super(_id, name, [reactiveData], ValidatedData.getValidator(jsonSchema));
-    this.type = 'jsonschema';
-  }
-}
 
 export const reactiveDataFactory = ['$http', function ($http) {
+  // reactiveDataArray (array of parent reactives)
+  // stateParams: is this stateful + initial state
+  class TransformedData extends ReactiveData {
+    constructor(_id, name, reactiveDataArray, transformFunction, state) {
+      super(_id, name);
+      this.type = "transformed";
+      let self = this;
+
+      let stateEnabled = state ? true: false;
+      if (stateEnabled) this.state = state;
+
+      let reactiveStreams = _.pluck(reactiveDataArray, 'stream');
+
+      let injectSomething = (latestArgs) => {
+        // one or more of the input streams contain error(s)
+        if (_.some(latestArgs, (arg) => ! arg.isData)) {
+          self.injectError('Transform function inputs contain error(s)');
+        }
+        else try {
+          // inputs seem ok. We will try applying the transformFunction now.
+          let data = undefined;
+          let transformFunctionArgs = latestArgs.map((x) => JSON.parse(JSON.stringify(x.data)));
+          if (stateEnabled) transformFunctionArgs.push(self.state);
+          data = transformFunction(...transformFunctionArgs);
+          if (! (_.isUndefined(data) || _.isNull(data))) self.injectData(data);
+          else self.injectError('Transform function evaluation did not yield data');
+        } catch (e) { // ran into errors during transformFunction application
+          self.injectError('Error during transform function evaluation: ' + e.message);
+        }
+      }
+
+      if (reactiveStreams.length > 0) {
+        self.combiner = Rx.Observable.combineLatest(...reactiveStreams)
+        .doOnNext((latestArgs) => {injectSomething(latestArgs);}).subscribe(new Rx.ReplaySubject(0));
+      } else {
+        self.combiner = Rx.Observable.just([]).doOnNext((latestArgs) => {injectSomething(latestArgs);}).subscribe(new Rx.ReplaySubject(0));
+      }
+    }
+
+    dispose() {
+      this.combiner.dispose();
+    }
+  }
+
+  class ValidatedData extends TransformedData {
+    static getValidator(jsonSchema) {
+      let myjv = (new ajv({
+        allErrors: true
+      }));
+      let validate = undefined;
+      try {
+        validate = myjv.compile(jsonSchema);
+      }
+      catch (e) {
+        throw new Error('JSON Schema Compilation Error during ValidatedData construction');
+      }
+
+      return ((data) => {
+        if (validate(data)) return data;
+        if (validate.errors.length > 5) {
+          throw new Error('Schema validation failure (limiting to 5 errors)- '.concat(myjv.errorsText(_.first(validate.errors, 5))));
+        }
+        else {
+          throw new Error('Schema validation failure - '.concat(myjv.errorsText(validate.errors)))
+        };
+      });
+    }
+
+    constructor(_id, name, reactiveData, jsonSchema) {
+      super(_id, name, [reactiveData], ValidatedData.getValidator(jsonSchema));
+      this.type = 'jsonschema';
+    }
+  }
+
   // SimpleHTTPData and ExtendedHTTPData implementations below; other implementations above;
   class ExtendedHTTPData extends ReactiveData { // HTTP GET method
     constructor(_id, name, reactiveData, intervalSec) { // interval in seconds // reactiveData provides the config

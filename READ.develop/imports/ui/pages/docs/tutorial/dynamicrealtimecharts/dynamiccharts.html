@@ -1,0 +1,88 @@
+<h3>Dynamic Visualizations</h3>
+<blockquote>
+  <p>READ is uniquely suited to handle streaming data and dynamic real-time visualizations</p>
+  <footer>We will now work in a scenario where we have a REST API that updates its data continuously</footer>
+  <footer>We will poll this API every second, accumulate the recent twenty data values,
+    and visualize the current window of data</footer>
+  <footer>Our visualization will update dynamically with the accumulated data, i.e., every second</footer>
+</blockquote>
+
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial/advancedusecases/statefultransform.2.png')">
+        <img src="/images/tutorial/advancedusecases/statefultransform.2.png" alt="Dataset Creation"></img>
+      </a>
+      <div class="caption">
+        <h4>Create Dynamic Dataset</h4>
+        <p class="word-wrap">Create dashboard <code>Dynamic</code>. Create dataset <code>Dynamic Sine</code>.
+          Switch the dataset type to <strong>URL</strong> and set the URL to
+          <a href="http://readnodered.mybluemix.net/sampleapp/dynamicsine" target="_blank">http://readnodered.mybluemix.net/sampleapp/dynamicsine</a>. <strong>Enable polling</strong> and set the
+        polling interval to one second.
+      </p></div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial/advancedusecases/statefultransform.3.png')">
+        <img src="/images/tutorial/advancedusecases/statefultransform.3.png" alt="Dataset Creation"></img>
+      </a>
+      <div class="caption">
+        <h4>Create Stateful Dataset</h4>
+        <p class="word-wrap">Create dataset <code>Stateful Sine</code>.
+          Switch the dataset type to <strong>Transform</strong> and set <code>Dynamic Sine</code> as the parent.
+          Use <a href="https://gist.githubusercontent.com/sriumcp/6eeb5a9cd7fd5648b17721396e03f10d/raw/c6fa7d6f9746a6b0fff9f70ea72927deabe2d4da/statefultransform.js" target="_blank">this function</a>
+          as the transform function. <strong>Enable state</strong> and set empty array <code>[]</code> as the initial state.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <a href="javascript:void(0)" ng-click="mainContentCtrl.openModel('/images/tutorial/advancedusecases/statefultransform.4.png')">
+        <img src="/images/tutorial/advancedusecases/statefultransform.4.png" alt="Visualization Creation"></img>
+      </a>
+      <div class="caption">
+        <h4>Create Dynamic Visualization</h4>
+        <p class="word-wrap">Create visualization <code>Stateful Sine</code>.
+          Choose <code>Stateful Sine</code> as the dataset. Set the chart type as <strong>Multibar</strong>.
+          Use <a target="_blank" href="https://gist.githubusercontent.com/sriumcp/d99573ac404510648889ee9502ee252f/raw/2615dc74390c571248abc00150ba35fae0127fe7/statefulsinebasic.js">this</a>
+          as basic options for the visualization. Use
+          <a target="_blank" href="https://gist.githubusercontent.com/sriumcp/17acf94e92db5557fa33e75e00c2b2aa/raw/578324d7d5d8f8c97d17bad265e2b443a6e1a15c/statefultransformadvanced.js">this</a> as advanced options.</p>
+          <p>You should now see the visualization updating dynamically.</p>
+          <p>Click on the <strong>Usage Info</strong> tab of a visualization to see the data format, basic options,
+            and advanced options expected by the chart type</p>
+      </div>
+    </div>
+  </div>
+</div> <!-- row -->
+
+<h4>Exercise</h4>
+<ul class="list-group">
+  <li class="list-group-item">
+    Create more dynamic time series visualizations using chart types such as
+      <strong>Multi</strong> and <strong>Stacked Area</strong> using the <code>Stateful Sine</code> dataset.
+  </li>
+</ul>
+
+<h4>Key Concepts</h4>
+<ul class="list-group">
+  <li class="list-group-item">You can specify Javascript functions within a <strong>transform</strong> dataset to transform, combine, aggregate its inputs (parent datasets)</li>
+  <li class="list-group-item">You can maintain state in a <strong>transform</strong> dataset by initializing it to any valid javascript
+    object (i.e., array or object).
+  </li>
+  <li class="list-group-item">If state is enabled, the last argument to the transform function is the state object. The rest
+  of the arguments are the latest data value(s) from the parent dataset(s). The transform function updates the state as well as returns the
+  current data value of the transform dataset.</li>
+  <li class="list-group-item">Stateful transforms are best used in conjuction with <strong>URL</strong> datasets that are polled.</li>
+  <li class="list-group-item">Refer to the <strong>Usage Info</strong> tab of a visualization to see the data format,
+    basic options, and advanced options expected by the chart type</li>
+</ul>
+
+<nav>
+   <ul class="pager">
+     <li><a href="javascript:void(0)" ng-click="mainContentCtrl.switch('timeseries', 'timeSeriesCharts')">Previous</a></li>
+     <li><a href="javascript:void(0)" ng-click="mainContentCtrl.switch('cars', 'createApp')">Next</a></li>
+   </ul>
+</nav>
