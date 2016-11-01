@@ -1,6 +1,10 @@
 import { Meteor } from 'meteor/meteor';
+import angular from 'angular';
 import _ from 'underscore/underscore';
+
 import exportAppModal from './exportappmodal.html';
+import importAppModal from './importappmodal.html';
+import {importedAppSchema} from '/imports/api/apps'
 
 import {Users} from '/imports/api/users';
 import {Apps} from '/imports/api/apps';
@@ -19,7 +23,7 @@ function ($scope, $reactive, $state, readState, $q, $uibModal) {
     item: () => Apps.findOne({_id: self.user.selectedIds.appId}),
     exportedItem: () => {
       let exportedApp = {
-        version: "0.5.0",
+        version: "0.5.2",
         app: Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
         dashboards: Dashboards.find({appId: self.getReactively('user.selectedIds.appId')}).fetch(),
         dataSets: DataSets.find({appId: self.getReactively('user.selectedIds.appId')}).fetch(),
@@ -42,9 +46,17 @@ function ($scope, $reactive, $state, readState, $q, $uibModal) {
                 return self.getReactively('exportedItem');
               }
             },
-            controller: ['$scope', 'exportedItem', '$uibModalInstance',
-            function($scope, exportedItem, $uibModalInstance) {
+            controller: ['$scope', 'exportedItem', '$uibModalInstance', '$timeout',
+            function($scope, exportedItem, $uibModalInstance, $timeout) {
               $scope.exportedItem = JSON.stringify(exportedItem, undefined, 2);
+              $uibModalInstance.rendered.then(() => {
+                $timeout(() => {
+                  if ($scope.exportedItem.length > 0) {
+                    angular.element('#exportedItem').scrollTop(0);
+                  }
+                });
+              });
+
               this.cancel = function() {
                 $uibModalInstance.dismiss('cancel');
               };
@@ -56,6 +68,23 @@ function ($scope, $reactive, $state, readState, $q, $uibModal) {
             controllerAs: 'modalCtrl',
             size: 'lg',
             templateUrl: exportAppModal
+          });
+//          alert(JSON.stringify(self.getReactively('exportedItem')));
+        },
+        importable: () => true,
+        importItem: () => {
+          let modalInstance = $uibModal.open({
+            controller: ['$scope', '$uibModalInstance', '$timeout',
+            function($scope, $uibModalInstance, $timeout) {
+              $scope.appSchema = importedAppSchema;
+              $scope.importedItem = undefined;
+              this.cancel = function() {
+                $uibModalInstance.dismiss('cancel');
+              };
+            }],
+            controllerAs: 'modalCtrl',
+            size: 'lg',
+            templateUrl: importAppModal
           });
 //          alert(JSON.stringify(self.getReactively('exportedItem')));
         },

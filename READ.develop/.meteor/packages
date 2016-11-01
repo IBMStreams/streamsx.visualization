@@ -16,10 +16,10 @@ standard-minifier-js@1.2.1    # JS minifier run for production mode
 es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
 
 angular-templates
-fourseven:scss
 fortawesome:fontawesome
 shell-server@0.2.1
 pbastowski:angular-babel
 d3js:d3
 ryanwu:jquery-ui-interactions
 ryanwu:meteor-gridstack
+fourseven:scss@3.10.0

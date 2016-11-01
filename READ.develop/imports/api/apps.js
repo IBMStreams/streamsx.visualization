@@ -1,5 +1,10 @@
 import {Mongo} from 'meteor/mongo';
+import _ from 'underscore';
+
 import ajv from 'ajv';
+import {dashboardSchema} from './dashboards';
+import {dataSetSchema} from './datasets';
+import {visualizationSchema} from './visualizations';
 
 export const appSchema = {
   $schema: "http://json-schema.org/schema#",
@@ -18,6 +23,56 @@ export const appSchema = {
   },
   required: ["userId", "name", "private", "readOnly"],
   additionalProperties: false
+};
+
+let _appSchema = JSON.parse(JSON.stringify(appSchema));
+_appSchema.properties._id = {type: "string"};
+_appSchema.required.push("_id");
+
+let _dashboardSchema = JSON.parse(JSON.stringify(dashboardSchema));
+_dashboardSchema.properties._id = {type: "string"};
+_dashboardSchema.required.push("_id");
+
+let _dataSetSchema = JSON.parse(JSON.stringify(dataSetSchema));
+_dataSetSchema.oneOf.forEach(r => {
+  r.properties._id = {type: "string"};
+  r.required.push("_id")
+});
+
+let _visualizationSchema = JSON.parse(JSON.stringify(visualizationSchema));
+_visualizationSchema.oneOf.forEach(r => {
+  r.properties._id = {type: "string"};
+  r.required.push("_id")
+});
+
+export const importedAppSchema = {
+  $schema: "http://json-schema.org/schema#",
+  description: "Exported app schema",
+  type: "object",
+  properties: {
+    version: {type: "string"},
+    app: {$ref: "#/definitions/app"},
+    dashboards: {
+      type: "array",
+      items: {$ref: "#/definitions/dashboard"}
+    },
+    dataSets: {
+      type: "array",
+      items: {$ref: "#/definitions/dataSet"}
+    },
+    visualizations: {
+      type: "array",
+      items: {$ref: "#/definitions/visualization"}
+    }
+  },
+  required: ["version", "app", "dashboards", "dataSets", "visualizations"],
+  additionalProperties: false,
+  definitions: {
+    app: _appSchema,
+    dashboard: _dashboardSchema,
+    dataSet: _dataSetSchema,
+    visualization: _visualizationSchema
+  },
 };
 
 export const Apps = new Mongo.Collection('apps');
