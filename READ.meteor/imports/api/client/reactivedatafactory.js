@@ -181,14 +181,15 @@ class WebsocketData extends ReactiveData {
 
     self.latestOne = new Rx.ReplaySubject(1); // create a replay subject which stores its latest data value
 
-    self.socket.subscribe(self.latestOne);
-    self.latestOne.onNext(x => {
+    //self.socket.subscribe(self.latestOne);
+    /*self.latestOne.onNext(x => {
        console.log('Data Received by ReplaySubject!');
        //if (x.isData) self.injectData(x.data);
        if (!x.isData) {
          self.injectError("Websocket dataset has error");
        }
      });
+     */
     self.socket.subscribe(
         function(e) {
           self.injectData(JSON.parse(e.data));
