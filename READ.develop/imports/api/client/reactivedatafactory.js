@@ -263,7 +263,6 @@ class WebsocketData extends ReactiveData {
 //   }
 // }
 
-export const reactiveDataFactory = ['$http', function ($http) {
   // SimpleHTTPData and ExtendedHTTPData implementations below; other implementations above;
   class ExtendedHTTPData extends ReactiveData { // HTTP GET method
     constructor(_id, name, reactiveData, intervalSec) { // interval in seconds // reactiveData provides the config
@@ -275,7 +274,7 @@ export const reactiveDataFactory = ['$http', function ($http) {
         try {
           $http(httpConfig).then(response => {
             self.injectData(response.data);
-          }, response => {
+        }, response => {
             self.injectError("Error during HTTP with status: " + response.status + " and statusText: " + response.statusText);
           })
         } catch (e) {
@@ -286,20 +285,20 @@ export const reactiveDataFactory = ['$http', function ($http) {
       if (! intervalSec) {
         reactiveData.stream.doOnNext(x => {
           if (x.isData) injectSomething(x.data);
-          else self.injectError("ExtendedHTTP parent dataset has error");
-        }).subscribe();
+      else self.injectError("ExtendedHTTP parent dataset has error");
+      }).subscribe();
       } else if (! ((_.isNumber(intervalSec)) && (intervalSec >= 1))) {
         self.injectError('Invalid interval value: ' + interval);
       } else {
         self.intervalGen = Rx.Observable.merge(Rx.Observable.just(0), Rx.Observable.interval(intervalSec*1000));
         self.intervalSubscription = Rx.Observable.combineLatest(reactiveData.stream, self.intervalGen, (x, y) => {
-          return x;
-        }).doOnNext(x => {
+              return x;
+      }).doOnNext(x => {
           if (x.isData) injectSomething(x.data);
-          if (! x.isData) {
-            self.injectError("ExtendedHTTP parent dataset has error");
-          }
-        }).subscribe(new Rx.ReplaySubject(0));
+        if (! x.isData) {
+          self.injectError("ExtendedHTTP parent dataset has error");
+        }
+      }).subscribe(new Rx.ReplaySubject(0));
       }
     }
 
