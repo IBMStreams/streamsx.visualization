@@ -5,8 +5,7 @@
 > Use READ to rapidly create real-time visualizations, responsive sharable dashboards, REST API dataflows, and new types of visualizations.
 
 ## READ Demo
-* http://169.44.119.88:3002/#/app/jetLpRfQ3BCRGiMxe
-  * READ dashboards with maps and geo visualizations, dynamic real-time charts, time series charts, and other charts like sunburst and parallel coordinates
+* http://169.44.119.88:3002/#/app/jetLpRfQ3BCRGiMxe (publicly shared READ dashboards)
 
 ## Getting Started
 1. Install [Meteor](https://www.meteor.com)
