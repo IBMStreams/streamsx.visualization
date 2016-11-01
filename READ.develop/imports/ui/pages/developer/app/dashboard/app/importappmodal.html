@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Import App from Clipboard</h3>
+</div>
+
+<div class="modal-body" id="modal-body">
+  <form name="importedApp" novalidate>
+    <textarea class='form-control modal-textarea' ng-model='importedItem' style='height: 450px' id="importedItem"
+    valid-json json-schema="appSchema" ng-model-options="{allowInvalid: true}"></textarea>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-click="modalCtrl.import()"
+  ng-disabled="! importedApp.$valid">Import from Clipboard</button>
+  <button class="btn btn-warning" type="button" ng-click="modalCtrl.cancel()">Dismiss</button>
+</div>

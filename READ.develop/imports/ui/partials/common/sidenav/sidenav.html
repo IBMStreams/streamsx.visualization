@@ -9,6 +9,9 @@
   <li ng-show="$ctrl.itemsControl.exportable()" ng-click="$ctrl.itemsControl.exportItem()">
     <a href="javascript:void(0)" uib-tooltip="{{'Export ' + $ctrl.itemsControl.itemType + ' to clipboard'}}" tooltip-placement="bottom-left"><i class="fa fa-upload" aria-hidden="true"></i></a>
   </li>
+  <li ng-show="$ctrl.itemsControl.importable()" ng-click="$ctrl.itemsControl.importItem()">
+    <a href="javascript:void(0)" uib-tooltip="{{'Import ' + $ctrl.itemsControl.itemType + ' from clipboard'}}" tooltip-placement="bottom-left"><i class="fa fa-download" aria-hidden="true"></i></a>
+  </li>
   <li ng-show="$ctrl.itemsControl.selectedItem && (! $ctrl.item.readOnly) && ($ctrl.itemControls.deletable())" ng-click="$ctrl.brieflyShowAreYouSure()">
     <a href="javascript:void(0)" uib-tooltip="{{'Delete ' + $ctrl.itemsControl.itemType}}"
     tooltip-placement="bottom-left"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>

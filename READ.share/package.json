@@ -19,6 +19,7 @@
     "cytoscape": "^2.7.9",
     "meteor-node-stubs": "^0.2.3",
     "nvd3": "^1.8.1",
+    "read-common": "file:../READ.common",
     "rx": "^4.1.0",
     "toposort": "^1.0.0",
     "underscore": "^1.8.3"

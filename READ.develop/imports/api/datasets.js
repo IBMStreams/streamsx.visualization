@@ -2,9 +2,6 @@ import {Mongo} from 'meteor/mongo';
 import _ from 'underscore/underscore';
 import ajv from 'ajv';
 
-// populate this first and use this for extending the rest...
-// let dataSchema = {}
-
 export const rawDataSchema = {
   $schema: "http://json-schema.org/schema#",
   description: "Raw Data schema",
@@ -13,7 +10,10 @@ export const rawDataSchema = {
     userId: {type: "string"},
     appId: {type: "string"},
     dashboardId: {type: "string"},
-    dataSetType: {constant: "raw"},
+    dataSetType: {
+      type: "string",
+      enum: ["raw"]
+    },
     name: {
       type: "string",
       minLength: 1,
@@ -34,7 +34,10 @@ export const simpleHTTPDataSchema = {
     userId: {type: "string"},
     appId: {type: "string"},
     dashboardId: {type: "string"},
-    dataSetType: {constant: "simpleHTTP"},
+    dataSetType: {
+      type: "string",
+      enum: ["simpleHTTP"]
+    },
     name: {
       type: "string",
       minLength: 1,
@@ -63,7 +66,10 @@ export const extendedHTTPDataSchema = {
     userId: {type: "string"},
     appId: {type: "string"},
     dashboardId: {type: "string"},
-    dataSetType: {constant: "extendedHTTP"},
+    dataSetType: {
+      type: "string",
+      enum: ["extendedHTTP"]
+    },
     name: {
       type: "string",
       minLength: 1,
@@ -92,17 +98,20 @@ export const transformedDataSchema = {
     userId: {type: "string"},
     appId: {type: "string"},
     dashboardId: {type: "string"},
-    dataSetType: {constant: "transformed"},
+    dataSetType: {
+      type: "string",
+      enum: ["transformed"]
+    },
     name: {
       type: "string",
       minLength: 1,
       maxLength: 20
     },
+    selectedVisualizationId: {type: "string"},
     parents: {
       type: "array",
       items: {type: "string"}
     },
-    selectedVisualizationId: {type: "string"},
     stateParams: {
       type: "object",
       properties: {
@@ -115,6 +124,12 @@ export const transformedDataSchema = {
   },
   required: ["userId", "appId", "dashboardId", "dataSetType", "name", "parents", "stateParams", "transformFunction"],
   additionalProperties: false
+};
+
+export const dataSetSchema = {
+  $schema: "http://json-schema.org/schema#",
+  description: "Dataset schema",
+  oneOf: [rawDataSchema, simpleHTTPDataSchema, transformedDataSchema]
 };
 
 export const DataSets = new Mongo.Collection('datasets');

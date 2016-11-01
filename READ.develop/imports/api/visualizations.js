@@ -7,7 +7,10 @@ export const nvd3VisualizationSchema = {
   type: "object",
   properties: {
     userId: {type: "string"},
-    pluginType: {constant: "NVD3"},
+    pluginType: {
+      type: "string",
+      enum: ["NVD3"]
+    },
     appId: {type: "string"},
     dashboardId: {type: "string"},
     name: {
@@ -29,7 +32,7 @@ export const nvd3VisualizationSchema = {
       }
     },
   },
-  required: ["userId", "appId", "dashboardId", "name", "templateId", "dataSetId", "basicOptions", "advancedOptions", "gridStack"],
+  required: ["userId", "pluginType", "appId", "dashboardId", "name", "templateId", "dataSetId", "basicOptions", "advancedOptions", "gridStack"],
   additionalProperties: false
 };
 
@@ -39,7 +42,10 @@ export const leafletVisualizationSchema = {
   type: "object",
   properties: {
     userId: {type: "string"},
-    pluginType: {constant: "leaflet"},
+    pluginType: {
+      type: "string",
+      enum: ["leaflet"]
+    },
     appId: {type: "string"},
     dashboardId: {type: "string"},
     name: {
@@ -59,9 +65,15 @@ export const leafletVisualizationSchema = {
       }
     },
   },
-  required: ["userId", "appId", "dashboardId", "name", "templateId", "dataSetId", "gridStack"],
+  required: ["userId", "pluginType", "appId", "dashboardId", "name", "templateId", "dataSetId", "gridStack"],
   additionalProperties: false
 };
+
+export const visualizationSchema = {
+  $schema: "http://json-schema.org/schema#",
+  description: "Visualization schema",
+  oneOf: [nvd3VisualizationSchema, leafletVisualizationSchema]
+}
 
 export const Visualizations = new Mongo.Collection('visualizations');
 
@@ -83,7 +95,6 @@ let getValidate = (pluginType) => {
     default: throw new Error("Unknown plugin type detected in getValidate");
   }
 }
-
 
 Meteor.methods({
   'visualization.create'(visualization) {
