@@ -62,7 +62,7 @@ export const reactivePipeline = ['reactiveDataFactory', function (reactiveDataFa
         break;
         case "interval": return reactiveDataFactory.intervalData(dataSet._id, dataSet.name, dataSet.intervalSec);
         break;
-        case "websocket": return reactiveDataFactory.websocketData(dataSet._id, dataSet.name, dataSet.url,dataSet.bufferSize);
+        case "websocket": return reactiveDataFactory.websocketData(dataSet._id, dataSet.name, dataSet.url);
         break;
         case "transformed": {
           // get reactives
