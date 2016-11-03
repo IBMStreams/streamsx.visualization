@@ -34,7 +34,10 @@ export const wsDataSchema = {
     userId: {type: "string"},
     appId: {type: "string"},
     dashboardId: {type: "string"},
-    dataSetType: {constant: "websocket"},
+    dataSetType: {
+      type: "string",
+      enum: ["websocket"]
+    },
     name: {
       type: "string",
       minLength: 1,
@@ -42,7 +45,7 @@ export const wsDataSchema = {
     },
     selectedVisualizationId: {type: "string"},
     url: {type: "string"},
-    bufferSize: {type: "number"}
+    bufferSize: {type: "number"} // what's the bufferSize for?
   },
   required: ["userId", "appId", "dashboardId", "dataSetType", "name", "url", "bufferSize"],
   additionalProperties: false
@@ -151,7 +154,7 @@ export const transformedDataSchema = {
 export const dataSetSchema = {
   $schema: "http://json-schema.org/schema#",
   description: "Dataset schema",
-  oneOf: [rawDataSchema, simpleHTTPDataSchema, transformedDataSchema]
+  oneOf: [rawDataSchema, simpleHTTPDataSchema, wsDataSchema, transformedDataSchema]
 };
 
 export const DataSets = new Mongo.Collection('datasets');

@@ -16,6 +16,7 @@
   "author": "Srinivasan Parthasarathy",
   "license": "Unlicense",
   "dependencies": {
-    "bootstrap-sass": "^3.3.7"
+    "bootstrap-sass": "^3.3.7",
+    "rx-dom": "^7.0.3"
   }
 }
