@@ -20,7 +20,7 @@ class ReactiveData {
     this.name = name;
     this.type = "abstract";
     this.stream = new Rx.ReplaySubject(1);
-    this.injectError('Data Unavailable');
+    this.injectError('TEST Data Unavailable');
   }
 
   injectData(data) {
@@ -208,7 +208,8 @@ class WebsocketData extends ReactiveData {
 
 }
  dispose() {
-   self.socket.dispose();
+   if (self.socket) self.socket.dispose;
+   self.socket = null;
  }
 }
 
