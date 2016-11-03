@@ -38,6 +38,7 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
   this.dataSetTypes = dataSetTypes.filter(dsType => {
     if (! _.contains(['extendedHTTP'], dsType.name)) return true;
     else return false; // we are not allowing extendedHTTP until things are fixed...
+       // return true;
   });
 
   this.aceJsonSchemaOptions = aceJsonSchemaOptions;

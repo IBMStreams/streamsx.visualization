@@ -136,7 +136,7 @@ function ($scope, $reactive, readState, $timeout) {
       readState.pipeline.removeDataSet(dataSet._id);
     },
     changed: (newDataSet, oldDataSet) => { // we can optimize later... // this has to be based on fields not all changes...
-      if (! _.contains(['raw', 'simpleHTTP', 'extendedHTTP', 'transformed'], newDataSet.dataSetType))
+      if (! _.contains(['raw', 'websocket','simpleHTTP', 'extendedHTTP', 'transformed'], newDataSet.dataSetType))
       throw new Error('only raw, simpleHTTP, extendedHTTP, and transformed dataset changes handled at the moment');
       else {
         if (_.contains(['extendedHTTP', 'transformed'], oldDataSet.dataSetType)) readState.dependencies.removeParents(oldDataSet._id);

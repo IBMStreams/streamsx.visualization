@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import {Mongo} from 'meteor/mongo';
 import angular from 'angular';
 import _ from 'underscore/underscore';
 
@@ -12,8 +13,8 @@ import {Dashboards} from '/imports/api/dashboards';
 import {Visualizations} from '/imports/api/visualizations';
 import {DataSets} from '/imports/api/datasets';
 
-export const appSideNavCtrl = ['$scope', '$reactive', '$state', 'readState', '$q', '$uibModal',
-function ($scope, $reactive, $state, readState, $q, $uibModal) {
+export const appSideNavCtrl = ['$scope', '$reactive', '$state', 'readState', '$q', '$uibModal', '$timeout',
+function ($scope, $reactive, $state, readState, $q, $uibModal, $timeout) {
   $reactive(this).attach($scope);
   let self = this;
 
@@ -69,24 +70,71 @@ function ($scope, $reactive, $state, readState, $q, $uibModal) {
             size: 'lg',
             templateUrl: exportAppModal
           });
-//          alert(JSON.stringify(self.getReactively('exportedItem')));
+          //          alert(JSON.stringify(self.getReactively('exportedItem')));
         },
         importable: () => true,
         importItem: () => {
+          let mapAppIds = function(appObj, oldToNew) {
+            oldToNew[appObj.app._id] = (new Mongo.ObjectID())._str;
+            appObj.dashboards.forEach(d => oldToNew[d._id] = (new Mongo.ObjectID())._str);
+            appObj.dataSets.forEach(d => oldToNew[d._id] = (new Mongo.ObjectID())._str);
+            appObj.visualizations.forEach(v => oldToNew[v._id] = (new Mongo.ObjectID())._str);
+          }
+
+          let fixAppIds = function(appObj, oldToNew) {
+            appObj.app._id = oldToNew[appObj.app._id];
+            if (appObj.app.selectedDashboardId) appObj.app.selectedDashboardId = oldToNew[appObj.app.selectedDashboardId];
+            appObj.dashboards.forEach(d => {
+              d._id = oldToNew[d._id];
+              d.appId = oldToNew[d.appId];
+              if (d.selectedDataSetId) d.selectedDataSetId = oldToNew[d.selectedDataSetId];
+            });
+            appObj.dataSets.forEach(d => {
+              d._id = oldToNew[d._id];
+              d.appId = oldToNew[d.appId];
+              d.dashboardId = oldToNew[d.dashboardId];
+              if (d.selectedVisualizationId) d.selectedVisualizationId = oldToNew[d.selectedVisualizationId];
+            });
+            appObj.visualizations.forEach(v => {
+              v._id = oldToNew[v._id];
+              v.appId = oldToNew[v.appId];
+              v.dashboardId = oldToNew[v.dashboardId];
+              v.dataSetId = oldToNew[v.dataSetId];
+            });
+          }
+
+          let importApp = function(_importedApp) {
+            let importedApp = JSON.parse(_importedApp);
+            let oldToNew = {};
+            mapAppIds(importedApp, oldToNew);
+            fixAppIds(importedApp, oldToNew);
+
+            // meteor insert (not meteor.create) everything in importedApp nos and then switch
+            console.log('importedApp', importedApp)
+          };
+
           let modalInstance = $uibModal.open({
             controller: ['$scope', '$uibModalInstance', '$timeout',
             function($scope, $uibModalInstance, $timeout) {
               $scope.appSchema = importedAppSchema;
               $scope.importedItem = undefined;
+
               this.cancel = function() {
                 $uibModalInstance.dismiss('cancel');
+              };
+
+              let mod = this;
+              this.import = function() {
+                importApp($scope.importedItem);
+                $timeout(() => {
+                  mod.cancel();
+                }, 2000);
               };
             }],
             controllerAs: 'modalCtrl',
             size: 'lg',
             templateUrl: importAppModal
           });
-//          alert(JSON.stringify(self.getReactively('exportedItem')));
         },
         creatable: () => true,
         switchItem: (selectedId) => {
