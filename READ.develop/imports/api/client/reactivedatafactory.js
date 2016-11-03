@@ -20,7 +20,7 @@ class ReactiveData {
     this.name = name;
     this.type = "abstract";
     this.stream = new Rx.ReplaySubject(1);
-    this.injectError('TEST Data Unavailable');
+    this.injectError('Data Unavailable');
   }
 
   injectData(data) {
@@ -78,6 +78,59 @@ class IntervalData extends ReactiveData {
 
   dispose() {
     this.intervalSubscription.dispose();
+  }
+}
+
+class WebsocketData extends ReactiveData {
+  constructor(_id, name, url) {
+    super(_id, name);
+    this.type = "websocket";
+    let self = this;
+    let onInterval = false;
+
+    // if socket closes due to a 'close' event (and not any other error), this follow up kicks in
+    let closeFollowUp = function() {
+      console.log('socket is about to close due to close error; initiating closeFollowUp');
+      // // clean up existing subscriptions
+      if (! onInterval) {
+        onInterval = true;
+        self.intervalSubscription = Rx.Observable.interval(3000 /* ms */)
+        .take(40 /* try for a couple of minutes */)
+        .doOnNext(() => {
+          initSocket();
+        }).subscribe(new Rx.ReplaySubject(0));
+      }
+    };
+
+    // init the socket after disposing any existing subscriptions
+    let initSocket = () => {
+      if (self.socket) self.socket.onCompleted();
+      if (self.subscription) self.subscription.dispose();
+
+      self.socket = DOM.fromWebSocket(url);
+      if (self.intervalSubscription) self.intervalSubscription.dispose();
+      onInterval = false;
+
+      self.subscription = self.socket
+      .doOnNext(d => self.injectData(JSON.parse(d.data)))
+      .doOnError(e => {
+        if (e.type === "close") {
+          closeFollowUp();
+          return;
+        }
+        // all other errors
+        self.injectError('web socket error');
+      })
+      .subscribe(new Rx.ReplaySubject(0));
+    };
+
+    initSocket();
+  }
+
+  dispose() {
+    if (this.intervalSubscription) this.intervalSubscription.dispose();
+    if (this.subscription) this.subscription.dispose();
+    if (this.socket) this.socket.onCompleted();
   }
 }
 
@@ -156,114 +209,6 @@ export const reactiveDataFactory = ['$http', function ($http) {
     }
   }
 
-class WebsocketData extends ReactiveData {
-  constructor(_id, name, url) {
-     super(_id, name);
-     this.type = "websocket";
-     let self = this;
-
-    var openObserver = Rx.Observer.create(function(e) {
-      console.info('socket open');
-
-      // Now it is safe to send a message
-      self.socket.onNext('test');
-    });
-
-    // an observer for when the socket is about to close
-    var closingObserver = Rx.Observer.create(function() {
-      console.log('socket is about to close');
-    });
-
-    self.socket = DOM.fromWebSocket(
-        url,
-        null, // no protocol
-        openObserver,
-        closingObserver);
-
-    self.latestOne = new Rx.ReplaySubject(1); // create a replay subject which stores its latest data value
-
-    //self.socket.subscribe(self.latestOne);
-    /*self.latestOne.onNext(x => {
-       console.log('Data Received by ReplaySubject!');
-       //if (x.isData) self.injectData(x.data);
-       if (!x.isData) {
-         self.injectError("Websocket dataset has error");
-       }
-     });
-     */
-    self.socket.subscribe(
-        function(e) {
-          self.injectData(JSON.parse(e.data));
-          console.log('Data received by function: %s', e.data);
-        },
-        function(e) {
-          // errors and "unclean" closes land here
-          console.error('error: %s', e);
-        },
-        function() {
-          // the socket has been closed
-          console.info('socket closed');
-        }
-    );
-
-}
- dispose() {
-   if (self.socket) self.socket.dispose;
-   self.socket = null;
- }
-}
-
-// class WebsocketData extends ReactiveData {
-//   constructor(_id, name, url) {
-//     super(_id, name);
-//     this.type = "websocket";
-//     let self = this;
-//
-//     /* Code to initialize the socket -- uses socket.io events; */
-//     self.ws = new WebSocket(url);
-//
-//
-//
-//     /* A thin wrapper to convert socket.io events to Rx events */
-//     /* This piece of code ensures that when there is new data on the socket, that data gets pushed as a new message onto the dataStream,
-//      which is really an Rx.Observable */
-//     /* dataStream responds to 'data' events on the socket */
-//
-//     let dataStream = Rx.Observable.fromEventPattern(
-//         function addHandler(dataHandler) {
-//           self.ws.onmessage = dataHandler;
-//         },
-//         function removeHandler(dataHandler) {
-//           self.ws.onmessage = null;
-//         }
-//     ).doOnCompleted(function () {
-//       console.log("socket stream is completed");
-//     })
-//     /* Subscribe a new Rx.Observable to dataStream */
-//     self.latestOne = new Rx.ReplaySubject(2); // create a replay subject which stores its latest data value
-//     self.latestOne.doOnNext(x => {
-//       console.log('Data Received!');
-//       if (x.isData) self.injectData(x.data);
-//       if (!x.isData) {
-//         self.injectError("Websocket dataset has error");
-//       }
-//     });
-//
-//
-//
-//     //self.subscription = dataStream.subscribe(x => console.log(x));
-//     self.subscription = dataStream.subscribe(x=> {console.log(JSON.parse(x.data));self.injectData(JSON.parse(x.data))});
-//
-//     // subscribes latestOne to dataStream. The latest value from dataStream is now stored in latestOne
-//   }
-//
-//   dispose() {
-//
-//     if (self.subscription) this.self.subscription.dispose();
-//     self.ws = null;
-//   }
-// }
-
   // SimpleHTTPData and ExtendedHTTPData implementations below; other implementations above;
   class ExtendedHTTPData extends ReactiveData { // HTTP GET method
     constructor(_id, name, reactiveData, intervalSec) { // interval in seconds // reactiveData provides the config
@@ -275,7 +220,7 @@ class WebsocketData extends ReactiveData {
         try {
           $http(httpConfig).then(response => {
             self.injectData(response.data);
-        }, response => {
+          }, response => {
             self.injectError("Error during HTTP with status: " + response.status + " and statusText: " + response.statusText);
           })
         } catch (e) {
@@ -286,20 +231,20 @@ class WebsocketData extends ReactiveData {
       if (! intervalSec) {
         reactiveData.stream.doOnNext(x => {
           if (x.isData) injectSomething(x.data);
-      else self.injectError("ExtendedHTTP parent dataset has error");
-      }).subscribe();
+          else self.injectError("ExtendedHTTP parent dataset has error");
+        }).subscribe();
       } else if (! ((_.isNumber(intervalSec)) && (intervalSec >= 1))) {
         self.injectError('Invalid interval value: ' + interval);
       } else {
         self.intervalGen = Rx.Observable.merge(Rx.Observable.just(0), Rx.Observable.interval(intervalSec*1000));
         self.intervalSubscription = Rx.Observable.combineLatest(reactiveData.stream, self.intervalGen, (x, y) => {
-              return x;
-      }).doOnNext(x => {
+          return x;
+        }).doOnNext(x => {
           if (x.isData) injectSomething(x.data);
-        if (! x.isData) {
-          self.injectError("ExtendedHTTP parent dataset has error");
-        }
-      }).subscribe(new Rx.ReplaySubject(0));
+          if (! x.isData) {
+            self.injectError("ExtendedHTTP parent dataset has error");
+          }
+        }).subscribe(new Rx.ReplaySubject(0));
       }
     }
 

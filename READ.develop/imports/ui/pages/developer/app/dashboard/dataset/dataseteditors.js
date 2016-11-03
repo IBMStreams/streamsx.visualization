@@ -42,7 +42,7 @@ angularModule.factory('defaultDataSets', function() {
       }
     },websocket: {
       url: 'ws://websocket_address',
-      bufferSize: 20
+      bufferSize: 20 // what is the bufferSize for?
     },
     transformed: {
       parents: [],
