@@ -46,7 +46,7 @@ export function validJsonDirective() {
       $attrs.$observe('jsonSchema', (jsonSchemaVarStr) => {
         assignCheckerAndValidate($scope.$eval(jsonSchemaVarStr) || {});
         $scope.$watch(jsonSchemaVarStr, function(newVal, oldVal) {
-          console.log('jsonSchema scope watch fired');
+          // console.log('jsonSchema scope watch fired');
           assignCheckerAndValidate(newVal || {});
         }, true); // deep watch
       });

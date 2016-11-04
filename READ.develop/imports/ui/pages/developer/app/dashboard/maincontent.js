@@ -14,7 +14,7 @@ export const dashboardMainContentCtrl = ['$scope', '$reactive', 'readState', fun
     user: () => Users.findOne({}),
     app: () => Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
     dashboard: () => self.getReactively('app') ? Dashboards.findOne({_id: self.getReactively('app.selectedDashboardId')}) : undefined,
-    dataSet: () => self.getReactively('dashboard') ? DataSets.findOne({_id: self.getReactively('dashboard.selectedDataSetId')}) : undefined,
+    dataSet: () => self.getReactively('dashboard') ? DataSets.findOne({_id: self.getReactively('dashboard.selectedDataSetId')}) : undefined
   });
 
 }];

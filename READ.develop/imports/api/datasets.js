@@ -157,6 +157,12 @@ export const dataSetSchema = {
   oneOf: [rawDataSchema, simpleHTTPDataSchema, wsDataSchema, transformedDataSchema]
 };
 
+export const dataSetSchemaWithId = JSON.parse(JSON.stringify(dataSetSchema));
+dataSetSchemaWithId.oneOf.forEach(r => {
+  r.properties._id = {type: "string"};
+  r.required.push("_id")
+});
+
 export const DataSets = new Mongo.Collection('datasets');
 
 let rawDataSchemaValidate = undefined;
@@ -187,12 +193,26 @@ let getValidate = (dataSetType) => {
   }
 }
 
+let getValidateWithId = (dataSetType) => {
+  let v = _.find(dataSetSchemaWithId.oneOf, (r => r.properties.dataSetType.enum[0] === dataSetType));
+  if (! v) throw new Error('Unknown dataset type detected in getValidateWithId');
+  return (new ajv({removeAdditional: true})).compile(v);
+}
+
 Meteor.methods({
   'dataSet.create'(dataSet) {
     let validate = getValidate(dataSet.dataSetType);
     if (! validate(dataSet)) {
       console.log(validate.errors);
       throw new Error("Schema Validation Failure: dataset object does not match dataset schema in dataset.create");
+    }
+    else return DataSets.insert(dataSet);
+  },
+  'dataSet.import'(dataSet) {
+    let validateWithId = getValidateWithId(dataSet.dataSetType);
+    if (! validateWithId(dataSet)) {
+      console.log(validateWithId.errors);
+      throw new Error("Schema Validation Failure: dataset object does not match dataset schema in dataset.import");
     }
     else return DataSets.insert(dataSet);
   },

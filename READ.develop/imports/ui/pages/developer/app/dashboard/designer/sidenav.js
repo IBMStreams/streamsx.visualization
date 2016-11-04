@@ -142,7 +142,7 @@ function($scope, $reactive, $state, readState, $q) {
 
   let watcher = $scope.$watch('sideNavCtrl.item', newVal => {
     if (newVal) {
-      self.item.readOnly = self.app.readOnly;
+      self.item.readOnly = self.user.readOnly;
       watcher();
     }
   });
