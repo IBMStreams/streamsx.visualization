@@ -1,8 +1,9 @@
 import { Meteor } from 'meteor/meteor';
+import {Mongo} from 'meteor/mongo';
 import angular from 'angular';
 import _ from 'underscore/underscore';
+import toposort from 'toposort';
 
-import exportAppModal from './exportappmodal.html';
 import importAppModal from './importappmodal.html';
 import {importedAppSchema} from '/imports/api/apps'
 
@@ -12,18 +13,18 @@ import {Dashboards} from '/imports/api/dashboards';
 import {Visualizations} from '/imports/api/visualizations';
 import {DataSets} from '/imports/api/datasets';
 
-export const appSideNavCtrl = ['$scope', '$reactive', '$state', 'readState', '$q', '$uibModal',
-function ($scope, $reactive, $state, readState, $q, $uibModal) {
+export const appSideNavCtrl = ['$scope', '$reactive', '$state', 'readState', '$q', '$uibModal', '$timeout',
+function ($scope, $reactive, $state, readState, $q, $uibModal, $timeout) {
   $reactive(this).attach($scope);
   let self = this;
 
   this.helpers({
     user: () => Users.findOne({}),
     items: () => Apps.find({}).fetch(),
-    item: () => Apps.findOne({_id: self.user.selectedIds.appId}),
+    item: () => Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
     exportedItem: () => {
       let exportedApp = {
-        version: "0.5.2",
+        version: "0.6.0",
         app: Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
         dashboards: Dashboards.find({appId: self.getReactively('user.selectedIds.appId')}).fetch(),
         dataSets: DataSets.find({appId: self.getReactively('user.selectedIds.appId')}).fetch(),
@@ -39,54 +40,99 @@ function ($scope, $reactive, $state, readState, $q, $uibModal) {
         selectedId: self.getReactively('user.selectedIds.appId'),
         selectedItem: Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
         exportable: () => ! _.isUndefined(self.getReactively('user.selectedIds.appId')),
-        exportItem: () => {
-          let modalInstance = $uibModal.open({
-            resolve: {
-              exportedItem: function() {
-                return self.getReactively('exportedItem');
-              }
-            },
-            controller: ['$scope', 'exportedItem', '$uibModalInstance', '$timeout',
-            function($scope, exportedItem, $uibModalInstance, $timeout) {
-              $scope.exportedItem = JSON.stringify(exportedItem, undefined, 2);
-              $uibModalInstance.rendered.then(() => {
-                $timeout(() => {
-                  if ($scope.exportedItem.length > 0) {
-                    angular.element('#exportedItem').scrollTop(0);
-                  }
-                });
-              });
-
-              this.cancel = function() {
-                $uibModalInstance.dismiss('cancel');
-              };
-              $scope.copied = false;
-              this.copy = function() {
-                $scope.copied = true;
-              }
-            }],
-            controllerAs: 'modalCtrl',
-            size: 'lg',
-            templateUrl: exportAppModal
-          });
-//          alert(JSON.stringify(self.getReactively('exportedItem')));
-        },
+        exportedStr: JSON.stringify(self.getReactively('exportedItem'), undefined, 2),
         importable: () => true,
         importItem: () => {
+          let mapAppIds = function(appObj, oldToNew) {
+            oldToNew[appObj.app._id] = (new Mongo.ObjectID())._str;
+            appObj.dashboards.forEach(d => oldToNew[d._id] = (new Mongo.ObjectID())._str);
+            appObj.dataSets.forEach(d => oldToNew[d._id] = (new Mongo.ObjectID())._str);
+            appObj.visualizations.forEach(v => oldToNew[v._id] = (new Mongo.ObjectID())._str);
+          }
+
+          let fixAppIds = function(appObj, oldToNew) {
+            appObj.app._id = oldToNew[appObj.app._id];
+            if (appObj.app.selectedDashboardId) appObj.app.selectedDashboardId = oldToNew[appObj.app.selectedDashboardId];
+
+            appObj.dashboards.forEach(d => {
+              d._id = oldToNew[d._id];
+              d.appId = oldToNew[d.appId];
+              if (d.selectedDataSetId) d.selectedDataSetId = oldToNew[d.selectedDataSetId];
+            });
+
+            appObj.dataSets.forEach(d => {
+              d._id = oldToNew[d._id];
+              d.appId = oldToNew[d.appId];
+              d.dashboardId = oldToNew[d.dashboardId];
+              if (d.parents) d.parents = d.parents.map(p => oldToNew[p]);
+              if (d.selectedVisualizationId) d.selectedVisualizationId = oldToNew[d.selectedVisualizationId];
+            });
+
+            appObj.visualizations.forEach(v => {
+              v._id = oldToNew[v._id];
+              v.appId = oldToNew[v.appId];
+              v.dashboardId = oldToNew[v.dashboardId];
+              v.dataSetId = oldToNew[v.dataSetId];
+            });
+          }
+
+          let importApp = function(_importedApp) {
+            let importedApp = JSON.parse(_importedApp);
+            let oldToNew = {};
+            mapAppIds(importedApp, oldToNew);
+            fixAppIds(importedApp, oldToNew);
+
+            Meteor.call('app.import', importedApp.app, (err, res) => {
+              if (err) alert(err);
+            });
+
+            self.itemsControl.switchItem(importedApp.app._id);
+
+            importedApp.dashboards.forEach(d => Meteor.call('dashboard.import', d, (err, res) => {
+              if (err) alert(err);
+            }));
+
+            readState.deferredDataSets.promise.then(() => {
+              //toposort datasets and then import
+              let nodes = importedApp.dataSets.map(d => d._id);
+              let edges = [];
+              importedApp.dataSets
+              .filter(d => d.dataSetType === 'transformed')
+              .forEach(d => d.parents.forEach(p => edges.push([p, d._id])));
+
+              toposort.array(nodes, edges).map(_id => {
+                Meteor.call('dataSet.import', _.find(importedApp.dataSets, ds => ds._id === _id), (err, res) => {
+                  if (err) alert(err);
+                })
+              });
+
+              importedApp.visualizations.forEach(v => Meteor.call('visualization.import', v, (err, res) => {
+                if (err) alert(err);
+              }));
+            });
+
+          };
+
           let modalInstance = $uibModal.open({
             controller: ['$scope', '$uibModalInstance', '$timeout',
             function($scope, $uibModalInstance, $timeout) {
               $scope.appSchema = importedAppSchema;
               $scope.importedItem = undefined;
+
               this.cancel = function() {
                 $uibModalInstance.dismiss('cancel');
+              };
+
+              let mod = this;
+              this.import = function() {
+                importApp($scope.importedItem);
+                $uibModalInstance.dismiss('done');
               };
             }],
             controllerAs: 'modalCtrl',
             size: 'lg',
             templateUrl: importAppModal
           });
-//          alert(JSON.stringify(self.getReactively('exportedItem')));
         },
         creatable: () => true,
         switchItem: (selectedId) => {

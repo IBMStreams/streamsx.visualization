@@ -36,7 +36,7 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
   this.itemStream = new Rx.ReplaySubject(0);
 
   $scope.$watch(() => { // because of crummy ui-ace not working with ng-show
-    console.log('nvd3 designer controller scope watch fired');
+    //console.log('nvd3 designer controller scope watch fired');
     if (self.dataForm) self.validators.basicOptions = self.dataForm.$valid;
     if (self.advancedOptionsForm) self.validators.advancedOptions = self.advancedOptionsForm.$valid;
     return {
