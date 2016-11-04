@@ -1,4 +1,5 @@
-import Rx from 'rx/dist/rx.all'
+import Rx from 'rx/dist/rx.all';
+import {DOM} from 'rx-dom';
 import ajv from 'ajv';
 import _ from 'underscore/underscore';
 
@@ -77,6 +78,65 @@ class IntervalData extends ReactiveData {
 
   dispose() {
     this.intervalSubscription.dispose();
+  }
+}
+
+class WebsocketData extends ReactiveData {
+  constructor(_id, name, url) {
+    super(_id, name);
+    this.type = "websocket";
+    let self = this;
+    let onInterval = false;
+
+    // if socket closes due to a 'close' event (and not any other error), this follow up kicks in
+    let closeFollowUp = function() {
+      console.log('socket is about to close due to close error; initiating closeFollowUp');
+      // // clean up existing subscriptions
+      if (! onInterval) {
+        onInterval = true;
+        self.intervalSubscription = Rx.Observable.interval(3000 /* ms */)
+        .take(40 /* try for a couple of minutes */)
+        .doOnNext(() => {
+          initSocket();
+        }).subscribe(new Rx.ReplaySubject(0));
+      }
+    };
+
+    // init the socket after disposing any existing subscriptions
+    let initSocket = () => {
+      if (self.socket) self.socket.onCompleted();
+      if (self.subscription) self.subscription.dispose();
+
+      self.socket = DOM.fromWebSocket(url);
+      if (self.intervalSubscription) self.intervalSubscription.dispose();
+      onInterval = false;
+      console.log('inited socket');
+
+      self.subscription = self.socket
+      .doOnNext(d => {
+//        console.log('got data: ', d, JSON.parse(d.data));
+        self.injectData(JSON.parse(d.data))
+      })
+      .doOnError(e => {
+        if (e.type === "close") {
+          console.log('close error', e);
+          closeFollowUp();
+          return;
+        }
+        console.log('some other error', e)
+        // all other errors
+        self.injectError('web socket error');
+      })
+      .subscribe(new Rx.ReplaySubject(0));
+    };
+
+    initSocket();
+  }
+
+  dispose() {
+    if (this.intervalSubscription) this.intervalSubscription.dispose();
+    if (this.subscription) this.subscription.dispose();
+    if (this.socket) this.socket.onCompleted();
   }
 }
 
@@ -216,6 +276,7 @@ export const reactiveDataFactory = ['$http', function ($http) {
   myFactory.validatedData = (_id, name, reactiveData, schema) => new ValidatedData(_id, name, reactiveData, schema);
   myFactory.extendedHTTPData = (_id, name, reactiveData, intervalSec) => new ExtendedHTTPData(_id, name, reactiveData, intervalSec);
   myFactory.simpleHTTPData = (_id, name, url, intervalSec) => new SimpleHTTPData(_id, name, url, intervalSec);
+  myFactory.websocketData = (_id, name, url) => new WebsocketData(_id, name, url);
 
   return myFactory;
 }];

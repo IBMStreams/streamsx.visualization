@@ -23,6 +23,7 @@
         <div class="row">
           <div class="col-md-6" ng-if="dataSetCtrl.dataSet.dataSetType !== 'raw'">
             <simple-http-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'simpleHTTP'"></simple-http-data-editor>
+            <websocket-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'websocket'"></websocket-data-editor>
             <extended-http-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'extendedHTTP'"></extended-http-data-editor>
             <transformed-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'transformed'"></transformed-data-editor>
           </div>

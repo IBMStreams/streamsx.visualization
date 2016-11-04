@@ -5,6 +5,18 @@
         "label": "READ sample app"
     },
     {
+        "id": "63221c4b.14b9a4",
+        "type": "tab",
+        "label": "Flow 1"
+    },
+    {
+        "id": "ab1ada0d.0d25c8",
+        "type": "websocket-listener",
+        "z": "",
+        "path": "/random",
+        "wholemsg": "false"
+    },
+    {
         "id": "d3c49246.2c3b7",
         "type": "http in",
         "z": "31f156fd.ce0eaa",
@@ -166,6 +178,65 @@
         "name": "dynamicsine",
         "x": 749,
         "y": 393,
+        "wires": []
+    },
+    {
+        "id": "58c15a2a.0b75d4",
+        "type": "inject",
+        "z": "63221c4b.14b9a4",
+        "name": "Inject",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "x": 209,
+        "y": 169,
+        "wires": [
+            [
+                "8aaf54c8.8e0768"
+            ]
+        ]
+    },
+    {
+        "id": "8aaf54c8.8e0768",
+        "type": "function",
+        "z": "63221c4b.14b9a4",
+        "name": "Random value",
+        "func": "\nmsg.payload = [\n    {\"label\":\"Random One\",\n     \"value\":Math.floor(Math.random() * 10) + 1  \n    },\n    {\"label\":\"Random Two\",\n     \"value\":Math.floor(Math.random() * 10) + 1  \n    }\n    ]\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 419,
+        "y": 170,
+        "wires": [
+            [
+                "e3c54e5f.d9779",
+                "ac935458.bf6e98"
+            ]
+        ]
+    },
+    {
+        "id": "e3c54e5f.d9779",
+        "type": "debug",
+        "z": "63221c4b.14b9a4",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 608,
+        "y": 191,
+        "wires": []
+    },
+    {
+        "id": "ac935458.bf6e98",
+        "type": "websocket out",
+        "z": "63221c4b.14b9a4",
+        "name": "Random websocket",
+        "server": "ab1ada0d.0d25c8",
+        "client": "",
+        "x": 580,
+        "y": 254,
         "wires": []
     }
 ]

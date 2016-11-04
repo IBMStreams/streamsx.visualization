@@ -54,7 +54,7 @@ function ($scope, $reactive, $state, readState, $q) {
         clonable: false,
         selectedId: self.getReactively('app') ? self.getReactively('app.selectedDashboardId'): undefined,
         selectedItem: self.getReactively('app') ? Dashboards.findOne({_id: self.getReactively('app.selectedDashboardId')}) : undefined,
-        creatable: () => (self.app) && (! self.app.readOnly),
+        creatable: () => (self.app) && (! self.user.readOnly),
         switchItem: (selectedId) => {
           self.app.selectedDashboardId = selectedId;
           Meteor.call('app.update', self.user.selectedIds.appId, self.app, (err, res) => {if (err) alert(err);}); //update user
@@ -84,7 +84,7 @@ function ($scope, $reactive, $state, readState, $q) {
       self.updateDatabase(self.item);
     },
     deletable: () => {
-      if (self.app.readOnly) return false;
+      if (self.user.readOnly) return false;
       let idsFromThisDashboard = self.dataSets.map(x => x._id);
       let deps = readState.dependencies.getDerived(idsFromThisDashboard).map(x => x.id); // node id vs _id
       // also remove viz ids from deps
@@ -117,7 +117,7 @@ function ($scope, $reactive, $state, readState, $q) {
 
   let watcher = $scope.$watch('sideNavCtrl.item', newVal => {
     if (newVal) {
-      self.item.readOnly = self.app.readOnly;
+      self.item.readOnly = self.user.readOnly;
       watcher();
     }
   });

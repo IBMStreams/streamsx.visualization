@@ -19,11 +19,17 @@ export const dashboardSchema = {
   additionalProperties: false
 };
 
+export const dashboardSchemaWithId = JSON.parse(JSON.stringify(dashboardSchema));
+dashboardSchemaWithId.properties._id = {type: "string"};
+dashboardSchemaWithId.required.push("_id");
+
 export const Dashboards = new Mongo.Collection('dashboards');
 
 let validate = undefined;
+let validateImportable = undefined;
 try {
   validate = (new ajv({removeAdditional: true})).compile(dashboardSchema);
+  validateImportable = (new ajv({removeAdditional: true})).compile(dashboardSchemaWithId);
 }
 catch (e) {
   console.log(e);
@@ -33,6 +39,10 @@ catch (e) {
 Meteor.methods({
   'dashboard.create'(dashboard) {
     if (! validate(dashboard)) throw new Error("Schema Validation Failure: dashboard object does not match dashboard schema in dashboard.create");
+    return Dashboards.insert(dashboard);
+  },
+  'dashboard.import'(dashboard) {
+    if (! validateImportable(dashboard)) throw new Error("Schema Validation Failure: dashboard object does not match dashboard schema in dashboard.import");
     return Dashboards.insert(dashboard);
   },
   'dashboard.delete'(dashboardId) {

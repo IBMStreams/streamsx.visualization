@@ -34,7 +34,7 @@
               <label for="testData">Data</label>
               <div ui-ace=mainContentCtrl.aceJavaScriptOptions ng-model=mainContentCtrl.item.testData
               valid-json ng-model-options="{allowInvalid: true}"
-              ng-readonly="mainContentCtrl.item.readOnly" name="testData">
+              ng-readonly="mainContentCtrl.user.readOnly" name="testData">
               </div>
             </div>
           </form>
@@ -47,15 +47,15 @@
         </div>
 
         <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.leaflet === 'usageInfo'">
-          <form name="mainContentCtrl.usageInfoForm" ng-if="! mainContentCtrl.item.readOnly" novalidate>
+          <form name="mainContentCtrl.usageInfoForm" ng-if="! mainContentCtrl.user.readOnly" novalidate>
             <div class="form-group">
               <label for="usageInfo">Usage Info Editor</label>
               <div ui-ace=mainContentCtrl.aceHTMLOptions ng-model=mainContentCtrl.item.usageInfo
-              ng-readonly="mainContentCtrl.item.readOnly" name="usageInfo">
+              ng-readonly="mainContentCtrl.user.readOnly" name="usageInfo">
               </div>
             </div>
           </form>
-          <hr ng-if="! mainContentCtrl.item.readOnly" />
+          <hr ng-if="! mainContentCtrl.user.readOnly" />
 
           <div ng-bind-html="mainContentCtrl.item.usageInfo"></div>
         </div>

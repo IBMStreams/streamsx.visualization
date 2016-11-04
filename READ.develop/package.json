@@ -25,6 +25,7 @@
     "nvd3": "^1.8.1",
     "read-common": "file:../READ.common",
     "rx": "^4.1.0",
+    "socket.io-client": "^1.5.1",
     "toposort": "^1.0.0",
     "underscore": "^1.8.3"
   }

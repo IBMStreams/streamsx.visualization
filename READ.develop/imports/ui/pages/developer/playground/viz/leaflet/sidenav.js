@@ -33,7 +33,6 @@ function ($scope, $reactive, $state, $timeout, readState) {
         userId: 'guest',
         pluginType: 'leaflet',
         name: self.itemsControl.itemType + ' ' + self.items.length,
-        readOnly: false,
         inputSchemaId: self.dataSchemas[0]._id,
         testData: "{\n\tcenter: {\n\t\tlat: 51.505,\n\t\tlng: -0.09,\n\t\t\n\t\tzoom: 4\n\t}\n}",
         usageInfo: ''
@@ -51,7 +50,6 @@ function ($scope, $reactive, $state, $timeout, readState) {
         userId: 'guest',
         pluginType: 'leaflet',
         name: name,
-        readOnly: false,
         inputSchemaId: self.item.inputSchemaId,
         testData: self.item.testData,
         usageInfo: self.item.usageInfo

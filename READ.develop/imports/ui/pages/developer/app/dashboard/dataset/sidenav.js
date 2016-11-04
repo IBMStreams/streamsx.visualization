@@ -6,8 +6,8 @@ import {Apps} from '/imports/api/apps';
 import {Dashboards} from '/imports/api/dashboards';
 import {DataSets} from '/imports/api/datasets';
 
-export const dashboardDataSetSideNavCtrl = ['$scope', '$reactive', '$state', 'readState', 'defaultDataSets', '$q',
-function ($scope, $reactive, $state, readState, defaultDataSets, $q) {
+export const dashboardDataSetSideNavCtrl = ['$scope', '$reactive', '$state', 'readState', 'defaultDataSets', '$q', '$timeout',
+function ($scope, $reactive, $state, readState, defaultDataSets, $q, $timeout) {
   $reactive(this).attach($scope);
   let self = this;
 
@@ -56,7 +56,7 @@ function ($scope, $reactive, $state, readState, defaultDataSets, $q) {
         clonable: false,
         selectedId: self.getReactively('dashboard') ? self.getReactively('dashboard.selectedDataSetId') : undefined,
         selectedItem: self.getReactively('dashboard') ? DataSets.findOne({_id: self.getReactively('dashboard.selectedDataSetId')}) : undefined,
-        creatable: () => (self.app && self.dashboard && (! self.app.readOnly)),
+        creatable: () => (self.app && self.dashboard && (! self.user.readOnly)),
         switchItem: (selectedId) => {
           self.dashboard.selectedDataSetId = selectedId;
           Meteor.call('dashboard.update', self.dashboard._id, self.dashboard, (err, res) => {if (err) alert(err);}); //update dashboard
@@ -76,9 +76,7 @@ function ($scope, $reactive, $state, readState, defaultDataSets, $q) {
 
             Meteor.call('dataSet.create', dataSet, (err, res) => {
               if (err) alert(err);
-              else {
                 self.itemsControl.switchItem(res);
-              }
             });
           }
         }
@@ -94,7 +92,7 @@ function ($scope, $reactive, $state, readState, defaultDataSets, $q) {
       self.updateDatabase(self.item);
     },
     deletable: () => {
-      return ((! self.app.readOnly) && (self.item) && (readState.dependencies.getDerived(self.item._id).length === 0));
+      return ((! self.user.readOnly) && (self.item) && (readState.dependencies.getDerived(self.item._id).length === 0));
     },
     deleteItem: () => {
       Meteor.call('dataSet.delete', self.item._id, (err, res) => {
@@ -113,7 +111,7 @@ function ($scope, $reactive, $state, readState, defaultDataSets, $q) {
 
   let watcher = $scope.$watch('sideNavCtrl.item', newVal => {
     if (newVal) {
-      self.item.readOnly = self.app.readOnly;
+      self.item.readOnly = self.user.readOnly;
       watcher();
     }
   });
