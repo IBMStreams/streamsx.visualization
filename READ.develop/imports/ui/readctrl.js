@@ -85,7 +85,6 @@ function ($scope, $reactive, readState, $timeout) {
     });
   });
 
-
   let playgroundQuery = Playground.find({});
   let playgroundQueryObserveHandle = playgroundQuery.observe({
     added: (template) => {
@@ -117,23 +116,19 @@ function ($scope, $reactive, readState, $timeout) {
     }
   });
 
-  let dataSetQuery = DataSets.find({});
-  let dataSetQueryHandle = dataSetQuery.observe({
+  DataSets.find().observe({
     added: (dataSet) => {
-      readState.deferredDataSets.promise.then(() => {
-        // if you cannot find dataset in readState.dependencies... you gotta do all the work here...
-        if (readState.dependencies.findNode(dataSet._id).length === 0) {
-          readState.dependencies.addNode(dataSet._id);
-          if (_.contains(['extendedHTTP', 'transformed'], dataSet.dataSetType)) {
-            throw new Error('extendedHTTP and transformed datasets cannot be added directly');
-          };
-          readState.pipeline.addDataSet(dataSet);
-        }
-      });
+        readState.deferredDataSets.promise.then(() => {
+          // if you cannot find dataset in readState.dependencies... you gotta do all the work here...
+          if (readState.dependencies.findNode(dataSet._id).length === 0) {
+            readState.dependencies.addNode(dataSet._id);
+            readState.pipeline.addDataSet(dataSet);
+          }
+        });
     },
     removed: (dataSet) => {
-      readState.dependencies.removeNode(dataSet._id);
-      readState.pipeline.removeDataSet(dataSet._id);
+        readState.dependencies.removeNode(dataSet._id);
+        readState.pipeline.removeDataSet(dataSet._id);
     },
     changed: (newDataSet, oldDataSet) => { // we can optimize later... // this has to be based on fields not all changes...
       if (! _.contains(['raw', 'websocket','simpleHTTP', 'extendedHTTP', 'transformed'], newDataSet.dataSetType))
@@ -151,8 +146,7 @@ function ($scope, $reactive, readState, $timeout) {
     readState.dependencies.addParents([visualization.dataSetId, visualization.templateId], visualization._id);
   };
 
-  let visualizationQuery = Visualizations.find({});
-  let visualizationQueryHandle = visualizationQuery.observe({
+  Visualizations.find().observe({
     added: (visualization) => {
       readState.dependencies.addNode(visualization._id);
       readState.deferredVisualizations.promise.then(() => {

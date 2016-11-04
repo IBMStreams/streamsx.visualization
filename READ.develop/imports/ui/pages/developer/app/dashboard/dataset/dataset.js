@@ -20,19 +20,20 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
 
   this.helpers({
     user: () => Users.findOne({}),
-    app: () => Apps.findOne({_id: self.user.selectedIds.appId}),
-    dashboard: () => Dashboards.findOne({_id: self.app.selectedDashboardId}),
-    dataSet: () => DataSets.findOne({_id: self.dashboard.selectedDataSetId}),
-    dataSets: () => DataSets.find({dashboardId: self.dashboard._id}).fetch(),
-    descendants: () => readState.dependencies.getDescendants(self.dashboard.selectedDataSetId).map(x => x.id),
+    app: () => Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
+    dashboard: () => Dashboards.findOne({_id: self.getReactively('app.selectedDashboardId')}),
+    dataSet: () => DataSets.findOne({_id: self.getReactively('dashboard.selectedDataSetId')}),
+    dataSets: () => DataSets.find({dashboardId: self.getReactively('dashboard._id')}).fetch(),
+    descendants: () => readState.dependencies.getDescendants(self.getReactively('dashboard.selectedDataSetId')).map(x => x.id),
     candidateParents: () => DataSets.find({}).fetch().filter(ds => {
-      if (ds._id === self.dataSet._id) return false;
-      if (_.contains(self.descendants, ds._id)) return false;
+      if (ds._id === self.getReactively('dataSet._id')) return false;
+      if (_.contains(self.getReactively('descendants'), ds._id)) return false;
       return true;
     }).map(ds => {
       ds.dashboardName = Dashboards.findOne({_id: ds.dashboardId}).name;
       return ds;
-    })
+    }),
+    rds: () => readState.pipeline.findReactiveData(self.getReactively('dataSet._id'))
   });
 
   this.dataSetTypes = dataSetTypes.filter(dsType => {

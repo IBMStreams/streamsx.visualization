@@ -6,8 +6,8 @@ import {Apps} from '/imports/api/apps';
 import {Dashboards} from '/imports/api/dashboards';
 import {DataSets} from '/imports/api/datasets';
 
-export const dashboardDataSetSideNavCtrl = ['$scope', '$reactive', '$state', 'readState', 'defaultDataSets', '$q',
-function ($scope, $reactive, $state, readState, defaultDataSets, $q) {
+export const dashboardDataSetSideNavCtrl = ['$scope', '$reactive', '$state', 'readState', 'defaultDataSets', '$q', '$timeout',
+function ($scope, $reactive, $state, readState, defaultDataSets, $q, $timeout) {
   $reactive(this).attach($scope);
   let self = this;
 
@@ -76,9 +76,7 @@ function ($scope, $reactive, $state, readState, defaultDataSets, $q) {
 
             Meteor.call('dataSet.create', dataSet, (err, res) => {
               if (err) alert(err);
-              else {
                 self.itemsControl.switchItem(res);
-              }
             });
           }
         }
