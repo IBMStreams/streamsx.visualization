@@ -26,6 +26,7 @@ export const userSchema = {
       },
       additionalProperties: false,
     },
+    readOnly: {type: "boolean"},
     shareServiceURL: {type: "string"}
   },
   required: ["name", "selectedIds", "shareServiceURL"],

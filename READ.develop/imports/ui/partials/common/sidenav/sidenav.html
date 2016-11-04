@@ -13,7 +13,7 @@
   <li ng-show="$ctrl.itemsControl.importable()" ng-click="$ctrl.itemsControl.importItem()">
     <a href="javascript:void(0)" uib-tooltip="{{'Import ' + $ctrl.itemsControl.itemType}}" tooltip-placement="bottom-left"><i class="fa fa-download" aria-hidden="true"></i></a>
   </li>
-  <li ng-show="$ctrl.itemsControl.selectedItem && (! $ctrl.item.readOnly) && ($ctrl.itemControls.deletable())" ng-click="$ctrl.brieflyShowAreYouSure()">
+  <li ng-show="$ctrl.itemsControl.selectedItem && (! $ctrl.readOnly) && ($ctrl.itemControls.deletable())" ng-click="$ctrl.brieflyShowAreYouSure()">
     <a href="javascript:void(0)" uib-tooltip="{{'Delete ' + $ctrl.itemsControl.itemType}}"
     tooltip-placement="bottom-left"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
   </li>
@@ -54,9 +54,9 @@
       <span class="input-group-addon"><input type="radio" ng-model="$ctrl.itemsControl.selectedId"
         value="{{_item._id}}" ng-change="$ctrl.itemsControl.switchItem($ctrl.itemsControl.selectedId)"/>
       </span>
-      <input type="text" ng-if="$ctrl.item.readOnly" class="form-control" readonly ng-model="_item.name"></input>
+      <input type="text" ng-if="$ctrl.readOnly" class="form-control" readonly ng-model="_item.name"></input>
 
-      <input type="text" ng-if="! $ctrl.item.readOnly" class="form-control"
+      <input type="text" ng-if="! $ctrl.readOnly" class="form-control"
       ng-model="$ctrl.newItemName" name="newItemName" minlength=1 maxlength=20 required
       ng-model-options='{ debounce: 500 }'
       ng-change="sideNavForm.newItemName.$invalid || $ctrl.itemControls.renameItem($ctrl.newItemName)"></input>

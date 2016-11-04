@@ -28,7 +28,7 @@
             <label for="validationSchema">JSON Schema</label>
               <div ui-ace="mainContentCtrl.aceJavaScriptOptions" ng-model="mainContentCtrl.item.jsonSchema"
               valid-json ng-model-options="{allowInvalid: true}"
-              ng-readonly="mainContentCtrl.item.readOnly" name="validationSchema"></div>
+              ng-readonly="mainContentCtrl.user.readOnly" name="validationSchema"></div>
             </div>
           </form>
         </div>
@@ -39,7 +39,7 @@
             <label for="testData">Data</label>
               <div ui-ace="mainContentCtrl.aceJavaScriptOptions" ng-model="mainContentCtrl.item.testData"
               valid-json ng-model-options="{allowInvalid: true}"
-              ng-readonly="mainContentCtrl.item.readOnly" name="testData"></div>
+              ng-readonly="mainContentCtrl.user.readOnly" name="testData"></div>
             </div>
           </form>
         </div>

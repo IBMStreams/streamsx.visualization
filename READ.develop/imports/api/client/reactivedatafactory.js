@@ -110,14 +110,20 @@ class WebsocketData extends ReactiveData {
       self.socket = DOM.fromWebSocket(url);
       if (self.intervalSubscription) self.intervalSubscription.dispose();
       onInterval = false;
+      console.log('inited socket');
 
       self.subscription = self.socket
-      .doOnNext(d => self.injectData(JSON.parse(d.data)))
+      .doOnNext(d => {
+//        console.log('got data: ', d, JSON.parse(d.data));
+        self.injectData(JSON.parse(d.data))
+      })
       .doOnError(e => {
         if (e.type === "close") {
+          console.log('close error', e);
           closeFollowUp();
           return;
         }
+        console.log('some other error', e)
         // all other errors
         self.injectError('web socket error');
       })
@@ -262,7 +268,6 @@ export const reactiveDataFactory = ['$http', function ($http) {
       this.type = "simpleHTTP";
     }
   }
-
 
   let myFactory = {};
   myFactory.rawData = (_id, name, data) => new RawData(_id, name, data);

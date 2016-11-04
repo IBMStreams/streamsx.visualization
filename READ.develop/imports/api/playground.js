@@ -13,11 +13,10 @@ export const dataSchemaTemplateSchema = {
       minLength: 1,
       maxLength: 20
     },
-    readOnly: {type: "boolean"},
     jsonSchema: {type: "string"},
     testData: {type: "string"}
   },
-  required: ["userId", "pluginType", "name", "readOnly", "jsonSchema", "testData"],
+  required: ["userId", "pluginType", "name", "jsonSchema", "testData"],
   additionalProperties: false
 };
 
@@ -33,7 +32,6 @@ export const nvd3TemplateSchema = {
       minLength: 1,
       maxLength: 20
     },
-    readOnly: {type: "boolean"},
     inputSchemaId: {type: "string"}, // schema for input data
     testData: {type: "string"},
     basicOptionsSchemaId: {type: "string"},
@@ -43,7 +41,7 @@ export const nvd3TemplateSchema = {
     advancedOptions: {type: "string"}, // nvd3 option generator with functions and all.. based on canonical data schema
     usageInfo: {type: "string"}
   },
-  required: ["userId", "pluginType", "name", "readOnly", "inputSchemaId", "testData",
+  required: ["userId", "pluginType", "name", "inputSchemaId", "testData",
   "basicOptionsSchemaId", "basicOptions", "canonicalSchemaId", "canonicalTransform", "advancedOptions", "usageInfo"],
   additionalProperties: false
 };
@@ -60,12 +58,11 @@ export const leafletTemplateSchema = {
       minLength: 1,
       maxLength: 20
     },
-    readOnly: {type: "boolean"},
     inputSchemaId: {type: "string"},
     testData: {type: "string"},
     usageInfo: {type: "string"}
   },
-  required: ["userId", "pluginType", "name", "readOnly", "inputSchemaId", "testData", "usageInfo"],
+  required: ["userId", "pluginType", "name", "inputSchemaId", "testData", "usageInfo"],
   additionalProperties: false
 };
 

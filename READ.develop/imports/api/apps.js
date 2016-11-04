@@ -18,10 +18,9 @@ export const appSchema = {
       maxLength: 20
     },
     private: {type: "boolean"},
-    readOnly: {type: "boolean"},
     selectedDashboardId: {type: "string"}
   },
-  required: ["userId", "name", "private", "readOnly"],
+  required: ["userId", "name", "private"],
   additionalProperties: false
 };
 

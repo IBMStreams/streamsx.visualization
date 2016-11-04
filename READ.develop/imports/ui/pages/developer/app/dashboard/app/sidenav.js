@@ -150,7 +150,6 @@ function ($scope, $reactive, $state, readState, $q, $uibModal, $timeout) {
             userId: 'guest',
             name: self.itemsControl.itemType + self.items.length,
             private: true,
-            readOnly: false
           }, (err, res) => {
             if (err) alert(err);
             else {

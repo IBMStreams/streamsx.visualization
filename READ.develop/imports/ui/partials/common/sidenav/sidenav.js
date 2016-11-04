@@ -6,7 +6,8 @@ export const sideNavComponent = {
     itemsControl: '=',
     item: '=',
     itemControls: '=',
-    parentItems: '='
+    parentItems: '=',
+    readOnly: '<'
   },
   templateUrl: sideNavTemplate,
   controller: ['$timeout', '$scope', function($timeout, $scope) {

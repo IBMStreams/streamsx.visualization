@@ -48,7 +48,7 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
 
   let watcher = $scope.$watch('dataSetCtrl.dataSet', newVal => {
     if (newVal) {
-      self.dataSet.readOnly = self.app.readOnly;
+      self.dataSet.readOnly = self.user.readOnly;
       watcher();
     }
   });
@@ -100,7 +100,10 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
   this.rds = readState.pipeline.findReactiveData(self.dataSet._id);
 
   this.rds.stream.doOnNext(x => {
-    self.lastDataObject = x;
+    $timeout(() => {
+      self.lastDataObject = x;
+    }, 0); // this seems necessary for propagating changes to the view... what a lousy hack!
   }).subscribe(new Rx.ReplaySubject(0));
+
 
 }];
