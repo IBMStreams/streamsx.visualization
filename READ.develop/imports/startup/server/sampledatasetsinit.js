@@ -23,7 +23,7 @@ export default datasets =
 	"url": "http://readnodered.mybluemix.net/sampleapp/dynamicsine",
 	"poll": {
 		"enabled": true,
-		"intervalSec": 4
+		"intervalSec": 3
 	}
 },
 {
@@ -282,5 +282,32 @@ export default datasets =
 	"name": "Tiles",
 	"rawData": "{\n    url: \"http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png\",\n    options: {\n        attribution: '\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors'\n    }\n}",
 	"selectedVisualizationId": "fNxikntSNTPpnunKj"
+},
+{
+	"_id": "cpvWhCdrwde89sDRz",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "YPHGTDAsaursHHfPQ",
+	"dataSetType": "websocket",
+	"name": "Dynamic Websocket",
+	"url": "ws://localhost:1880/ws/simple",
+	"bufferSize": 20
+},
+{
+	"_id": "d7kBgpXTTwYLCrXMg",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "YPHGTDAsaursHHfPQ",
+	"dataSetType": "transformed",
+	"name": "Stateful Websocket",
+	"parents": [
+		"cpvWhCdrwde89sDRz"
+	],
+	"transformFunction": "(x, s) =\u003e {\n    if (s.length === 200) s.splice(0, 1)\n    s.push(x);\n    return s.map((v, i) =\u003e {\n        return {\n            time: i,\n            sin: v\n        }\n    });\n}",
+	"stateParams": {
+		"enabled": true,
+		"state": "[]"
+	},
+	"selectedVisualizationId": "bEhyQppynjZRGLJxe"
 }]
 

@@ -3,14 +3,15 @@
     <label for="inputSchema">Type</label>
     <select class="form-control" ng-model="dataSetCtrl.dataSet.dataSetType" name="dataSetType"
     ng-options="dsType.name as dsType.displayName for dsType in dataSetCtrl.dataSetTypes"
-    ng-change="dataSetCtrl.updateDataSetType()">
+    ng-change="dataSetCtrl.updateDataSetType()" ng-disabled="dataSetCtrl.user.readOnly">
     </select>
   </div>
 
   <div class="form-group">
     <label for="parentDataSets">Parent Dataset(s)</label>
     <select class="form-control" multiple size="5" ng-model="dataSetCtrl.dataSet.parents" name="parentDataSets"
-    ng-options="dataSet._id as dataSet.name group by dataSet.dashboardName for dataSet in dataSetCtrl.candidateParents">
+    ng-options="dataSet._id as dataSet.name group by dataSet.dashboardName for dataSet in dataSetCtrl.candidateParents"
+    ng-disabled="dataSetCtrl.user.readOnly">
     </select>
   </div>
 
@@ -18,7 +19,7 @@
     <label for="transformFunction">Transform Function</label>
     <div ui-ace="dataSetCtrl.aceJavaScriptOptions" ng-model="dataSetCtrl.dataSet.transformFunction"
     valid-function required ng-model-options="{allowInvalid: true}"
-    ng-readonly="dataSetCtrl.dataSet.readOnly" name="transformFunction">
+    ng-readonly="dataSetCtrl.user.readOnly" name="transformFunction">
     </div>
   </div>
 
@@ -28,7 +29,7 @@
       <div class="checkbox">
         <label>
           <input name="stateEnabled" type="checkbox" ng-model="dataSetCtrl.dataSet.stateParams.enabled"
-          ng-readonly="dataSetCtrl.dataSet.readOnly">Enable</input>
+          ng-disabled="dataSetCtrl.user.readOnly">Enable</input>
         </label>
       </div>
     </div>
@@ -37,7 +38,7 @@
       <label for="state">Initial State</label>
       <div ui-ace="dataSetCtrl.aceJavaScriptOptions" ng-model="dataSetCtrl.dataSet.stateParams.state"
       valid-state-object ng-model-options="{allowInvalid: true}"
-      ng-readonly="dataSetCtrl.dataSet.readOnly" name="state">
+      ng-readonly="dataSetCtrl.user.readOnly" name="state">
       </div>
     </div>
   </div>

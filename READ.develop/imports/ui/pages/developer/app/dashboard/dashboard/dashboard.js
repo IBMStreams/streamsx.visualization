@@ -10,14 +10,17 @@ export const dashboardDashboardCtrl = ['$scope', '$reactive', function ($scope, 
   this.helpers({
     user: () => Users.findOne({}),
     app: () => Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
-    dashboard: () => Dashboards.findOne({_id: self.getReactively('app.selectedDashboardId')})
+    dashboard: () => Dashboards.findOne({_id: self.getReactively('app.selectedDashboardId')}),
+    gsOptions: () => {
+      return {
+        cellHeight: 80,
+        verticalMargin: 10,
+        static_grid: self.getReactively('user.readOnly'),
+        draggable: {
+          handle: '.panel-heading',
+        }
+      }
+    }
   });
 
-  this.gsOptions = {
-      cellHeight: 80,
-      verticalMargin: 10,
-      draggable: {
-        handle: '.panel-heading',
-      }
-  };
 }];

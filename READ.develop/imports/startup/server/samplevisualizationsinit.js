@@ -172,7 +172,7 @@ export default visualizations =
 	"dataSetId": "GwS2d655YujxqfZCf",
 	"gridStack": {
 		"x": 6,
-		"y": 0,
+		"y": 5,
 		"height": 6,
 		"width": 6
 	},
@@ -298,7 +298,7 @@ export default visualizations =
 	"dataSetId": "GwS2d655YujxqfZCf",
 	"gridStack": {
 		"x": 0,
-		"y": 0,
+		"y": 5,
 		"height": 4,
 		"width": 6
 	},
@@ -498,5 +498,23 @@ export default visualizations =
 		"height": 4,
 		"width": 6
 	}
+},
+{
+	"_id": "bEhyQppynjZRGLJxe",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "YPHGTDAsaursHHfPQ",
+	"name": "Noisy sine",
+	"templateId": "GrjTHgAnhoWDy748u",
+	"pluginType": "NVD3",
+	"dataSetId": "d7kBgpXTTwYLCrXMg",
+	"gridStack": {
+		"x": 0,
+		"y": 0,
+		"height": 5,
+		"width": 12
+	},
+	"basicOptions": "{\n    xKey: \"time\",\n    yKeys: [\"sin\"]\n}",
+	"advancedOptions": "{\n    chart: {\n        type: 'lineChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d, i){ return  i;}\n,        y: function(d){ return d.y; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Time (ms)',\n            ticks: 25,\n            tickFormat: function(d) {\n                return null;\n                return d3.time.format('%M:%S')(new Date(d)); //uncomment for date format\n            }\n        },\n        yAxis: {\n            ticks: 25,\n            axisLabel: 'Voltage (v)',\n            axisLabelDistance: -10\n        },\n        yDomain: [-2, 2]\n    }\n}"
 }]
 

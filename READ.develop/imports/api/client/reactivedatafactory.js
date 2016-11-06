@@ -110,11 +110,9 @@ class WebsocketData extends ReactiveData {
       self.socket = DOM.fromWebSocket(url);
       if (self.intervalSubscription) self.intervalSubscription.dispose();
       onInterval = false;
-      console.log('inited socket');
 
       self.subscription = self.socket
       .doOnNext(d => {
-//        console.log('got data: ', d, JSON.parse(d.data));
         self.injectData(JSON.parse(d.data))
       })
       .doOnError(e => {
@@ -123,7 +121,7 @@ class WebsocketData extends ReactiveData {
           closeFollowUp();
           return;
         }
-        console.log('some other error', e)
+        console.log('non-close error', e)
         // all other errors
         self.injectError('web socket error');
       })

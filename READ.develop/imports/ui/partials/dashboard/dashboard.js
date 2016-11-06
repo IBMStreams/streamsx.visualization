@@ -62,6 +62,7 @@ export const dashboardComponent = {
     if (self.gsOptions) {
       $timeout(function() {
         $(function () {
+          console.log('gridstack options: ', self.gsOptions);
           $('.grid-stack').gridstack(self.gsOptions);
           fixGrid();
         });

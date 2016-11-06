@@ -1,5 +1,8 @@
 <!-- hidden exportedStr -->
 <ol class="breadcrumb">
+  <li ng-show="$ctrl.readOnly">
+    <strong>Readonly Mode</strong>
+  </li>
   <li ng-show="$ctrl.itemsControl.creatable()" ng-click="$ctrl.itemsControl.createItem()">
     <a href="javascript:void(0)" uib-tooltip="{{'Create ' + $ctrl.itemsControl.itemType}}"
     tooltip-placement="bottom-left"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
