@@ -17,10 +17,10 @@ function ($scope, $reactive, $state, $timeout, readState) {
 
   this.itemsControl = {
     itemType: "Data Schema",
-    clonable: true,
+    clonable: ! self.user.readOnly,
     selectedId: self.user.selectedIds.dataSchemaId,
     selectedItem: self.item,
-    creatable: () => true,
+    creatable: () => ! self.user.readOnly,
     switchItem: (selectedId) => {
       self.user.selectedIds.dataSchemaId = selectedId;
       Meteor.call('user.update', self.user, (err, res) => {if (err) alert(err);}); //update user

@@ -3,7 +3,7 @@
     <label for="inputSchema">Type</label>
     <select class="form-control" ng-model="dataSetCtrl.dataSet.dataSetType" name="dataSetType"
     ng-options="dsType.name as dsType.displayName for dsType in dataSetCtrl.dataSetTypes"
-    ng-change="dataSetCtrl.updateDataSetType()">
+    ng-change="dataSetCtrl.updateDataSetType()" ng-disabled="dataSetCtrl.user.readOnly">
     </select>
   </div>
 
@@ -11,7 +11,7 @@
     <label for="rawData">Data</label>
     <div ui-ace="dataSetCtrl.aceJavaScriptOptions" ng-model="dataSetCtrl.dataSet.rawData"
     valid-json ng-model-options="{allowInvalid: true}"
-    ng-readonly="dataSetCtrl.dataSet.readOnly" name="rawData">
+    ng-readonly="dataSetCtrl.user.readOnly" name="rawData">
     </div>
   </div>
 </form>

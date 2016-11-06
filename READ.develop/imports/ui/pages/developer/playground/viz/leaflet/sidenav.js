@@ -18,10 +18,10 @@ function ($scope, $reactive, $state, $timeout, readState) {
 
   this.itemsControl = {
     itemType: "Leaflet Template",
-    clonable: true,
+    clonable: ! self.user.readOnly,
     selectedId: self.user.selectedIds.leafletId,
     selectedItem: self.item,
-    creatable: () => (self.dataSchemas.length > 0),
+    creatable: () => (! self.user.readOnly) && (self.dataSchemas.length > 0),
     whyNotCreatable: "Leaflet template creation disabled since no data schemas are available",
     switchItem: (selectedId) => {
       self.user.selectedIds.leafletId = selectedId;

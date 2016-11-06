@@ -25,7 +25,8 @@
             <div class="form-group">
               <label for="inputSchema">Input Schema</label>
               <select class="form-control" ng-model="mainContentCtrl.item.inputSchemaId" name="inputSchema"
-              ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas">
+              ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas"
+              ng-disabled="mainContentCtrl.user.readOnly">
               </select>
             </div>
 

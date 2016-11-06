@@ -40,7 +40,8 @@
             <div class="form-group">
               <label for="inputSchema">Input Schema</label>
               <select class="form-control" ng-model="mainContentCtrl.item.inputSchemaId" name="inputSchema"
-              ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas">
+              ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas"
+              ng-disabled="mainContentCtrl.user.readOnly">
               </select>
             </div>
 
@@ -62,7 +63,8 @@
               <select class="form-control" ng-model="mainContentCtrl.item.basicOptionsSchemaId"
               name="basicOptionsSchema"
               ng-change="mainContentCtrl.updateBasicOptionsSchema(mainContentCtrl.item.basicOptionsSchemaId)"
-              ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas">
+              ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas"
+              ng-disabled="mainContentCtrl.user.readOnly">
               </select>
             </div>
 
@@ -83,7 +85,8 @@
             <div class="form-group">
               <label for="canonicalSchema">Canonical Data Schema</label>
               <select class="form-control" ng-model="mainContentCtrl.item.canonicalSchemaId"
-              name="canonicalSchema" ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas">
+              name="canonicalSchema" ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas"
+              ng-disabled="mainContentCtrl.user.readOnly">
               </select>
             </div>
             <hr/>

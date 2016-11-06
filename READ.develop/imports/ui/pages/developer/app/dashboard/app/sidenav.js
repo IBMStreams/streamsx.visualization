@@ -41,7 +41,7 @@ function ($scope, $reactive, $state, readState, $q, $uibModal, $timeout) {
         selectedItem: Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
         exportable: () => ! _.isUndefined(self.getReactively('user.selectedIds.appId')),
         exportedStr: JSON.stringify(self.getReactively('exportedItem'), undefined, 2),
-        importable: () => true,
+        importable: () => ! self.getReactively('user.readOnly'),
         importItem: () => {
           let mapAppIds = function(appObj, oldToNew) {
             oldToNew[appObj.app._id] = (new Mongo.ObjectID())._str;
@@ -134,7 +134,7 @@ function ($scope, $reactive, $state, readState, $q, $uibModal, $timeout) {
             templateUrl: importAppModal
           });
         },
-        creatable: () => true,
+        creatable: () => ! self.getReactively('user.readOnly'),
         switchItem: (selectedId) => {
           self.user.selectedIds.appId = selectedId;
           // reset all deferredPromises...
