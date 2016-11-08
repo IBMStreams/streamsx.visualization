@@ -10,6 +10,7 @@ import {DataSets} from '/imports/api/datasets';
 import './rawdatausageinfo.html';
 import './simplehttpdatausageinfo.html';
 import './websocketdatausageinfo.html';
+import './transformdatausageinfo.html';
 
 import {aceJsonSchemaOptions, aceJavaScriptOptions, aceHTMLOptions} from '/imports/ui/partials/aceoptions';
 

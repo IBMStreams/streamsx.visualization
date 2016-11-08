@@ -1,0 +1,78 @@
+<div class="usage-info">
+    <h4>Transform</h4>
+    <hr/>
+    <div class="sections-container">
+        <div class="col-lg-6 col-md-6 hidden-sm hidden-xs annotation-sections"></div>
+        <div class="col-lg-6 col-md-6 hidden-sm hidden-xs code-sections"></div>
+        <section class="row">
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                <p><strong>Parent dataset(s)</strong> can be zero or more datasets. The latest values
+                  of these datasets are passed in as input arguments to the transform function.</p>
+                <p>In this example, we are creating a transform dataset using a single parent
+                  named <code>Dynamic Websocket</code>.</p>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+              <img src="/images/usageinfo/parentdataset.png" width="100%"
+              style="padding-top: 20px; padding-right: 20px; padding-bottom: 20px;"></img>
+            </div>
+        </section>
+
+        <hr />
+
+        <section class="row">
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                <p><strong>Transform function</strong> must be a valid JavaScript function. Its arguments are the latest
+                data values from the parent datasets. Further, if <strong>state</strong> is enabled, the final argument to the function
+                is the current state. The transform function can combine in any manner its arguments
+                and also the state if state is enabled; it should
+                return a javascript object, number or string which is the value of this dataset.
+                The transform function can also update the state as part of its logic.</p>
+
+                <p>Transform functions are automatically (re-)invoked when a parent dataset value changes.</p>
+
+                <p>Continuing with our example, this transform function takes the current value of the
+                  <code>Dynamic Websocket</code> dataset
+                  as its first argument, and the current state as its second argument. The state in this example
+                  is initialized to an empty array (see below). Whenever the parent dataset value changes, the
+                  transform function updates the state to ensure that it contains the most recent 200 values of
+                  from the parent dataset.
+                  This transform function also creates a new array by mapping the state and returns this new array.
+                </p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                <pre>
+// x: parent dataset value
+// s: current state
+(x, s) => {
+  // if s already has 200 items, delete first item
+  if (s.length === 200) s.splice(0, 1)
+  // push the latest value
+  s.push(x);
+  // create a new array from the state and return it
+  return s.map((v, i) => {
+    return {
+      time: i,
+      sine: v
+    }
+  });
+}             </pre>
+            </div>
+        </section>
+
+        <hr/>
+
+        <section class="row">
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                <p>If <strong>state</strong> is enabled, it must be initialized to a valid
+                  JavaScript object or array.</p>
+
+                <p>In this example, the state is initialized to an empty array.</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                <pre>
+[]              </pre>
+            </div>
+        </section>
+    </div>
+</div>

@@ -52,7 +52,9 @@
           <div ng-include="'/imports/ui/pages/developer/app/dashboard/dataset/simplehttpdatausageinfo.html'"
           ng-if="dataSetCtrl.dataSet.dataSetType === 'simpleHTTP'"></div>
           <div ng-include="'/imports/ui/pages/developer/app/dashboard/dataset/websocketdatausageinfo.html'"
-          ng-if="dataSetCtrl.dataSet.dataSetType === 'websocket'"></div>       
+          ng-if="dataSetCtrl.dataSet.dataSetType === 'websocket'"></div>
+          <div ng-include="'/imports/ui/pages/developer/app/dashboard/dataset/transformdatausageinfo.html'"
+          ng-if="dataSetCtrl.dataSet.dataSetType === 'transformed'"></div>       
         </div>
       </div>
     </div>
