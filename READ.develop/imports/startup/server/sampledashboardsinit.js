@@ -11,7 +11,7 @@ export default dashboards =
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Dynamics",
-	"selectedDataSetId": "QWF74B2tAs5LRspSz"
+	"selectedDataSetId": "d7kBgpXTTwYLCrXMg"
 },
 {
 	"_id": "RFznYoGe3ETKsGLQz",
@@ -25,6 +25,6 @@ export default dashboards =
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Maps",
-	"selectedDataSetId": "oZF4xTTraiir4avX6"
+	"selectedDataSetId": "JhLqiLWZMxis3LxJP"
 }]
 

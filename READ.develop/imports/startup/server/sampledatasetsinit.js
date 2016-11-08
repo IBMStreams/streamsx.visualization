@@ -290,7 +290,7 @@ export default datasets =
 	"dashboardId": "YPHGTDAsaursHHfPQ",
 	"dataSetType": "websocket",
 	"name": "Dynamic Websocket",
-	"url": "ws://localhost:1880/ws/simple",
+	"url": "ws://readnodered.mybluemix.net/ws/simple",
 	"bufferSize": 20
 },
 {
