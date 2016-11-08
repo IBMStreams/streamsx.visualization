@@ -57,8 +57,16 @@ body {
   z-index: 1030;
 }
 
+.breadcrumb li.selectedtab {
+  color: #ad2424;
+}
+
 .sidenav .sidenav-content .breadcrumb {
   background-color: $navbar-header-background-color;
+}
+
+.sidenav .sidenav-content .breadcrumb a.btn {
+  padding: 0px;
 }
 
 .panel.with-nav-tabs .panel-heading {
@@ -67,6 +75,14 @@ body {
 
 .panel.with-nav-tabs .nav-tabs {
   border-bottom: none;
+}
+
+.nav-tabs li.active a, .nav-tabs li.active a:hover, .nav-tabs li.active a:focus {
+  border-width: 3px 1px 1px;
+  border-top-color: #ad2424;
+  // border-left-color: #ddd;
+  // border-right-color: #ddd;
+  border-bottom-color: transparent;
 }
 
 .ace_editor, .validation-messages {
@@ -140,13 +156,15 @@ pre {
   padding: 0px;
 }
 
-.thumbnail .caption .word-wrap {
+.thumbnail .caption .word-wrap, .usage-info .word-wrap {
    white-space: pre-wrap;      /* CSS3 */
    white-space: -moz-pre-wrap; /* Firefox */
    white-space: -pre-wrap;     /* Opera <7 */
    white-space: -o-pre-wrap;   /* Opera 7 */
    word-wrap: break-word;      /* IE */
 }
+
+
 
 .sidenav-item {
   padding-top: 5px;
@@ -179,6 +197,7 @@ pre {
 .leaflet-retina .leaflet-control-layers-toggle {
 	background-image: url(/bower_components/leaflet/dist/images/layers-2x.png) !important;
   }
+
 
 
 /*==========  Mobile First Method  ==========*/

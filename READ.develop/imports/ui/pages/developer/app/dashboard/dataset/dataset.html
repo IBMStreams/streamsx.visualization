@@ -16,11 +16,14 @@
             <i ng-if="! dataSetCtrl.validators.dataSetEditor" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
           </a>
           </li>
+          <li ng-class="{active: dataSetCtrl.readState.mainContentSelectedTab.dataSet === 'usageInfo'}" ng-if="dataSetCtrl.dataSet">
+            <a ng-click="dataSetCtrl.readState.mainContentSelectedTab.dataSet = 'usageInfo'">Usage Info</a>
+          </li>
         </ul>
       </div>
 
       <div class="panel-body">
-        <div class="row">
+        <div class="row" ng-if="dataSetCtrl.readState.mainContentSelectedTab.dataSet !== 'usageInfo'">
           <div class="col-md-6" ng-if="dataSetCtrl.dataSet.dataSetType !== 'raw'">
             <simple-http-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'simpleHTTP'"></simple-http-data-editor>
             <websocket-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'websocket'"></websocket-data-editor>
@@ -41,6 +44,15 @@
           <div class="col-md-12" ng-if="dataSetCtrl.dataSet.dataSetType === 'raw'">
             <raw-data-editor></raw-data-editor>
           </div>
+        </div>
+
+        <div ng-if="dataSetCtrl.readState.mainContentSelectedTab.dataSet === 'usageInfo'">
+          <div ng-include="'/imports/ui/pages/developer/app/dashboard/dataset/rawdatausageinfo.html'"
+          ng-if="dataSetCtrl.dataSet.dataSetType === 'raw'"></div>
+          <div ng-include="'/imports/ui/pages/developer/app/dashboard/dataset/simplehttpdatausageinfo.html'"
+          ng-if="dataSetCtrl.dataSet.dataSetType === 'simpleHTTP'"></div>
+          <div ng-include="'/imports/ui/pages/developer/app/dashboard/dataset/websocketdatausageinfo.html'"
+          ng-if="dataSetCtrl.dataSet.dataSetType === 'websocket'"></div>       
         </div>
       </div>
     </div>

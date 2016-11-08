@@ -3,6 +3,11 @@ import dashboardTemplate from './dashboard.html';
 
 import {Visualizations} from '/imports/api/visualizations';
 
+// Hack to make gridstack work due to the missing size function
+$.fn.size = function(){
+  return this.length;
+};
+
 export const dashboardComponent = {
   bindings: {
     gsOptions: "=",
@@ -62,7 +67,6 @@ export const dashboardComponent = {
     if (self.gsOptions) {
       $timeout(function() {
         $(function () {
-          console.log('gridstack options: ', self.gsOptions);
           $('.grid-stack').gridstack(self.gsOptions);
           fixGrid();
         });
