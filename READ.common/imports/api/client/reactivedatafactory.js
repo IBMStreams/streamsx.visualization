@@ -1,8 +1,9 @@
-import Rx from 'rx/dist/rx.all';
-import {DOM} from 'rx-dom';
-import ajv from 'ajv';
-import _ from 'underscore/underscore';
+let Rx = require('rx/dist/rx.all');
+let DOM = require('rx-dom').DOM;
+let ajv = require('ajv');
+let _  = require('underscore');
 
+var exports = module.exports = {};
 // define the various reactive classes here...
 class Message {
   constructor(msg, isData) {
@@ -138,7 +139,7 @@ class WebsocketData extends ReactiveData {
   }
 }
 
-export const reactiveDataFactory = ['$http', function ($http) {
+const reactiveDataFactory = ['$http', function ($http) {
   // reactiveDataArray (array of parent reactives)
   // stateParams: is this stateful + initial state
   class TransformedData extends ReactiveData {
@@ -278,3 +279,5 @@ export const reactiveDataFactory = ['$http', function ($http) {
 
   return myFactory;
 }];
+
+exports.reactiveDataFactory = reactiveDataFactory;

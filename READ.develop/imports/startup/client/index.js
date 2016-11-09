@@ -18,8 +18,8 @@ import leaflet from 'leaflet/dist/leaflet';
 import angularLeafletDirective from 'angular-leaflet-directive/dist/angular-leaflet-directive';
 import 'leaflet/dist/leaflet.css';
 
-import {reactiveDataFactory} from '/imports/api/client/reactivedatafactory.js';
-import {reactivePipeline} from '/imports/api/client/reactivepipeline';
+import {reactiveDataFactory} from 'read-common/imports/api/client/reactivedatafactory.js';
+import {reactivePipeline} from 'read-common/imports/api/client/reactivepipeline';
 import {readStateFactory} from '/imports/api/client/readstatefactory.js';
 import {readCtrl} from '/imports/ui/readctrl.js';
 

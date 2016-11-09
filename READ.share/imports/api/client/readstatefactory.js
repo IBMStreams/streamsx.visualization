@@ -1,6 +1,6 @@
 /* read.state angular factory -
 This contains models / state that is shared across views and view controllers */
-import {Dependency} from './dependency';
+import {Dependency} from 'read-common/imports/api/client/dependency';
 
 export const readStateFactory = ['$q', 'reactivePipeline', ($q, reactivePipelineService) => {
   let myFactory = {
