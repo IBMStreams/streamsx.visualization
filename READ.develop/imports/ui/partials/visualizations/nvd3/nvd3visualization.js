@@ -77,6 +77,6 @@ export const nvd3VisualizationComponent = {
       parentId: "canonicalData"
     };
     let vcds = reactivePipeline.addDataSet(validatedCanonicalDataSet);
-    vcds.stream.doOnNext(x => (self.canonicalDataObject = x)).subscribe(new Rx.ReplaySubject(0));
+    vcds.stream.doOnNext(x => $timeout(() => (self.canonicalDataObject = x), 0)).subscribe(new Rx.ReplaySubject(0));
   }]
 }

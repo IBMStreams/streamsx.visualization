@@ -27,7 +27,8 @@
           </nav>
         </div>
 
-        <div class="main col-xs-12" ng-class="{'col-sm-6': (readState.sidebar.present && readState.sidebar.show), 'col-md-8': (readState.sidebar.present && readState.sidebar.show), 'col-lg-9': (readState.sidebar.present && readState.sidebar.show), 'col-sm-12': ! (readState.sidebar.present && readState.sidebar.show), 'col-md-12': ! (readState.sidebar.present && readState.sidebar.show), 'col-lg-12': ! (readState.sidebar.present && readState.sidebar.show)}">
+        <div class="main col-xs-12"
+        ng-class="{'col-sm-6': (readState.sidebar.present && readState.sidebar.show), 'col-md-8': (readState.sidebar.present && readState.sidebar.show), 'col-lg-9': (readState.sidebar.present && readState.sidebar.show), 'col-sm-12': ! (readState.sidebar.present && readState.sidebar.show), 'col-md-12': ! (readState.sidebar.present && readState.sidebar.show), 'col-lg-12': ! (readState.sidebar.present && readState.sidebar.show)}">
           <div ui-view="maincontent" class="main-content"></div>
           <nav class="navbar navbar-default navbar-fixed-bottom hidden-sm hidden-md hidden-lg">
             <div class="navbar-header">
@@ -38,8 +39,8 @@
             </a>
           </div>
         </nav>
-
       </div>
+
     </div>
   </div>
 </body>

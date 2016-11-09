@@ -19,7 +19,7 @@ import {reactivePipeline} from 'read-common/imports/api/client/reactivepipeline'
 import {readStateFactory} from '/imports/api/client/readstatefactory.js';
 import {readCtrl} from '/imports/ui/readctrl.js';
 
-import {dimensionsDirective} from '/imports/ui/partials/dimensions';
+import {dimensionsDirective} from 'read-common/imports/ui/partials/dimensions';
 
 import {headerNavComponent} from '/imports/ui/partials/common/headernav/headernav';
 import {sideNavComponent} from '/imports/ui/partials/common/sidenav/sidenav';
