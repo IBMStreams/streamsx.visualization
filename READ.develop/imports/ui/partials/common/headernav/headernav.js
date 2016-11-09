@@ -1,18 +1,28 @@
+import { Meteor } from 'meteor/meteor';
 import templateUrl from './headernav.html';
 // intended to work only with the readonly sample app
 import 'bootstrap-tour/build/css/bootstrap-tour.css';
 import Tour from 'bootstrap-tour/build/js/bootstrap-tour';
+
+import {Users} from '/imports/api/users';
 
 export const headerNavComponent = {
   templateUrl: templateUrl,
   bindings: {
     sidebar: '<'
   },
-  controller: ['$scope', '$rootScope', '$state', function($scope, $rootScope, $state) {
+  controller: ['$scope', '$rootScope', '$state', '$reactive',
+  function($scope, $rootScope, $state, $reactive) {
+    $reactive(this).attach($scope);
+
     this.toggleSidebar = () => {
       this.sidebar.show = ! this.sidebar.show;
       $rootScope.$broadcast('sidebar-toggled');
     };
+
+    this.helpers({
+      user: () => Users.findOne({})
+    });
 
     // Instance the tour
     let tour = new Tour({
