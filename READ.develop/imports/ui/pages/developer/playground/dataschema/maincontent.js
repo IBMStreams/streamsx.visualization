@@ -7,7 +7,7 @@ import Rx from 'rx/dist/rx.all'
 import {Users} from '/imports/api/users';
 import {Playground} from '/imports/api/playground';
 
-import {reactiveDataFactory} from '/imports/api/client/reactivedatafactory'
+import {reactiveDataFactory} from 'read-common/imports/api/client/reactivedatafactory'
 import {aceJsonSchemaOptions, aceJavaScriptOptions} from '/imports/ui/partials/aceoptions';
 
 export const schemaMainContentCtrl = ['$scope', '$reactive', '$timeout', '$state', 'reactiveDataFactory', 'readState', 'reactivePipeline',

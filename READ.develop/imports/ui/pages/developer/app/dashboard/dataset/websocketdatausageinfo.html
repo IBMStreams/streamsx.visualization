@@ -1,0 +1,26 @@
+<div class="usage-info">
+    <h4>Websocket</h4>
+    <hr/>
+    <div class="sections-container">
+        <div class="col-lg-6 col-md-6 hidden-sm hidden-xs annotation-sections"></div>
+        <div class="col-lg-6 col-md-6 hidden-sm hidden-xs code-sections"></div>
+        <section class="row">
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                <p><strong>URL</strong> must be a <strong>valid websocket URL</strong> which sends JSON.stringified data: i.e.,
+                if the websocket sends the string <code>s</code>, then <code>JSON.parse(s)</code>
+                javascript function invocation must return valid JSON.</p>
+
+                <p>In this example, the websocket URL sends a (variable) string <code>s</code> once every <em>0.05</em> secs.
+                READ's websocket dataset internally calls <code>JSON.parse(s)</code> once it receives the string, which returns a number
+                which is valid JSON.</p>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+              <p class="word-wrap">
+                <br />
+                <a href="javascript:void(0)">ws://readnodered.mybluemix.net/ws/simple</a>
+              </p>
+            </div>
+        </section>
+    </div>
+</div>

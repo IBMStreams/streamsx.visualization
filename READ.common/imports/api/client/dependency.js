@@ -1,8 +1,10 @@
-import cytoscape from "cytoscape";
-import angular from 'angular';
-import _ from 'underscore/underscore';
+let cytoscape = require("cytoscape");
+let angular = require('angular');
+let _  = require('underscore');
 
-export class Dependency {
+var exports = module.exports = {}
+
+class Dependency {
   constructor() {
     this.graph = cytoscape({
       elements: []
@@ -67,3 +69,5 @@ export class Dependency {
     return this.graph.filter(selector).successors().nodes().map(e => e.data());
   }
 }
+
+exports.Dependency = Dependency;

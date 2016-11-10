@@ -1,6 +1,8 @@
-import _ from 'underscore/underscore';
+let _  = require('underscore');
 
-export class Pipeline {
+var exports = module.exports = {};
+
+class Pipeline {
   constructor() {
     this.reactiveDataSets = []; // array of ReactiveData
   }
@@ -35,7 +37,7 @@ export class Pipeline {
 }
 
 // angular wrapper service for the pipeline
-export const reactivePipeline = ['reactiveDataFactory', "leafletData", "leafletBoundsHelpers", function (reactiveDataFactory, leafletData, leafletBoundsHelpers) {
+const reactivePipeline = ['reactiveDataFactory', "leafletData", "leafletBoundsHelpers", function (reactiveDataFactory, leafletData, leafletBoundsHelpers) {
   class ReactivePipeline extends Pipeline {
     constructor() {
       super();
@@ -61,6 +63,8 @@ export const reactivePipeline = ['reactiveDataFactory', "leafletData", "leafletB
         case "raw": return reactiveDataFactory.rawData(dataSet._id, dataSet.name, eval("(" + dataSet.rawData + ")"));
         break;
         case "interval": return reactiveDataFactory.intervalData(dataSet._id, dataSet.name, dataSet.intervalSec);
+        break;
+        case "websocket": return reactiveDataFactory.websocketData(dataSet._id, dataSet.name, dataSet.url);
         break;
         case "transformed": {
           // get reactives
@@ -127,3 +131,5 @@ export const reactivePipeline = ['reactiveDataFactory', "leafletData", "leafletB
 
   this.getInstance = () => (new ReactivePipeline());
 }];
+
+exports.reactivePipeline = reactivePipeline;

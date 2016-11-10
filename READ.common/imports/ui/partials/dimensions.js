@@ -1,7 +1,6 @@
-import Rx from 'rx/dist/rx.all';
-import angular from 'angular';
+var exports = module.exports = {}
 
-export const dimensionsDirective = ['$window', '$timeout', function($window, $timeout) {
+const dimensionsDirective = ['$window', '$timeout', function($window, $timeout) {
   return {
     restrict: 'A',
     link: function($scope, $el, $attrs, $ctrl) {
@@ -24,4 +23,6 @@ export const dimensionsDirective = ['$window', '$timeout', function($window, $ti
 
     }
   };
-}]
+}];
+
+exports.dimensionsDirective = dimensionsDirective;

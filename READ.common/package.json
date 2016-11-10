@@ -16,7 +16,12 @@
   "author": "Srinivasan Parthasarathy",
   "license": "Unlicense",
   "dependencies": {
+    "ajv": "^4.8.2",
+    "angular": "^1.5.8",
     "bootstrap-sass": "^3.3.7",
-    "rx-dom": "^7.0.3"
+    "cytoscape": "^2.7.10",
+    "rx": "^4.1.0",
+    "rx-dom": "^7.0.3",
+    "underscore": "^1.8.3"
   }
 }
