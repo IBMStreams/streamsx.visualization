@@ -27,14 +27,14 @@ export const headerNavComponent = {
     // Instance the tour
     let tour = new Tour({
       storage: false,
+      onStart: function() {
+        $state.go('read.developer.app.dashboard.app');
+      },
       steps: [
         {
           element: "#tour",
           title: "Welcome to READ",
           content: "This tour will introduce you to the key features of READ",
-          onNext: function() {
-            $state.go('read.developer.app.dashboard.app');
-          },
           placement: 'bottom'
         }, {
           element: "#myapps",
@@ -73,13 +73,51 @@ export const headerNavComponent = {
         }, {
           element: "#allitems",
           title: "Dashboards",
-          content: "An app can contain any number of dashboards. Visualizations can \
-          be positioned and resized \
-          in the dashboard after their creation in the visualizations tab.",
+          content: "An app can contain any number of dashboards.",
           placement: 'auto bottom',
           onNext: function() {
             $state.go('read.developer.app.dashboard.dataset');
           },
+          onPrev: function() {
+            $state.go('read.developer.app.dashboard.app');
+          }
+        }, {
+          element: "#allitems",
+          title: "Datasets",
+          content: "A dashboard can contain any number of datasets. READ supports multiple types of datasets \
+          such as <strong>URL</strong>, <strong>Raw</strong>, <strong>Websocket</strong>, \
+          and <strong>Transformed</strong> datasets. Click on the <em>Usage Info</em> tab to get \
+          detailed usage info for a specific type of dataset.",
+          placement: 'auto bottom',
+          onNext: function() {
+            $state.go('read.developer.app.dashboard.designer');
+          },
+          onPrev: function() {
+            $state.go('read.developer.app.dashboard.dashboard');
+          }
+        }, {
+          element: "#allitems",
+          title: "Visualizations",
+          content: "A dataset can be used to create any number of visualizations. \
+          READ supports multiple types of visualizations \
+          including maps, time series charts, and other interesting chart types like sunburst \
+          and parallel coordinates. Click on the <em>Usage Info</em> tab to get \
+          detailed usage info for a specific type of visualization.",
+          placement: 'auto bottom',
+          onNext: function() {
+            $state.go('read.developer.app.dashboard.dashboard');
+          },
+          onPrev: function() {
+            $state.go('read.developer.app.dashboard.dataset');
+          }
+        }, {
+          element: "#allitems",
+          title: "Dashboard Layout",
+          content: "You can reposition and resize visualizations within the dashboards.",
+          placement: 'auto bottom',
+          onPrev: function() {
+            $state.go('read.developer.app.dashboard.designer');
+          }
         }
       ]});
 

@@ -19,14 +19,12 @@ export const dashboardComponent = {
     $reactive(this).attach($scope);
     let self = this;
 
-    this.helpers({
-      visualizations: () => Visualizations.find({dashboardId: self.dashboardId}).fetch().map(viz => {
-          viz.dimensions = {
-            height: undefined,
-            width: undefined
-          };
-          return viz;
-      })
+    this.visualizations = Visualizations.find({dashboardId: self.dashboardId}).fetch().map(viz => {
+      viz.dimensions = {
+        height: undefined,
+        width: undefined
+      };
+      return viz;
     });
 
     function extractGridDimensions() {

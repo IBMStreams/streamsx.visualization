@@ -11,14 +11,14 @@ export default dashboards =
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Dynamics",
-	"selectedDataSetId": "d7kBgpXTTwYLCrXMg"
+	"selectedDataSetId": "GwS2d655YujxqfZCf"
 },
 {
 	"_id": "RFznYoGe3ETKsGLQz",
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Variety",
-	"selectedDataSetId": "dYvhhokemueLhytDX"
+	"selectedDataSetId": "384vc72q4fyELKjNq"
 },
 {
 	"_id": "ruHbJhctjLhCYZiof",

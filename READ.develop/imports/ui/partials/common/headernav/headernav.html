@@ -41,7 +41,7 @@
           </ul>
         </li>
 
-        <li id="tour" ng-click="$ctrl.startTour()"><a href="javascript:void(0)"><span class="hidden-xs hidden-sm">Tour</span> <i class="fa fa-play-circle"></i></a></li>
+        <li id="tour" ng-if="$ctrl.user.readOnly" ng-click="$ctrl.startTour()"><a href="javascript:void(0)"><span class="hidden-xs hidden-sm">Tour</span> <i class="fa fa-play-circle"></i></a></li>
 
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript:void(0)">

@@ -22,7 +22,7 @@
         </ul>
       </div>
 
-      <div class="panel-body">
+      <div class="panel-body" id="dataset">
         <div class="row" ng-if="dataSetCtrl.readState.mainContentSelectedTab.dataSet !== 'usageInfo'">
           <div class="col-md-6" ng-if="dataSetCtrl.dataSet.dataSetType !== 'raw'">
             <simple-http-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'simpleHTTP'"></simple-http-data-editor>
@@ -54,7 +54,7 @@
           <div ng-include="'/imports/ui/pages/developer/app/dashboard/dataset/websocketdatausageinfo.html'"
           ng-if="dataSetCtrl.dataSet.dataSetType === 'websocket'"></div>
           <div ng-include="'/imports/ui/pages/developer/app/dashboard/dataset/transformdatausageinfo.html'"
-          ng-if="dataSetCtrl.dataSet.dataSetType === 'transformed'"></div>       
+          ng-if="dataSetCtrl.dataSet.dataSetType === 'transformed'"></div>
         </div>
       </div>
     </div>

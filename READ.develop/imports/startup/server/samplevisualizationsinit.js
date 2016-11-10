@@ -190,7 +190,7 @@ export default visualizations =
 	"dataSetId": "dYvhhokemueLhytDX",
 	"gridStack": {
 		"x": 0,
-		"y": 12,
+		"y": 18,
 		"height": 7,
 		"width": 12
 	},
@@ -208,7 +208,7 @@ export default visualizations =
 	"dataSetId": "dYvhhokemueLhytDX",
 	"gridStack": {
 		"x": 0,
-		"y": 19,
+		"y": 25,
 		"height": 5,
 		"width": 12
 	},
@@ -226,7 +226,7 @@ export default visualizations =
 	"dataSetId": "gbKpr34hdTFzXzFdQ",
 	"gridStack": {
 		"x": 6,
-		"y": 6,
+		"y": 0,
 		"height": 6,
 		"width": 6
 	},
@@ -243,8 +243,8 @@ export default visualizations =
 	"pluginType": "NVD3",
 	"dataSetId": "gbKpr34hdTFzXzFdQ",
 	"gridStack": {
-		"x": 0,
-		"y": 24,
+		"x": 6,
+		"y": 12,
 		"height": 5,
 		"width": 6
 	},
@@ -261,8 +261,8 @@ export default visualizations =
 	"pluginType": "NVD3",
 	"dataSetId": "JaNmzZhzkDA5DBSth",
 	"gridStack": {
-		"x": 6,
-		"y": 0,
+		"x": 0,
+		"y": 6,
 		"height": 6,
 		"width": 6
 	},
@@ -280,7 +280,7 @@ export default visualizations =
 	"dataSetId": "uErToyy7uWJ266dPj",
 	"gridStack": {
 		"x": 0,
-		"y": 6,
+		"y": 12,
 		"height": 6,
 		"width": 6
 	},
@@ -516,5 +516,23 @@ export default visualizations =
 	},
 	"basicOptions": "{\n    xKey: \"time\",\n    yKeys: [\"sin\"]\n}",
 	"advancedOptions": "{\n    chart: {\n        type: 'lineChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d, i){ return  i;}\n,        y: function(d){ return d.y; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Time (ms)',\n            ticks: 25,\n            tickFormat: function(d) {\n                return null;\n                return d3.time.format('%M:%S')(new Date(d)); //uncomment for date format\n            }\n        },\n        yAxis: {\n            ticks: 25,\n            axisLabel: 'Voltage (v)',\n            axisLabelDistance: -10\n        },\n        yDomain: [-2, 2]\n    }\n}"
+},
+{
+	"_id": "s6R2XQYMkBgYmhtA2",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "RFznYoGe3ETKsGLQz",
+	"name": "Boxplot",
+	"templateId": "FdxAqyQjJLMHtFQBJ",
+	"pluginType": "NVD3",
+	"dataSetId": "384vc72q4fyELKjNq",
+	"gridStack": {
+		"x": 6,
+		"y": 6,
+		"height": 6,
+		"width": 6
+	},
+	"basicOptions": "{}",
+	"advancedOptions": "{\n    chart: {\n        type: 'boxPlotChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 60\n        },\n        x: function(d){ return d.label; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Experiments' \n        },\n        yAxis: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('.02f')(d);\n            },\n            axisLabelDistance: -5\n        }\n    }\n}"
 }]
 
