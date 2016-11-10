@@ -19,7 +19,7 @@ shell-server@0.2.1            # Server-side component of the `meteor shell` comm
 angular-templates
 fourseven:scss
 fortawesome:fontawesome
-pbastowski:angular-babel
 d3js:d3
 ryanwu:jquery-ui-interactions
 ryanwu:meteor-gridstack
+ecmascript
