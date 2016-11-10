@@ -75,12 +75,16 @@ const reactivePipeline = ['reactiveDataFactory', "leafletData", "leafletBoundsHe
           });
           // eval the transformFunction
           let transformFunction = undefined;
-          try {
-            transformFunction = eval("(" + dataSet.transformFunction + ")");
-            if (! _.isFunction(transformFunction)) throw new Error("Invalid transform function in makeReactiveData");
-          } catch (e) {
-            throw new Error("Transform function eval error in makeReactiveData: " + e.message);
-          }
+          (function tfEval() {
+            let myModules = require('read-mymodules').myModules;
+            try {
+              transformFunction = eval("(" + dataSet.transformFunction + ")");
+              if (! _.isFunction(transformFunction)) throw new Error("Invalid transform function in makeReactiveData");
+            } catch (e) {
+              throw new Error("Transform function eval error in makeReactiveData: " + e.message);
+            }
+          })();
+
           // eval the state
           let state = undefined;
           if (dataSet.stateParams.enabled) {
