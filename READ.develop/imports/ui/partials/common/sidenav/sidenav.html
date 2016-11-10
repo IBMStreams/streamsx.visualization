@@ -1,19 +1,48 @@
-<ol class="breadcrumb">
+<!-- hidden exportedStr -->
+<ol class="breadcrumb" id="itembreadcrumb" ng-if="$ctrl.readOnly">
+  <li>
+    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+  </li>
+  <li>
+    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-clone" aria-hidden="true"></i></a>
+  </li>
+  <li>
+    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-upload" aria-hidden="true"></i></a>
+  </li>
+  <li>
+    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-download" aria-hidden="true"></i></a>
+  </li>
+  <li>
+    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+  </li>
+</ol>
+
+<ol class="breadcrumb" ng-if="! $ctrl.readOnly">
   <li ng-show="$ctrl.itemsControl.creatable()" ng-click="$ctrl.itemsControl.createItem()">
-    <a href="javascript:void(0)" uib-tooltip="{{'Create ' + $ctrl.itemsControl.itemType}}"
+    <a href="javascript:void(0)"
+    uib-tooltip="{{'Create ' + $ctrl.itemsControl.itemType}}"
     tooltip-placement="bottom-left"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
   </li>
   <li ng-show="$ctrl.itemsControl.selectedItem && $ctrl.itemsControl.clonable" ng-click="$ctrl.itemsControl.cloneItem()">
     <a href="javascript:void(0)" uib-tooltip="{{'Clone ' + $ctrl.itemsControl.itemType}}" tooltip-placement="bottom-left"><i class="fa fa-clone" aria-hidden="true"></i></a>
   </li>
-  <li ng-show="$ctrl.itemsControl.exportable()" ng-click="$ctrl.itemsControl.exportItem()">
+  <li ng-show="$ctrl.itemsControl.exportable()" ngclipboard data-clipboard-text="{{$ctrl.itemsControl.exportedStr}}" ng-click="$ctrl.brieflyShowExported()">
     <a href="javascript:void(0)" uib-tooltip="{{'Export ' + $ctrl.itemsControl.itemType + ' to clipboard'}}" tooltip-placement="bottom-left"><i class="fa fa-upload" aria-hidden="true"></i></a>
   </li>
-  <li ng-show="$ctrl.itemsControl.selectedItem && (! $ctrl.item.readOnly) && ($ctrl.itemControls.deletable())" ng-click="$ctrl.brieflyShowAreYouSure()">
+  <li ng-show="$ctrl.itemsControl.importable()" ng-click="$ctrl.itemsControl.importItem()">
+    <a href="javascript:void(0)" uib-tooltip="{{'Import ' + $ctrl.itemsControl.itemType}}" tooltip-placement="bottom-left"><i class="fa fa-download" aria-hidden="true"></i></a>
+  </li>
+  <li ng-show="$ctrl.itemsControl.selectedItem && (! $ctrl.readOnly) && ($ctrl.itemControls.deletable())" ng-click="$ctrl.brieflyShowAreYouSure()">
     <a href="javascript:void(0)" uib-tooltip="{{'Delete ' + $ctrl.itemsControl.itemType}}"
     tooltip-placement="bottom-left"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-    <button ng-if="$ctrl.showAreYouSure" class="btn btn-danger btn-xs" ng-click="$ctrl.deleteItem()">Confirm</button>
   </li>
+  <li ng-if="$ctrl.showExported">
+    <span class="btn btn-success btn-xs">{{$ctrl.itemsControl.itemType + ' exported'}}</span>
+  </li>
+  <li ng-if="$ctrl.showAreYouSure">
+    <button class="btn btn-danger btn-xs" ng-click="$ctrl.deleteItem()">Confirm</button>
+  </li>
+
   <!-- Below is only to preserve space -->
   <li class="space-preserver ng-hide">
     <a href="javascript:void(0)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
@@ -21,32 +50,34 @@
 </ol>
 
 <div class="form-group" ng-repeat="parentItem in $ctrl.parentItems">
-  <label for="selectedParentItemId">Selected {{parentItem.itemType}}</label>
+  <label for="selectedParentItemId">Select {{parentItem.itemType}}</label>
   <select class="form-control" ng-model="parentItem.selectedId"
   ng-options="item._id as item.name for item in parentItem.items"
   ng-change="parentItem.switchItem(parentItem.selectedId)">
   </select>
 </div>
 
-<form name="sideNavForm" novalidate ng-if="$ctrl.item">
+<form name="sideNavForm" novalidate ng-if="$ctrl.item" id="allitems">
 <div class="form-group" ng-if="$ctrl.items.length > 0">
   <label for="selectedItemId">Select {{$ctrl.itemsControl.itemType}}</label>
   <div ng-repeat="_item in $ctrl.items">
-    <div class="input-group sidenav-item" ng-if="(_item._id !== $ctrl.itemsControl.selectedId)">
-      <span class="input-group-addon"><input type="radio" ng-model="$ctrl.itemsControl.selectedId"
+    <div class="input-group sidenav-item" ng-if="(_item._id !== $ctrl.itemsControl.selectedId)"
+    ng-click="$ctrl.itemsControl.switchItem(_item._id)">
+      <!-- <span class="input-group-addon"><input type="radio" ng-model="$ctrl.itemsControl.selectedId"
         value="{{_item._id}}" ng-change="$ctrl.itemsControl.switchItem($ctrl.itemsControl.selectedId)"/>
-      </span>
+      </span> -->
+      <span class="input-group-addon"><i class="fa fa-check" aria-hidden="true"
+        ng-style="{visibility: 'hidden'}"></i></span>
       <input type="text" class="form-control" readonly ng-model="_item.name"></input>
     </div>
 
     <div class="input-group sidenav-item" ng-if="(_item._id === $ctrl.itemsControl.selectedId)"
-    ng-class="{'has-error': (sideNavForm.newItemName.$invalid || sideNavForm.newItemName.$empty)}">
-      <span class="input-group-addon"><input type="radio" ng-model="$ctrl.itemsControl.selectedId"
-        value="{{_item._id}}" ng-change="$ctrl.itemsControl.switchItem($ctrl.itemsControl.selectedId)"/>
-      </span>
-      <input type="text" ng-if="$ctrl.item.readOnly" class="form-control" readonly ng-model="_item.name"></input>
+    ng-class="{'has-error': (sideNavForm.newItemName.$invalid || sideNavForm.newItemName.$empty)}"
+    id="selecteditem">
+      <span class="input-group-addon"><i class="fa fa-check" aria-hidden="true"></i></span>
+      <input type="text" ng-if="$ctrl.readOnly" class="form-control" readonly ng-model="_item.name"></input>
 
-      <input type="text" ng-if="! $ctrl.item.readOnly" class="form-control"
+      <input type="text" ng-if="! $ctrl.readOnly" class="form-control"
       ng-model="$ctrl.newItemName" name="newItemName" minlength=1 maxlength=20 required
       ng-model-options='{ debounce: 500 }'
       ng-change="sideNavForm.newItemName.$invalid || $ctrl.itemControls.renameItem($ctrl.newItemName)"></input>

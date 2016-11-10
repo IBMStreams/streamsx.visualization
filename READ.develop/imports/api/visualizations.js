@@ -7,7 +7,10 @@ export const nvd3VisualizationSchema = {
   type: "object",
   properties: {
     userId: {type: "string"},
-    pluginType: {constant: "NVD3"},
+    pluginType: {
+      type: "string",
+      enum: ["NVD3"]
+    },
     appId: {type: "string"},
     dashboardId: {type: "string"},
     name: {
@@ -29,7 +32,7 @@ export const nvd3VisualizationSchema = {
       }
     },
   },
-  required: ["userId", "appId", "dashboardId", "name", "templateId", "dataSetId", "basicOptions", "advancedOptions", "gridStack"],
+  required: ["userId", "pluginType", "appId", "dashboardId", "name", "templateId", "dataSetId", "basicOptions", "advancedOptions", "gridStack"],
   additionalProperties: false
 };
 
@@ -39,7 +42,10 @@ export const leafletVisualizationSchema = {
   type: "object",
   properties: {
     userId: {type: "string"},
-    pluginType: {constant: "leaflet"},
+    pluginType: {
+      type: "string",
+      enum: ["leaflet"]
+    },
     appId: {type: "string"},
     dashboardId: {type: "string"},
     name: {
@@ -59,9 +65,21 @@ export const leafletVisualizationSchema = {
       }
     },
   },
-  required: ["userId", "appId", "dashboardId", "name", "templateId", "dataSetId", "gridStack"],
+  required: ["userId", "pluginType", "appId", "dashboardId", "name", "templateId", "dataSetId", "gridStack"],
   additionalProperties: false
 };
+
+export const visualizationSchema = {
+  $schema: "http://json-schema.org/schema#",
+  description: "Visualization schema",
+  oneOf: [nvd3VisualizationSchema, leafletVisualizationSchema]
+};
+
+export const visualizationSchemaWithId = JSON.parse(JSON.stringify(visualizationSchema));
+visualizationSchemaWithId.oneOf.forEach(r => {
+  r.properties._id = {type: "string"};
+  r.required.push("_id")
+});
 
 export const Visualizations = new Mongo.Collection('visualizations');
 
@@ -84,6 +102,11 @@ let getValidate = (pluginType) => {
   }
 }
 
+let getValidateWithId = (pluginType) => {
+  let v = _.find(visualizationSchemaWithId.oneOf, (r => r.properties.pluginType.enum[0] === pluginType));
+  if (! v) throw new Error('Unknown plugin type detected in getValidateWithId');
+  return (new ajv({removeAdditional: true})).compile(v);
+}
 
 Meteor.methods({
   'visualization.create'(visualization) {
@@ -91,6 +114,14 @@ Meteor.methods({
     if (! validate(visualization)) {
       console.log(validate.errors);
       throw new Error("Schema Validation Failure: visualization object does not match visualization schema in visualization.create");
+    }
+    return Visualizations.insert(visualization);
+  },
+  'visualization.import'(visualization) {
+    let validateWithId = getValidateWithId(visualization.pluginType);
+    if (! validateWithId(visualization)) {
+      console.log(validateWithId.errors);
+      throw new Error("Schema Validation Failure: visualization object does not match visualization schema in visualization.import");
     }
     return Visualizations.insert(visualization);
   },

@@ -40,7 +40,8 @@
             <div class="form-group">
               <label for="inputSchema">Input Schema</label>
               <select class="form-control" ng-model="mainContentCtrl.item.inputSchemaId" name="inputSchema"
-              ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas">
+              ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas"
+              ng-disabled="mainContentCtrl.user.readOnly">
               </select>
             </div>
 
@@ -49,7 +50,7 @@
               <label for="testData">Data</label>
               <div ui-ace=mainContentCtrl.aceJavaScriptOptions ng-model=mainContentCtrl.item.testData
               valid-json ng-model-options="{allowInvalid: true}"
-              ng-readonly="mainContentCtrl.item.readOnly" name="testData">
+              ng-readonly="mainContentCtrl.user.readOnly" name="testData">
               </div>
             </div>
           </form>
@@ -62,7 +63,8 @@
               <select class="form-control" ng-model="mainContentCtrl.item.basicOptionsSchemaId"
               name="basicOptionsSchema"
               ng-change="mainContentCtrl.updateBasicOptionsSchema(mainContentCtrl.item.basicOptionsSchemaId)"
-              ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas">
+              ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas"
+              ng-disabled="mainContentCtrl.user.readOnly">
               </select>
             </div>
 
@@ -72,7 +74,7 @@
               <div ui-ace=mainContentCtrl.aceJavaScriptOptions ng-model=mainContentCtrl.item.basicOptions
               valid-json json-schema="mainContentCtrl.basicOptionsSchema"
               ng-model-options="{allowInvalid: true}"
-              ng-readonly="mainContentCtrl.item.readOnly" name="basicOptions">
+              ng-readonly="mainContentCtrl.user.readOnly" name="basicOptions">
               </div>
             </div>
           </form>
@@ -83,7 +85,8 @@
             <div class="form-group">
               <label for="canonicalSchema">Canonical Data Schema</label>
               <select class="form-control" ng-model="mainContentCtrl.item.canonicalSchemaId"
-              name="canonicalSchema" ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas">
+              name="canonicalSchema" ng-options="dataSchema._id as dataSchema.name for dataSchema in mainContentCtrl.dataSchemas"
+              ng-disabled="mainContentCtrl.user.readOnly">
               </select>
             </div>
             <hr/>
@@ -91,7 +94,7 @@
               <label for="canonicalTransform">Canonical Transform</label>
               <div ui-ace=mainContentCtrl.aceJavaScriptOptions ng-model=mainContentCtrl.item.canonicalTransform
               valid-function required ng-model-options="{allowInvalid: true}"
-              ng-readonly="mainContentCtrl.item.readOnly" name="canonicalTransform">
+              ng-readonly="mainContentCtrl.user.readOnly" name="canonicalTransform">
               </div>
             </div>
             <hr/>
@@ -109,7 +112,7 @@
               <label for="advancedOptions">Advanced Options</label>
               <div ui-ace=mainContentCtrl.aceJavaScriptOptions ng-model=mainContentCtrl.item.advancedOptions
               valid-object ng-model-options="{allowInvalid: true}"
-              ng-readonly="mainContentCtrl.item.readOnly" name="advancedOptions">
+              ng-readonly="mainContentCtrl.user.readOnly" name="advancedOptions">
               </div>
             </div>
           </form>
@@ -123,15 +126,15 @@
         </div>
 
         <div ng-if="mainContentCtrl.readState.mainContentSelectedTab.nvd3 === 'usageInfo'">
-          <form name="mainContentCtrl.usageInfoForm" ng-if="! mainContentCtrl.item.readOnly" novalidate>
+          <form name="mainContentCtrl.usageInfoForm" ng-if="! mainContentCtrl.user.readOnly" novalidate>
             <div class="form-group">
               <label for="usageInfo">Usage Info Editor</label>
               <div ui-ace=mainContentCtrl.aceHTMLOptions ng-model=mainContentCtrl.item.usageInfo
-              ng-readonly="mainContentCtrl.item.readOnly" ng-model-options="{debounce: 500}"name="usageInfo">
+              ng-readonly="mainContentCtrl.user.readOnly" ng-model-options="{debounce: 500}"name="usageInfo">
               </div>
             </div>
           </form>
-          <hr ng-if="! mainContentCtrl.item.readOnly" />
+          <hr ng-if="! mainContentCtrl.user.readOnly" />
 
           <div ng-bind-html="mainContentCtrl.item.usageInfo"></div>
         </div>

@@ -17,10 +17,10 @@ function ($scope, $reactive, $state, $timeout, readState) {
 
   this.itemsControl = {
     itemType: "Data Schema",
-    clonable: true,
+    clonable: ! self.user.readOnly,
     selectedId: self.user.selectedIds.dataSchemaId,
     selectedItem: self.item,
-    creatable: () => true,
+    creatable: () => ! self.user.readOnly,
     switchItem: (selectedId) => {
       self.user.selectedIds.dataSchemaId = selectedId;
       Meteor.call('user.update', self.user, (err, res) => {if (err) alert(err);}); //update user
@@ -31,7 +31,6 @@ function ($scope, $reactive, $state, $timeout, readState) {
         userId: 'guest',
         pluginType: 'Data Schema',
         name: self.itemsControl.itemType + ' ' + self.items.length,
-        readOnly: false,
         jsonSchema: '{}',
         testData: "42"
       }, (err, res) => {
@@ -48,7 +47,6 @@ function ($scope, $reactive, $state, $timeout, readState) {
         userId: 'guest',
         pluginType: 'Data Schema',
         name: name,
-        readOnly: false,
         jsonSchema: self.item.jsonSchema,
         testData: self.item.testData
       }, (err, res) => {

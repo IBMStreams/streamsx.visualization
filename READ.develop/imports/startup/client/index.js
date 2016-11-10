@@ -18,13 +18,13 @@ import leaflet from 'leaflet/dist/leaflet';
 import angularLeafletDirective from 'angular-leaflet-directive/dist/angular-leaflet-directive';
 import 'leaflet/dist/leaflet.css';
 
-import {reactiveDataFactory} from '/imports/api/client/reactivedatafactory.js';
-import {reactivePipeline} from '/imports/api/client/reactivepipeline';
+import {reactiveDataFactory} from 'read-common/imports/api/client/reactivedatafactory.js';
+import {reactivePipeline} from 'read-common/imports/api/client/reactivepipeline';
 import {readStateFactory} from '/imports/api/client/readstatefactory.js';
 import {readCtrl} from '/imports/ui/readctrl.js';
 
 import {validJsonDirective, validObjectDirective, validStateObjectDirective, validFunctionDirective} from '/imports/ui/partials/aceoptions';
-import {dimensionsDirective} from '/imports/ui/partials/dimensions';
+import {dimensionsDirective} from 'read-common/imports/ui/partials/dimensions';
 
 import {headerNavComponent} from '/imports/ui/partials/common/headernav/headernav';
 import {sideNavComponent} from '/imports/ui/partials/common/sidenav/sidenav';
@@ -118,13 +118,6 @@ angularModule.factory('reactiveDataFactory', reactiveDataFactory)
 .controller('leafletVizDesignCtrl', leafletVizDesignCtrl)
 
 angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
-  // handle CORS business
-/*  $httpProvider.defaults.useXDomain = true;
-  delete $httpProvider.defaults.headers.common["X-Requested-With"];
-
-  $httpProvider.defaults.withCredentials = true;
-  $httpProvider.defaults.headers.common["Accept"] = "application/json";
-  $httpProvider.defaults.headers.common["Content-Type"] = "application/json"; */
 
   // For any unmatched url, send to /home
   $urlRouterProvider.otherwise("/developer/home");

@@ -18,10 +18,10 @@ function ($scope, $reactive, $state, $timeout, readState) {
 
   this.itemsControl = {
     itemType: "Leaflet Template",
-    clonable: true,
+    clonable: ! self.user.readOnly,
     selectedId: self.user.selectedIds.leafletId,
     selectedItem: self.item,
-    creatable: () => (self.dataSchemas.length > 0),
+    creatable: () => (! self.user.readOnly) && (self.dataSchemas.length > 0),
     whyNotCreatable: "Leaflet template creation disabled since no data schemas are available",
     switchItem: (selectedId) => {
       self.user.selectedIds.leafletId = selectedId;
@@ -33,7 +33,6 @@ function ($scope, $reactive, $state, $timeout, readState) {
         userId: 'guest',
         pluginType: 'leaflet',
         name: self.itemsControl.itemType + ' ' + self.items.length,
-        readOnly: false,
         inputSchemaId: self.dataSchemas[0]._id,
         testData: "{\n\tcenter: {\n\t\tlat: 51.505,\n\t\tlng: -0.09,\n\t\t\n\t\tzoom: 4\n\t}\n}",
         usageInfo: ''
@@ -51,7 +50,6 @@ function ($scope, $reactive, $state, $timeout, readState) {
         userId: 'guest',
         pluginType: 'leaflet',
         name: name,
-        readOnly: false,
         inputSchemaId: self.item.inputSchemaId,
         testData: self.item.testData,
         usageInfo: self.item.usageInfo

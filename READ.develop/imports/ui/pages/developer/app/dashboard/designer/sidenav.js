@@ -76,7 +76,7 @@ function($scope, $reactive, $state, readState, $q) {
         clonable: false,
         selectedId: self.getReactively('item') ? self.getReactively('item._id') : undefined,
         selectedItem: self.getReactively('item'),
-        creatable: () => ((self.dataSet) && (self.templates.length > 0)),
+        creatable: () => ((! self.user.readOnly) && (self.dataSet) && (self.templates.length > 0)),
         switchItem: (selectedId) => {
           self.dataSet.selectedVisualizationId = selectedId;
           Meteor.call('dataSet.update', self.dataSet._id, self.dataSet, (err, res) => {
@@ -142,7 +142,7 @@ function($scope, $reactive, $state, readState, $q) {
 
   let watcher = $scope.$watch('sideNavCtrl.item', newVal => {
     if (newVal) {
-      self.item.readOnly = self.app.readOnly;
+      self.item.readOnly = self.user.readOnly;
       watcher();
     }
   });

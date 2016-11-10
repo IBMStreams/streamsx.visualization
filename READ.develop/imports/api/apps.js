@@ -1,5 +1,10 @@
 import {Mongo} from 'meteor/mongo';
+import _ from 'underscore';
+
 import ajv from 'ajv';
+import {dashboardSchema, dashboardSchemaWithId} from './dashboards';
+import {dataSetSchema, dataSetSchemaWithId} from './datasets';
+import {visualizationSchema, visualizationSchemaWithId} from './visualizations';
 
 export const appSchema = {
   $schema: "http://json-schema.org/schema#",
@@ -13,18 +18,53 @@ export const appSchema = {
       maxLength: 20
     },
     private: {type: "boolean"},
-    readOnly: {type: "boolean"},
     selectedDashboardId: {type: "string"}
   },
-  required: ["userId", "name", "private", "readOnly"],
+  required: ["userId", "name", "private"],
   additionalProperties: false
+};
+
+let appSchemaWithId = JSON.parse(JSON.stringify(appSchema));
+appSchemaWithId.properties._id = {type: "string"};
+appSchemaWithId.required.push("_id");
+
+export const importedAppSchema = {
+  $schema: "http://json-schema.org/schema#",
+  description: "Exported app schema",
+  type: "object",
+  properties: {
+    version: {type: "string"},
+    app: {$ref: "#/definitions/app"},
+    dashboards: {
+      type: "array",
+      items: {$ref: "#/definitions/dashboard"}
+    },
+    dataSets: {
+      type: "array",
+      items: {$ref: "#/definitions/dataSet"}
+    },
+    visualizations: {
+      type: "array",
+      items: {$ref: "#/definitions/visualization"}
+    }
+  },
+  required: ["version", "app", "dashboards", "dataSets", "visualizations"],
+  additionalProperties: false,
+  definitions: {
+    app: appSchemaWithId,
+    dashboard: dashboardSchemaWithId,
+    dataSet: dataSetSchemaWithId,
+    visualization: visualizationSchemaWithId
+  },
 };
 
 export const Apps = new Mongo.Collection('apps');
 
 let validate = undefined;
+let validateImportable = undefined;
 try {
   validate = (new ajv({removeAdditional: true})).compile(appSchema);
+  validateImportable = (new ajv({removeAdditional: true})).compile(appSchemaWithId);
 }
 catch (e) {
   console.log(e);
@@ -34,6 +74,10 @@ catch (e) {
 Meteor.methods({
   'app.create'(app) {
     if (! validate(app)) throw new Error("Schema Validation Failure: app object does not match app schema in app.create");
+    return Apps.insert(app);
+  },
+  'app.import'(app) {
+    if (! validateImportable(app)) throw new Error("Schema Validation Failure: app object does not match app schema in app.import");
     return Apps.insert(app);
   },
   'app.delete'(appId) {

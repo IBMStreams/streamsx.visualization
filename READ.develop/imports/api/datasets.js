@@ -2,9 +2,6 @@ import {Mongo} from 'meteor/mongo';
 import _ from 'underscore/underscore';
 import ajv from 'ajv';
 
-// populate this first and use this for extending the rest...
-// let dataSchema = {}
-
 export const rawDataSchema = {
   $schema: "http://json-schema.org/schema#",
   description: "Raw Data schema",
@@ -13,7 +10,10 @@ export const rawDataSchema = {
     userId: {type: "string"},
     appId: {type: "string"},
     dashboardId: {type: "string"},
-    dataSetType: {constant: "raw"},
+    dataSetType: {
+      type: "string",
+      enum: ["raw"]
+    },
     name: {
       type: "string",
       minLength: 1,
@@ -26,6 +26,31 @@ export const rawDataSchema = {
   additionalProperties: false
 };
 
+export const wsDataSchema = {
+  $schema: "http://json-schema.org/schema#",
+  description: "Websocket Data schema",
+  type: "object",
+  properties: {
+    userId: {type: "string"},
+    appId: {type: "string"},
+    dashboardId: {type: "string"},
+    dataSetType: {
+      type: "string",
+      enum: ["websocket"]
+    },
+    name: {
+      type: "string",
+      minLength: 1,
+      maxLength: 20
+    },
+    selectedVisualizationId: {type: "string"},
+    url: {type: "string"},
+    bufferSize: {type: "number"} // what's the bufferSize for?
+  },
+  required: ["userId", "appId", "dashboardId", "dataSetType", "name", "url", "bufferSize"],
+  additionalProperties: false
+};
+
 export const simpleHTTPDataSchema = {
   $schema: "http://json-schema.org/schema#",
   description: "Simple HTTP Data schema",
@@ -34,7 +59,10 @@ export const simpleHTTPDataSchema = {
     userId: {type: "string"},
     appId: {type: "string"},
     dashboardId: {type: "string"},
-    dataSetType: {constant: "simpleHTTP"},
+    dataSetType: {
+      type: "string",
+      enum: ["simpleHTTP"]
+    },
     name: {
       type: "string",
       minLength: 1,
@@ -63,7 +91,10 @@ export const extendedHTTPDataSchema = {
     userId: {type: "string"},
     appId: {type: "string"},
     dashboardId: {type: "string"},
-    dataSetType: {constant: "extendedHTTP"},
+    dataSetType: {
+      type: "string",
+      enum: ["extendedHTTP"]
+    },
     name: {
       type: "string",
       minLength: 1,
@@ -92,17 +123,20 @@ export const transformedDataSchema = {
     userId: {type: "string"},
     appId: {type: "string"},
     dashboardId: {type: "string"},
-    dataSetType: {constant: "transformed"},
+    dataSetType: {
+      type: "string",
+      enum: ["transformed"]
+    },
     name: {
       type: "string",
       minLength: 1,
       maxLength: 20
     },
+    selectedVisualizationId: {type: "string"},
     parents: {
       type: "array",
       items: {type: "string"}
     },
-    selectedVisualizationId: {type: "string"},
     stateParams: {
       type: "object",
       properties: {
@@ -117,16 +151,30 @@ export const transformedDataSchema = {
   additionalProperties: false
 };
 
+export const dataSetSchema = {
+  $schema: "http://json-schema.org/schema#",
+  description: "Dataset schema",
+  oneOf: [rawDataSchema, simpleHTTPDataSchema, wsDataSchema, transformedDataSchema]
+};
+
+export const dataSetSchemaWithId = JSON.parse(JSON.stringify(dataSetSchema));
+dataSetSchemaWithId.oneOf.forEach(r => {
+  r.properties._id = {type: "string"};
+  r.required.push("_id")
+});
+
 export const DataSets = new Mongo.Collection('datasets');
 
 let rawDataSchemaValidate = undefined;
 let simpleHTTPDataSchemaValidate = undefined;
 let extendedHTTPDataSchemaValidate = undefined;
+let wsDataSchemaValidate = undefined;
 let transformedDataSchemaValidate = undefined;
 try {
   rawDataSchemaValidate = (new ajv({removeAdditional: true})).compile(rawDataSchema);
   simpleHTTPDataSchemaValidate = (new ajv({removeAdditional: true})).compile(simpleHTTPDataSchema);
   extendedHTTPDataSchemaValidate = (new ajv({removeAdditional: true})).compile(extendedHTTPDataSchema);
+  wsDataSchemaValidate = (new ajv({removeAdditional: true})).compile(wsDataSchema);
   transformedDataSchemaValidate = (new ajv({removeAdditional: true})).compile(transformedDataSchema);
 }
 catch (e) {
@@ -138,10 +186,17 @@ let getValidate = (dataSetType) => {
   switch (dataSetType) {
     case "raw": return rawDataSchemaValidate;
     case "simpleHTTP": return simpleHTTPDataSchemaValidate;
+    case "websocket": return wsDataSchemaValidate;
     case "extendedHTTP": return extendedHTTPDataSchemaValidate;
     case "transformed": return transformedDataSchemaValidate;
     default: throw new Error("Unknown dataset type detected in getValidate");
   }
+}
+
+let getValidateWithId = (dataSetType) => {
+  let v = _.find(dataSetSchemaWithId.oneOf, (r => r.properties.dataSetType.enum[0] === dataSetType));
+  if (! v) throw new Error('Unknown dataset type detected in getValidateWithId');
+  return (new ajv({removeAdditional: true})).compile(v);
 }
 
 Meteor.methods({
@@ -150,6 +205,14 @@ Meteor.methods({
     if (! validate(dataSet)) {
       console.log(validate.errors);
       throw new Error("Schema Validation Failure: dataset object does not match dataset schema in dataset.create");
+    }
+    else return DataSets.insert(dataSet);
+  },
+  'dataSet.import'(dataSet) {
+    let validateWithId = getValidateWithId(dataSet.dataSetType);
+    if (! validateWithId(dataSet)) {
+      console.log(validateWithId.errors);
+      throw new Error("Schema Validation Failure: dataset object does not match dataset schema in dataset.import");
     }
     else return DataSets.insert(dataSet);
   },

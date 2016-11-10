@@ -9,9 +9,9 @@ export default datasets =
 	"url": "https://gist.githubusercontent.com/sriumcp/5ca15b9e9b8c51db99cbbadc12047831/raw/b071553834d3c48c0bdde7cced6b2e126040e627/sinecos",
 	"poll": {
 		"enabled": false,
-		"intervalSec": 20
+		"intervalSec": 2
 	},
-	"selectedVisualizationId": "uCrjw5b7Zo9ysRNyM"
+	"selectedVisualizationId": "FYPdv7MiGcWN72KPu"
 },
 {
 	"_id": "QWF74B2tAs5LRspSz",
@@ -23,7 +23,7 @@ export default datasets =
 	"url": "http://readnodered.mybluemix.net/sampleapp/dynamicsine",
 	"poll": {
 		"enabled": true,
-		"intervalSec": 4
+		"intervalSec": 3
 	}
 },
 {
@@ -125,7 +125,7 @@ export default datasets =
 	"dashboardId": "ruHbJhctjLhCYZiof",
 	"dataSetType": "raw",
 	"name": "Toner",
-	"rawData": "{\n    center: {\n        lat: 52.52,\n        lng: 13.40,\n        zoom: 4\n    },\n    markers: {\n        m1: {\n            lat: 52.52,\n            lng: 13.40\n        }\n    },\n    defaults: {\n        tileLayer: \"http://tile.stamen.com/toner/{z}/{x}/{y}.png\",\n        zoomControlPosition: 'topright',\n        tileLayerOptions: {\n            opacity: 0.9,\n            detectRetina: true,\n            reuseTiles: true,\n            attribution: '\u003ca href=\"http://www.stamen.com/\"\u003eStamen\u003c/a\u003e'\n        },\n        scrollWheelZoom: false\n    }\n}",
+	"rawData": "{\n    center: {\n        lat: 52.52,\n        lng: 13.40,\n        zoom: 4\n    },\n    markers: {\n        m1: {\n            lat: 52.52,\n            lng: 13.40\n        }\n    },\n    defaults: {\n        tileLayer: \"http://tile.stamen.com/toner/{z}/{x}/{y}.png\",\n        zoomControlPosition: 'topright',\n        tileLayerOptions: {\n            opacity: 0.9,\n            detectRetina: true,\n            reuseTiles: true,\n            attribution: '\u003ca href=\"http://www.stamen.com/\"\u003eStamen\u003c/a\u003e'\n        }\n    }\n}",
 	"selectedVisualizationId": "v2xoZNpfdBBHM2Ett"
 },
 {
@@ -282,5 +282,42 @@ export default datasets =
 	"name": "Tiles",
 	"rawData": "{\n    url: \"http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png\",\n    options: {\n        attribution: '\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors'\n    }\n}",
 	"selectedVisualizationId": "fNxikntSNTPpnunKj"
+},
+{
+	"_id": "cpvWhCdrwde89sDRz",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "YPHGTDAsaursHHfPQ",
+	"dataSetType": "websocket",
+	"name": "Dynamic Websocket",
+	"url": "ws://readnodered.mybluemix.net/ws/simple",
+	"bufferSize": 20
+},
+{
+	"_id": "d7kBgpXTTwYLCrXMg",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "YPHGTDAsaursHHfPQ",
+	"dataSetType": "transformed",
+	"name": "Stateful Websocket",
+	"parents": [
+		"cpvWhCdrwde89sDRz"
+	],
+	"transformFunction": "(x, s) =\u003e {\n    if (s.length === 200) s.splice(0, 1)\n    s.push(x);\n    return s.map((v, i) =\u003e {\n        return {\n            time: i,\n            sin: v\n        }\n    });\n}",
+	"stateParams": {
+		"enabled": true,
+		"state": "[]"
+	},
+	"selectedVisualizationId": "bEhyQppynjZRGLJxe"
+},
+{
+	"_id": "384vc72q4fyELKjNq",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "RFznYoGe3ETKsGLQz",
+	"dataSetType": "raw",
+	"name": "Boxplot dataset",
+	"rawData": "[\n    {\n        label: \"Sample A\",\n        Q1: 180,\n        Q2: 200,\n        Q3: 250,\n        whisker_low: 115,\n        whisker_high: 400,\n        outliers: [50, 100, 425]\n    },  {\n        label: \"Sample B\",\n        Q1: 300,\n        Q2: 350,\n        Q3: 400,\n        whisker_low: 225,\n        whisker_high: 425,\n        outliers: [175, 450, 480]\n    },  {\n        label: \"Sample C\",\n        Q1: 100,\n        Q2: 200,\n        Q3: 300,\n        whisker_low: 25,\n        whisker_high: 400,\n        outliers: [450, 475]\n    }\n]",
+	"selectedVisualizationId": "s6R2XQYMkBgYmhtA2"
 }]
 

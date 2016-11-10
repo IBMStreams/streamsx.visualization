@@ -18,10 +18,10 @@ function ($scope, $reactive, $state, $timeout, readState) {
 
   this.itemsControl = {
     itemType: "NVD3 Template",
-    clonable: true,
+    clonable: ! self.user.readOnly,
     selectedId: self.user.selectedIds.nvd3Id,
     selectedItem: self.item,
-    creatable: () => (self.dataSchemas.length > 0),
+    creatable: () => (! self.user.readOnly) && (self.dataSchemas.length > 0),
     whyNotCreatable: "NVD3 template creation disabled since no data schemas are available",
     switchItem: (selectedId) => {
       self.user.selectedIds.nvd3Id = selectedId;
@@ -33,7 +33,6 @@ function ($scope, $reactive, $state, $timeout, readState) {
         userId: 'guest',
         pluginType: 'NVD3',
         name: self.itemsControl.itemType + ' ' + self.items.length,
-        readOnly: false,
         inputSchemaId: self.dataSchemas[0]._id,
         testData: "42",
         basicOptionsSchemaId: self.dataSchemas[0]._id,
@@ -56,7 +55,6 @@ function ($scope, $reactive, $state, $timeout, readState) {
         userId: 'guest',
         pluginType: 'NVD3',
         name: name,
-        readOnly: false,
         inputSchemaId: self.item.inputSchemaId,
         testData: self.item.testData,
         basicOptionsSchemaId: self.item.basicOptionsSchemaId,

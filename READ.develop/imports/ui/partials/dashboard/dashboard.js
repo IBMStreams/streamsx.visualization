@@ -3,6 +3,11 @@ import dashboardTemplate from './dashboard.html';
 
 import {Visualizations} from '/imports/api/visualizations';
 
+// Hack to make gridstack work due to the missing size function
+$.fn.size = function(){
+  return this.length;
+};
+
 export const dashboardComponent = {
   bindings: {
     gsOptions: "=",
@@ -15,11 +20,11 @@ export const dashboardComponent = {
     let self = this;
 
     this.visualizations = Visualizations.find({dashboardId: self.dashboardId}).fetch().map(viz => {
-        viz.dimensions = {
-          height: undefined,
-          width: undefined
-        };
-        return viz;
+      viz.dimensions = {
+        height: undefined,
+        width: undefined
+      };
+      return viz;
     });
 
     function extractGridDimensions() {

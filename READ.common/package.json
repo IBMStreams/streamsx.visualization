@@ -1,0 +1,27 @@
+{
+  "name": "read-common",
+  "private": true,
+  "version": "0.6.0",
+  "description": "Common components between READ.meteor and READ.share",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "READ",
+    "common",
+    "share",
+    "develop"
+  ],
+  "author": "Srinivasan Parthasarathy",
+  "license": "Unlicense",
+  "dependencies": {
+    "ajv": "^4.8.2",
+    "angular": "^1.5.8",
+    "bootstrap-sass": "^3.3.7",
+    "cytoscape": "^2.7.10",
+    "rx": "^4.1.0",
+    "rx-dom": "^7.0.3",
+    "underscore": "^1.8.3"
+  }
+}

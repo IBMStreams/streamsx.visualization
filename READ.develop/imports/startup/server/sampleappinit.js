@@ -4,7 +4,6 @@ export default app =
 	"userId": "guest",
 	"name": "Sample",
 	"private": false,
-	"readOnly": false,
-	"selectedDashboardId": "ruHbJhctjLhCYZiof"
+	"selectedDashboardId": "CTyzoHgRxeFpnK29Y"
 }]
 

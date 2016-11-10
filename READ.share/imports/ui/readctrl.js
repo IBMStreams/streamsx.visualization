@@ -36,7 +36,7 @@ function ($scope, $reactive, readState, $location) {
   });
 
   this.helpers({
-    user: () => Users.findOne({})
+    user: () => Users.findOne({}),
   });
 
   this.subscribe('dashboards', () => [readState.app._id], {

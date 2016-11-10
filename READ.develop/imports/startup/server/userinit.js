@@ -7,5 +7,6 @@ export default guestUser = {
         "nvd3Id" : "GrjTHgAnhoWDy748u",
         "leafletId": "8Y4beRBmJvL9dFJLt"
     },
+    "readOnly": false,
     "shareServiceURL" : "http://localhost:3002"
 }

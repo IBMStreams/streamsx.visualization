@@ -6,7 +6,8 @@ export const sideNavComponent = {
     itemsControl: '=',
     item: '=',
     itemControls: '=',
-    parentItems: '='
+    parentItems: '=',
+    readOnly: '<'
   },
   templateUrl: sideNavTemplate,
   controller: ['$timeout', '$scope', function($timeout, $scope) {
@@ -23,7 +24,14 @@ export const sideNavComponent = {
       self.showAreYouSure = true;
       self.briefTimer = $timeout(() => {
         self.showAreYouSure = false;
-      }, 3000); // 4 seconds
+      }, 3000); // 3 seconds
+    };
+
+    this.brieflyShowExported = () => {
+      self.showExported = true;
+      self.briefTimer = $timeout(() => {
+        self.showExported = false;
+      }, 3000); // 3 seconds
     };
 
     this.deleteItem = () => {

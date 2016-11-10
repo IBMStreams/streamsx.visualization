@@ -7,6 +7,11 @@ import {Apps} from '/imports/api/apps';
 import {Dashboards} from '/imports/api/dashboards';
 import {DataSets} from '/imports/api/datasets';
 
+import './rawdatausageinfo.html';
+import './simplehttpdatausageinfo.html';
+import './websocketdatausageinfo.html';
+import './transformdatausageinfo.html';
+
 import {aceJsonSchemaOptions, aceJavaScriptOptions, aceHTMLOptions} from '/imports/ui/partials/aceoptions';
 
 export const dashboardDataSetCtrl = ['$scope', '$reactive', '$timeout', '$state', 'reactiveDataFactory',
@@ -20,24 +25,26 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
 
   this.helpers({
     user: () => Users.findOne({}),
-    app: () => Apps.findOne({_id: self.user.selectedIds.appId}),
-    dashboard: () => Dashboards.findOne({_id: self.app.selectedDashboardId}),
-    dataSet: () => DataSets.findOne({_id: self.dashboard.selectedDataSetId}),
-    dataSets: () => DataSets.find({dashboardId: self.dashboard._id}).fetch(),
-    descendants: () => readState.dependencies.getDescendants(self.dashboard.selectedDataSetId).map(x => x.id),
+    app: () => Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
+    dashboard: () => Dashboards.findOne({_id: self.getReactively('app.selectedDashboardId')}),
+    dataSet: () => DataSets.findOne({_id: self.getReactively('dashboard.selectedDataSetId')}),
+    dataSets: () => DataSets.find({dashboardId: self.getReactively('dashboard._id')}).fetch(),
+    descendants: () => readState.dependencies.getDescendants(self.getReactively('dashboard.selectedDataSetId')).map(x => x.id),
     candidateParents: () => DataSets.find({}).fetch().filter(ds => {
-      if (ds._id === self.dataSet._id) return false;
-      if (_.contains(self.descendants, ds._id)) return false;
+      if (ds._id === self.getReactively('dataSet._id')) return false;
+      if (_.contains(self.getReactively('descendants'), ds._id)) return false;
       return true;
     }).map(ds => {
       ds.dashboardName = Dashboards.findOne({_id: ds.dashboardId}).name;
       return ds;
-    })
+    }),
+    rds: () => readState.pipeline.findReactiveData(self.getReactively('dataSet._id'))
   });
 
   this.dataSetTypes = dataSetTypes.filter(dsType => {
     if (! _.contains(['extendedHTTP'], dsType.name)) return true;
     else return false; // we are not allowing extendedHTTP until things are fixed...
+       // return true;
   });
 
   this.aceJsonSchemaOptions = aceJsonSchemaOptions;
@@ -46,7 +53,7 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
 
   let watcher = $scope.$watch('dataSetCtrl.dataSet', newVal => {
     if (newVal) {
-      self.dataSet.readOnly = self.app.readOnly;
+      self.dataSet.readOnly = self.user.readOnly;
       watcher();
     }
   });
@@ -98,7 +105,10 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
   this.rds = readState.pipeline.findReactiveData(self.dataSet._id);
 
   this.rds.stream.doOnNext(x => {
-    self.lastDataObject = x;
+    $timeout(() => {
+      self.lastDataObject = x;
+    }, 0); // this seems necessary for propagating changes to the view... what a lousy hack!
   }).subscribe(new Rx.ReplaySubject(0));
+
 
 }];

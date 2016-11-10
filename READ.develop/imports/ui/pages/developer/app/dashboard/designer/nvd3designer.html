@@ -28,7 +28,7 @@
                   <label for="template">Chart Type</label>
                   <select class="form-control" ng-model="designerCtrl.visualization.templateId" name="template"
                   ng-options="template._id as template.name group by template.pluginType for template in designerCtrl.templates"
-                  ng-change="designerCtrl.updateChartTypeAndReload()">
+                  ng-change="designerCtrl.updateChartTypeAndReload()" ng-disabled="designerCtrl.user.readOnly">
                 </select>
               </div>
 
@@ -37,7 +37,7 @@
                 <div ui-ace="designerCtrl.aceJavaScriptOptions" ng-model="designerCtrl.visualization.basicOptions"
                 valid-json json-schema="nvd3VizDesignCtrl.basicOptionsSchema"
                 ng-model-options="{allowInvalid: true}"
-                ng-readonly="designerCtrl.visualization.readOnly" name="basicOptions">
+                ng-readonly="designerCtrl.user.readOnly" name="basicOptions">
               </div>
             </div>
           </form>
@@ -49,7 +49,7 @@
             <label for="advancedOptions">Advanced Options</label>
             <div ui-ace="designerCtrl.aceJavaScriptOptions" ng-model="designerCtrl.visualization.advancedOptions"
             valid-object ng-model-options="{allowInvalid: true}"
-            ng-readonly="designerCtrl.visualization.readOnly" name="advancedOptions">
+            ng-readonly="designerCtrl.user.readOnly" name="advancedOptions">
           </div>
         </div>
       </form>

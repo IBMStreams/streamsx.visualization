@@ -32,9 +32,10 @@ export function validJsonDirective() {
       if (!$ctrl) return;
       let validJsonChecker = (new ajv()).compile({});
 
-      let assignCheckerAndValidate = (jsonSchema) => {
+      let assignCheckerAndValidate = function(jsonSchema) {
         try {
           validJsonChecker = (new ajv()).compile(jsonSchema);
+//          console.log('using validJsonChecker from: ', jsonSchema);
         } catch (e) {
           console.log("jsonSchema compilation error in validJsonDirective -- will resort to default schema");
           validJsonChecker = (new ajv()).compile({});
@@ -43,17 +44,18 @@ export function validJsonDirective() {
       };
 
       $attrs.$observe('jsonSchema', (jsonSchemaVarStr) => {
-        console.log('about to $scope.$eval');
         assignCheckerAndValidate($scope.$eval(jsonSchemaVarStr) || {});
         $scope.$watch(jsonSchemaVarStr, function(newVal, oldVal) {
-          console.log('jsonSchema scope watch fired');
+          // console.log('jsonSchema scope watch fired');
           assignCheckerAndValidate(newVal || {});
         }, true); // deep watch
       });
 
-      $ctrl.$validators.validJson = (modelValue, viewValue) => {
+      $ctrl.$validators.validJson = function(modelValue, viewValue) {
         try {
-          return validJsonChecker(eval("(" + viewValue + ")"));
+          let val = validJsonChecker(eval("(" + viewValue + ")"));
+//          console.log(val, validJsonChecker.errors, (new ajv().errorsText(validJsonChecker.errors)));
+          return val;
         } catch(e) {
           return false;
         }

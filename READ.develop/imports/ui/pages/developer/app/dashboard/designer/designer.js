@@ -28,7 +28,7 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, r
     dataSet: () => DataSets.findOne({_id: self.getReactively('dashboard.selectedDataSetId')}),
     visualization: () => {
       let viz = Visualizations.findOne({_id: self.getReactively('dataSet.selectedVisualizationId')});
-      if (viz) viz.readOnly = self.app.readOnly;
+      if (viz) viz.readOnly = self.user.readOnly;
       return viz;
     },
     templates: () => Playground.find({

@@ -2,10 +2,15 @@
   <div class="form-group" ng-if="$ctrl.items.length > 0">
     <label for="selectedItemId">Select {{$ctrl.itemsControl.itemType}}</label>
     <div ng-repeat="_item in $ctrl.items">
-      <div class="input-group sidenav-item" >
-        <span class="input-group-addon"><input type="radio" ng-model="$ctrl.itemsControl.selectedId"
-          value="{{_item._id}}" ng-change="$ctrl.itemsControl.switchItem($ctrl.itemsControl.selectedId)"/>
+      <div class="input-group sidenav-item" ng-click="$ctrl.itemsControl.switchItem(_item._id)">
+        <span class="input-group-addon" ng-if="_item._id !== $ctrl.itemsControl.selectedId">
+          <i class="fa fa-check" aria-hidden="true" ng-style="{visibility: 'hidden'}"></i>
         </span>
+
+        <span class="input-group-addon" ng-if="_item._id === $ctrl.itemsControl.selectedId">
+          <i class="fa fa-check" aria-hidden="true"></i>
+        </span>
+
         <input type="text" class="form-control" readonly ng-model="_item.name"></input>
       </div>
     </div>
