@@ -1,7 +1,7 @@
-let Rx = require('rx/dist/rx.all');
-let DOM = require('rx-dom').DOM;
-let ajv = require('ajv');
-let _  = require('underscore');
+var Rx = require('rx/dist/rx.all');
+var DOM = require('rx-dom').DOM;
+var ajv = require('ajv');
+var _  = require('underscore');
 
 var exports = module.exports = {};
 // define the various reactive classes here...

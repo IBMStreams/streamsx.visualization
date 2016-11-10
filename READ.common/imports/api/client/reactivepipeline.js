@@ -1,4 +1,4 @@
-let _  = require('underscore');
+var _  = require('underscore');
 
 var exports = module.exports = {};
 

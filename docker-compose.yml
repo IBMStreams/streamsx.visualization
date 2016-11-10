@@ -8,7 +8,7 @@ readdevelop:
     - ROOT_URL=http://localhost
     - MONGO_URL=mongodb://mongo:27017/readdb
     - PORT=3000
-  mem_limit: 512
+  mem_limit: 512M
 
 readshare:
   image: sriumcp/readshare
@@ -20,10 +20,10 @@ readshare:
     - ROOT_URL=http://localhost
     - MONGO_URL=mongodb://mongo:27017/readdb
     - PORT=3002
-  mem_limit: 512
+  mem_limit: 512M
 
 mongo:
   image: mongo:latest
   expose:
     - "27017"
-  mem_limit: 256
+  mem_limit: 256M

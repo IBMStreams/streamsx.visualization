@@ -1,6 +1,6 @@
-let cytoscape = require("cytoscape");
-let angular = require('angular');
-let _  = require('underscore');
+var cytoscape = require("cytoscape");
+var angular = require('angular');
+var _  = require('underscore');
 
 var exports = module.exports = {}
 

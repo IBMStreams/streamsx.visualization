@@ -14,6 +14,7 @@
     "angular-nvd3": "^1.0.9",
     "angular-ui-bootstrap": "^2.1.4",
     "angular-ui-router": "^0.3.1",
+    "babel-runtime": "^6.18.0",
     "bootstrap-sass": "^3.3.7",
     "bower": "^1.7.9",
     "cytoscape": "^2.7.9",
