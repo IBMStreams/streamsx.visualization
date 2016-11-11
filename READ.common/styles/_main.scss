@@ -203,18 +203,12 @@ pre {
 /*==========  Mobile First Method  ==========*/
 /* Extra Small Devices, Phones */
 @media only screen and (min-width : $screen-xs-min) {
-  .main .main-content {
-    padding-bottom: $navbar-height;
-  }
 }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : $screen-sm-min) {
   .main .main-content {
     padding-bottom: 0;
-  }
-  .sidenav .sidenav-content {
-    padding-bottom: $navbar-height;
   }
   .row > .sidenav {
     height: 100%;
