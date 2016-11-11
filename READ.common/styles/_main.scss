@@ -15,11 +15,15 @@ $viz-panel-header-height: 36px;
 }
 
 // additional styles
-html, body, .page-wrapper, .content-wrapper, .content-wrapper > .row,
+html, body, .page-wrapper, .content-wrapper > .row,
 .main, .main-content, .main-content-panel-wrapper {
   // this is an issue; most of these things have height 100% only at sm, md and lg
   // probably why xs setting is not working
   height: 100%;
+}
+
+.content-wrapper {
+  @include calc(height, '100% - 1.43em') // content wrapper height
 }
 
 .after-button {
