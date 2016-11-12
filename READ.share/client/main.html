@@ -10,36 +10,17 @@
     <div class="content-wrapper container-fluid">
       <div class="row">
         <div class="sidenav col-xs-12 col-sm-6 col-md-4 col-lg-3 navbar-default" ng-show="readState.sidebar.show" ng-if="readState.sidebar.present">
-          <div ui-view="sidenav" class="sidenav-content">
-          </div>
-
-          <nav class="navbar hidden-xs">
-            <div class="navbar-header col-sm-12 col-md-12 col-lg-12">
-              <a class="navbar-brand" href="https://github.com/IBMStreams/streamsx.visualization" target="_blank">Built on READ</a>
-              <a class="navbar-brand pull-right" href="https://github.com/IBMStreams/streamsx.visualization" target="_blank">
-                <span>
-                  <i class="fa fa-github"></i>
-                </span>
-              </a>
-            </div>
-          </nav>
+          <div ui-view="sidenav" class="sidenav-content"></div>
         </div>
 
         <div class="main col-xs-12"
         ng-class="{'col-sm-6': (readState.sidebar.present && readState.sidebar.show), 'col-md-8': (readState.sidebar.present && readState.sidebar.show), 'col-lg-9': (readState.sidebar.present && readState.sidebar.show), 'col-sm-12': ! (readState.sidebar.present && readState.sidebar.show), 'col-md-12': ! (readState.sidebar.present && readState.sidebar.show), 'col-lg-12': ! (readState.sidebar.present && readState.sidebar.show)}">
-          <div ui-view="maincontent" class="main-content"></div>
-
-          <nav class="navbar navbar-default navbar-fixed-bottom hidden-sm hidden-md hidden-lg">
-            <div class="navbar-header">
-              <a class="navbar-brand" ui-sref="read.developer.home">Github</a>
-              <a class="navbar-brand pull-right" ui-sref="read.developer.home"><span>
-                <i class="fa fa-github"></i>
-              </span>
-            </a>
-          </div>
-        </nav>
-
+        <div ui-view="maincontent" class="main-content"></div>
       </div>
     </div>
+  </div>
+
+  <div style="text-align: center">
+    <a href="https://github.com/IBMStreams/streamsx.visualization" target="_blank">READ <i class="fa fa-github"></i></a>
   </div>
 </body>

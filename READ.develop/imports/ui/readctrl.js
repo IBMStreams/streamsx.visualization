@@ -48,37 +48,41 @@ function ($scope, $reactive, readState, $timeout) {
         readState.deferredUser.promise.then(() => {
           readState.deferredPlayground.promise.then(() => {
             readState.deferredApps.promise.then(() => {
-              self.subscribe('dashboards', () => [self.user.selectedIds.appId], {
+              self.subscribe('dashboards', () => [self.getReactively('user.selectedIds.appId')], {
                 onReady: () => {
                   readState.deferredDashboards.resolve();
                 }
               });
 
+              let finishedDataSetOnReady = false;
               self.subscribe('datasets', () => {
-                return [self.user.selectedIds.appId]
+                return [self.getReactively('user.selectedIds.appId')]
               }, {
                 onReady: () => {
-                  let dataSets = DataSets.find({appId: self.user.selectedIds.appId}).fetch();
-                  dataSets.map(dataSet => {
-                    readState.dependencies.addNode(dataSet._id);
-                  });
-                  dataSets.map(dataSet => {
-                    if (_.contains(['extendedHTTP', 'transformed'], dataSet.dataSetType)) {
-                      changeDataSetParents(dataSet);
-                    };
-                  });
-                  //toposort
-                  let nodes = dataSets.map(d => d._id);
-                  let edges = readState.dependencies.graph.elements().edges().map(e => e.data()).map(o => [o.source, o.target]);
-                  toposort.array(nodes, edges).map(_id => {
-                    readState.pipeline.addDataSet(_.find(dataSets, ds => ds._id === _id));
-                  });
-                  // finally resolve
-                  readState.deferredDataSets.resolve();
+                  if (! finishedDataSetOnReady) {
+                    let dataSets = DataSets.find({appId: self.getReactively('user.selectedIds.appId')}).fetch();
+                    dataSets.map(dataSet => {
+                      readState.dependencies.addNode(dataSet._id);
+                    });
+                    dataSets.map(dataSet => {
+                      if (_.contains(['extendedHTTP', 'transformed'], dataSet.dataSetType)) {
+                        changeDataSetParents(dataSet);
+                      };
+                    });
+                    //toposort
+                    let nodes = dataSets.map(d => d._id);
+                    let edges = readState.dependencies.graph.elements().edges().map(e => e.data()).map(o => [o.source, o.target]);
+                    toposort.array(nodes, edges).map(_id => {
+                      readState.pipeline.addDataSet(_.find(dataSets, ds => ds._id === _id));
+                    });
+                    // finally resolve
+                    readState.deferredDataSets.resolve();
+                  }
+                  finishedDataSetOnReady = true;
                 }
               });
 
-              self.subscribe('visualizations', () => [self.user.selectedIds.appId], {
+              self.subscribe('visualizations', () => [self.getReactively('user.selectedIds.appId')], {
                 onReady: () => {
                   readState.deferredVisualizations.resolve();
                 }
