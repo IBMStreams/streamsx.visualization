@@ -66,15 +66,43 @@ export const leafletTemplateSchema = {
   additionalProperties: false
 };
 
+export const customPluginTemplateSchema = {
+  $schema: "http://json-schema.org/schema#",
+  description: "Custom plugin template schema",
+  type: "object",
+  properties: {
+    userId: {type: "string"},
+    pluginType: {constant: "Custom Plugin"},
+    pluginId: {type: "string"},
+    name: {
+      type: "string",
+      minLength: 1,
+      maxLength: 20
+    },
+    inputSchemaId: {type: "string"}, // schema for input data
+    testData: {type: "string"},
+    basicOptionsSchemaId: {type: "string"},
+    basicOptions: {type: "string"}, // e.g., axis mappings
+    initFunction: {type: "string"}, // initialize the chart element (independent of data) // includes setting any classes
+    updateFunction: {type: "string"}, // update the chart when data changes (called once after init and everytime data changes)
+    usageInfo: {type: "string"}
+  },
+  required: ["userId", "pluginType", "pluginId", "name", "inputSchemaId", "testData",
+  "basicOptionsSchemaId", "basicOptions", "initFunction", "updateFunction", "usageInfo"],
+  additionalProperties: false
+};
+
 export const Playground = new Mongo.Collection('playground');
 
 let dataSchemaValidate = undefined;
 let nvd3Validate = undefined;
 let leafletValidate = undefined;
+let customPluginValidate = undefined;
 try {
   dataSchemaValidate = (new ajv({removeAdditional: true})).compile(dataSchemaTemplateSchema);
   nvd3Validate = (new ajv({removeAdditional: true})).compile(nvd3TemplateSchema);
   leafletValidate = (new ajv({removeAdditional: true})).compile(leafletTemplateSchema);
+  customPluginValidate = (new ajv({removeAdditional: true})).compile(customPluginTemplateSchema);
 }
 catch (e) {
   console.log(e);
@@ -86,6 +114,7 @@ let getValidate = (pluginType) => {
     case "Data Schema": return dataSchemaValidate;
     case "NVD3": return nvd3Validate;
     case "leaflet": return leafletValidate;
+    case "Custom Plugin": return customPluginValidate;
     default: throw new Error("Unknown plug in type detected in getValidate");
   }
 }
