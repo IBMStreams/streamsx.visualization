@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "meteor run",
-    "postinstall": "node_modules/bower/bin/bower install"
+    "postinstall": "node_modules/bower/bin/bower install --allow-root"
   },
   "dependencies": {
     "ajv": "^4.8.2",
