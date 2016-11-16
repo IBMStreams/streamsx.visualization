@@ -24,6 +24,7 @@
     "cytoscape": "^2.7.9",
     "meteor-node-stubs": "^0.2.3",
     "ngclipboard": "^1.1.1",
+    "node-red": "^0.15.2",
     "nvd3": "^1.8.1",
     "read-common": "file:../READ.common",
     "read-mymodules": "file:../READ.mymodules",

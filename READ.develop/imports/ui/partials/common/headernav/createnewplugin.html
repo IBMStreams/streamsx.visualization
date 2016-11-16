@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">New Plugin</h3>
+</div>
+
+<div class="modal-body" id="modal-body">
+  <form name="pluginName" novalidate>
+    <input class='form-control' ng-model='modalCtrl.newPluginName' ng-required="true" ng-minlength="1" ng-maxlength="20"></input>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-click="modalCtrl.create()"
+  ng-disabled="! pluginName.$valid">Create</button>
+  <button class="btn btn-warning" type="button" ng-click="modalCtrl.cancel()">Dismiss</button>
+</div>

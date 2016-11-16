@@ -7,7 +7,12 @@
     {
         "id": "63221c4b.14b9a4",
         "type": "tab",
-        "label": "Flow 1"
+        "label": "Websocket"
+    },
+    {
+        "type": "tab",
+        "id": "858f7aa3.4d3228",
+        "label": "Streams views"
     },
     {
         "id": "ab1ada0d.0d25c8",
@@ -238,5 +243,46 @@
         "x": 580,
         "y": 254,
         "wires": []
+    },
+    {
+        "id": "2dc3efb8.c3748",
+        "type": "http in",
+        "z": "858f7aa3.4d3228",
+        "name": "waves",
+        "url": "/streams/waves",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 206,
+        "y": 228,
+        "wires": [
+            [
+                "bd69bab.2637948"
+            ]
+        ]
+    },
+    {
+        "id": "94b10d0.2182ef",
+        "type": "http response",
+        "z": "858f7aa3.4d3228",
+        "name": "",
+        "x": 705.5,
+        "y": 227,
+        "wires": []
+    },
+    {
+        "id": "bd69bab.2637948",
+        "type": "http request",
+        "z": "858f7aa3.4d3228",
+        "name": "waveview with password",
+        "method": "GET",
+        "ret": "obj",
+        "url": "https://192.168.147.129:8443/streams/rest/instances/StreamsInstance/views/StreamsInstance.application::Main_7.waveview/viewitems",
+        "x": 471,
+        "y": 228,
+        "wires": [
+            [
+                "94b10d0.2182ef"
+            ]
+        ]
     }
 ]

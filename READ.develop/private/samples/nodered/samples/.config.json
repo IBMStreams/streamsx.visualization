@@ -2,8 +2,7 @@
  "nodes": {
   "node-red": {
    "name": "node-red",
-   "version": "0.15.2",
-   "local": false,
+   "version": "0.13.4",
    "nodes": {
     "sentiment": {
      "name": "sentiment",
@@ -11,9 +10,8 @@
       "sentiment"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/analysis/72-sentiment.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/analysis/72-sentiment.js"
     },
     "inject": {
      "name": "inject",
@@ -21,9 +19,8 @@
       "inject"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/core/20-inject.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/core/20-inject.js"
     },
     "catch": {
      "name": "catch",
@@ -31,9 +28,8 @@
       "catch"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/core/25-catch.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/core/25-catch.js"
     },
     "status": {
      "name": "status",
@@ -41,9 +37,8 @@
       "status"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/core/25-status.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/core/25-status.js"
     },
     "debug": {
      "name": "debug",
@@ -51,9 +46,8 @@
       "debug"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/core/58-debug.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/core/58-debug.js"
     },
     "exec": {
      "name": "exec",
@@ -61,9 +55,8 @@
       "exec"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/core/75-exec.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/core/75-exec.js"
     },
     "function": {
      "name": "function",
@@ -71,9 +64,8 @@
       "function"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/core/80-function.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/core/80-function.js"
     },
     "template": {
      "name": "template",
@@ -81,9 +73,8 @@
       "template"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/core/80-template.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/core/80-template.js"
     },
     "delay": {
      "name": "delay",
@@ -91,9 +82,8 @@
       "delay"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/core/89-delay.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/core/89-delay.js"
     },
     "trigger": {
      "name": "trigger",
@@ -101,9 +91,8 @@
       "trigger"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/core/89-trigger.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/core/89-trigger.js"
     },
     "comment": {
      "name": "comment",
@@ -111,9 +100,8 @@
       "comment"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/core/90-comment.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/core/90-comment.js"
     },
     "unknown": {
      "name": "unknown",
@@ -121,9 +109,8 @@
       "unknown"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/core/98-unknown.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/core/98-unknown.js"
     },
     "rpi-gpio": {
      "name": "rpi-gpio",
@@ -134,9 +121,8 @@
       "rpi-keyboard"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/hardware/36-rpi-gpio.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/hardware/36-rpi-gpio.js"
     },
     "mqtt": {
      "name": "mqtt",
@@ -146,9 +132,8 @@
       "mqtt-broker"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/io/10-mqtt.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/io/10-mqtt.js"
     },
     "httpin": {
      "name": "httpin",
@@ -157,9 +142,8 @@
       "http response"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/io/21-httpin.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/io/21-httpin.js"
     },
     "httprequest": {
      "name": "httprequest",
@@ -167,9 +151,8 @@
       "http request"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/io/21-httprequest.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/io/21-httprequest.js"
     },
     "websocket": {
      "name": "websocket",
@@ -180,9 +163,8 @@
       "websocket-client"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/io/22-websocket.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/io/22-websocket.js"
     },
     "watch": {
      "name": "watch",
@@ -190,9 +172,8 @@
       "watch"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/io/23-watch.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/io/23-watch.js"
     },
     "tcpin": {
      "name": "tcpin",
@@ -202,9 +183,8 @@
       "tcp request"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/io/31-tcpin.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/io/31-tcpin.js"
     },
     "udp": {
      "name": "udp",
@@ -213,9 +193,8 @@
       "udp out"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/io/32-udp.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/io/32-udp.js"
     },
     "switch": {
      "name": "switch",
@@ -223,9 +202,8 @@
       "switch"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/logic/10-switch.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/logic/10-switch.js"
     },
     "change": {
      "name": "change",
@@ -233,9 +211,8 @@
       "change"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/logic/15-change.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/logic/15-change.js"
     },
     "range": {
      "name": "range",
@@ -243,9 +220,8 @@
       "range"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/logic/16-range.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/logic/16-range.js"
     },
     "CSV": {
      "name": "CSV",
@@ -253,9 +229,8 @@
       "csv"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/parsers/70-CSV.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/parsers/70-CSV.js"
     },
     "HTML": {
      "name": "HTML",
@@ -263,9 +238,8 @@
       "html"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/parsers/70-HTML.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/parsers/70-HTML.js"
     },
     "JSON": {
      "name": "JSON",
@@ -273,9 +247,8 @@
       "json"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/parsers/70-JSON.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/parsers/70-JSON.js"
     },
     "XML": {
      "name": "XML",
@@ -283,9 +256,8 @@
       "xml"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/parsers/70-XML.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/parsers/70-XML.js"
     },
     "tail": {
      "name": "tail",
@@ -293,9 +265,8 @@
       "tail"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/storage/28-tail.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/storage/28-tail.js"
     },
     "file": {
      "name": "file",
@@ -304,48 +275,14 @@
       "file in"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/storage/50-file.js"
-    },
-    "link": {
-     "name": "link",
-     "types": [
-      "link in",
-      "link out"
-     ],
-     "enabled": true,
-     "local": false,
-     "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/core/60-link.js"
-    },
-    "tls": {
-     "name": "tls",
-     "types": [
-      "tls-config"
-     ],
-     "enabled": true,
-     "local": false,
-     "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/io/05-tls.js"
-    },
-    "split": {
-     "name": "split",
-     "types": [
-      "split",
-      "join"
-     ],
-     "enabled": true,
-     "local": false,
-     "module": "node-red",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red/nodes/core/logic/17-split.js"
+     "file": "/usr/local/lib/node_modules/node-red/nodes/core/storage/50-file.js"
     }
    }
   },
   "node-red-node-email": {
    "name": "node-red-node-email",
-   "version": "0.1.11",
-   "local": false,
+   "version": "0.1.3",
    "nodes": {
     "email": {
      "name": "email",
@@ -354,16 +291,14 @@
       "e-mail in"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red-node-email",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red-node-email/61-email.js"
+     "file": "/usr/local/lib/node_modules/node-red/node_modules/node-red-node-email/61-email.js"
     }
    }
   },
   "node-red-node-feedparser": {
    "name": "node-red-node-feedparser",
-   "version": "0.1.6",
-   "local": false,
+   "version": "0.1.5",
    "nodes": {
     "feedparse": {
      "name": "feedparse",
@@ -371,16 +306,14 @@
       "feedparse"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red-node-feedparser",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red-node-feedparser/32-feedparse.js"
+     "file": "/usr/local/lib/node_modules/node-red/node_modules/node-red-node-feedparser/32-feedparse.js"
     }
    }
   },
   "node-red-node-rbe": {
    "name": "node-red-node-rbe",
    "version": "0.1.5",
-   "local": false,
    "nodes": {
     "rbe": {
      "name": "rbe",
@@ -388,16 +321,14 @@
       "rbe"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red-node-rbe",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red-node-rbe/rbe.js"
+     "file": "/usr/local/lib/node_modules/node-red/node_modules/node-red-node-rbe/rbe.js"
     }
    }
   },
   "node-red-node-twitter": {
    "name": "node-red-node-twitter",
-   "version": "0.1.7",
-   "local": false,
+   "version": "0.1.6",
    "nodes": {
     "twitter": {
      "name": "twitter",
@@ -407,28 +338,8 @@
       "twitter out"
      ],
      "enabled": true,
-     "local": false,
      "module": "node-red-node-twitter",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red-node-twitter/27-twitter.js"
-    }
-   }
-  },
-  "node-red-node-serialport": {
-   "name": "node-red-node-serialport",
-   "version": "0.4.0",
-   "local": false,
-   "nodes": {
-    "serialport": {
-     "name": "serialport",
-     "types": [
-      "serial in",
-      "serial out",
-      "serial-port"
-     ],
-     "enabled": true,
-     "local": false,
-     "module": "node-red-node-serialport",
-     "file": "/Users/rjv/Development/streamsx.visualization/READ.develop/node_modules/node-red-node-serialport/25-serial.js"
+     "file": "/usr/local/lib/node_modules/node-red/node_modules/node-red-node-twitter/27-twitter.js"
     }
    }
   }

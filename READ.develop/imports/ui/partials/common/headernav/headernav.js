@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import templateUrl from './headernav.html';
+import createNewPluginTemplate from './createnewplugin.html'
 // intended to work only with the readonly sample app
 import 'bootstrap-tour/build/css/bootstrap-tour.css';
 import Tour from 'bootstrap-tour/build/js/bootstrap-tour';
@@ -11,8 +12,8 @@ export const headerNavComponent = {
   bindings: {
     sidebar: '<'
   },
-  controller: ['$scope', '$rootScope', '$state', '$reactive',
-  function($scope, $rootScope, $state, $reactive) {
+  controller: ['$scope', '$rootScope', '$state', '$reactive', '$uibModal',
+  function($scope, $rootScope, $state, $reactive, $uibModal) {
     $reactive(this).attach($scope);
 
     this.toggleSidebar = () => {
@@ -23,6 +24,22 @@ export const headerNavComponent = {
     this.helpers({
       user: () => Users.findOne({})
     });
+
+    this.createNewPlugin = () => {
+      // modal business
+      let modalInstance = $uibModal.open({
+        controller: ['$scope', '$uibModalInstance',
+        function($scope, $uibModalInstance) {
+
+          this.cancel = function() {
+            $uibModalInstance.dismiss('cancel');
+          };
+        }],
+        controllerAs: 'modalCtrl',
+        size: 'lg',
+        templateUrl: createNewPluginTemplate
+      });
+    };
 
     // Instance the tour
     let tour = new Tour({
