@@ -62,7 +62,7 @@ const reactivePipeline = ['reactiveDataFactory', "leafletData", "leafletBoundsHe
       switch (dataSet.dataSetType) {
         case "raw": return reactiveDataFactory.rawData(dataSet._id, dataSet.name, eval("(" + dataSet.rawData + ")"));
         break;
-        case "interval": return reactiveDataFactory.intervalData(dataSet._id, dataSet.name, dataSet.intervalSec);
+        case "interval": return reactiveDataFactory.intervalData(dataSet._id, dataSet.name, dataSet.intervalMilliSec);
         break;
         case "websocket": return reactiveDataFactory.websocketData(dataSet._id, dataSet.name, dataSet.url);
         break;
@@ -118,13 +118,13 @@ const reactivePipeline = ['reactiveDataFactory', "leafletData", "leafletBoundsHe
           let reactiveData = _.find(self.reactiveDataSets, ds => (ds._id === dataSet.parentId));
           if (! reactiveData) throw new Error("Unable to find parent dataset in makeReativeData");
           let argArray = [dataSet._id, dataSet.name, reactiveData];
-          if (dataSet.poll.enabled) argArray.push(dataSet.poll.intervalSec);
+          if (dataSet.poll.enabled) argArray.push(dataSet.poll.intervalMilliSec);
           return reactiveDataFactory.extendedHTTPData(...argArray);
         }
         break;
         case "simpleHTTP": {
           let argArray = [dataSet._id, dataSet.name, dataSet.url];
-          if (dataSet.poll.enabled) argArray.push(dataSet.poll.intervalSec);
+          if (dataSet.poll.enabled) argArray.push(dataSet.poll.intervalMilliSec);
           return reactiveDataFactory.simpleHTTPData(...argArray);
         }
         break;
