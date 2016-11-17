@@ -11,21 +11,21 @@ export default dashboards =
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Dynamics",
-	"selectedDataSetId": "d7kBgpXTTwYLCrXMg"
+	"selectedDataSetId": "QWF74B2tAs5LRspSz"
 },
 {
 	"_id": "RFznYoGe3ETKsGLQz",
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Variety",
-	"selectedDataSetId": "384vc72q4fyELKjNq"
+	"selectedDataSetId": "dYvhhokemueLhytDX"
 },
 {
 	"_id": "ruHbJhctjLhCYZiof",
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Maps",
-	"selectedDataSetId": "wm4dSc6Fc5NR3LgpG"
+	"selectedDataSetId": "6gZNShwCFcMCptQ2H"
 },
 {
 	"_id": "n4NQicNrGa2QkjPgp",
