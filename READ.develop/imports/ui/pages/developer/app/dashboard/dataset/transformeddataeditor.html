@@ -18,7 +18,7 @@
   <div class="form-group">
     <label for="transformFunction">Transform Function</label>
     <div ui-ace="dataSetCtrl.aceJavaScriptOptions" ng-model="dataSetCtrl.dataSet.transformFunction"
-    valid-function required ng-model-options="{allowInvalid: true}"
+    valid-function required ng-model-options="{allowInvalid: true, debounce: 500}"
     ng-readonly="dataSetCtrl.user.readOnly" name="transformFunction">
     </div>
   </div>
