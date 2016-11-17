@@ -334,8 +334,8 @@ export default visualizations =
 	"dataSetId": "JhLqiLWZMxis3LxJP",
 	"gridStack": {
 		"x": 0,
-		"y": 11,
-		"height": 8,
+		"y": 17,
+		"height": 5,
 		"width": 6
 	}
 },
@@ -350,7 +350,7 @@ export default visualizations =
 	"dataSetId": "wm4dSc6Fc5NR3LgpG",
 	"gridStack": {
 		"x": 0,
-		"y": 28,
+		"y": 29,
 		"height": 5,
 		"width": 12
 	}
@@ -381,9 +381,9 @@ export default visualizations =
 	"pluginType": "leaflet",
 	"dataSetId": "6gZNShwCFcMCptQ2H",
 	"gridStack": {
-		"x": 6,
-		"y": 8,
-		"height": 8,
+		"x": 0,
+		"y": 5,
+		"height": 6,
 		"width": 6
 	}
 },
@@ -397,8 +397,8 @@ export default visualizations =
 	"pluginType": "leaflet",
 	"dataSetId": "XtsxDSh3BL8pGvqNQ",
 	"gridStack": {
-		"x": 0,
-		"y": 19,
+		"x": 6,
+		"y": 20,
 		"height": 9,
 		"width": 6
 	}
@@ -414,7 +414,7 @@ export default visualizations =
 	"dataSetId": "NNQ9r4tYyXLJfWzyK",
 	"gridStack": {
 		"x": 6,
-		"y": 16,
+		"y": 8,
 		"height": 8,
 		"width": 6
 	}
@@ -430,7 +430,7 @@ export default visualizations =
 	"dataSetId": "tEheoTBzYnS3ZBKpQ",
 	"gridStack": {
 		"x": 0,
-		"y": 5,
+		"y": 11,
 		"height": 6,
 		"width": 6
 	}
@@ -462,7 +462,7 @@ export default visualizations =
 	"dataSetId": "5oJFX5SxWexTCD9ca",
 	"gridStack": {
 		"x": 6,
-		"y": 33,
+		"y": 34,
 		"height": 6,
 		"width": 6
 	}
@@ -478,7 +478,7 @@ export default visualizations =
 	"dataSetId": "iEahWn8fycZDsGjfZ",
 	"gridStack": {
 		"x": 0,
-		"y": 33,
+		"y": 34,
 		"height": 6,
 		"width": 6
 	}
@@ -494,7 +494,7 @@ export default visualizations =
 	"dataSetId": "oZF4xTTraiir4avX6",
 	"gridStack": {
 		"x": 6,
-		"y": 24,
+		"y": 16,
 		"height": 4,
 		"width": 6
 	}

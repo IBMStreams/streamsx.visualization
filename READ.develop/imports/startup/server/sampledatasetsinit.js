@@ -1,4 +1,4 @@
-export default datasets =
+export default datasets = 
 [{
 	"_id": "y68h9Lziqtr7E6Nz8",
 	"userId": "guest",
@@ -36,7 +36,7 @@ export default datasets =
 	"parents": [
 		"QWF74B2tAs5LRspSz"
 	],
-	"transformFunction": "(x, s) =\u003e {\n    if (s.length === 20) s.splice(0, 1)\n    x.hello = 'world';\n    s.push(x);\n    return s;\n}",
+	"transformFunction": "(x, s) =\u003e {\n    if (s.length \u003e= 20) s.splice(0, 1)\n    x.hello = 'world';\n    s.push(x);\n    return s;\n}",
 	"stateParams": {
 		"enabled": true,
 		"state": "[]"
@@ -303,7 +303,7 @@ export default datasets =
 	"parents": [
 		"cpvWhCdrwde89sDRz"
 	],
-	"transformFunction": "(x, s) =\u003e {\n    if (s.length === 200) s.splice(0, 1)\n    s.push(x);\n    return s.map((v, i) =\u003e {\n        return {\n            time: i,\n            sin: v\n        }\n    });\n}",
+	"transformFunction": "(x, s) =\u003e {\n    if (s.length \u003e= 200) s.splice(0, 1)\n    s.push(x);\n    return s.map((v, i) =\u003e {\n        return {\n            time: i,\n            sin: v\n        }\n    });\n}",
 	"stateParams": {
 		"enabled": true,
 		"state": "[]"
@@ -445,3 +445,4 @@ export default datasets =
 	},
 	"selectedVisualizationId": "6sydvLoRERWGKqoHq"
 }]
+
