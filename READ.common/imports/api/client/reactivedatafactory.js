@@ -64,14 +64,14 @@ class RawData extends ReactiveData {
 }
 
 class IntervalData extends ReactiveData {
-  constructor(_id, name, intervalSec) { // interval in seconds
+  constructor(_id, name, intervalMilliSec) { // interval in milli seconds
     super(_id, name);
     this.type = "interval";
-    if (! ((intervalSec) && (_.isNumber(intervalSec)) && (intervalSec >= 1))) {
+    if (! ((intervalMilliSec) && (_.isNumber(intervalMilliSec)) && (intervalMilliSec >= 10))) {
       this.injectError('Invalid interval value: ' + interval);
     } else {
       let self = this;
-      this.intervalSubscription = Rx.Observable.interval(intervalSec*1000).timeInterval().doOnNext(x => {
+      this.intervalSubscription = Rx.Observable.interval(intervalMilliSec).timeInterval().doOnNext(x => {
         self.injectData(x);
       }).subscribe(new Rx.ReplaySubject(0));
     }
@@ -216,7 +216,7 @@ const reactiveDataFactory = ['$http', function ($http) {
 
   // SimpleHTTPData and ExtendedHTTPData implementations below; other implementations above;
   class ExtendedHTTPData extends ReactiveData { // HTTP GET method
-    constructor(_id, name, reactiveData, intervalSec) { // interval in seconds // reactiveData provides the config
+    constructor(_id, name, reactiveData, intervalMilliSec) { // interval in milli seconds // reactiveData provides the config
       super(_id, name);
       this.type = "extendedHTTP";
       let self = this;
@@ -233,15 +233,15 @@ const reactiveDataFactory = ['$http', function ($http) {
         }
       };
 
-      if (! intervalSec) {
+      if (! intervalMilliSec) {
         reactiveData.stream.doOnNext(x => {
           if (x.isData) injectSomething(x.data);
           else self.injectError("ExtendedHTTP parent dataset has error");
         }).subscribe();
-      } else if (! ((_.isNumber(intervalSec)) && (intervalSec >= 1))) {
+      } else if (! ((_.isNumber(intervalMilliSec)) && (intervalMilliSec >= 10))) {
         self.injectError('Invalid interval value: ' + interval);
       } else {
-        self.intervalGen = Rx.Observable.merge(Rx.Observable.just(0), Rx.Observable.interval(intervalSec*1000));
+        self.intervalGen = Rx.Observable.merge(Rx.Observable.just(0), Rx.Observable.interval(intervalMilliSec));
         self.intervalSubscription = Rx.Observable.combineLatest(reactiveData.stream, self.intervalGen, (x, y) => {
           return x;
         }).doOnNext(x => {
@@ -259,22 +259,22 @@ const reactiveDataFactory = ['$http', function ($http) {
   }
 
   class SimpleHTTPData extends ExtendedHTTPData { // HTTP GET method
-    constructor(_id, name, url, intervalSec) { // interval in seconds
+    constructor(_id, name, url, intervalMilliSec) { // interval in milli seconds
       super(_id, name, new RawData(_id + '-part', name + '-part', {
         method: 'GET',
         url: url
-      }), intervalSec);
+      }), intervalMilliSec);
       this.type = "simpleHTTP";
     }
   }
 
   let myFactory = {};
   myFactory.rawData = (_id, name, data) => new RawData(_id, name, data);
-  myFactory.intervalData = (_id, name, intervalSec) => new IntervalData(_id, name, intervalSec);
+  myFactory.intervalData = (_id, name, intervalMilliSec) => new IntervalData(_id, name, intervalMilliSec);
   myFactory.transformedData = (_id, name, reactives, transformFunction, state) => new TransformedData(_id, name, reactives, transformFunction, state);
   myFactory.validatedData = (_id, name, reactiveData, schema) => new ValidatedData(_id, name, reactiveData, schema);
-  myFactory.extendedHTTPData = (_id, name, reactiveData, intervalSec) => new ExtendedHTTPData(_id, name, reactiveData, intervalSec);
-  myFactory.simpleHTTPData = (_id, name, url, intervalSec) => new SimpleHTTPData(_id, name, url, intervalSec);
+  myFactory.extendedHTTPData = (_id, name, reactiveData, intervalMilliSec) => new ExtendedHTTPData(_id, name, reactiveData, intervalMilliSec);
+  myFactory.simpleHTTPData = (_id, name, url, intervalMilliSec) => new SimpleHTTPData(_id, name, url, intervalMilliSec);
   myFactory.websocketData = (_id, name, url) => new WebsocketData(_id, name, url);
 
   return myFactory;

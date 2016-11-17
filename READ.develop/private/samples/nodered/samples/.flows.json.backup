@@ -265,19 +265,19 @@
         "type": "http response",
         "z": "858f7aa3.4d3228",
         "name": "",
-        "x": 656.5,
-        "y": 229,
+        "x": 705.5,
+        "y": 227,
         "wires": []
     },
     {
         "id": "bd69bab.2637948",
         "type": "http request",
         "z": "858f7aa3.4d3228",
-        "name": "view",
+        "name": "waveview with password",
         "method": "GET",
         "ret": "obj",
-        "url": "https://192.168.147.129:8443/streams/rest/instances/StreamsInstance/views/StreamsInstance.application::Main_7.waveview/viewitems",
-        "x": 480,
+        "url": "https://192.168.147.129:8443/streams/rest/instances/StreamsInstance/views/StreamsInstance.application::Main_2.waveview/viewitems",
+        "x": 471,
         "y": 228,
         "wires": [
             [
