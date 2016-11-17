@@ -216,22 +216,9 @@
         "y": 170,
         "wires": [
             [
-                "e3c54e5f.d9779",
                 "ac935458.bf6e98"
             ]
         ]
-    },
-    {
-        "id": "e3c54e5f.d9779",
-        "type": "debug",
-        "z": "63221c4b.14b9a4",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "false",
-        "x": 608,
-        "y": 191,
-        "wires": []
     },
     {
         "id": "ac935458.bf6e98",

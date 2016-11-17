@@ -6,10 +6,9 @@ let aceOptions = {
   showIntentGuides: true,
   showPrintMargin: false,
   useSoftTabs: true,
-  useWrapMode: true,
-  behavioursEnabled: true,
-  wrapBehavioursEnable: true,
-  theme: 'github'
+  // behavioursEnabled: true,
+  // wrapBehavioursEnable: true,
+  theme: 'solarized_dark'
 };
 
 export const aceJsonSchemaOptions = angular.merge({
