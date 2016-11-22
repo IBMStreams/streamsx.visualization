@@ -8,11 +8,11 @@ let aceOptions = {
   useSoftTabs: true,
   // behavioursEnabled: true,
   // wrapBehavioursEnable: true,
-  theme: 'solarized_dark'
+  theme: 'github'
 };
 
 export const aceJsonSchemaOptions = angular.merge({
-  mode: 'json'
+  mode: 'javascript'
 }, aceOptions);
 
 export const aceJavaScriptOptions = angular.merge({
