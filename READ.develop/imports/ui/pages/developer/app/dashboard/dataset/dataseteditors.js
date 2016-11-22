@@ -38,7 +38,7 @@ angularModule.factory('defaultDataSets', function() {
       url: 'http://properurl.org/jsondata',
       poll: {
         enabled: false,
-        intervalSec: 20
+        intervalMilliSec: 20000
       }
     },websocket: {
       url: 'ws://websocket_address',
@@ -57,7 +57,7 @@ angularModule.factory('defaultDataSets', function() {
         parentId: parentId,
         poll: {
           enabled: false,
-          intervalSec: 20
+          intervalMilliSec: 20000
         }
       }
     }

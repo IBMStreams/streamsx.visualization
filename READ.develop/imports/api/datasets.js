@@ -74,7 +74,7 @@ export const simpleHTTPDataSchema = {
       type: "object",
       properties: {
         enabled: {type: "boolean"},
-        intervalSec: {type: "number"}
+        intervalMilliSec: {type: "number"}
       },
       required: ["enabled"]
     }
@@ -106,7 +106,7 @@ export const extendedHTTPDataSchema = {
       type: "object",
       properties: {
         enabled: {type: "boolean"},
-        intervalSec: {type: "number"}
+        intervalMilliSec: {type: "number"}
       },
       required: ["enabled"]
     }

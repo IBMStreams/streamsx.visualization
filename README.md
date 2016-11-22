@@ -18,7 +18,7 @@
 4. Visit READ in your browser after you see this message: *=> App running at: http://localhost:3000/*
 
 ## Next steps
-* Take the 5 minute READ tour: http://169.44.122.120:3000/#/developer/app/dashboard/designer
+* Take the 2 minute READ tour: http://169.44.122.120:3000/#/developer/app/dashboard/designer
 * Play with the sample app bundled with READ
 * Follow the tutorial: http://localhost:3000/#/docs/tutorial
 

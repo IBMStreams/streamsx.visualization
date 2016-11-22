@@ -11,20 +11,34 @@ export default dashboards =
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Dynamics",
-	"selectedDataSetId": "GwS2d655YujxqfZCf"
+	"selectedDataSetId": "QWF74B2tAs5LRspSz"
 },
 {
 	"_id": "RFznYoGe3ETKsGLQz",
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Variety",
-	"selectedDataSetId": "384vc72q4fyELKjNq"
+	"selectedDataSetId": "dYvhhokemueLhytDX"
 },
 {
 	"_id": "ruHbJhctjLhCYZiof",
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Maps",
-	"selectedDataSetId": "JhLqiLWZMxis3LxJP"
+	"selectedDataSetId": "6gZNShwCFcMCptQ2H"
+},
+{
+	"_id": "n4NQicNrGa2QkjPgp",
+	"userId": "guest",
+	"appId": "3sPJybyTA6AhNH6JH",
+	"name": "Test transform",
+	"selectedDataSetId": "GdtxfnJdDzWyommet"
+},
+{
+	"_id": "YSyvaf7Y7k5s4q5bG",
+	"userId": "guest",
+	"appId": "CiEXqZ62vAfDKGebA",
+	"name": "experiments",
+	"selectedDataSetId": "sSJTfdCcYEY5TWYbx"
 }]
 

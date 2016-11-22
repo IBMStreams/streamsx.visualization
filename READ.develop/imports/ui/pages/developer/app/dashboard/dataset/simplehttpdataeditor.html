@@ -26,9 +26,9 @@
     </div>
 
     <div class="form-group" ng-if="dataSetCtrl.dataSet.poll.enabled">
-      <label for="intervalSec">Polling Interval (sec)</label>
-      <input class="form-control" name="intervalSec" type="number" ng-required="dataSetCtrl.dataSet.poll.enabled"
-      ng-model="dataSetCtrl.dataSet.poll.intervalSec" ng-min="1" ng-readonly="dataSetCtrl.dataSet.readOnly">
+      <label for="intervalMilliSec">Polling Interval (msec)</label>
+      <input class="form-control" name="intervalMilliSec" type="number" ng-required="dataSetCtrl.dataSet.poll.enabled"
+      ng-model="dataSetCtrl.dataSet.poll.intervalMilliSec" ng-min="10" ng-readonly="dataSetCtrl.dataSet.readOnly">
       </input>
     </div>
   </div>
