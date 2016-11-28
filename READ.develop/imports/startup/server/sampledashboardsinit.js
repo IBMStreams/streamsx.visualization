@@ -11,7 +11,7 @@ export default dashboards =
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Dynamics",
-	"selectedDataSetId": "d7kBgpXTTwYLCrXMg"
+	"selectedDataSetId": "E5orNmqqHhBsKFduX"
 },
 {
 	"_id": "RFznYoGe3ETKsGLQz",

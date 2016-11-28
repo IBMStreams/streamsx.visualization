@@ -23,7 +23,7 @@ export default datasets =
 	"url": "http://readnodered.mybluemix.net/sampleapp/dynamicsine",
 	"poll": {
 		"enabled": true,
-		"intervalMilliSec": 3000
+		"intervalMilliSec": 1000
 	}
 },
 {
@@ -36,12 +36,12 @@ export default datasets =
 	"parents": [
 		"QWF74B2tAs5LRspSz"
 	],
-	"transformFunction": "(x, s) =\u003e {\n    if (s.length \u003e= 20) s.splice(0, 1)\n    x.hello = 'world';\n    s.push(x);\n    return s;\n}",
+	"transformFunction": "(x, s) =\u003e {\n    if (s.length \u003e= 20) s.splice(0, 1);\n    s.push(x);\n    return s;\n}",
 	"stateParams": {
 		"enabled": true,
 		"state": "[]"
 	},
-	"selectedVisualizationId": "9vpjXMYfudC4wjF9o"
+	"selectedVisualizationId": "L9qoJqjJ4ZxFwWPTD"
 },
 {
 	"_id": "dYvhhokemueLhytDX",
@@ -319,5 +319,36 @@ export default datasets =
 	"name": "Boxplot dataset",
 	"rawData": "[\n    {\n        label: \"Sample A\",\n        Q1: 180,\n        Q2: 200,\n        Q3: 250,\n        whisker_low: 115,\n        whisker_high: 400,\n        outliers: [50, 100, 425]\n    },  {\n        label: \"Sample B\",\n        Q1: 300,\n        Q2: 350,\n        Q3: 400,\n        whisker_low: 225,\n        whisker_high: 425,\n        outliers: [175, 450, 480]\n    },  {\n        label: \"Sample C\",\n        Q1: 100,\n        Q2: 200,\n        Q3: 300,\n        whisker_low: 25,\n        whisker_high: 400,\n        outliers: [450, 475]\n    }\n]",
 	"selectedVisualizationId": "s6R2XQYMkBgYmhtA2"
+},
+{
+	"_id": "SfA4CcQ7unREF9evJ",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "YPHGTDAsaursHHfPQ",
+	"dataSetType": "simpleHTTP",
+	"name": "Tans",
+	"url": "https://gist.githubusercontent.com/sriumcp/c8038b3f9024af3dd1ecca96d0d81cfd/raw/b4ddfd0bb7b35dff232197257c534c73b9b0f0dc/gistfile1.txt",
+	"poll": {
+		"enabled": false,
+		"intervalMilliSec": 20000
+	}
+},
+{
+	"_id": "E5orNmqqHhBsKFduX",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "YPHGTDAsaursHHfPQ",
+	"dataSetType": "transformed",
+	"name": "Sine Cos Tan",
+	"parents": [
+		"GwS2d655YujxqfZCf",
+		"SfA4CcQ7unREF9evJ"
+	],
+	"transformFunction": "(x, y) =\u003e {\n    return x.map((r, i) =\u003e {\n        r.tan = y[i];\n        return r;\n    })\n}",
+	"stateParams": {
+		"enabled": false,
+		"state": "{\n  initialValue: 17\n}"
+	},
+	"selectedVisualizationId": "MBd33qz5ZzXMuqYha"
 }]
 

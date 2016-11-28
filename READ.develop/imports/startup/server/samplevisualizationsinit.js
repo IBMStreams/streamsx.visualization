@@ -288,24 +288,6 @@ export default visualizations =
 	"advancedOptions": "{\n  \"chart\": {\n    \"type\": \"pieChart\",\n    \"margin\": {\n        \"top\": 20, \n        \"right\": 20, \n        \"bottom\": 20,\n        \"left\": 20\n    },\n    \"showLabels\": true,\n    \"duration\": 500,\n    \"labelThreshold\": 0.02,\n    \"labelSunbeamLayout\": true\n  }\n}"
 },
 {
-	"_id": "9vpjXMYfudC4wjF9o",
-	"userId": "guest",
-	"appId": "jetLpRfQ3BCRGiMxe",
-	"dashboardId": "YPHGTDAsaursHHfPQ",
-	"name": "Stateful Multi Sine",
-	"templateId": "zAnReEZadoCj5aobp",
-	"pluginType": "NVD3",
-	"dataSetId": "GwS2d655YujxqfZCf",
-	"gridStack": {
-		"x": 0,
-		"y": 5,
-		"height": 4,
-		"width": 6
-	},
-	"basicOptions": "{\n    xKey: \"time\",\n    yKeys: [{\n        \"key\": \"sin\",\n        \"type\": \"bar\",\n        \"yAxis\": 1\n    }, {\n        \"key\": \"cos\",\n        \"type\": \"area\",\n        \"yAxis\": 2\n    }],\n}",
-	"advancedOptions": "{\n    chart: {\n        type: 'multiChart',\n        margin: {\n            top: 20, \n            right: 40, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d){ return new Date(d.x); },\n        y: function(d){ return d.y.toFixed(2); },\n        useInteractiveGuideline: true,\n        color: d3.scale.category10().range(),\n        xAxis: {\n            axisLabel: 'Time (ms)',\n            tickFormat: function(d){\n                return d3.time.format('%M:%S')(new Date(d)); //uncomment for date format\n            }\n        },\n        yDomain1: [-1, 1],\n        yDomain2: [-1, 1],\n        yAxis1: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('0.02f')(d);\n            },\n            axisLabelDistance: -10\n        },\n        yAxis2: {\n            tickFormat: function(d) {\n                return d3.format('0.02f')(d);\n            }\n        }\n     }\n}"
-},
-{
 	"_id": "TWp65LpLmm7i5XFjR",
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
@@ -534,5 +516,23 @@ export default visualizations =
 	},
 	"basicOptions": "{}",
 	"advancedOptions": "{\n    chart: {\n        type: 'boxPlotChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 60\n        },\n        x: function(d){ return d.label; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Experiments' \n        },\n        yAxis: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('.02f')(d);\n            },\n            axisLabelDistance: -5\n        }\n    }\n}"
+},
+{
+	"_id": "MBd33qz5ZzXMuqYha",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "YPHGTDAsaursHHfPQ",
+	"name": "Sine Cos Tan",
+	"templateId": "zAnReEZadoCj5aobp",
+	"pluginType": "NVD3",
+	"dataSetId": "E5orNmqqHhBsKFduX",
+	"gridStack": {
+		"x": 0,
+		"y": 5,
+		"height": 6,
+		"width": 6
+	},
+	"basicOptions": "{\n    xKey: \"time\",\n    yKeys: [{\n        \"key\": \"sin\",\n        \"type\": \"bar\",\n        \"yAxis\": 1\n    }, {\n        \"key\": \"cos\",\n        \"type\": \"area\",\n        \"yAxis\": 1\n    }, {\n        \"key\": \"tan\",\n        \"type\": \"line\",\n        \"yAxis\": 2\n    }],\n}",
+	"advancedOptions": "{\n    chart: {\n        type: 'multiChart',\n        margin: {\n            top: 20, \n            right: 40, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d){ return new Date(d.x); },\n        y: function(d){ return d.y.toFixed(2); },\n        useInteractiveGuideline: true,\n        color: d3.scale.category10().range(),\n        xAxis: {\n            axisLabel: 'Time (ms)',\n            tickFormat: function(d){\n                return d3.time.format('%M:%S')(new Date(d)); //uncomment for date format\n            }\n        },\n        yDomain1: [-1, 1],\n        yDomain2: [-5, 5],\n        yAxis1: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('0.02f')(d);\n            },\n            axisLabelDistance: -10\n        },\n        yAxis2: {\n            tickFormat: function(d) {\n                return d3.format('0.02f')(d);\n            }\n        }\n     }\n}"
 }]
 
