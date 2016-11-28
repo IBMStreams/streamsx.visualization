@@ -335,7 +335,7 @@ export default visualizations =
 	"gridStack": {
 		"x": 0,
 		"y": 17,
-		"height": 5,
+		"height": 12,
 		"width": 6
 	}
 },
@@ -534,77 +534,5 @@ export default visualizations =
 	},
 	"basicOptions": "{}",
 	"advancedOptions": "{\n    chart: {\n        type: 'boxPlotChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 60\n        },\n        x: function(d){ return d.label; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Experiments' \n        },\n        yAxis: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('.02f')(d);\n            },\n            axisLabelDistance: -5\n        }\n    }\n}"
-},
-{
-	"_id": "WpJJbebhgKti994zu",
-	"userId": "guest",
-	"appId": "CiEXqZ62vAfDKGebA",
-	"dashboardId": "YSyvaf7Y7k5s4q5bG",
-	"name": "Visualization 0",
-	"templateId": "RYoPMm5p7Cpk5z4ST",
-	"pluginType": "NVD3",
-	"dataSetId": "JSkFnNpDjSuncSrgm",
-	"gridStack": {
-		"x": 6,
-		"y": 0,
-		"height": 4,
-		"width": 6
-	},
-	"basicOptions": "{\n    xKey: \"key\",\n    yKey: \"value\"\n}",
-	"advancedOptions": "{\n  chart: {\n    type: \"scatterChart\",\n    margin: {\n        top: 20, \n        right: 30, \n        bottom: 40,\n        left: 60\n    },\n    scatter: {\n      onlyCircles: false\n    },\n    showLegend: true,\n    showDistX: true,\n    showDistY: true,\n    duration: 350,\n    xAxis: {\n      axisLabel: \"Popularity\"\n    },\n    yAxis: {\n      axisLabel: \"Ratings\",\n      axisLabelDistance: -5\n    },\n    pointRange: [200, 200],\n    zoom: {\n      enabled: false\n    }\n  }\n}"
-},
-{
-	"_id": "EigxDL9kRLaGEKs4i",
-	"userId": "guest",
-	"appId": "CiEXqZ62vAfDKGebA",
-	"dashboardId": "YSyvaf7Y7k5s4q5bG",
-	"name": "Visualization 0",
-	"templateId": "GrjTHgAnhoWDy748u",
-	"pluginType": "NVD3",
-	"dataSetId": "sSJTfdCcYEY5TWYbx",
-	"gridStack": {
-		"x": 0,
-		"y": 0,
-		"height": 4,
-		"width": 6
-	},
-	"basicOptions": "{\n    xKey: \"preg\",\n    yKeys: [\"plas\"]\n}",
-	"advancedOptions": "{\n    chart: {\n        type: 'lineChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d){ return d.x; },\n        y: function(d){ return d.y; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Time (ms)' \n        },\n        yAxis: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('.02f')(d);\n            },\n            axisLabelDistance: -10\n        }\n    }\n}"
-},
-{
-	"_id": "vbX3y8pRt5spBbHf2",
-	"userId": "guest",
-	"appId": "3sPJybyTA6AhNH6JH",
-	"dashboardId": "n4NQicNrGa2QkjPgp",
-	"name": "Visualization 0",
-	"templateId": "GrjTHgAnhoWDy748u",
-	"pluginType": "NVD3",
-	"dataSetId": "NKFdKeeqzCvpAvTBb",
-	"gridStack": {
-		"x": 0,
-		"y": 4,
-		"height": 4,
-		"width": 4
-	},
-	"basicOptions": "{\n    xKey: \"timeStamp\",\n    yKeys: [\"sine\", \"cos\"]\n}",
-	"advancedOptions": "{\n    chart: {\n        type: 'lineChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d){ return d.x; },\n        y: function(d){ return d.y; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Time (ms)' \n        },\n        yAxis: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('.02f')(d);\n            },\n            axisLabelDistance: -10\n        }\n    }\n}"
-},
-{
-	"_id": "6sydvLoRERWGKqoHq",
-	"userId": "guest",
-	"appId": "3sPJybyTA6AhNH6JH",
-	"dashboardId": "n4NQicNrGa2QkjPgp",
-	"name": "Visualization 0",
-	"templateId": "GrjTHgAnhoWDy748u",
-	"pluginType": "NVD3",
-	"dataSetId": "GdtxfnJdDzWyommet",
-	"gridStack": {
-		"x": 0,
-		"y": 0,
-		"height": 4,
-		"width": 4
-	},
-	"basicOptions": "{\n    xKey: \"timeStamp\",\n    yKeys: [\"sine\",  \"cos\"]\n}",
-	"advancedOptions": "{\n    chart: {\n        type: 'lineChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d){ return d.x; },\n        y: function(d){ return d.y; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Time (ms)' \n        },\n        yAxis: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('.02f')(d);\n            },\n            axisLabelDistance: -10\n        }\n    }\n}"
 }]
 
