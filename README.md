@@ -23,8 +23,8 @@
 * Follow the tutorial: http://localhost:3000/#/docs/tutorial
 
 ## Contributing
-We welcome a variety of contributions to READ.
+We encourage you to contribute to READ in a variety of ways.
 
-1. Contributing code or documentation by opening pull requests
-2. Submitting feature requests or bugs by logging issues
-3. Sharing your READ dashboards and apps publicly. We will create a link to them from this page
+1. Contribute code or documentation by opening pull requests
+2. Submit feature requests or bugs by logging issues
+3. Share your READ dashboards and apps publicly and let us know. We will link them from this page
