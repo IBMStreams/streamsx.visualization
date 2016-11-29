@@ -24,6 +24,7 @@
 
 ## Contributing
 We welcome a variety of contributions to READ.
+
 1. Contributing code or documentation by opening pull requests
 2. Submitting feature requests or bugs by logging issues
 3. Sharing your READ dashboards and apps publicly. We will create a link to them from this page
