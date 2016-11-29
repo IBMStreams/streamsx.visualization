@@ -81,11 +81,6 @@ import {tutorialSideNavCtrl} from '/imports/ui/pages/docs/tutorial/sidenav';
 import tutorialMainContentTemplateUrl from '/imports/ui/pages/docs/tutorial/maincontent.html';
 import {tutorialMainContentCtrl} from '/imports/ui/pages/docs/tutorial/maincontent';
 
-import helpTopicsSideNavTemplateUrl from '/imports/ui/pages/docs/helptopics/sidenav.html';
-import {helpTopicsSideNavCtrl} from '/imports/ui/pages/docs/helptopics/sidenav.js';
-import helpTopicsMainContentTemplateUrl from '/imports/ui/pages/docs/helptopics/maincontent.html';
-import {helpTopicsMainContentCtrl} from '/imports/ui/pages/docs/helptopics/maincontent';
-
 let name = 'read';
 
 let angularModule = angular.module(name, [angularMeteor, uiRouter, ngMessages,
@@ -314,24 +309,6 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', f
       'maincontent@': {
         templateUrl: tutorialMainContentTemplateUrl,
         controller: tutorialMainContentCtrl,
-        controllerAs: 'mainContentCtrl'
-      }
-    },
-    onEnter: ['readState', function(readState) {
-      readState.sidebar.isPresent();
-    }]
-  })
-  .state('read.docs.helptopics', {
-    url: "/docs/helptopics",
-    views: {
-      'sidenav@': {
-        templateUrl: helpTopicsSideNavTemplateUrl,
-        controller: helpTopicsSideNavCtrl,
-        controllerAs: 'sideNavCtrl'
-      },
-      'maincontent@': {
-        templateUrl: helpTopicsMainContentTemplateUrl,
-        controller: helpTopicsMainContentCtrl,
         controllerAs: 'mainContentCtrl'
       }
     },
