@@ -23,7 +23,7 @@ export default datasets =
 	"url": "http://readnodered.mybluemix.net/sampleapp/dynamicsine",
 	"poll": {
 		"enabled": true,
-		"intervalMilliSec": 3000
+		"intervalMilliSec": 1000
 	}
 },
 {
@@ -36,12 +36,12 @@ export default datasets =
 	"parents": [
 		"QWF74B2tAs5LRspSz"
 	],
-	"transformFunction": "(x, s) =\u003e {\n    if (s.length \u003e= 20) s.splice(0, 1)\n    x.hello = 'world';\n    s.push(x);\n    return s;\n}",
+	"transformFunction": "(x, s) =\u003e {\n    if (s.length \u003e= 20) s.splice(0, 1);\n    s.push(x);\n    return s;\n}",
 	"stateParams": {
 		"enabled": true,
 		"state": "[]"
 	},
-	"selectedVisualizationId": "9vpjXMYfudC4wjF9o"
+	"selectedVisualizationId": "L9qoJqjJ4ZxFwWPTD"
 },
 {
 	"_id": "dYvhhokemueLhytDX",
@@ -321,128 +321,34 @@ export default datasets =
 	"selectedVisualizationId": "s6R2XQYMkBgYmhtA2"
 },
 {
-	"_id": "Bey6quEyoyyn42pyz",
+	"_id": "SfA4CcQ7unREF9evJ",
 	"userId": "guest",
-	"appId": "3sPJybyTA6AhNH6JH",
-	"dashboardId": "n4NQicNrGa2QkjPgp",
-	"dataSetType": "raw",
-	"name": "First",
-	"rawData": "{}"
-},
-{
-	"_id": "SNanGhDBLtxWrQRg5",
-	"userId": "guest",
-	"appId": "3sPJybyTA6AhNH6JH",
-	"dashboardId": "n4NQicNrGa2QkjPgp",
-	"dataSetType": "transformed",
-	"name": "Test Transform",
-	"parents": [
-		"Bey6quEyoyyn42pyz"
-	],
-	"transformFunction": "x =\u003e {\n    console.log(myModules.d3.schemeCategory10, 'second time -- this time from inside');\n    return myModules.d3.schemeCategory10;\n}",
-	"stateParams": {
-		"enabled": false,
-		"state": "{\n  initialValue: 17\n}"
-	}
-},
-{
-	"_id": "dsZSv3iSA9bRTK2T7",
-	"userId": "guest",
-	"appId": "3sPJybyTA6AhNH6JH",
-	"dashboardId": "n4NQicNrGa2QkjPgp",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "YPHGTDAsaursHHfPQ",
 	"dataSetType": "simpleHTTP",
-	"name": "View",
-	"url": "http://localhost:9000/streams/waves",
+	"name": "Tans",
+	"url": "https://gist.githubusercontent.com/sriumcp/c8038b3f9024af3dd1ecca96d0d81cfd/raw/b4ddfd0bb7b35dff232197257c534c73b9b0f0dc/gistfile1.txt",
 	"poll": {
-		"enabled": true,
-		"intervalMilliSec": 1000
+		"enabled": false,
+		"intervalMilliSec": 20000
 	}
 },
 {
-	"_id": "yGqFSJwu6FCHkvgp7",
+	"_id": "E5orNmqqHhBsKFduX",
 	"userId": "guest",
-	"appId": "CiEXqZ62vAfDKGebA",
-	"dashboardId": "YSyvaf7Y7k5s4q5bG",
-	"dataSetType": "raw",
-	"name": "raw input",
-	"rawData": "{ name: 'pima_diabetes',\n  attributes: \n   [ 'preg',\n     'plas',\n     'pres',\n     'skin',\n     'insu',\n     'mass',\n     'pedi',\n     'age',\n     'class' ],\n  types: \n   { preg: { type: 'numeric' },\n     plas: { type: 'numeric' },\n     pres: { type: 'numeric' },\n     skin: { type: 'numeric' },\n     insu: { type: 'numeric' },\n     mass: { type: 'numeric' },\n     pedi: { type: 'numeric' },\n     age: { type: 'numeric' },\n     class: { type: 'nominal', oneof: [Object] } },\n  data: \n   [ { preg: 6,\n       plas: 148,\n       pres: 72,\n       skin: 35,\n       insu: 0,\n       mass: 33.6,\n       pedi: 0.627,\n       age: 50,\n       class: 1 },\n     { preg: 1,\n       plas: 85,\n       pres: 66,\n       skin: 29,\n       insu: 0,\n       mass: 26.6,\n       pedi: 0.351,\n       age: 31,\n       class: 0 },\n     { preg: 8,\n       plas: 183,\n       pres: 64,\n       skin: 0,\n       insu: 0,\n       mass: 23.3,\n       pedi: 0.672,\n       age: 32,\n       class: 1 },\n     { preg: 1,\n       plas: 89,\n       pres: 66,\n       skin: 23,\n       insu: 94,\n       mass: 28.1,\n       pedi: 0.167,\n       age: 21,\n       class: 0 },\n     { preg: 0,\n       plas: 137,\n       pres: 40,\n       skin: 35,\n       insu: 168,\n       mass: 43.1,\n       pedi: 2.288,\n       age: 33,\n       class: 1 },\n     { preg: 5,\n       plas: 116,\n       pres: 74,\n       skin: 0,\n       insu: 0,\n       mass: 25.6,\n       pedi: 0.201,\n       age: 30,\n       class: 0 },\n     { preg: 3,\n       plas: 78,\n       pres: 50,\n       skin: 32,\n       insu: 88,\n       mass: 31,\n       pedi: 0.248,\n       age: 26,\n       class: 1 },\n     { preg: 10,\n       plas: 115,\n       pres: 0,\n       skin: 0,\n       insu: 0,\n       mass: 35.3,\n       pedi: 0.134,\n       age: 29,\n       class: 0 },\n     { preg: 2,\n       plas: 197,\n       pres: 70,\n       skin: 45,\n       insu: 543,\n       mass: 30.5,\n       pedi: 0.158,\n       age: 53,\n       class: 1 },\n     { preg: 8,\n       plas: 125,\n       pres: 96,\n       skin: 0,\n       insu: 0,\n       mass: 0,\n       pedi: 0.232,\n       age: 54,\n       class: 1 },\n     { preg: 4,\n       plas: 110,\n       pres: 92,\n       skin: 0,\n       insu: 0,\n       mass: 37.6,\n       pedi: 0.191,\n       age: 30,\n       class: 0 },\n     { preg: 10,\n       plas: 168,\n       pres: 74,\n       skin: 0,\n       insu: 0,\n       mass: 38,\n       pedi: 0.537,\n       age: 34,\n       class: 1 },\n     { preg: 10,\n       plas: 139,\n       pres: 80,\n       skin: 0,\n       insu: 0,\n       mass: 27.1,\n       pedi: 1.441,\n       age: 57,\n       class: 0 },\n     { preg: 1,\n       plas: 189,\n       pres: 60,\n       skin: 23,\n       insu: 846,\n       mass: 30.1,\n       pedi: 0.398,\n       age: 59,\n       class: 1 },\n     { preg: 5,\n       plas: 166,\n       pres: 72,\n       skin: 19,\n       insu: 175,\n       mass: 25.8,\n       pedi: 0.587,\n       age: 51,\n       class: 1 },\n     { preg: 7,\n       plas: 100,\n       pres: 0,\n       skin: 0,\n       insu: 0,\n       mass: 30,\n       pedi: 0.484,\n       age: 32,\n       class: 1 },\n     { preg: 0,\n       plas: 118,\n       pres: 84,\n       skin: 47,\n       insu: 230,\n       mass: 45.8,\n       pedi: 0.551,\n       age: 31,\n       class: 1 },\n     { preg: 7,\n       plas: 107,\n       pres: 74,\n       skin: 0,\n       insu: 0,\n       mass: 29.6,\n       pedi: 0.254,\n       age: 31,\n       class: 1 },\n     { preg: 1,\n       plas: 103,\n       pres: 30,\n       skin: 38,\n       insu: 83,\n       mass: 43.3,\n       pedi: 0.183,\n       age: 33,\n       class: 0 },\n     { preg: 1,\n       plas: 115,\n       pres: 70,\n       skin: 30,\n       insu: 96,\n       mass: 34.6,\n       pedi: 0.529,\n       age: 32,\n       class: 1 },\n     { preg: 3,\n       plas: 126,\n       pres: 88,\n       skin: 41,\n       insu: 235,\n       mass: 39.3,\n       pedi: 0.704,\n       age: 27,\n       class: 0 },\n     { preg: 8,\n       plas: 99,\n       pres: 84,\n       skin: 0,\n       insu: 0,\n       mass: 35.4,\n       pedi: 0.388,\n       age: 50,\n       class: 0 },\n     { preg: 7,\n       plas: 196,\n       pres: 90,\n       skin: 0,\n       insu: 0,\n       mass: 39.8,\n       pedi: 0.451,\n       age: 41,\n       class: 1 },\n     { preg: 9,\n       plas: 119,\n       pres: 80,\n       skin: 35,\n       insu: 0,\n       mass: 29,\n       pedi: 0.263,\n       age: 29,\n       class: 1 },\n     { preg: 11,\n       plas: 143,\n       pres: 94,\n       skin: 33,\n       insu: 146,\n       mass: 36.6,\n       pedi: 0.254,\n       age: 51,\n       class: 1 },\n     { preg: 10,\n       plas: 125,\n       pres: 70,\n       skin: 26,\n       insu: 115,\n       mass: 31.1,\n       pedi: 0.205,\n       age: 41,\n       class: 1 },\n     { preg: 7,\n       plas: 147,\n       pres: 76,\n       skin: 0,\n       insu: 0,\n       mass: 39.4,\n       pedi: 0.257,\n       age: 43,\n       class: 1 },\n     { preg: 1,\n       plas: 97,\n       pres: 66,\n       skin: 15,\n       insu: 140,\n       mass: 23.2,\n       pedi: 0.487,\n       age: 22,\n       class: 0 },\n     { preg: 13,\n       plas: 145,\n       pres: 82,\n       skin: 19,\n       insu: 110,\n       mass: 22.2,\n       pedi: 0.245,\n       age: 57,\n       class: 0 } ] }\n"
-},
-{
-	"_id": "JSkFnNpDjSuncSrgm",
-	"userId": "guest",
-	"appId": "CiEXqZ62vAfDKGebA",
-	"dashboardId": "YSyvaf7Y7k5s4q5bG",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "YPHGTDAsaursHHfPQ",
 	"dataSetType": "transformed",
-	"name": "preg counts",
+	"name": "Sine Cos Tan",
 	"parents": [
-		"yGqFSJwu6FCHkvgp7"
+		"GwS2d655YujxqfZCf",
+		"SfA4CcQ7unREF9evJ"
 	],
-	"transformFunction": "x =\u003e {\n    let counts = _.countBy(_.pluck(x.data, \"preg\"));\n    let c = [];\n    _.mapObject(counts, (v, k) =\u003e {\n        c.push({\n            key: Number(k),\n            value: v\n        });\n    })\n    return c;\n}",
+	"transformFunction": "(x, y) =\u003e {\n    return x.map((r, i) =\u003e {\n        r.tan = y[i];\n        return r;\n    })\n}",
 	"stateParams": {
 		"enabled": false,
 		"state": "{\n  initialValue: 17\n}"
 	},
-	"selectedVisualizationId": "WpJJbebhgKti994zu"
-},
-{
-	"_id": "sSJTfdCcYEY5TWYbx",
-	"userId": "guest",
-	"appId": "CiEXqZ62vAfDKGebA",
-	"dashboardId": "YSyvaf7Y7k5s4q5bG",
-	"dataSetType": "transformed",
-	"name": "data values",
-	"parents": [
-		"yGqFSJwu6FCHkvgp7"
-	],
-	"transformFunction": "x =\u003e x.data",
-	"stateParams": {
-		"enabled": false,
-		"state": "{\n  initialValue: 17\n}"
-	},
-	"selectedVisualizationId": "EigxDL9kRLaGEKs4i"
-},
-{
-	"_id": "NKFdKeeqzCvpAvTBb",
-	"userId": "guest",
-	"appId": "3sPJybyTA6AhNH6JH",
-	"dashboardId": "n4NQicNrGa2QkjPgp",
-	"dataSetType": "transformed",
-	"name": "view transform",
-	"parents": [
-		"dsZSv3iSA9bRTK2T7"
-	],
-	"transformFunction": "x =\u003e x.viewItems.map(y =\u003e y.data)",
-	"stateParams": {
-		"enabled": false,
-		"state": "{\n  initialValue: 17\n}"
-	},
-	"selectedVisualizationId": "vbX3y8pRt5spBbHf2"
-},
-{
-	"_id": "NtnNvwW3CqsRY92iN",
-	"userId": "guest",
-	"appId": "3sPJybyTA6AhNH6JH",
-	"dashboardId": "n4NQicNrGa2QkjPgp",
-	"dataSetType": "websocket",
-	"name": "ws",
-	"url": "ws://192.168.147.129:8081",
-	"bufferSize": 20
-},
-{
-	"_id": "GdtxfnJdDzWyommet",
-	"userId": "guest",
-	"appId": "3sPJybyTA6AhNH6JH",
-	"dashboardId": "n4NQicNrGa2QkjPgp",
-	"dataSetType": "transformed",
-	"name": "ws buffer",
-	"parents": [
-		"NtnNvwW3CqsRY92iN"
-	],
-	"transformFunction": "(x, s) =\u003e {\n    if (s.length \u003e= 80) s.splice(0, 1);\n    s.push(x.tuples[0].tuple);\n    return s;\n}",
-	"stateParams": {
-		"enabled": true,
-		"state": "[]"
-	},
-	"selectedVisualizationId": "6sydvLoRERWGKqoHq"
+	"selectedVisualizationId": "MBd33qz5ZzXMuqYha"
 }]
 

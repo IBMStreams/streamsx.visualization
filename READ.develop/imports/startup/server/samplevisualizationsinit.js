@@ -288,24 +288,6 @@ export default visualizations =
 	"advancedOptions": "{\n  \"chart\": {\n    \"type\": \"pieChart\",\n    \"margin\": {\n        \"top\": 20, \n        \"right\": 20, \n        \"bottom\": 20,\n        \"left\": 20\n    },\n    \"showLabels\": true,\n    \"duration\": 500,\n    \"labelThreshold\": 0.02,\n    \"labelSunbeamLayout\": true\n  }\n}"
 },
 {
-	"_id": "9vpjXMYfudC4wjF9o",
-	"userId": "guest",
-	"appId": "jetLpRfQ3BCRGiMxe",
-	"dashboardId": "YPHGTDAsaursHHfPQ",
-	"name": "Stateful Multi Sine",
-	"templateId": "zAnReEZadoCj5aobp",
-	"pluginType": "NVD3",
-	"dataSetId": "GwS2d655YujxqfZCf",
-	"gridStack": {
-		"x": 0,
-		"y": 5,
-		"height": 4,
-		"width": 6
-	},
-	"basicOptions": "{\n    xKey: \"time\",\n    yKeys: [{\n        \"key\": \"sin\",\n        \"type\": \"bar\",\n        \"yAxis\": 1\n    }, {\n        \"key\": \"cos\",\n        \"type\": \"area\",\n        \"yAxis\": 2\n    }],\n}",
-	"advancedOptions": "{\n    chart: {\n        type: 'multiChart',\n        margin: {\n            top: 20, \n            right: 40, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d){ return new Date(d.x); },\n        y: function(d){ return d.y.toFixed(2); },\n        useInteractiveGuideline: true,\n        color: d3.scale.category10().range(),\n        xAxis: {\n            axisLabel: 'Time (ms)',\n            tickFormat: function(d){\n                return d3.time.format('%M:%S')(new Date(d)); //uncomment for date format\n            }\n        },\n        yDomain1: [-1, 1],\n        yDomain2: [-1, 1],\n        yAxis1: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('0.02f')(d);\n            },\n            axisLabelDistance: -10\n        },\n        yAxis2: {\n            tickFormat: function(d) {\n                return d3.format('0.02f')(d);\n            }\n        }\n     }\n}"
-},
-{
 	"_id": "TWp65LpLmm7i5XFjR",
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
@@ -335,7 +317,7 @@ export default visualizations =
 	"gridStack": {
 		"x": 0,
 		"y": 17,
-		"height": 5,
+		"height": 12,
 		"width": 6
 	}
 },
@@ -536,75 +518,21 @@ export default visualizations =
 	"advancedOptions": "{\n    chart: {\n        type: 'boxPlotChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 60\n        },\n        x: function(d){ return d.label; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Experiments' \n        },\n        yAxis: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('.02f')(d);\n            },\n            axisLabelDistance: -5\n        }\n    }\n}"
 },
 {
-	"_id": "WpJJbebhgKti994zu",
+	"_id": "MBd33qz5ZzXMuqYha",
 	"userId": "guest",
-	"appId": "CiEXqZ62vAfDKGebA",
-	"dashboardId": "YSyvaf7Y7k5s4q5bG",
-	"name": "Visualization 0",
-	"templateId": "RYoPMm5p7Cpk5z4ST",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "YPHGTDAsaursHHfPQ",
+	"name": "Sine Cos Tan",
+	"templateId": "zAnReEZadoCj5aobp",
 	"pluginType": "NVD3",
-	"dataSetId": "JSkFnNpDjSuncSrgm",
+	"dataSetId": "E5orNmqqHhBsKFduX",
 	"gridStack": {
-		"x": 6,
-		"y": 0,
-		"height": 4,
+		"x": 0,
+		"y": 5,
+		"height": 6,
 		"width": 6
 	},
-	"basicOptions": "{\n    xKey: \"key\",\n    yKey: \"value\"\n}",
-	"advancedOptions": "{\n  chart: {\n    type: \"scatterChart\",\n    margin: {\n        top: 20, \n        right: 30, \n        bottom: 40,\n        left: 60\n    },\n    scatter: {\n      onlyCircles: false\n    },\n    showLegend: true,\n    showDistX: true,\n    showDistY: true,\n    duration: 350,\n    xAxis: {\n      axisLabel: \"Popularity\"\n    },\n    yAxis: {\n      axisLabel: \"Ratings\",\n      axisLabelDistance: -5\n    },\n    pointRange: [200, 200],\n    zoom: {\n      enabled: false\n    }\n  }\n}"
-},
-{
-	"_id": "EigxDL9kRLaGEKs4i",
-	"userId": "guest",
-	"appId": "CiEXqZ62vAfDKGebA",
-	"dashboardId": "YSyvaf7Y7k5s4q5bG",
-	"name": "Visualization 0",
-	"templateId": "GrjTHgAnhoWDy748u",
-	"pluginType": "NVD3",
-	"dataSetId": "sSJTfdCcYEY5TWYbx",
-	"gridStack": {
-		"x": 0,
-		"y": 0,
-		"height": 4,
-		"width": 6
-	},
-	"basicOptions": "{\n    xKey: \"preg\",\n    yKeys: [\"plas\"]\n}",
-	"advancedOptions": "{\n    chart: {\n        type: 'lineChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d){ return d.x; },\n        y: function(d){ return d.y; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Time (ms)' \n        },\n        yAxis: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('.02f')(d);\n            },\n            axisLabelDistance: -10\n        }\n    }\n}"
-},
-{
-	"_id": "vbX3y8pRt5spBbHf2",
-	"userId": "guest",
-	"appId": "3sPJybyTA6AhNH6JH",
-	"dashboardId": "n4NQicNrGa2QkjPgp",
-	"name": "Visualization 0",
-	"templateId": "GrjTHgAnhoWDy748u",
-	"pluginType": "NVD3",
-	"dataSetId": "NKFdKeeqzCvpAvTBb",
-	"gridStack": {
-		"x": 0,
-		"y": 4,
-		"height": 4,
-		"width": 4
-	},
-	"basicOptions": "{\n    xKey: \"timeStamp\",\n    yKeys: [\"sine\", \"cos\"]\n}",
-	"advancedOptions": "{\n    chart: {\n        type: 'lineChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d){ return d.x; },\n        y: function(d){ return d.y; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Time (ms)' \n        },\n        yAxis: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('.02f')(d);\n            },\n            axisLabelDistance: -10\n        }\n    }\n}"
-},
-{
-	"_id": "6sydvLoRERWGKqoHq",
-	"userId": "guest",
-	"appId": "3sPJybyTA6AhNH6JH",
-	"dashboardId": "n4NQicNrGa2QkjPgp",
-	"name": "Visualization 0",
-	"templateId": "GrjTHgAnhoWDy748u",
-	"pluginType": "NVD3",
-	"dataSetId": "GdtxfnJdDzWyommet",
-	"gridStack": {
-		"x": 0,
-		"y": 0,
-		"height": 4,
-		"width": 4
-	},
-	"basicOptions": "{\n    xKey: \"timeStamp\",\n    yKeys: [\"sine\",  \"cos\"]\n}",
-	"advancedOptions": "{\n    chart: {\n        type: 'lineChart',\n        margin: {\n            top: 20, \n            right: 20, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d){ return d.x; },\n        y: function(d){ return d.y; },\n        useInteractiveGuideline: true,\n        xAxis: {\n            axisLabel: 'Time (ms)' \n        },\n        yAxis: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('.02f')(d);\n            },\n            axisLabelDistance: -10\n        }\n    }\n}"
+	"basicOptions": "{\n    xKey: \"time\",\n    yKeys: [{\n        \"key\": \"sin\",\n        \"type\": \"bar\",\n        \"yAxis\": 1\n    }, {\n        \"key\": \"cos\",\n        \"type\": \"area\",\n        \"yAxis\": 1\n    }, {\n        \"key\": \"tan\",\n        \"type\": \"line\",\n        \"yAxis\": 2\n    }],\n}",
+	"advancedOptions": "{\n    chart: {\n        type: 'multiChart',\n        margin: {\n            top: 20, \n            right: 40, \n            bottom: 40,\n            left: 55\n        },\n        x: function(d){ return new Date(d.x); },\n        y: function(d){ return d.y.toFixed(2); },\n        useInteractiveGuideline: true,\n        color: d3.scale.category10().range(),\n        xAxis: {\n            axisLabel: 'Time (ms)',\n            tickFormat: function(d){\n                return d3.time.format('%M:%S')(new Date(d)); //uncomment for date format\n            }\n        },\n        yDomain1: [-1, 1],\n        yDomain2: [-5, 5],\n        yAxis1: {\n            axisLabel: 'Voltage (v)',\n            tickFormat: function(d) {\n                return d3.format('0.02f')(d);\n            },\n            axisLabelDistance: -10\n        },\n        yAxis2: {\n            tickFormat: function(d) {\n                return d3.format('0.02f')(d);\n            }\n        }\n     }\n}"
 }]
 

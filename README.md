@@ -22,8 +22,8 @@
 * Play with the sample app bundled with READ
 * Follow the tutorial: http://localhost:3000/#/docs/tutorial
 
-## Sharing READ Dashboards
-Refer to help topics: http://localhost:3000/#/docs/helptopics
-
-## Dealing with CORS
-Refer to help topics: http://localhost:3000/#/docs/helptopics
+## Contributing
+We welcome a variety of contributions to READ.
+1. Contributing code or documentation by opening pull requests
+2. Submitting feature requests or bugs by logging issues
+3. Sharing your READ dashboards and apps publicly. We will create a link to them from this page
