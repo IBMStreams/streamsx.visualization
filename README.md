@@ -21,6 +21,8 @@
 * Take the 2 minute READ tour: http://169.44.122.120:3000/#/developer/app/dashboard/designer
 * Play with the sample app bundled with READ
 * Follow the tutorial: http://localhost:3000/#/docs/tutorial
+* For more information in topics such as READ for Streams Users, sharing your READ dashboards publicly,
+and handling CORS issues, refer to the [Wiki](https://github.com/IBMStreams/streamsx.visualization/wiki)
 
 ## Contributing
 We encourage you to contribute to READ in a variety of ways.
