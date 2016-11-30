@@ -39,6 +39,9 @@ import {nvd3VisualizationComponent} from '/imports/ui/partials/visualizations/nv
 import {leafletVisualizationComponent} from '/imports/ui/partials/visualizations/leaflet/leafletvisualization';
 import {visualizationComponent} from '/imports/ui/partials/visualizations/visualization';
 
+// seems necessary to avoid leaflet marker error
+L.Icon.Default.imagePath = '/bower_components/leaflet/dist/images';
+
 let name = 'read';
 
 let angularModule = angular.module(name, [angularMeteor, uiRouter, ngMessages, 'ui.bootstrap', 'nvd3', 'leaflet-directive']);

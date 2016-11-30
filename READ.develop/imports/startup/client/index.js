@@ -15,6 +15,7 @@ import 'angular-nvd3/dist/angular-nvd3';
 import 'nvd3/build/nv.d3.css';
 
 import leaflet from 'leaflet/dist/leaflet';
+
 import angularLeafletDirective from 'angular-leaflet-directive/dist/angular-leaflet-directive';
 import 'leaflet/dist/leaflet.css';
 
@@ -80,6 +81,9 @@ import tutorialSideNavTemplateUrl from '/imports/ui/pages/docs/tutorial/sidenav.
 import {tutorialSideNavCtrl} from '/imports/ui/pages/docs/tutorial/sidenav';
 import tutorialMainContentTemplateUrl from '/imports/ui/pages/docs/tutorial/maincontent.html';
 import {tutorialMainContentCtrl} from '/imports/ui/pages/docs/tutorial/maincontent';
+
+// seems necessary to avoid leaflet marker error
+L.Icon.Default.imagePath = '/bower_components/leaflet/dist/images';
 
 let name = 'read';
 
