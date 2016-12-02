@@ -21,7 +21,13 @@ export const leafletVisualizationComponent = {
 
     let reactivePipeline = reactivePipelineService.getInstance();
     let tds = reactivePipeline.addReactiveData(readState.pipeline.findReactiveData(self.visualization.dataSetId));
+    tds.stream.doOnNext((x) => {
+      self.validatedDataObject = x;
+    }).subscribe(new Rx.ReplaySubject(0));
 
+    // this is a major major hack -- we're turning off validation for leaflet
+
+    /*
     this.inputSchemaObject = Playground.findOne({_id: self.template.inputSchemaId});
     let validatedDataSet = {
       _id: "validatedData",
@@ -31,6 +37,6 @@ export const leafletVisualizationComponent = {
       parentId: self.visualization.dataSetId
     };
     let vds = reactivePipeline.addDataSet(validatedDataSet);
-    vds.stream.doOnNext(x => $timeout(() => (self.validatedDataObject = x), 0)).subscribe(new Rx.ReplaySubject(0));
+    vds.stream.doOnNext(x => $timeout(() => (self.validatedDataObject = x), 0)).subscribe(new Rx.ReplaySubject(0));*/
   }]
 }
