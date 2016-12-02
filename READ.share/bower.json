@@ -22,7 +22,8 @@
     "tests"
   ],
   "dependencies": {
-    "leaflet": "^1.0.1"
+    "leaflet": "^1.0.1",
+    "bootstrap": "^3.3.7"
   },
   "devDependencies": {}
 }
