@@ -10,11 +10,6 @@
         "label": "Streams views"
     },
     {
-        "id": "e31f0234.e530d",
-        "type": "tab",
-        "label": "Temp flows"
-    },
-    {
         "id": "ab1ada0d.0d25c8",
         "type": "websocket-listener",
         "z": "",
@@ -226,46 +221,5 @@
                 "94b10d0.2182ef"
             ]
         ]
-    },
-    {
-        "id": "70489ed3.9b4ef",
-        "type": "http in",
-        "z": "e31f0234.e530d",
-        "name": "Leaflet marker",
-        "url": "/temp/leafletmarker",
-        "method": "get",
-        "swaggerDoc": "",
-        "x": 228.5,
-        "y": 250,
-        "wires": [
-            [
-                "fc2b52d6.61f1e"
-            ]
-        ]
-    },
-    {
-        "id": "fc2b52d6.61f1e",
-        "type": "function",
-        "z": "e31f0234.e530d",
-        "name": "Lat Lng noises",
-        "func": "msg.payload = {\n    latNoise: Math.random()*10 - 5,\n    lngNoise: Math.random()*10 - 5\n};\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 441.5,
-        "y": 248,
-        "wires": [
-            [
-                "46eb087d.400328"
-            ]
-        ]
-    },
-    {
-        "id": "46eb087d.400328",
-        "type": "http response",
-        "z": "e31f0234.e530d",
-        "name": "",
-        "x": 588.5,
-        "y": 250,
-        "wires": []
     }
 ]

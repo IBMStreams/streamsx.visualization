@@ -18,7 +18,6 @@ import 'leaflet/dist/leaflet';
 import angularLeafletDirective from 'angular-leaflet-directive/dist/angular-leaflet-directive';
 import 'drmonty-leaflet-awesome-markers/js/leaflet.awesome-markers.js';
 import 'leaflet/dist/leaflet.css';
-import 'drmonty-leaflet-awesome-markers/css/leaflet.awesome-markers.css';
 
 import {reactiveDataFactory} from 'read-common/imports/api/client/reactivedatafactory.js';
 import {reactivePipeline} from 'read-common/imports/api/client/reactivepipeline';
