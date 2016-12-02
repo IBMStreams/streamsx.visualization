@@ -24,7 +24,8 @@
   "dependencies": {
     "ace-builds": "^1.2.5",
     "leaflet": "^1.0.1",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "Leaflet.awesome-markers": "^2.0.2"
   },
   "devDependencies": {}
 }
