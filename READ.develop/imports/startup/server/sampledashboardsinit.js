@@ -11,20 +11,27 @@ export default dashboards =
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Dynamics",
-	"selectedDataSetId": "E5orNmqqHhBsKFduX"
+	"selectedDataSetId": "CiPuWcxfjAJ4zkiFy"
 },
 {
 	"_id": "RFznYoGe3ETKsGLQz",
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Variety",
-	"selectedDataSetId": "384vc72q4fyELKjNq"
+	"selectedDataSetId": "dYvhhokemueLhytDX"
 },
 {
 	"_id": "ruHbJhctjLhCYZiof",
 	"userId": "guest",
 	"appId": "jetLpRfQ3BCRGiMxe",
 	"name": "Maps",
-	"selectedDataSetId": "5oJFX5SxWexTCD9ca"
+	"selectedDataSetId": "XtsxDSh3BL8pGvqNQ"
+},
+{
+	"_id": "7kGXWA8K4yM55PCji",
+	"userId": "guest",
+	"appId": "Q4EnorTFxvG9gyHyB",
+	"name": "Sine and Cos",
+	"selectedDataSetId": "QWvddJfeSQguPZA62"
 }]
 

@@ -181,7 +181,7 @@ export default datasets =
 	"parents": [
 		"DxX8kK4KRPXjhJ5kJ"
 	],
-	"transformFunction": "x =\u003e {\n    return {\n        center: {\n            lat: 38.51,\n            lng: 139,\n            zoom: 4\n        },\n        defaults: {\n            scrollWheelZoom: false\n        },\n        geojson: {\n            data: x,\n            style: {\n                fillColor: \"#ccfa12\",\n                weight: 2,\n                opacity: 1,\n                color: 'white',\n                dashArray: '3',\n                fillOpacity: 0.7\n            }\n        }\n    }\n}",
+	"transformFunction": "x =\u003e {\n    return {\n        center: {\n            lat: 38.51,\n            lng: 139,\n            zoom: 4\n        },\n        defaults: {\n            scrollWheelZoom: false\n        },\n        geojson: {\n            data: x,\n            style: function(f) {\n                return {\n                    fillColor: \"#ccfa12\",\n                    weight: 2,\n                    opacity: 1,\n                    color: 'white',\n                    dashArray: '3',\n                    fillOpacity: 0.7\n                }\n            }\n        }\n    }\n}",
 	"stateParams": {
 		"enabled": false,
 		"state": "{\n  initialValue: 17\n}"
@@ -350,5 +350,122 @@ export default datasets =
 		"state": "{\n  initialValue: 17\n}"
 	},
 	"selectedVisualizationId": "MBd33qz5ZzXMuqYha"
+},
+{
+	"_id": "4B6qZLiEkSiXnHXqu",
+	"userId": "guest",
+	"appId": "Q4EnorTFxvG9gyHyB",
+	"dashboardId": "7kGXWA8K4yM55PCji",
+	"dataSetType": "simpleHTTP",
+	"name": "Time_HTTPView",
+	"url": "http://192.168.147.130:8080/currentTime/ports/input/0/tuples",
+	"poll": {
+		"enabled": true,
+		"intervalMilliSec": 1000
+	}
+},
+{
+	"_id": "5jGmc6gN3PLiD7GBo",
+	"userId": "guest",
+	"appId": "Q4EnorTFxvG9gyHyB",
+	"dashboardId": "7kGXWA8K4yM55PCji",
+	"dataSetType": "transformed",
+	"name": "Stateful_HTTPView",
+	"parents": [
+		"4B6qZLiEkSiXnHXqu"
+	],
+	"transformFunction": "(x, s) =\u003e {                                // x is the parent dataset, and s contains the current state\n    if (s.length === 30) s.splice(0, 1)    // If s already has 30 items, delete the first item\n    s.push(x[0]);                          // Push the latest data point into the state array\n    return s;                              // Return the state\n}",
+	"stateParams": {
+		"enabled": true,
+		"state": "[]"
+	},
+	"selectedVisualizationId": "JRP8GczpGh6tE6e8t"
+},
+{
+	"_id": "ffWGE6q3CTE3BgzR2",
+	"userId": "guest",
+	"appId": "Q4EnorTFxvG9gyHyB",
+	"dashboardId": "7kGXWA8K4yM55PCji",
+	"dataSetType": "websocket",
+	"name": "Time_WebSocket",
+	"url": "ws://192.168.147.130:8081",
+	"bufferSize": 20
+},
+{
+	"_id": "TwfSXQpWjbfZzJRdZ",
+	"userId": "guest",
+	"appId": "Q4EnorTFxvG9gyHyB",
+	"dashboardId": "7kGXWA8K4yM55PCji",
+	"dataSetType": "transformed",
+	"name": "Stateful_WebSocket",
+	"parents": [
+		"ffWGE6q3CTE3BgzR2"
+	],
+	"transformFunction": "(x, s) =\u003e {\n    if (s.length === 200) s.splice(0, 1)\n    s.push(x.tuples[0].tuple);\n    return s;\n}",
+	"stateParams": {
+		"enabled": true,
+		"state": "[]"
+	},
+	"selectedVisualizationId": "a6dKnmAkcKJnPkfH6"
+},
+{
+	"_id": "AmuFHRCZFaQG6uZzA",
+	"userId": "guest",
+	"appId": "Q4EnorTFxvG9gyHyB",
+	"dashboardId": "7kGXWA8K4yM55PCji",
+	"dataSetType": "simpleHTTP",
+	"name": "Time_View_Annot",
+	"url": "http://localhost:9000/streams/waves",
+	"poll": {
+		"enabled": true,
+		"intervalMilliSec": 1000
+	}
+},
+{
+	"_id": "QWvddJfeSQguPZA62",
+	"userId": "guest",
+	"appId": "Q4EnorTFxvG9gyHyB",
+	"dashboardId": "7kGXWA8K4yM55PCji",
+	"dataSetType": "transformed",
+	"name": "Transform_View_Anno",
+	"parents": [
+		"AmuFHRCZFaQG6uZzA"
+	],
+	"transformFunction": "x =\u003e _.pluck(x.viewItems, 'data')",
+	"stateParams": {
+		"enabled": false,
+		"state": "{\n  initialValue: 17\n}"
+	},
+	"selectedVisualizationId": "YWkThmxuc8tHAEkN5"
+},
+{
+	"_id": "oiGDWp4Nbv7cm9zGW",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "YPHGTDAsaursHHfPQ",
+	"dataSetType": "simpleHTTP",
+	"name": "Lat Lng Noise",
+	"url": "http://readnodered.mybluemix.net/leaflet/marker",
+	"poll": {
+		"enabled": true,
+		"intervalMilliSec": 1000
+	}
+},
+{
+	"_id": "CiPuWcxfjAJ4zkiFy",
+	"userId": "guest",
+	"appId": "jetLpRfQ3BCRGiMxe",
+	"dashboardId": "YPHGTDAsaursHHfPQ",
+	"dataSetType": "transformed",
+	"name": "Dynamic Map",
+	"parents": [
+		"oiGDWp4Nbv7cm9zGW"
+	],
+	"transformFunction": "(x, s) =\u003e {\n    s.markers.m1.lat = 38 + x.latNoise;\n    s.markers.m1.lng = x.lngNoise - 96;\n    return s;\n}",
+	"stateParams": {
+		"enabled": true,
+		"state": "{\n  \"defaults\": {\n    \"center\": {\n        \"lat\": 38,\n        \"lng\": -96,\n        \"zoom\": 4\n    },\n    \"scrollWheelZoom\": true,\n    \"tileLayer\": \"http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}\",\n    \"zoomControlPosition\": \"topright\",\n    \"tileLayerOptions\": {\n      \"opacity\": 0.9,\n      \"detectRetina\": true,\n      \"reuseTiles\": true,\n      \"attribution\": \"Tiles \u0026copy; Esri \u0026mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, 2012\"\n    }\n  },\n  markers: {\n      m1: {\n        lat: 38,\n        lng: -96,\n        icon: {\n            type: 'awesomeMarker',\n            icon: 'star',\n            iconColor: 'blue',\n            markerColor: 'red'\n}\n      }, \n      m2: {\n        lat: 38,\n        lng: -96,\n        icon: {\n            icon: 'heart',\n            type: 'awesomeMarker',\n            iconColor: 'red',\n            markerColor: 'green'\n        }\n      }\n  }\n}\n"
+	},
+	"selectedVisualizationId": "c3hzWwqRLvD8wfFdX"
 }]
 
