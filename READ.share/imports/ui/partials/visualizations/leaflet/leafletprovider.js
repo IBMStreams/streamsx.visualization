@@ -8,12 +8,13 @@ export const leafletProviderComponent = {
   },
   controller: ['$scope', '$rootScope', '$timeout', function($scope, $rootScope, $timeout) {
     $scope.ready = true;
-    $rootScope.$on('sidebar-toggled', () => {
+    let unregisterFn = $rootScope.$on('sidebar-toggled', () => {
       $scope.ready = false;
       $timeout(() => {
         $scope.ready = true;
       }, 10);
     });
+    $scope.$on('$destroy', unregisterFn);
   }],
   controllerAs: 'leafletController'
 };

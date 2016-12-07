@@ -144,6 +144,7 @@ const reactiveDataFactory = ['$http', function ($http) {
   // stateParams: is this stateful + initial state
   class TransformedData extends ReactiveData {
     constructor(_id, name, reactiveDataArray, transformFunction, state) {
+      console.log('constructing transformed data');
       super(_id, name);
       this.type = "transformed";
       let self = this;
@@ -153,7 +154,7 @@ const reactiveDataFactory = ['$http', function ($http) {
 
       let reactiveStreams = _.pluck(reactiveDataArray, 'stream');
 
-      let injectSomething = (latestArgs) => {
+      let injectSomething = function(latestArgs) {
         // one or more of the input streams contain error(s)
         if (_.some(latestArgs, (arg) => ! arg.isData)) {
           self.injectError('Transform function inputs contain error(s)');
@@ -171,15 +172,20 @@ const reactiveDataFactory = ['$http', function ($http) {
         }
       }
 
+      let somethingInjector = function(latestArgs) {
+        injectSomething(latestArgs);
+      }
+
       if (reactiveStreams.length > 0) {
         self.combiner = Rx.Observable.combineLatest(...reactiveStreams)
-        .doOnNext((latestArgs) => {injectSomething(latestArgs);}).subscribe(new Rx.ReplaySubject(0));
+        .doOnNext(somethingInjector).subscribe(new Rx.ReplaySubject(0));
       } else {
-        self.combiner = Rx.Observable.just([]).doOnNext((latestArgs) => {injectSomething(latestArgs);}).subscribe(new Rx.ReplaySubject(0));
+        self.combiner = Rx.Observable.just([]).doOnNext(somethingInjector).subscribe(new Rx.ReplaySubject(0));
       }
     }
 
     dispose() {
+      console.log('disposing transformed data');
       this.combiner.dispose();
     }
   }

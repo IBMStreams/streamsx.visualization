@@ -105,9 +105,8 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory,
   this.rds = readState.pipeline.findReactiveData(self.dataSet._id);
 
   this.rds.stream.doOnNext(x => {
-    $timeout(() => {
-      self.lastDataObject = x;
-    }, 0); // this seems necessary for propagating changes to the view... what a lousy hack!
+    $scope.lastDataObject = x;
+    $timeout(); // this seems necessary for propagating changes to the view... what a lousy hack! */
   }).subscribe(new Rx.ReplaySubject(0));
 
 
