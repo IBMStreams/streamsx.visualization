@@ -32,12 +32,12 @@
           </div>
 
           <div class="col-md-6" ng-if="dataSetCtrl.dataSet.dataSetType !== 'raw'">
-            <label ng-if="dataSetCtrl.lastDataObject.isData">Data</label>
-            <pre class="pre-scrollable" ng-if="dataSetCtrl.lastDataObject.isData">{{dataSetCtrl.lastDataObject.data | json:2}}</pre>
+            <label ng-if="lastDataObject.isData">Data</label>
+            <pre class="pre-scrollable" ng-if="lastDataObject.isData">{{lastDataObject.data | json:2}}</pre>
 
-            <label ng-if="! dataSetCtrl.lastDataObject.isData">Error</label>
-            <div class="alert alert-danger" role="alert" ng-if="! dataSetCtrl.lastDataObject.isData">
-              {{dataSetCtrl.lastDataObject.error}}
+            <label ng-if="! lastDataObject.isData">Error</label>
+            <div class="alert alert-danger" role="alert" ng-if="! lastDataObject.isData">
+              {{lastDataObject.error}}
             </div>
           </div>
 

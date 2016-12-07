@@ -20,10 +20,16 @@
 ## Next steps
 * Take the 2 minute READ tour: http://169.44.122.120:3000/#/developer/app/dashboard/designer
 * Play with the sample app bundled with READ
+* Follow the Usage Info which accompanies every dataset and visualization in the sample app
 * Follow the tutorial: http://localhost:3000/#/docs/tutorial
+* Refer to the [Wiki](https://github.com/IBMStreams/streamsx.visualization/wiki) for more documentation on topics such as
+  * READ for Streams Users
+  * Sharing your READ dashboards publicly
+  * Handling CORS Issues
 
-## Sharing READ Dashboards
-Refer to help topics: http://localhost:3000/#/docs/helptopics
+## Contributing
+We encourage you to contribute to READ in a variety of ways.
 
-## Dealing with CORS
-Refer to help topics: http://localhost:3000/#/docs/helptopics
+1. Contribute code or documentation by opening pull requests
+2. Submit feature requests or bugs by logging issues
+3. Share your READ dashboards and apps publicly and let us know. We will link them from this page

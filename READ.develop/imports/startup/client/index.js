@@ -14,8 +14,9 @@ import 'nvd3/build/nv.d3.js';
 import 'angular-nvd3/dist/angular-nvd3';
 import 'nvd3/build/nv.d3.css';
 
-import leaflet from 'leaflet/dist/leaflet';
+import 'leaflet/dist/leaflet';
 import angularLeafletDirective from 'angular-leaflet-directive/dist/angular-leaflet-directive';
+import 'drmonty-leaflet-awesome-markers/js/leaflet.awesome-markers.js';
 import 'leaflet/dist/leaflet.css';
 
 import {reactiveDataFactory} from 'read-common/imports/api/client/reactivedatafactory.js';
@@ -81,10 +82,8 @@ import {tutorialSideNavCtrl} from '/imports/ui/pages/docs/tutorial/sidenav';
 import tutorialMainContentTemplateUrl from '/imports/ui/pages/docs/tutorial/maincontent.html';
 import {tutorialMainContentCtrl} from '/imports/ui/pages/docs/tutorial/maincontent';
 
-import helpTopicsSideNavTemplateUrl from '/imports/ui/pages/docs/helptopics/sidenav.html';
-import {helpTopicsSideNavCtrl} from '/imports/ui/pages/docs/helptopics/sidenav.js';
-import helpTopicsMainContentTemplateUrl from '/imports/ui/pages/docs/helptopics/maincontent.html';
-import {helpTopicsMainContentCtrl} from '/imports/ui/pages/docs/helptopics/maincontent';
+// seems necessary to avoid leaflet marker error
+L.Icon.Default.imagePath = '/bower_components/leaflet/dist/images';
 
 let name = 'read';
 
@@ -314,24 +313,6 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', f
       'maincontent@': {
         templateUrl: tutorialMainContentTemplateUrl,
         controller: tutorialMainContentCtrl,
-        controllerAs: 'mainContentCtrl'
-      }
-    },
-    onEnter: ['readState', function(readState) {
-      readState.sidebar.isPresent();
-    }]
-  })
-  .state('read.docs.helptopics', {
-    url: "/docs/helptopics",
-    views: {
-      'sidenav@': {
-        templateUrl: helpTopicsSideNavTemplateUrl,
-        controller: helpTopicsSideNavCtrl,
-        controllerAs: 'sideNavCtrl'
-      },
-      'maincontent@': {
-        templateUrl: helpTopicsMainContentTemplateUrl,
-        controller: helpTopicsMainContentCtrl,
         controllerAs: 'mainContentCtrl'
       }
     },

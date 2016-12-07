@@ -24,7 +24,7 @@ function ($scope, $reactive, $state, readState, $q, $uibModal, $timeout) {
     item: () => Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
     exportedItem: () => {
       let exportedApp = {
-        version: "0.6.0",
+        version: "0.7.0",
         app: Apps.findOne({_id: self.getReactively('user.selectedIds.appId')}),
         dashboards: Dashboards.find({appId: self.getReactively('user.selectedIds.appId')}).fetch(),
         dataSets: DataSets.find({appId: self.getReactively('user.selectedIds.appId')}).fetch(),

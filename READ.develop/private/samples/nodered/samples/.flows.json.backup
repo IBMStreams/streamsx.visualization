@@ -212,7 +212,7 @@
         "name": "waveview with password",
         "method": "GET",
         "ret": "obj",
-        "url": "https://192.168.147.129:8443/streams/rest/instances/StreamsInstance/views/StreamsInstance.application::Main_0.waveview/viewitems",
+        "url": "https://192.168.147.130:8443/streams/rest/instances/StreamsInstance/views/StreamsInstance.application::Main_1.waveview/viewitems",
         "tls": "",
         "x": 471,
         "y": 228,

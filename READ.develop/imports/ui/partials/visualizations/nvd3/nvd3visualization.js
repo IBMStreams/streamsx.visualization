@@ -68,6 +68,12 @@ export const nvd3VisualizationComponent = {
     };
     let cds = reactivePipeline.addDataSet(canonicalDataSet);
 
+    cds.stream.doOnNext(x => {
+      self.canonicalDataObject = x;
+      $timeout();
+    }).subscribe(new Rx.ReplaySubject(0));
+    // We are knocking out the below for performance reasons... we can revisit later.
+    /*
     this.canonicalSchemaObject = Playground.findOne({_id: self.template.canonicalSchemaId});
     let validatedCanonicalDataSet = {
       _id: "validatedCanonicalData",
@@ -78,5 +84,6 @@ export const nvd3VisualizationComponent = {
     };
     let vcds = reactivePipeline.addDataSet(validatedCanonicalDataSet);
     vcds.stream.doOnNext(x => $timeout(() => (self.canonicalDataObject = x), 0)).subscribe(new Rx.ReplaySubject(0));
+    */
   }]
 }

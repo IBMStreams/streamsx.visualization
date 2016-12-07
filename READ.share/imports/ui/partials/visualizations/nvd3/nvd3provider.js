@@ -26,16 +26,28 @@ export const nvd3ProviderComponent = {
       if ($scope.options.chart.type && $scope.options.chart.height) $scope.ready = true;
     }, true);
 
-    // use this for anything?
+    $scope.config = {
+        visible: true, // default: true
+        extended: false, // default: false
+        disabled: false, // default: false
+        refreshDataOnly: true, // default: true
+        deepWatchOptions: true, // default: true
+        deepWatchData: true, // default: true
+        deepWatchDataDepth: 2, // default: 2
+        debounce: 50 // default: 10
+    };
+
     $scope.api = {};
 
-    $rootScope.$on('sidebar-toggled', () => {
+    let unregisterFn = $rootScope.$on('sidebar-toggled', () => {
       $timeout(() => {
         angular.extend($scope.options.chart, self.dim);
         if ($scope.options.chart.type && $scope.options.chart.height) $scope.ready = true;
         if ($scope.ready && $scope.api.update) $scope.api.update();
       }, 10);
     });
+
+    $scope.$on('$destroy', unregisterFn);
 
     $scope.$watch('nvd3Controller.dim', (newVal, oldVal) => {
       angular.extend($scope.dimensions, newVal);

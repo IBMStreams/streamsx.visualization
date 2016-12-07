@@ -10,8 +10,9 @@ import 'nvd3/build/nv.d3.js';
 import 'angular-nvd3/dist/angular-nvd3';
 import 'nvd3/build/nv.d3.css';
 
-import leaflet from 'leaflet/dist/leaflet';
+import 'leaflet/dist/leaflet';
 import angularLeafletDirective from 'angular-leaflet-directive/dist/angular-leaflet-directive';
+import 'drmonty-leaflet-awesome-markers/js/leaflet.awesome-markers.js';
 import 'leaflet/dist/leaflet.css';
 
 import {reactiveDataFactory} from 'read-common/imports/api/client/reactivedatafactory.js';
@@ -38,6 +39,9 @@ import {leafletProviderComponent, leafletMapDirective} from '/imports/ui/partial
 import {nvd3VisualizationComponent} from '/imports/ui/partials/visualizations/nvd3/nvd3visualization';
 import {leafletVisualizationComponent} from '/imports/ui/partials/visualizations/leaflet/leafletvisualization';
 import {visualizationComponent} from '/imports/ui/partials/visualizations/visualization';
+
+// seems necessary to avoid leaflet marker error
+L.Icon.Default.imagePath = '/bower_components/leaflet/dist/images';
 
 let name = 'read';
 
