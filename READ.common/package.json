@@ -1,7 +1,7 @@
 {
   "name": "read-common",
   "private": true,
-  "version": "0.6.0",
+  "version": "0.7.1",
   "description": "Common components between READ.meteor and READ.share",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
     "bootstrap-sass": "^3.3.7",
     "cytoscape": "^2.7.10",
     "drmonty-leaflet-awesome-markers": "^2.0.2",
+    "leaflet.markercluster": "git+https://github.com/Leaflet/Leaflet.markercluster.git#leaflet-0.7",
     "read-mymodules": "file:../READ.mymodules",
     "rx": "^4.1.0",
     "rx-dom": "^7.0.3",
