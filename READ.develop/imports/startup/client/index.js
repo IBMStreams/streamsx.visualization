@@ -20,8 +20,6 @@ import 'drmonty-leaflet-awesome-markers/js/leaflet.awesome-markers.js';
 import 'leaflet.markercluster/dist/leaflet.markercluster.js';
 import 'leaflet/dist/leaflet.css';
 
-console.log(L);
-
 import {reactiveDataFactory} from 'read-common/imports/api/client/reactivedatafactory.js';
 import {reactivePipeline} from 'read-common/imports/api/client/reactivepipeline';
 import {readStateFactory} from '/imports/api/client/readstatefactory.js';
@@ -119,7 +117,11 @@ angularModule.factory('reactiveDataFactory', reactiveDataFactory)
 .controller('nvd3VizDesignCtrl', nvd3VizDesignCtrl)
 .controller('leafletVizDesignCtrl', leafletVizDesignCtrl)
 
-angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
+angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$compileProvider',
+function($stateProvider, $urlRouterProvider, $httpProvider, $compileProvider) {
+
+  // because of breaking changes in angular 1.6
+  $compileProvider.preAssignBindingsEnabled(true);
 
   // For any unmatched url, send to /home
   $urlRouterProvider.otherwise("/developer/home");
