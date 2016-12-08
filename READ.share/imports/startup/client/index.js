@@ -66,7 +66,7 @@ angularModule.factory('reactiveDataFactory', reactiveDataFactory)
 angularModule.config(['$stateProvider', '$urlRouterProvider', '$compileProvider',
 function($stateProvider, $urlRouterProvider, $compileProvider) {
   // because of breaking changes in angular 1.6
-  $compileProvider.preAssignBindingsEnabled(true);
+//  $compileProvider.preAssignBindingsEnabled(true);
 
   // For any unmatched url, send to /home
   $urlRouterProvider.otherwise("/home");
