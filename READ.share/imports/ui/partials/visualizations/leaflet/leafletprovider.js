@@ -40,6 +40,11 @@ export const leafletMapDirective = ['$compile', function($compile) {
       let template = '<leaflet ' + templateOptions.join(' ') + ' ' + 'height="{{dim.height}}"></leaflet>';
       let content = $compile(template)($scope);
       $element.append(content);
-    }
+    },
+    controller: ['$scope', 'leafletMarkersHelpers', function($scope, leafletMarkersHelpers) {
+      $scope.$on('$stateChangeStart', function () {
+        leafletMarkersHelpers.resetMarkerGroups()
+      });
+    }]
   }
 }];
