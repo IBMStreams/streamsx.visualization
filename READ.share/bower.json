@@ -24,7 +24,11 @@
   "dependencies": {
     "leaflet": "^1.0.1",
     "bootstrap": "^3.3.7",
-    "Leaflet.awesome-markers": "^2.0.2"
+    "Leaflet.awesome-markers": "^2.0.2",
+    "leaflet.markercluster": "https://github.com/Leaflet/Leaflet.markercluster.git#leaflet-0.7"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "leaflet.markercluster": "leaflet-0.7"
+  }
 }
