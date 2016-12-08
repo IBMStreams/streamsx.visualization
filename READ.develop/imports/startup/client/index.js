@@ -59,18 +59,12 @@ import {dashboardDataSetSideNavCtrl} from '/imports/ui/pages/developer/app/dashb
 import dashboardDataSetMainContentTemplateUrl from '/imports/ui/pages/developer/app/dashboard/dataset/dataset.html';
 import {dashboardDataSetCtrl} from '/imports/ui/pages/developer/app/dashboard/dataset/dataset';
 
-import {schemaSideNavCtrl} from '/imports/ui/pages/developer/playground/dataschema/sidenav.js';
-import schemaMainContentTemplateUrl from '/imports/ui/pages/developer/playground/dataschema/maincontent.html';
-import {schemaMainContentCtrl} from '/imports/ui/pages/developer/playground/dataschema/maincontent.js';
+import playgroundSideNavTemplateUrl from '/imports/ui/pages/developer/playground/sidenav.html';
+import {playgroundSideNavCtrl} from '/imports/ui/pages/developer/playground/sidenav.js';
+import playgroundMainContentTemplateUrl from '/imports/ui/pages/developer/playground/maincontent.html';
+import {playgroundMainContentCtrl} from '/imports/ui/pages/developer/playground/maincontent.js';
 
-import {nvd3SideNavCtrl} from '/imports/ui/pages/developer/playground/viz/nvd3/sidenav.js';
-import nvd3MainContentTemplateUrl from '/imports/ui/pages/developer/playground/viz/nvd3/maincontent.html';
-import {nvd3MainContentCtrl} from '/imports/ui/pages/developer/playground/viz/nvd3/maincontent.js';
 import {nvd3ProviderComponent} from '/imports/ui/partials/visualizations/nvd3/nvd3provider';
-
-import {leafletSideNavCtrl} from '/imports/ui/pages/developer/playground/viz/leaflet/sidenav.js';
-import leafletMainContentTemplateUrl from '/imports/ui/pages/developer/playground/viz/leaflet/maincontent.html';
-import {leafletMainContentCtrl} from '/imports/ui/pages/developer/playground/viz/leaflet/maincontent.js';
 import {leafletProviderComponent, leafletMapDirective} from '/imports/ui/partials/visualizations/leaflet/leafletprovider';
 
 import {visualizationComponent} from '/imports/ui/partials/visualizations/visualization';
@@ -234,58 +228,20 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', f
     }]
   })
   .state('read.developer.playground', {
+    url: "/developer/playground",
     abstract: true
   })
-  .state('read.developer.playground.dataschema', {
-    url: "/developer/playground/dataschema",
+  .state('read.developer.playground.plugins', {
+    url: "/plugins",
     views: {
       'sidenav@': {
-        templateUrl: sideNavWrapperTemplateUrl,
-        controller: schemaSideNavCtrl,
+        templateUrl: playgroundSideNavTemplateUrl,
+        controller: playgroundSideNavCtrl,
         controllerAs: 'sideNavCtrl'
       },
       'maincontent@': {
-        templateUrl: schemaMainContentTemplateUrl,
-        controller: schemaMainContentCtrl,
-        controllerAs: 'mainContentCtrl'
-      }
-    },
-    onEnter: ['readState', function(readState) {
-      readState.sidebar.isPresent();
-    }]
-  })
-  .state('read.developer.playground.viz', {
-    abstract: true
-  })
-  .state('read.developer.playground.viz.nvd3', {
-    url: "/developer/playground/nvd3",
-    views: {
-      'sidenav@': {
-        templateUrl: sideNavWrapperTemplateUrl,
-        controller: nvd3SideNavCtrl,
-        controllerAs: 'sideNavCtrl'
-      },
-      'maincontent@': {
-        templateUrl: nvd3MainContentTemplateUrl,
-        controller: nvd3MainContentCtrl,
-        controllerAs: 'mainContentCtrl'
-      }
-    },
-    onEnter: ['readState', function(readState) {
-      readState.sidebar.isPresent();
-    }]
-  })
-  .state('read.developer.playground.viz.leaflet', {
-    url: "/developer/playground/leaflet",
-    views: {
-      'sidenav@': {
-        templateUrl: sideNavWrapperTemplateUrl,
-        controller: leafletSideNavCtrl,
-        controllerAs: 'sideNavCtrl'
-      },
-      'maincontent@': {
-        templateUrl: leafletMainContentTemplateUrl,
-        controller: leafletMainContentCtrl,
+        templateUrl: playgroundMainContentTemplateUrl,
+        controller: playgroundMainContentCtrl,
         controllerAs: 'mainContentCtrl'
       }
     },

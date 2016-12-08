@@ -15,6 +15,7 @@ export const userSchema = {
       type: "object",
       properties: {
         appId: {type: "string"},
+        pluginId: {type: "string"},
         dataSchemaId: {type: "string"},
         chartJSId: {type: "string"},
         nvd3Id: {type: "string"},

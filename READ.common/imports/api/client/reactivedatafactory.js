@@ -144,7 +144,6 @@ const reactiveDataFactory = ['$http', function ($http) {
   // stateParams: is this stateful + initial state
   class TransformedData extends ReactiveData {
     constructor(_id, name, reactiveDataArray, transformFunction, state) {
-      console.log('constructing transformed data');
       super(_id, name);
       this.type = "transformed";
       let self = this;
