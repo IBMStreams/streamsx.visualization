@@ -19,25 +19,17 @@ export const dashboardComponent = {
     $reactive(this).attach($scope);
     let self = this;
 
-    this.visualizations = Visualizations.find({dashboardId: self.dashboardId}).fetch().map(viz => {
-      viz.dimensions = {
-        height: undefined,
-        width: undefined
-      };
-      return viz;
-    });
-
     function extractGridDimensions() {
       return _.filter(_.map($('.grid-stack > .grid-stack-item'), function (el) {
-          el = $(el);
-          var node = el.data('_gridstack_node');
-          if (node) {
-            return {
-              _id: el.attr('data-visualization-id'),
-              x: node.x,
-              y: node.y,
-              width: node.width,
-              height: node.height
+        el = $(el);
+        var node = el.data('_gridstack_node');
+        if (node) {
+          return {
+            _id: el.attr('data-visualization-id'),
+            x: node.x,
+            y: node.y,
+            width: node.width,
+            height: node.height
           }
         }
         else return undefined;
@@ -64,23 +56,33 @@ export const dashboardComponent = {
       }, 200);
     }
 
-    if (self.gsOptions) {
-      $timeout(function() {
-        $(function () {
-          $('.grid-stack').gridstack(self.gsOptions);
-          fixGrid();
-        });
+    this.$onInit = function() {
+      self.visualizations = Visualizations.find({dashboardId: self.dashboardId}).fetch().map(viz => {
+        viz.dimensions = {
+          height: undefined,
+          width: undefined
+        };
+        return viz;
+      });
 
-        $('.grid-stack').on('resizestop', function (event, ui) {
-          fixGrid();
-        });
+      if (self.gsOptions) {
+        $timeout(function() {
+          $(function () {
+            $('.grid-stack').gridstack(self.gsOptions);
+            fixGrid();
+          });
 
-        $('.grid-stack').on('dragstop', function (event, ui) {
-          fixGrid();
-        });
-      }, 1);
-    }
-    else throw new Error('undefined gsOptions in dashboard component');
+          $('.grid-stack').on('resizestop', function (event, ui) {
+            fixGrid();
+          });
+
+          $('.grid-stack').on('dragstop', function (event, ui) {
+            fixGrid();
+          });
+        }, 1);
+      }
+      else throw new Error('undefined gsOptions in dashboard component');
+    };
 
   }]
 };

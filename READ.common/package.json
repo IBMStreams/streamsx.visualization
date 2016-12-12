@@ -1,7 +1,7 @@
 {
   "name": "read-common",
   "private": true,
-  "version": "0.6.0",
+  "version": "1.0.0",
   "description": "Common components between READ.meteor and READ.share",
   "main": "index.js",
   "scripts": {

@@ -7,6 +7,7 @@ import angularSanitize from 'angular-sanitize';
 import angularUi from 'angular-ui-bootstrap';
 import clipBoard from 'clipboard';
 import ngClipBoard from 'ngclipboard/dist/ngclipboard';
+import sortable from 'angular-ui-sortable/dist/sortable';
 
 import d3 from 'd3';
 
@@ -59,10 +60,13 @@ import {dashboardDataSetSideNavCtrl} from '/imports/ui/pages/developer/app/dashb
 import dashboardDataSetMainContentTemplateUrl from '/imports/ui/pages/developer/app/dashboard/dataset/dataset.html';
 import {dashboardDataSetCtrl} from '/imports/ui/pages/developer/app/dashboard/dataset/dataset';
 
-import playgroundSideNavTemplateUrl from '/imports/ui/pages/developer/playground/sidenav.html';
-import {playgroundSideNavCtrl} from '/imports/ui/pages/developer/playground/sidenav.js';
-import playgroundMainContentTemplateUrl from '/imports/ui/pages/developer/playground/maincontent.html';
-import {playgroundMainContentCtrl} from '/imports/ui/pages/developer/playground/maincontent.js';
+import pluginSideNavTemplateUrl from '/imports/ui/pages/developer/playground/plugin/sidenav.html';
+import {pluginSideNavCtrl} from '/imports/ui/pages/developer/playground/plugin/sidenav.js';
+import pluginMainContentTemplateUrl from '/imports/ui/pages/developer/playground/plugin/maincontent.html';
+import {pluginMainContentCtrl} from '/imports/ui/pages/developer/playground/plugin/maincontent.js';
+
+import playgroundDataSetSideNavTemplateUrl from '/imports/ui/pages/developer/playground/dataset/sidenav.html';
+import {playgroundDataSetSideNavCtrl} from '/imports/ui/pages/developer/playground/dataset/sidenav.js';
 
 import {nvd3ProviderComponent} from '/imports/ui/partials/visualizations/nvd3/nvd3provider';
 import {leafletProviderComponent, leafletMapDirective} from '/imports/ui/partials/visualizations/leaflet/leafletprovider';
@@ -82,7 +86,7 @@ L.Icon.Default.imagePath = '/bower_components/leaflet/dist/images';
 let name = 'read';
 
 let angularModule = angular.module(name, [angularMeteor, uiRouter, ngMessages,
-  'ui.bootstrap', 'ngSanitize', 'ui.ace', 'nvd3', 'ngclipboard', 'read.dataSetEditors', 'leaflet-directive']);
+  'ui.bootstrap', 'ngSanitize', 'ui.ace', 'nvd3', 'ngclipboard', 'read.dataSetEditors', 'leaflet-directive', 'ui.sortable']);
   //  'ui.bootstrap', 'ngSanitize', 'ui.ace', 'nvd3', 'ngclipboard', 'read.dataSetEditors', 'leaflet-directive']);
 
 angularModule.factory('reactiveDataFactory', reactiveDataFactory)
@@ -124,6 +128,8 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', f
     resolve: {
       deferredUser: ['readState', (readState) => readState.deferredUser.promise],
       deferredApps: ['readState', (readState) => readState.deferredApps.promise],
+      deferredPlugins: ['readState', (readState) => readState.deferredPlugins.promise],
+      deferredPlaygroundDatasets: ['readState', (readState) => readState.deferredPlaygroundDatasets.promise],
       deferredPlayground: ['readState', (readState) => readState.deferredPlayground.promise],
       deferredDataSets: ['readState', (readState) => readState.deferredDataSets.promise],
       deferredDashboards: ['readState', (readState) => readState.deferredDashboards.promise],
@@ -231,18 +237,31 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', f
     url: "/developer/playground",
     abstract: true
   })
-  .state('read.developer.playground.plugins', {
-    url: "/plugins",
+  .state('read.developer.playground.plugin', {
+    url: "/plugin",
     views: {
       'sidenav@': {
-        templateUrl: playgroundSideNavTemplateUrl,
-        controller: playgroundSideNavCtrl,
+        templateUrl: pluginSideNavTemplateUrl,
+        controller: pluginSideNavCtrl,
         controllerAs: 'sideNavCtrl'
       },
       'maincontent@': {
-        templateUrl: playgroundMainContentTemplateUrl,
-        controller: playgroundMainContentCtrl,
+        templateUrl: pluginMainContentTemplateUrl,
+        controller: pluginMainContentCtrl,
         controllerAs: 'mainContentCtrl'
+      }
+    },
+    onEnter: ['readState', function(readState) {
+      readState.sidebar.isPresent();
+    }]
+  })
+  .state('read.developer.playground.dataset', {
+    url: "/dataset",
+    views: {
+      'sidenav@': {
+        templateUrl: playgroundDataSetSideNavTemplateUrl,
+        controller: playgroundDataSetSideNavCtrl,
+        controllerAs: 'sideNavCtrl'
       }
     },
     onEnter: ['readState', function(readState) {

@@ -69,6 +69,10 @@ body {
   background-color: $navbar-header-background-color;
 }
 
+.sidenav .sidenav-content .breadcrumb.secondary {
+  margin-top: 15px;
+}
+
 .sidenav .sidenav-content .breadcrumb a.btn {
   padding: 0px;
 }
@@ -168,11 +172,21 @@ pre {
    word-wrap: break-word;      /* IE */
 }
 
-
-
 .sidenav-item {
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+.sidenav-item input.form-control[readonly] {
+  background-color: #999999;
+}
+
+.sidenav-item.selected-item input[readonly] {
+  background-color: #dddddd;
+}
+
+.sidenav-item.selected-item input:not([readonly]) {
+  background-color: #ffffff;
 }
 
 .angular-leaflet-map .legend {

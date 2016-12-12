@@ -28,6 +28,7 @@ export const readStateFactory = ['$q', 'reactivePipeline', ($q, reactivePipeline
     deferredDataSets: $q.defer(),
     deferredVisualizations: $q.defer(),
     deferredPlugins: $q.defer(),
+    deferredPlaygroundDatasets: $q.defer(),
     dependencies: new Dependency(),
     pipeline: reactivePipelineService.getInstance(),
   };

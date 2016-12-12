@@ -27,11 +27,24 @@ function ($scope, $reactive, readState, $timeout) {
     }
   });
 
+  this.subscribe('plugins', null, {
+    onReady: () => {
+      readState.deferredPlugins.resolve();
+    }
+  });
+
+  this.subscribe('playgrounddatasets', null, {
+    onReady: () => {
+      readState.deferredPlaygroundDatasets.resolve();
+    }
+  });
+
   this.subscribe('playground', null, {
     onReady: () => {
       readState.deferredPlayground.resolve();
     }
   });
+
 
   let changeDataSetParents = (dataSet) => {
     if (! _.contains(['extendedHTTP', 'transformed'], dataSet.dataSetType))

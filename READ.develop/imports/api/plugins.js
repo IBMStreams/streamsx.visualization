@@ -12,7 +12,8 @@ export const pluginSchema = {
       minLength: 1,
       maxLength: 20
     },
-    selectedTemplate: {type: "string"}
+    selectedTemplate: {type: "string"},
+    position: {type: "number"}
   },
   required: ["userId", "name"],
   additionalProperties: false

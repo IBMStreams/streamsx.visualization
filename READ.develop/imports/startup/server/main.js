@@ -6,6 +6,8 @@ import {Apps} from '/imports/api/apps';
 import {Dashboards} from '/imports/api/dashboards';
 import {DataSets} from '/imports/api/datasets';
 import {Visualizations} from '/imports/api/visualizations';
+import {Plugins} from '/imports/api/plugins';
+import {PlaygroundDatasets} from '/imports/api/playgrounddatasets';
 
 import guestUser from './userinit';
 import playground from './playgroundinit';

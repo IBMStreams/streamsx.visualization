@@ -7,4 +7,5 @@ export const visualizationComponent = {
   bindings: {
     visualization: '<',
     dim: '<'
-  }}
+  }
+}

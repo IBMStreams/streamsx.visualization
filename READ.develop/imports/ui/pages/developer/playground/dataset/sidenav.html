@@ -1,0 +1,66 @@
+<ol class="breadcrumb" ng-if="sideNavCtrl.user.readOnly">
+  <li>
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset" class="btn">Datasets</a>
+    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+  </li>
+  <li>
+    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-upload" aria-hidden="true"></i></a>
+  </li>
+  <li>
+    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-download" aria-hidden="true"></i></a>
+  </li>
+  <li>
+    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+  </li>
+</ol>
+
+<ol class="breadcrumb secondary">
+  <li>
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.plugin" class="btn">
+      Plugins&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    </a>
+  </li>
+</ol>
+
+<ol class="breadcrumb secondary">
+  <li>
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.charttemplates" class="btn">
+      Chart Templates&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    </a>
+  </li>
+</ol>
+
+<ol class="breadcrumb" ng-if="! sideNavCtrl.user.readOnly">
+  <li>
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset" class="btn">Datasets</a>
+  </li>
+  <li ng-click="sideNavCtrl.createDataset()">
+    <a href="javascript:void(0)"
+    uib-tooltip="Create Dataset"
+    tooltip-placement="bottom-left"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+  </li>
+  <li ng-show="sideNavCtrl.dataset && sideNavCtrl.deletableDataset" ng-click="sideNavCtrl.brieflyShowAreYouSure()">
+    <a href="javascript:void(0)" uib-tooltip="Delete Dataset"
+    tooltip-placement="bottom-left"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+  </li>
+  <li ng-if="sideNavCtrl.showAreYouSure">
+    <button class="btn btn-danger btn-xs" ng-click="sideNavCtrl.deleteDataset()">Confirm</button>
+  </li>
+</ol>
+
+<form name="sideNavForm" novalidate id="alldatasets">
+  <div ui-sortable="sideNavCtrl.sortOptions" ng-model="sideNavCtrl.datasets" class="sortable-list">
+    <label for="selectedId">Select Dataset</label>
+    <div ng-repeat="dataset in sideNavCtrl.datasets" class="sidenav-item sortable-item"
+    ng-class="{'selected-item': sideNavCtrl.dataset._id === dataset._id}">
+      <input type="text" class="form-control" ng-if="sideNavCtrl.dataset._id !== dataset._id"
+      readonly ng-model="dataset.name"
+      ng-click="sideNavCtrl.switchDataset(dataset._id)"></input>
+      <input type="text" class="form-control" ng-if="sideNavCtrl.dataset._id === dataset._id"
+      ng-readonly="! dataset.editable" ng-model="dataset.name"
+      minlength=1 maxlength=20 required
+      ng-click="sideNavCtrl.setEditMode(dataset)"
+      ng-mouseleave="sideNavCtrl.unsetEditMode(dataset)"></input>
+    </div>
+  </div>
+</form>
