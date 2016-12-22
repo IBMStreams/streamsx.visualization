@@ -93,6 +93,11 @@ body {
   border-bottom-color: transparent;
 }
 
+.quick-buttons .breadcrumb {
+  border-bottom: none;
+  margin-bottom: 0px;
+}
+
 .ace_editor, .validation-messages {
   min-height: 350px;
   width: 100%;

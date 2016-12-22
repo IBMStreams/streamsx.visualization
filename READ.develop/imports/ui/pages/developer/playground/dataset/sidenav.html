@@ -1,6 +1,25 @@
+<ol class="breadcrumb secondary">
+  <li>
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.plugin"
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">
+      Plugins&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    </a>
+  </li>
+</ol>
+
+<ol class="breadcrumb secondary">
+  <li>
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.charttemplate"
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">
+      Templates&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    </a>
+  </li>
+</ol>
+
 <ol class="breadcrumb" ng-if="sideNavCtrl.user.readOnly">
   <li>
-    <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset" class="btn">Datasets</a>
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset"
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">Datasets</a>
     <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
   </li>
   <li>
@@ -14,34 +33,33 @@
   </li>
 </ol>
 
-<ol class="breadcrumb secondary">
-  <li>
-    <a href="javascript:void(0)" ui-sref="read.developer.playground.plugin" class="btn">
-      Plugins&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i>
-    </a>
-  </li>
-</ol>
-
-<ol class="breadcrumb secondary">
-  <li>
-    <a href="javascript:void(0)" ui-sref="read.developer.playground.charttemplates" class="btn">
-      Chart Templates&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i>
-    </a>
-  </li>
-</ol>
-
 <ol class="breadcrumb" ng-if="! sideNavCtrl.user.readOnly">
   <li>
-    <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset" class="btn">Datasets</a>
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset"
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">Datasets</a>
+  </li>
+  <li ng-click="sideNavCtrl.cloneDataset()">
+    <a href="javascript:void(0)"
+    uib-tooltip="Clone Dataset"
+    tooltip-placement="bottom"><i class="fa fa-clone" aria-hidden="true"></i></a>
   </li>
   <li ng-click="sideNavCtrl.createDataset()">
     <a href="javascript:void(0)"
     uib-tooltip="Create Dataset"
     tooltip-placement="bottom-left"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
   </li>
+  <li ngclipboard data-clipboard-text="{{sideNavCtrl.exportedStr}}" ng-click="sideNavCtrl.brieflyShowExported()">
+    <a href="javascript:void(0)" uib-tooltip="Export Dataset to clipboard" tooltip-placement="bottom"><i class="fa fa-upload" aria-hidden="true"></i></a>
+  </li>
+  <li ng-click="sideNavCtrl.importDataset()">
+    <a href="javascript:void(0)" uib-tooltip="Import Dataset" tooltip-placement="bottom"><i class="fa fa-download" aria-hidden="true"></i></a>
+  </li>
   <li ng-show="sideNavCtrl.dataset && sideNavCtrl.deletableDataset" ng-click="sideNavCtrl.brieflyShowAreYouSure()">
     <a href="javascript:void(0)" uib-tooltip="Delete Dataset"
     tooltip-placement="bottom-left"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+  </li>
+  <li ng-if="sideNavCtrl.showExported">
+    <span class="btn btn-success btn-xs">Dataset exported</span>
   </li>
   <li ng-if="sideNavCtrl.showAreYouSure">
     <button class="btn btn-danger btn-xs" ng-click="sideNavCtrl.deleteDataset()">Confirm</button>

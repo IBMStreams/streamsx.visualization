@@ -5,27 +5,39 @@ import ajv from 'ajv';
 import Rx from 'rx/dist/rx.all'
 
 import {Users} from '/imports/api/users';
-import {Playground} from '/imports/api/playground';
+import {Plugins} from '/imports/api/plugins';
 
 import {reactiveDataFactory} from 'read-common/imports/api/client/reactivedatafactory'
 import {aceJsonSchemaOptions, aceJavaScriptOptions} from '/imports/ui/partials/aceoptions';
 
-export const pluginMainContentCtrl = ['$scope', '$reactive', '$timeout', '$state', 'reactiveDataFactory', 'readState', 'reactivePipeline',
-function ($scope, $reactive, $timeout, $state, reactiveDataFactory, readState, reactivePipelineService) {
-  // $reactive(this).attach($scope);
-  // let self = this;
-  // this.readState = readState;
-  //
-  // this.aceJsonSchemaOptions = aceJsonSchemaOptions;
-  // this.aceJavaScriptOptions = aceJavaScriptOptions;
-  //
-  // this.helpers({
-  //   user: () => Users.findOne({}),
-  //   items: () => Playground.find({pluginType: 'Data Schema'}).fetch(),
-  //   item: () => self.getReactively('user.selectedIds.dataSchemaId') ?
-  //   Playground.findOne({_id: self.user.selectedIds.dataSchemaId}) : undefined
-  // });
-  //
+export const pluginMainContentCtrl = ['$scope', '$reactive', '$timeout', '$state', '$stateParams', 'readState',
+function ($scope, $reactive, $timeout, $state, $stateParams, readState) {
+  $reactive(this).attach($scope);
+  let self = this;
+  this.readState = readState;
+
+  let pluginIndex = Number($stateParams.index);
+
+  this.aceJsonSchemaOptions = aceJsonSchemaOptions;
+  this.aceJavaScriptOptions = aceJavaScriptOptions;
+
+  this.helpers({
+    user: () => Users.findOne({}),
+    plugins: () => Plugins.find({}).fetch(),
+    plugin: () => self.getReactively('user.selectedIds.pluginId') ?
+    Plugins.findOne({_id: self.user.selectedIds.pluginId}) : undefined
+  });
+
+  this.switchPlugin = (selectedId) => {
+    self.user.selectedIds.pluginId = selectedId;
+    Meteor.call('user.update', self.user, (err, res) => {if (err) alert(err);}); //update user
+    $state.reload($state.$current.name);
+  }
+
+  if ((_.isNumber(pluginIndex)) && (pluginIndex >= 0) && (pluginIndex < self.plugins.length)) {
+    self.switchPlugin(self.plugins[pluginIndex]._id);
+  }
+
   // this.validators = {
   //   testData: true,
   //   jsonSchema: true

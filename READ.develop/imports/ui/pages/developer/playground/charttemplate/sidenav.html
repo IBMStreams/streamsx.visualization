@@ -1,0 +1,84 @@
+<ol class="breadcrumb secondary">
+  <li>
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.plugin"
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">
+      Plugins&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+      {{sideNavCtrl.plugin.name}}
+    </a>
+  </li>
+</ol>
+
+<ol class="breadcrumb" ng-if="sideNavCtrl.user.readOnly">
+  <li>
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.charttemplate"
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">Templates</a>
+    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+  </li>
+  <li>
+    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-upload" aria-hidden="true"></i></a>
+  </li>
+  <li>
+    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-download" aria-hidden="true"></i></a>
+  </li>
+  <li>
+    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+  </li>
+</ol>
+
+<ol class="breadcrumb" ng-if="! sideNavCtrl.user.readOnly">
+  <li>
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.charttemplate"
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">Templates</a>
+  </li>
+  <li ng-click="sideNavCtrl.cloneChartTemplate()" ng-show="sideNavCtrl.chartTemplate && sideNavCtrl.clonableChartTemplate">
+    <a href="javascript:void(0)"
+    uib-tooltip="Clone Chart Template"
+    tooltip-placement="bottom"><i class="fa fa-clone" aria-hidden="true"></i></a>
+  </li>
+  <li ng-click="sideNavCtrl.createChartTemplate()">
+    <a href="javascript:void(0)"
+    uib-tooltip="Create Chart Template"
+    tooltip-placement="bottom"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+  </li>
+  <li ngclipboard data-clipboard-text="{{sideNavCtrl.exportedStr}}" ng-click="sideNavCtrl.brieflyShowExported()">
+    <a href="javascript:void(0)" uib-tooltip="Export Chart Template to clipboard" tooltip-placement="bottom"><i class="fa fa-upload" aria-hidden="true"></i></a>
+  </li>
+  <li ng-click="sideNavCtrl.importChartTemplate()">
+    <a href="javascript:void(0)" uib-tooltip="Import Chart Template" tooltip-placement="bottom"><i class="fa fa-download" aria-hidden="true"></i></a>
+  </li>
+  <li ng-show="sideNavCtrl.chartTemplate && sideNavCtrl.deletableChartTemplate" ng-click="sideNavCtrl.brieflyShowAreYouSure()">
+    <a href="javascript:void(0)" uib-tooltip="Delete Chart Template"
+    tooltip-placement="bottom"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+  </li>
+  <li ng-if="sideNavCtrl.showExported">
+    <span class="btn btn-success btn-xs">Chart Template exported</span>
+  </li>
+  <li ng-if="sideNavCtrl.showAreYouSure">
+    <button class="btn btn-danger btn-xs" ng-click="sideNavCtrl.deleteChartTemplate()">Confirm</button>
+  </li>
+</ol>
+
+<form name="sideNavForm" novalidate id="allcharttemplates">
+  <div ui-sortable="sideNavCtrl.sortOptions" ng-model="sideNavCtrl.chartTemplates" class="sortable-list">
+    <label for="selectedId">Select Chart Template</label>
+    <div ng-repeat="chartTemplate in sideNavCtrl.chartTemplates" class="sidenav-item sortable-item"
+    ng-class="{'selected-item': sideNavCtrl.chartTemplate._id === chartTemplate._id}">
+      <input type="text" class="form-control" ng-if="sideNavCtrl.chartTemplate._id !== chartTemplate._id"
+      readonly ng-model="chartTemplate.name"
+      ng-click="sideNavCtrl.switchChartTemplate(chartTemplate._id)"></input>
+      <input type="text" class="form-control" ng-if="sideNavCtrl.chartTemplate._id === chartTemplate._id"
+      ng-readonly="! chartTemplate.editable" ng-model="chartTemplate.name"
+      minlength=1 maxlength=20 required
+      ng-click="sideNavCtrl.setEditMode(chartTemplate)"
+      ng-mouseleave="sideNavCtrl.unsetEditMode(chartTemplate)"></input>
+    </div>
+  </div>
+</form>
+
+<ol class="breadcrumb secondary">
+  <li>
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset"
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">Datasets
+    &nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+  </li>
+</ol>

@@ -16,6 +16,7 @@ export const userSchema = {
       properties: {
         appId: {type: "string"},
         pluginId: {type: "string"},
+        playgroundDatasetId: {type: "string"},
         dataSchemaId: {type: "string"},
         chartJSId: {type: "string"},
         nvd3Id: {type: "string"},

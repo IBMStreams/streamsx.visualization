@@ -7,7 +7,6 @@ import {Apps} from '/imports/api/apps';
 import {Dashboards} from '/imports/api/dashboards';
 import {DataSets} from '/imports/api/datasets';
 
-import './rawdatausageinfo.html';
 import './simplehttpdatausageinfo.html';
 import './websocketdatausageinfo.html';
 import './transformdatausageinfo.html';

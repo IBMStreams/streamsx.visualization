@@ -1,6 +1,7 @@
 <ol class="breadcrumb" ng-if="sideNavCtrl.user.readOnly">
   <li>
-    <a href="javascript:void(0)" ui-sref="read.developer.playground.plugin" class="btn">Plugins</a>
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.plugin"
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">Plugins</a>
     <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
   </li>
   <li>
@@ -16,22 +17,23 @@
 
 <ol class="breadcrumb" ng-if="! sideNavCtrl.user.readOnly">
   <li>
-    <a href="javascript:void(0)" ui-sref="read.developer.playground.plugin" class="btn">Plugins</a>
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.plugin"
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">Plugins</a>
   </li>
   <li ng-click="sideNavCtrl.createPlugin()">
     <a href="javascript:void(0)"
     uib-tooltip="Create Plugin"
-    tooltip-placement="bottom-left"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+    tooltip-placement="bottom"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
   </li>
   <li ngclipboard data-clipboard-text="{{sideNavCtrl.exportedStr}}" ng-click="sideNavCtrl.brieflyShowExported()">
-    <a href="javascript:void(0)" uib-tooltip="Export Plugin to clipboard" tooltip-placement="bottom-left"><i class="fa fa-upload" aria-hidden="true"></i></a>
+    <a href="javascript:void(0)" uib-tooltip="Export Plugin to clipboard" tooltip-placement="bottom"><i class="fa fa-upload" aria-hidden="true"></i></a>
   </li>
   <li ng-click="sideNavCtrl.importPlugin()">
-    <a href="javascript:void(0)" uib-tooltip="Import Plugin" tooltip-placement="bottom-left"><i class="fa fa-download" aria-hidden="true"></i></a>
+    <a href="javascript:void(0)" uib-tooltip="Import Plugin" tooltip-placement="bottom"><i class="fa fa-download" aria-hidden="true"></i></a>
   </li>
   <li ng-show="sideNavCtrl.plugin && sideNavCtrl.deletablePlugin" ng-click="sideNavCtrl.brieflyShowAreYouSure()">
     <a href="javascript:void(0)" uib-tooltip="Delete Plugin"
-    tooltip-placement="bottom-left"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+    tooltip-placement="bottom"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
   </li>
   <li ng-if="sideNavCtrl.showExported">
     <span class="btn btn-success btn-xs">Plugin exported</span>
@@ -39,11 +41,6 @@
   <li ng-if="sideNavCtrl.showAreYouSure">
     <button class="btn btn-danger btn-xs" ng-click="sideNavCtrl.deletePlugin()">Confirm</button>
   </li>
-
-  <!-- Below is only to preserve space -->
-  <!-- <li class="space-preserver ng-hide">
-  <a href="javascript:void(0)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-</li> -->
 </ol>
 
 <form name="sideNavForm" novalidate id="allplugins">
@@ -65,15 +62,17 @@
 
 <ol class="breadcrumb secondary">
   <li>
-    <a href="javascript:void(0)" ui-sref="read.developer.playground.charttemplates" class="btn">
-      Chart Templates&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.charttemplate"
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">
+      Templates&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i>
     </a>
   </li>
 </ol>
 
 <ol class="breadcrumb secondary">
   <li>
-    <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset" class="btn">
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset"
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">
       Datasets&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i>
     </a>
   </li>

@@ -1,0 +1,58 @@
+<div class="main-content-panel-wrapper" ng-if="datasetCtrl.dataset">
+  <div class="main-content-panel">
+    <div class="panel with-nav-tabs panel-default">
+      <div class="panel-heading">
+        <ul class="nav nav-tabs">
+          <li ng-class="{active: datasetCtrl.readState.playground.dataset === 'editor'}">
+            <a ng-click="datasetCtrl.readState.playground.dataset = 'editor'">Data Editor
+            <i ng-if="! datasetCtrl.validators.datasetEditor" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+          </a>
+          </li>
+          <li ng-class="{active: datasetCtrl.readState.playground.dataset === 'usageInfo'}">
+            <a ng-click="datasetCtrl.readState.playground.dataset = 'usageInfo'">Usage Info</a>
+          </li>
+          <li class="quick-buttons" ng-click="sideNavCtrl.copy()" uib-tooltip="Copy Data to Clipboard" tooltip-placement="bottom">
+            <a href="javascript:void(0)"><i class="fa fa-files-o" aria-hidden="true"></i></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="panel-body" id="dataset">
+        <div class="row" ng-if="datasetCtrl.readState.playground.dataset !== 'usageInfo'">
+          <div class="col-md-6" ng-if="datasetCtrl.dataset.datasetType !== 'Raw'">
+            <simple-http-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'simpleHTTP'"></simple-http-data-editor>
+            <websocket-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'websocket'"></websocket-data-editor>
+            <extended-http-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'extendedHTTP'"></extended-http-data-editor>
+            <transformed-data-editor ng-if="dataSetCtrl.dataSet.dataSetType === 'transformed'"></transformed-data-editor>
+          </div>
+
+          <div class="col-md-6" ng-if="datasetCtrl.dataset.datasetType !== 'Raw'">
+            <label ng-if="lastDataObject.isData">Data</label>
+            <pre class="pre-scrollable" ng-if="lastDataObject.isData">{{lastDataObject.data | json:2}}</pre>
+
+            <label ng-if="! lastDataObject.isData">Error</label>
+            <div class="alert alert-danger" role="alert" ng-if="! lastDataObject.isData">
+              {{lastDataObject.error}}
+            </div>
+          </div>
+
+          <div class="col-md-12" ng-if="datasetCtrl.dataset.datasetType === 'Raw'">
+            <raw-data-editor></raw-data-editor>
+          </div>
+        </div>
+
+        <div ng-if="datasetCtrl.readState.playground.dataset === 'usageInfo'">
+          <div ng-include="'/imports/ui/pages/developer/playground/dataset/rawdatausageinfo.html'"
+          ng-if="datasetCtrl.dataset.datasetType === 'Raw'"></div>
+          <div ng-include="'/imports/ui/pages/developer/app/dashboard/dataset/simplehttpdatausageinfo.html'"
+          ng-if="datasetCtrl.dataset.datasetType === 'simpleHTTP'"></div>
+          <div ng-include="'/imports/ui/pages/developer/app/dashboard/dataset/websocketdatausageinfo.html'"
+          ng-if="datasetCtrl.dataset.datasetType === 'websocket'"></div>
+          <div ng-include="'/imports/ui/pages/developer/app/dashboard/dataset/transformdatausageinfo.html'"
+          ng-if="datasetCtrl.dataset.datasetType === 'transformed'"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

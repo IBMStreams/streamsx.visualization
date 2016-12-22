@@ -4,8 +4,8 @@ import _ from 'underscore/underscore';
 import {Users} from '/imports/api/users';
 import {PlaygroundDatasets} from '/imports/api/playgrounddatasets';
 
-export const playgroundDatasetSideNavCtrl = ['$scope', '$reactive', '$state', '$timeout', 'readState',
-function ($scope, $reactive, $state, $timeout, readState) {
+export const playgroundDatasetSideNavCtrl = ['$scope', '$reactive', '$state', '$timeout', 'readState', 'defaultDatasets',
+function ($scope, $reactive, $state, $timeout, readState, defaultDatasets) {
   $reactive(this).attach($scope);
   let self = this;
 
@@ -16,17 +16,22 @@ function ($scope, $reactive, $state, $timeout, readState) {
     deletableDataset: () => ! self.user.readOnly // and other stuff needs to go here like dependency checks, etc.
   });
 
-  this.createDataset = () => {
-    Meteor.call('playgrounddataset.create', {
-      userId: 'guest',
-      name: 'Dataset ' + self.plugins.length,
-      position: self.plugins.length
-    }, (err, res) => {
-      if (err) alert(err);
-      else {
-        self.switchDataset(res);
-      }
-    });
+  this.createDataset = (datasetType) => {
+    if (! datasetType) datasetType = 'Raw';
+    if (! defaultDatasets[datasetType]) throw new Error("Unknown dataset type detected in create dataset");
+    else {
+      let dataset = angular.merge({
+        userId: 'guest',
+        datasetType: datasetType,
+        name: 'PlaygroundDataset ' + self.datasets.length,
+        position: self.datasets.length
+      }, defaultDatasets[datasetType]);
+
+      Meteor.call('playgroundDataset.create', dataset, (err, res) => {
+        if (err) alert(err);
+          self.switchDataset(res);
+      });
+    }
   }
 
   this.switchDataset = (selectedId) => {
@@ -35,14 +40,14 @@ function ($scope, $reactive, $state, $timeout, readState) {
     $state.reload($state.$current.name);
   }
 
-  // update plugn in database
+  // update dataset in database
   this.updateDatabase = (_dataset) => {
-    Meteor.call('playgrounddataset.update', _dataset._id, _dataset, (err, res) => {
+    Meteor.call('playgroundDataset.update', _dataset._id, _dataset, (err, res) => {
       if (err) alert(err);
     });
   };
 
-  this.updateDatset = (_dataset) => {
+  this.updateDataset = (_dataset) => {
     self.updateDatabase(_dataset);
   }
 
@@ -82,7 +87,7 @@ function ($scope, $reactive, $state, $timeout, readState) {
   };
 
   this.deleteDataset = () => {
-    Meteor.call('playgrounddataset.delete', self.dataset._id, (err, res) => {
+    Meteor.call('playgroundDataset.delete', self.dataset._id, (err, res) => {
       if (err) alert(err);
       else {
         if (self.datasets.length > 0)

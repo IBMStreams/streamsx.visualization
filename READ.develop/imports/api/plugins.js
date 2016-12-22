@@ -12,10 +12,10 @@ export const pluginSchema = {
       minLength: 1,
       maxLength: 20
     },
-    selectedTemplate: {type: "string"},
+    selectedChartTemplateId: {type: "string"},
     position: {type: "number"}
   },
-  required: ["userId", "name"],
+  required: ["userId", "name", "position"],
   additionalProperties: false
 };
 

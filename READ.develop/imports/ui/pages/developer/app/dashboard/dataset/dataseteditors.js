@@ -1,7 +1,7 @@
 import angular from 'angular';
 import Rx from 'rx/dist/rx.all';
 
-import rawDataEditorTemplateUrl from './rawdataeditor.html';
+// import rawDataEditorTemplateUrl from './rawdataeditor.html';
 import simpleHTTPDataEditorTemplateUrl from './simplehttpdataeditor.html';
 import websocketDataEditorTemplateUrl from './websocketdataeditor.html';
 import transformedDataEditorTemplateUrl from './transformeddataeditor.html';
@@ -65,26 +65,22 @@ angularModule.factory('defaultDataSets', function() {
   return myFactory;
 });
 
-angularModule.directive('rawDataEditor', function() {
-  return {
-    templateUrl: rawDataEditorTemplateUrl
-  }
-}).directive('simpleHttpDataEditor', function() {
-  return {
-    templateUrl: simpleHTTPDataEditorTemplateUrl
-  }
-}).directive('websocketDataEditor', function() {
-  return {
-    templateUrl: websocketDataEditorTemplateUrl
-  }
-}).directive('transformedDataEditor', function() {
-  return {
-    templateUrl: transformedDataEditorTemplateUrl
-  }
-}).directive('extendedHttpDataEditor', function() {
-  return {
-    templateUrl: extendedHTTPDataEditorTemplateUrl
-  }
-});
+// angularModule.directive('simpleHttpDataEditor', function() {
+//   return {
+//     templateUrl: simpleHTTPDataEditorTemplateUrl
+//   }
+// }).directive('websocketDataEditor', function() {
+//   return {
+//     templateUrl: websocketDataEditorTemplateUrl
+//   }
+// }).directive('transformedDataEditor', function() {
+//   return {
+//     templateUrl: transformedDataEditorTemplateUrl
+//   }
+// }).directive('extendedHttpDataEditor', function() {
+//   return {
+//     templateUrl: extendedHTTPDataEditorTemplateUrl
+//   }
+// });
 
 export default angularModule;

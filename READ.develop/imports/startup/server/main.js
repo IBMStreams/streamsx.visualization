@@ -8,6 +8,7 @@ import {DataSets} from '/imports/api/datasets';
 import {Visualizations} from '/imports/api/visualizations';
 import {Plugins} from '/imports/api/plugins';
 import {PlaygroundDatasets} from '/imports/api/playgrounddatasets';
+import {ChartTemplates} from '/imports/api/charttemplates';
 
 import guestUser from './userinit';
 import playground from './playgroundinit';

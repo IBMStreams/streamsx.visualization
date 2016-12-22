@@ -1,0 +1,11 @@
+<div ng-if="(playgroundCtrl.currentState === 'plugin') && playgroundCtrl.plugin">
+  <div ng-controller="pluginCtrl as pluginCtrl">
+    <div ui-view="main"></div>
+  </div>
+</div>
+
+<div ng-if="(playgroundCtrl.currentState === 'dataset') && playgroundCtrl.dataset">
+  <div ng-controller="playgroundDatasetCtrl as datasetCtrl">
+    <div ui-view="main"></div>
+  </div>
+</div>

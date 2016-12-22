@@ -3,6 +3,7 @@ import _ from 'underscore/underscore';
 
 import {Users} from '/imports/api/users';
 import {Plugins} from '/imports/api/plugins';
+import {ChartTemplates} from '/imports/api/charttemplates';
 
 export const pluginSideNavCtrl = ['$scope', '$reactive', '$state', '$timeout', 'readState',
 function ($scope, $reactive, $state, $timeout, readState) {
@@ -13,7 +14,9 @@ function ($scope, $reactive, $state, $timeout, readState) {
     user: () => Users.findOne({}),
     plugins: () => Plugins.find().fetch().sort((a, b) => a.position - b.position),
     plugin: () => Plugins.findOne({_id: self.getReactively('user.selectedIds.pluginId')}),
-    deletablePlugin: () => ! self.user.readOnly // and other stuff needs to go here like dependency checks, etc.
+    chartTemplates: () => ChartTemplates.find({pluginId: self.getReactively('user.selectedIds.pluginId')}).fetch(),
+    deletablePlugin: () => (self.getReactively('plugin')) && (! self.getReactively('user.readOnly')) && (self.getReactively('chartTemplates.length') === 0)
+    // and other stuff needs to go here like dependency checks, etc.
   });
 
   this.createPlugin = () => {
@@ -35,7 +38,7 @@ function ($scope, $reactive, $state, $timeout, readState) {
     $state.reload($state.$current.name);
   }
 
-  // update plugn in database
+  // update plugin in database
   this.updateDatabase = (_plugin) => {
     Meteor.call('plugin.update', _plugin._id, _plugin, (err, res) => {
       if (err) alert(err);

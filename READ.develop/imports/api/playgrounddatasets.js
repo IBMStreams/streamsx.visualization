@@ -10,16 +10,17 @@ export const rawDataSchema = {
     userId: {type: "string"},
     datasetType: {
       type: "string",
-      enum: ["raw"]
+      enum: ["Raw"]
     },
     name: {
       type: "string",
       minLength: 1,
       maxLength: 20
     },
-    rawData: {type: "string"}
+    rawData: {type: "string"},
+    position: {type: "number"}
   },
-  required: ["userId", "datasetType", "name", "rawData"],
+  required: ["userId", "datasetType", "name", "rawData", "position"],
   additionalProperties: false
 };
 
@@ -31,16 +32,17 @@ export const WebSocketDataSchema = {
     userId: {type: "string"},
     datasetType: {
       type: "string",
-      enum: ["websocket"]
+      enum: ["WebSocket"]
     },
     name: {
       type: "string",
       minLength: 1,
       maxLength: 20
     },
-    url: {type: "string"}
+    url: {type: "string"},
+    position: {type: "number"}
   },
-  required: ["userId", "datasetType", "name", "url"],
+  required: ["userId", "datasetType", "name", "url", "position"],
   additionalProperties: false
 };
 
@@ -67,9 +69,10 @@ export const URLDataSchema = {
         intervalMilliSec: {type: "number"}
       },
       required: ["enabled"]
-    }
+    },
+    position: {type: "number"}
   },
-  required: ["userId", "datasetType", "name", "url", "poll"],
+  required: ["userId", "datasetType", "name", "url", "poll", "position"],
   additionalProperties: false
 };
 
@@ -82,7 +85,7 @@ export const derivedDataSchema = {
     userId: {type: "string"},
     datasetType: {
       type: "string",
-      enum: ["derived"]
+      enum: ["Derived"]
     },
     name: {
       type: "string",
@@ -93,9 +96,10 @@ export const derivedDataSchema = {
       type: "array",
       items: {type: "string"}
     },
-    transformFunction: {type: "string"}
+    transformFunction: {type: "string"},
+    position: {type: "number"}
   },
-  required: ["userId", "datasetType", "name", "parents", "transformFunction"],
+  required: ["userId", "datasetType", "name", "parents", "transformFunction", "position"],
   additionalProperties: false
 };
 
@@ -130,10 +134,10 @@ catch (e) {
 
 let getValidate = (datasetType) => {
   switch (datasetType) {
-    case "raw": return rawDataSchemaValidate;
+    case "Raw": return rawDataSchemaValidate;
     case "URL": return URLDataSchemaValidate;
     case "WebSocket": return WebSocketDataSchemaValidate;
-    case "derived": return derivedDataSchemaValidate;
+    case "Derived": return derivedDataSchemaValidate;
     default: throw new Error("Unknown dataset type detected in getValidate");
   }
 }

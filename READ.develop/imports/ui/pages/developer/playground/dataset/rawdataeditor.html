@@ -1,0 +1,17 @@
+<form name="datasetCtrl.datasetEditorForm" ng-if="datasetCtrl.dataset">
+  <div class="form-group">
+    <label for="datasetType">Dataset Type</label>
+    <select class="form-control" ng-model="datasetCtrl.dataset.datasetType" name="datasetType"
+    ng-options="dsType.name as dsType.displayName for dsType in datasetCtrl.datasetTypes"
+    ng-change="datasetCtrl.updateDatasetType()" ng-disabled="datasetCtrl.user.readOnly">
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="rawData">Data</label>
+    <div ui-ace="datasetCtrl.aceJavaScriptOptions" ng-model="datasetCtrl.dataset.rawData"
+    valid-json ng-model-options="{allowInvalid: true}"
+    ng-readonly="datasetCtrl.user.readOnly" name="rawData">
+    </div>
+  </div>
+</form>
