@@ -76,6 +76,8 @@ import {playgroundDatasetSideNavCtrl} from '/imports/ui/pages/developer/playgrou
 
 import chartTemplateSideNavTemplateUrl from '/imports/ui/pages/developer/playground/charttemplate/sidenav.html';
 import {chartTemplateSideNavCtrl} from '/imports/ui/pages/developer/playground/charttemplate/sidenav.js';
+import chartTemplateMainContentTemplateUrl from '/imports/ui/pages/developer/playground/charttemplate/maincontent.html';
+import {chartTemplateCtrl} from '/imports/ui/pages/developer/playground/charttemplate/maincontent.js';
 
 // import {nvd3ProviderComponent} from '/imports/ui/partials/visualizations/nvd3/nvd3provider';
 // import {leafletProviderComponent, leafletMapDirective} from '/imports/ui/partials/visualizations/leaflet/leafletprovider';
@@ -121,7 +123,8 @@ angularModule
 // .controller('nvd3VizDesignCtrl', nvd3VizDesignCtrl)
 // .controller('leafletVizDesignCtrl', leafletVizDesignCtrl)
 .controller('pluginCtrl', pluginMainContentCtrl)
-.controller('playgroundDatasetCtrl', playgroundDatasetCtrl);
+.controller('playgroundDatasetCtrl', playgroundDatasetCtrl)
+.controller('chartTemplateCtrl', chartTemplateCtrl);
 
 angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
 
@@ -291,11 +294,9 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', f
         controller: chartTemplateSideNavCtrl,
         controllerAs: 'sideNavCtrl'
       },
-      // 'main': {
-      //   templateUrl: pluginMainContentTemplateUrl,
-      //   controller: pluginMainContentCtrl,
-      //   controllerAs: 'mainContentCtrl'
-      // }
+      'main': {
+        templateUrl: chartTemplateMainContentTemplateUrl
+      }
     }
   })
   .state('read.docs', {

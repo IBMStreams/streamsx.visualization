@@ -12,7 +12,8 @@ export const readStateFactory = ['$q', ($q) => {
       helpTopics: 'dashboardSharing'
     },
     playground: {
-      dataset: 'editor'
+      dataset: 'editor',
+      chartTemplate: 'dataHandlers'
     },
     mainContentSelectedTab: {
       dataSet: 'editor',

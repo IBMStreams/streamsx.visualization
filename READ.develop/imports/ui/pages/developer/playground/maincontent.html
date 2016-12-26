@@ -4,6 +4,12 @@
   </div>
 </div>
 
+<div ng-if="(playgroundCtrl.currentState === 'charttemplate') && playgroundCtrl.chartTemplate">
+  <div ng-controller="chartTemplateCtrl as chartTemplateCtrl">
+    <div ui-view="main"></div>
+  </div>
+</div>
+
 <div ng-if="(playgroundCtrl.currentState === 'dataset') && playgroundCtrl.dataset">
   <div ng-controller="playgroundDatasetCtrl as datasetCtrl">
     <div ui-view="main"></div>

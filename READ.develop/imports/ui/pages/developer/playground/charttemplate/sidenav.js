@@ -25,7 +25,7 @@ function ($scope, $reactive, $state, $timeout, readState) {
       pluginId: self.getReactively('plugin._id'),
       name: 'Chart Template ' + self.chartTemplates.length,
       initFunction: 'x => x',
-      parentDatasets: [],
+      inputs: [],
       cleanupFunction: 'x => x',
       position: self.chartTemplates.length
     };

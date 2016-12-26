@@ -1,0 +1,94 @@
+<div class="main-content-panel-wrapper" ng-if="chartTemplateCtrl.chartTemplate">
+  <div class="main-content-panel">
+    <div class="panel with-nav-tabs panel-default">
+      <div class="panel-heading">
+        <ul class="nav nav-tabs">
+          <li ng-class="{active: chartTemplateCtrl.readState.playground.chartTemplate === 'dataHandlers'}">
+            <a ng-click="chartTemplateCtrl.readState.playground.chartTemplate = 'dataHandlers'">Data Handlers
+              <i ng-if="! chartTemplateCtrl.validators.dataHandlers" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+            </a>
+          </li>
+          <li ng-class="{active: chartTemplateCtrl.readState.playground.chartTemplate === 'options'}">
+            <a ng-click="chartTemplateCtrl.readState.playground.chartTemplate = 'options'">Options
+              <i ng-if="! chartTemplateCtrl.validators.options" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+            </a>
+          </li>
+          <li ng-class="{active: chartTemplateCtrl.readState.playground.chartTemplate === 'css'}">
+            <a ng-click="chartTemplateCtrl.readState.playground.chartTemplate = 'css'">CSS
+              <i ng-if="! chartTemplateCtrl.validators.css" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+            </a>
+          </li>
+          <li ng-class="{active: chartTemplateCtrl.readState.playground.chartTemplate === 'visualization'}">
+            <a ng-click="chartTemplateCtrl.readState.playground.chartTemplate = 'visualization'">Visualization
+              <i ng-if="! chartTemplateCtrl.validators.visualization" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
+            </a>
+          </li>
+          <li ng-class="{active: chartTemplateCtrl.readState.playground.chartTemplate === 'usageInfo'}">
+            <a ng-click="chartTemplateCtrl.readState.playground.chartTemplate = 'usageInfo'">Usage Info</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="panel-body" id="charttemplate">
+        <div ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'dataHandlers'">
+          <form name="chartTemplateCtrl.dataHandlers" ng-if="chartTemplateCtrl.chartTemplate">
+            <div class="form-group">
+              <label for="initFunction">Init Function</label>
+              <div ui-ace="chartTemplateCtrl.aceJavaScriptOptions" ng-model="chartTemplateCtrl.chartTemplate.initFunction"
+              valid-function required ng-model-options="{allowInvalid: true}"
+              ng-readonly="chartTemplateCtrl.user.readOnly" name="initFunction">
+              </div>
+            </div>
+
+            <hr />
+
+            <label>Inputs
+              <a href="javascript:void(0)" uib-tooltip="Create Input"
+              tooltip-placement="right" ng-disabled="! chartTemplateCtrl.inputtable" ng-click="chartTemplateCtrl.createInput()">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+              </a>
+            </label>
+
+            <ul class="list-group">
+              <li class="list-group-item" ng-repeat="input in chartTemplateCtrl.chartTemplate.inputs">
+                <span>
+                  <a class="pull-right" href="javascript:void(0)" uib-tooltip="Delete Input"
+                  tooltip-placement="left" ng-click="chartTemplateCtrl.deleteInput(input)"><i class="fa fa-minus-circle" aria-hidden="true"></i>
+                  </a>
+                </span>
+
+                <div class="form-group">
+                  <label for="inputName">Name</label>
+                  <input type="text" class="form-control" ng-model="input.name" minlength=1 maxlength=20 required></input>
+                </div>
+              </li>
+            </ul>
+
+            <hr />
+
+            <div class="form-group">
+              <label for="cleanupFunction">Cleanup Function</label>
+              <div ui-ace="chartTemplateCtrl.aceJavaScriptOptions" ng-model="chartTemplateCtrl.chartTemplate.cleanupFunction"
+              valid-function required ng-model-options="{allowInvalid: true}"
+              ng-readonly="chartTemplateCtrl.user.readOnly" name="cleanupFunction">
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <div class="col-md-12" ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'options'">
+        </div>
+
+        <div class="col-md-12" ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'css'">
+        </div>
+
+        <div class="col-md-12" ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'visualization'">
+        </div>
+
+        <div class="col-md-12" ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'usageInfo'">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

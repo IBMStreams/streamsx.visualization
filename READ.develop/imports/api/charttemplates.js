@@ -14,21 +14,27 @@ export const chartTemplateSchema = {
       maxLength: 20
     },
     initFunction: {type: "string"},
-    parentDatasets: {
+    inputs: {
       type: "array",
       items: {
         type: "object",
         properties: {
+          name: {
+            type: "string",
+            minLength: 1,
+            maxLength: 20
+          },
           datasetId: {type: "string"},
-          reactiveFunction: {type: "string"}
+          dataHandler: {type: "string"}
         },
-        required: ["datasetId", "reactiveFunction"]
+        required: ["name", "datasetId", "dataHandler"],
+        additionalProperties: false
       }
     },
     cleanupFunction: {type: "string"},
     position: {type: "number"}
   },
-  required: ["userId", "pluginId", "name", "initFunction", "parentDatasets", "position"],
+  required: ["userId", "pluginId", "name", "initFunction", "inputs", "position"],
   additionalProperties: false
 };
 
