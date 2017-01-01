@@ -1,9 +1,12 @@
 // overrides for bootstrap variables
 $navbar-margin-bottom:  0;
 $navbar-border-radius:  0;
-$navbar-header-background-color: #efefef;
+$navbar-header-background-color: #a50000;
 $usage-info-code-background-color: #f9f2f4;
-$viz-panel-header-height: 36px;
+$viz-panel-heading-height: 36px;
+$nav-links-background-color: #dd0404;
+$sidenav-background-color: #fff5f5;
+$panel-heading-background-color: #fff9f9;
 
 @import '{}/node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 @import '{}/node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss';
@@ -42,6 +45,22 @@ body {
   float: left;
 }
 
+.nav-tabs > li > a:hover {
+  background-color: #ffeeee;
+}
+
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-brand:focus {
+    color: #ffffff;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-brand:hover {
+    color: #000000;
+}
+
 .sidenav, .main {
   overflow-y: auto;
 }
@@ -61,14 +80,6 @@ body {
   z-index: 1030;
 }
 
-.breadcrumb li.selectedtab {
-  color: #ad2424;
-}
-
-.sidenav .sidenav-content .breadcrumb {
-  background-color: $navbar-header-background-color;
-}
-
 .sidenav .sidenav-content .breadcrumb.secondary {
   margin-top: 15px;
 }
@@ -77,25 +88,46 @@ body {
   padding: 0px;
 }
 
+.sidenav hr.divider {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: 1px solid #dddddd;
+}
+
+.side-topic {
+  height: 35px;
+  display: flex;
+  align-items: center;
+}
+
+.side-items strong {
+  display: flex;
+  align-items: center;
+}
+
+a.user-control {
+  text-decoration: none;
+}
+
+.side-topic .side-items .badge.user-controls {
+  background-color: $sidenav-background-color;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: 1px solid #ffabab;
+}
+
+.side-topic .side-items .user-controls .user-control {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
 .panel.with-nav-tabs .panel-heading {
   padding: 5px 5px 0 5px;
+  background-color: $panel-heading-background-color;
 }
 
 .panel.with-nav-tabs .nav-tabs {
   border-bottom: none;
-}
-
-.nav-tabs li.active a, .nav-tabs li.active a:hover, .nav-tabs li.active a:focus {
-  border-width: 3px 1px 1px;
-  border-top-color: #ad2424;
-  // border-left-color: #ddd;
-  // border-right-color: #ddd;
-  border-bottom-color: transparent;
-}
-
-.quick-buttons .breadcrumb {
-  border-bottom: none;
-  margin-bottom: 0px;
 }
 
 .ace_editor, .validation-messages {
@@ -133,15 +165,17 @@ pre {
   padding-left: 30px;
 }
 
-//.sidenav-content .docs .nav a,
-.sidenav-content .docs .nav a {
-  color: #777;
+.sidenav.navbar-default {
+  background-color: $sidenav-background-color;
 }
-.sidenav-content .docs .nav a:hover,
-.sidenav-content .docs .nav a:focus,
-.sidenav-content .docs .nav .active > a {
-  color: #555;
-  background-color: #efefef;
+
+.nav-links {
+  background: #556270; /* fallback for old browsers */
+  background: #7b4397; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #7b4397 , #dc2430); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #7b4397 , #dc2430); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  // background-color: $nav-links-background-color;
+  // background-image: linear-gradient(to right, $nav-links-background-color, #44018e);
 }
 
 .space-preserver.ng-hide {
@@ -177,17 +211,24 @@ pre {
    word-wrap: break-word;      /* IE */
 }
 
-.sidenav-item {
-  padding-top: 5px;
-  padding-bottom: 5px;
+.sidenav-item input {
+  box-shadow: none;
 }
 
 .sidenav-item input.form-control[readonly] {
-  background-color: #999999;
+  background-color: $sidenav-background-color;
+  border: none;
+  color: #8da0aa;
+}
+
+.sidenav-item input.form-control[readonly]:hover {
+  color: #000000;
 }
 
 .sidenav-item.selected-item input[readonly] {
-  background-color: #dddddd;
+  background-color: #fff4f4;
+  border: 1px solid #ff7e7e;
+  color: #000000;
 }
 
 .sidenav-item.selected-item input:not([readonly]) {

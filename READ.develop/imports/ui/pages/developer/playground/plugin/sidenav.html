@@ -1,51 +1,36 @@
-<ol class="breadcrumb" ng-if="sideNavCtrl.user.readOnly">
-  <li>
+<div class="side-item" ng-if="sideNavCtrl.user.readOnly">
     <a href="javascript:void(0)" ui-sref="read.developer.playground.plugin"
-    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">Plugins</a>
-    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-  </li>
-  <li>
-    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-upload" aria-hidden="true"></i></a>
-  </li>
-  <li>
-    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-download" aria-hidden="true"></i></a>
-  </li>
-  <li>
-    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-  </li>
-</ol>
+    ui-sref-opts="{reload: 'read.developer.playground'}"><strong>PLUGINS</strong></a>
+    <a href="javascript:void(0)" class="user-control disabled"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+    <a href="javascript:void(0)" class="user-control disabled"><i class="fa fa-upload" aria-hidden="true"></i></a>
+    <a href="javascript:void(0)" class="user-control disabled"><i class="fa fa-download" aria-hidden="true"></i></a>
+    <a href="javascript:void(0)" class="user-control disabled"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+</div>
 
-<ol class="breadcrumb" ng-if="! sideNavCtrl.user.readOnly">
-  <li>
-    <a href="javascript:void(0)" ui-sref="read.developer.playground.plugin"
-    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">Plugins</a>
-  </li>
-  <li ng-click="sideNavCtrl.createPlugin()">
-    <a href="javascript:void(0)"
-    uib-tooltip="Create Plugin"
-    tooltip-placement="bottom"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-  </li>
-  <li ngclipboard data-clipboard-text="{{sideNavCtrl.exportedStr}}" ng-click="sideNavCtrl.brieflyShowExported()">
-    <a href="javascript:void(0)" uib-tooltip="Export Plugin to clipboard" tooltip-placement="bottom"><i class="fa fa-upload" aria-hidden="true"></i></a>
-  </li>
-  <li ng-click="sideNavCtrl.importPlugin()">
-    <a href="javascript:void(0)" uib-tooltip="Import Plugin" tooltip-placement="bottom"><i class="fa fa-download" aria-hidden="true"></i></a>
-  </li>
-  <li ng-show="sideNavCtrl.plugin && sideNavCtrl.deletablePlugin" ng-click="sideNavCtrl.brieflyShowAreYouSure()">
-    <a href="javascript:void(0)" uib-tooltip="Delete Plugin"
-    tooltip-placement="bottom"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-  </li>
-  <li ng-if="sideNavCtrl.showExported">
-    <span class="btn btn-success btn-xs">Plugin exported</span>
-  </li>
-  <li ng-if="sideNavCtrl.showAreYouSure">
-    <button class="btn btn-danger btn-xs" ng-click="sideNavCtrl.deletePlugin()">Confirm</button>
-  </li>
-</ol>
+<div class="side-topic selected" ng-if="! sideNavCtrl.user.readOnly">
+  <div class="side-items">
+    <strong>
+      <a href="javascript:void(0)" ui-sref="read.developer.playground.plugin"
+      ui-sref-opts="{reload: 'read.developer.playground'}" class="user-control">PLUGINS</a>
+      <span class="badge user-controls">
+        <a href="javascript:void(0)" ng-click="sideNavCtrl.createPlugin()"
+        uib-tooltip="Create Plugin" class="user-control"
+        tooltip-placement="bottom"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+        <a href="javascript:void(0)" class="user-control" ngclipboard data-clipboard-text="{{sideNavCtrl.exportedStr}}" ng-click="sideNavCtrl.brieflyShowExported()"
+        uib-tooltip="Export Plugin to clipboard" tooltip-placement="bottom"><i class="fa fa-upload" aria-hidden="true"></i></a>
+        <a href="javascript:void(0)" class="user-control" ng-click="sideNavCtrl.importPlugin()" uib-tooltip="Import Plugin" tooltip-placement="bottom"><i class="fa fa-download" aria-hidden="true"></i></a>
+        <a href="javascript:void(0)" class="user-control" ng-show="sideNavCtrl.plugin && sideNavCtrl.deletablePlugin" ng-click="sideNavCtrl.brieflyShowAreYouSure()"
+        uib-tooltip="Delete Plugin"
+        tooltip-placement="bottom"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+      </span>
+      <span ng-if="sideNavCtrl.showExported" class="btn btn-success btn-xs">Plugin exported</span>
+      <button ng-if="sideNavCtrl.showAreYouSure" class="btn btn-danger btn-xs" ng-click="sideNavCtrl.deletePlugin()">Confirm</button>
+    </strong>
+  </div>
+</div>
 
 <form name="sideNavForm" novalidate id="allplugins">
   <div ui-sortable="sideNavCtrl.sortOptions" ng-model="sideNavCtrl.plugins" class="sortable-list">
-    <label for="selectedId">Select Plugin</label>
     <div ng-repeat="plugin in sideNavCtrl.plugins" class="sidenav-item sortable-item"
     ng-class="{'selected-item': sideNavCtrl.plugin._id === plugin._id}">
       <input type="text" class="form-control" ng-if="sideNavCtrl.plugin._id !== plugin._id"
@@ -60,20 +45,20 @@
   </div>
 </form>
 
-<ol class="breadcrumb secondary">
-  <li>
-    <a href="javascript:void(0)" ui-sref="read.developer.playground.charttemplate"
-    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">
-      Templates&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i>
-    </a>
-  </li>
-</ol>
+<hr class="divider" />
 
-<ol class="breadcrumb secondary">
-  <li>
-    <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset"
-    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">
-      Datasets&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+<div class="side-topic">
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.charttemplate"
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="user-control">
+      <strong>TEMPLATES&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i></strong>
     </a>
-  </li>
-</ol>
+</div>
+
+<hr class="divider" />
+
+<div class="side-topic">
+    <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset"
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="user-control">
+      <strong>DATASETS&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i></strong>
+    </a>
+</div>

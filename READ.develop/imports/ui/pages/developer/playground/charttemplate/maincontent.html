@@ -58,8 +58,24 @@
                 </span>
 
                 <div class="form-group">
-                  <label for="inputName">Name</label>
+                  <label>Name</label>
                   <input type="text" class="form-control" ng-model="input.name" minlength=1 maxlength=20 required></input>
+                </div>
+
+                <div class="form-group">
+                  <label>Dataset for {{input.name}}</label>
+                  <select class="form-control" ng-model="input.datasetId"
+                  ng-options="dataset._id as dataset.name for dataset in chartTemplateCtrl.playgroundDatasets"
+                  ng-disabled="chartTemplateCtrl.user.readOnly">
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Data Handler</label>
+                  <div ui-ace="chartTemplateCtrl.aceJavaScriptOptions" ng-model="input.dataHandler"
+                  valid-function required ng-model-options="{allowInvalid: true}"
+                  ng-readonly="chartTemplateCtrl.user.readOnly">
+                  </div>
                 </div>
               </li>
             </ul>

@@ -10,7 +10,7 @@
       </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
+    <div class="nav-links col-xs-12 col-sm-6 col-md-8 col-lg-9 gradient">
       <ul class="nav navbar-nav">
         <li class="hidden-sm hidden-md hidden-lg">
           <a href="javascript:void(0)" ui-sref="read.developer.home">READ</a>
@@ -24,44 +24,8 @@
 
         <li ng-if="false" id="myapps"><a ui-sref="read.developer.app.dashboard.app"><span class="hidden-xs hidden-sm">My Apps</span> <i class="fa fa-dashboard"></i></a></li>
         <li id="playground"><a ui-sref="read.developer.playground.plugin"><span class="hidden-xs hidden-sm">Playground</span> <i class="fa fa-wrench"></i></a></li>
-
-        <!-- <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript:void(0)">
-            <span class="hidden-xs hidden-sm">Playground</span> <i class="fa fa-wrench"></i> <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a ui-sref="read.developer.playground.dataschema">Data Schema</a></li>
-            <li role="separator" class="divider"></li>
-            <li ng-if="false" class="disabled"><a href="javascript:void(0)">ChartJS</a></li>
-            <li><a ui-sref="read.developer.playground.viz.nvd3">NVD3</a></li>
-            <li><a ui-sref="read.developer.playground.viz.leaflet">Leaflet</a></li>
-
-            <li class="col-xs-12" ng-if="! $ctrl.user.readOnly">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="my plugin" ng-model="plugin.name"></input>
-                <span class="input-group-addon" ng-click="$ctrl.createNewPlugin()"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
-              </div>
-            </li>
-
-            <li ng-if="false" class="disabled"><a href="javascript:void(0)">D3</a></li>
-            <li ng-if="false" class="disabled"><a href="javascript:void(0)">DCJS</a></li>
-            <li ng-if="false" role="separator" class="divider"></li>
-            <li ng-if="false" class="disabled"><a href="javascript:void(0)">User Control</a></li>
-          </ul>
-        </li> -->
-
         <li id="tour" ng-if="$ctrl.user.readOnly" ng-click="$ctrl.startTour()"><a href="javascript:void(0)"><span class="hidden-xs hidden-sm">Tour</span> <i class="fa fa-play-circle"></i></a></li>
-
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript:void(0)">
-            <span class="hidden-xs hidden-sm">Docs</span> <i class="fa fa-book"></i> <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a target="_blank" ui-sref="read.docs.tutorial">Tutorial</a></li>
-            <li ng-if="false" class="disabled"><a href="javascript:void(0)">Guide</a></li>
-            <li ng-if="false" class="disabled"><a href="javascript:void(0)">API Reference</a></li>
-          </ul>
-        </li>
+        <li id="docs"><a target="_blank" href="http://www.google.com"><span class="hidden-xs hidden-sm">Docs</span> <i class="fa fa-book"></i></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.row -->

@@ -31,6 +31,10 @@ function($scope, $reactive, readState, $state, $timeout) {
     playgroundDatasets: () => PlaygroundDatasets.find({}).fetch().sort((a, b) => a.position - b.position)
   });
 
+  self.updateTemplate = () => {
+    self.injectChartTemplate(self.chartTemplate);
+  }
+
   self.createInput = () => {
     let input = {
       name: "Input " + self.chartTemplate.inputs.length,
