@@ -1,7 +1,7 @@
 // overrides for bootstrap variables
 $navbar-margin-bottom:  0;
 $navbar-border-radius:  0;
-$navbar-header-background-color: #a50000;
+$navbar-header-background-color: #900000;
 $usage-info-code-background-color: #f9f2f4;
 $viz-panel-heading-height: 36px;
 $nav-links-background-color: #dd0404;
@@ -170,10 +170,9 @@ pre {
 }
 
 .nav-links {
-  background: #556270; /* fallback for old browsers */
-  background: #7b4397; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #7b4397 , #dc2430); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #7b4397 , #dc2430); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #dc2430; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #02bdac , #dc2430); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #02bdac , #dc2430); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   // background-color: $nav-links-background-color;
   // background-image: linear-gradient(to right, $nav-links-background-color, #44018e);
 }
@@ -216,23 +215,28 @@ pre {
 }
 
 .sidenav-item input.form-control[readonly] {
-  background-color: $sidenav-background-color;
+  background: rgba(0,0,0,0.0);
   border: none;
-  color: #8da0aa;
+  color: #a08282;
 }
 
 .sidenav-item input.form-control[readonly]:hover {
   color: #000000;
+  border: 1px solid #ff7e7e;
 }
 
 .sidenav-item.selected-item input[readonly] {
-  background-color: #fff4f4;
+  background: rgba(0,0,0,0.0);
   border: 1px solid #ff7e7e;
   color: #000000;
 }
 
 .sidenav-item.selected-item input:not([readonly]) {
   background-color: #ffffff;
+}
+
+a.user-control {
+  color: #b73333;
 }
 
 .angular-leaflet-map .legend {

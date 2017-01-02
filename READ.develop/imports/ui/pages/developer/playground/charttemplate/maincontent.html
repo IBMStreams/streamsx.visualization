@@ -42,21 +42,12 @@
 
             <hr />
 
-            <label>Inputs
-              <a href="javascript:void(0)" uib-tooltip="Create Input"
-              tooltip-placement="right" ng-disabled="! chartTemplateCtrl.inputtable" ng-click="chartTemplateCtrl.createInput()">
-                <i class="fa fa-plus-circle" aria-hidden="true"></i>
-              </a>
-            </label>
+            <label>Inputs</label>
+            <button class="btn btn-primary btn-xs" ng-disabled="! chartTemplateCtrl.inputtable"
+            ng-click="chartTemplateCtrl.createInput()">Add</button>
 
             <ul class="list-group">
               <li class="list-group-item" ng-repeat="input in chartTemplateCtrl.chartTemplate.inputs">
-                <span>
-                  <a class="pull-right" href="javascript:void(0)" uib-tooltip="Delete Input"
-                  tooltip-placement="left" ng-click="chartTemplateCtrl.deleteInput(input)"><i class="fa fa-minus-circle" aria-hidden="true"></i>
-                  </a>
-                </span>
-
                 <div class="form-group">
                   <label>Name</label>
                   <input type="text" class="form-control" ng-model="input.name" minlength=1 maxlength=20 required></input>
@@ -77,6 +68,15 @@
                   ng-readonly="chartTemplateCtrl.user.readOnly">
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <button class="btn btn-warning btn-xs"
+                  ng-click="chartTemplateCtrl.brieflyShowAreYouSure(input)">Delete</button>
+
+                  <button ng-if="chartTemplateCtrl.showAreYouSure === input"
+                  class="btn btn-danger btn-xs" ng-click="chartTemplateCtrl.deleteInput(input)">Confirm</button>
+                </div>
+
               </li>
             </ul>
 

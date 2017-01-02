@@ -45,6 +45,20 @@ function($scope, $reactive, readState, $state, $timeout) {
     self.injectChartTemplate(self.chartTemplate);
   }
 
+  self.showAreYouSure = undefined; // no we do not want to delete this input... and we don't want to see deletion option...
+  this.brieflyShowAreYouSure = (input) => {
+    self.showAreYouSure = input;
+    self.briefTimer = $timeout(() => {
+      self.showAreYouSure = undefined;
+    }, 3000); // 3 seconds
+  };
+
+  self.deleteInput = (input) => {
+    self.chartTemplate.inputs = self.chartTemplate.inputs.filter(x => x !== input);
+    self.injectChartTemplate(self.chartTemplate);
+  }
+
+
   this.itemStream = new Rx.ReplaySubject(0);
 
   self.injectChartTemplate = (ct) => {
