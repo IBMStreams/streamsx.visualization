@@ -15,12 +15,17 @@ function($scope, $reactive, readState, $state, $timeout) {
   let self = this;
   this.readState = readState;
 
+  // let pluginIndex = Number($stateParams.pluginIndex);
+  // let templateIndex = Number($stateParams.index);
+
   this.aceJsonSchemaOptions = aceJsonSchemaOptions;
   this.aceJavaScriptOptions = aceJavaScriptOptions;
   this.aceHTMLOptions = aceHTMLOptions;
 
   this.validators = {
-    dataHandlers: true
+    dataHandlers: true,
+    options: true,
+    css: true
   };
 
   this.helpers({
@@ -58,13 +63,14 @@ function($scope, $reactive, readState, $state, $timeout) {
     self.injectChartTemplate(self.chartTemplate);
   }
 
-
   this.itemStream = new Rx.ReplaySubject(0);
 
   self.injectChartTemplate = (ct) => {
     if (self.dataHandlers) self.validators.dataHandlers = self.dataHandlers.$valid;
+    if (self.options) self.validators.options = self.options.$valid;
+    if (self.css) self.validators.css = self.css.$valid;
     self.itemStream.onNext({
-      valid: self.validators.dataHandlers,
+      valid: self.validators.dataHandlers && self.validators.options && self.validators.css,
       item: ct
     });
     $timeout();

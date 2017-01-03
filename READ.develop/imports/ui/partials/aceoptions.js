@@ -1,6 +1,7 @@
 import angular from 'angular';
 import _ from 'underscore/underscore';
 import ajv from 'ajv';
+import css from 'css';
 
 let aceOptions = {
   showIntentGuides: true,
@@ -104,6 +105,24 @@ export function validFunctionDirective() {
         if (_.isEmpty(viewValue)) return false;
         try {
           return _.isFunction(eval("(" + viewValue + ")"));
+        } catch(e) {
+          return false;
+        }
+      }
+    }
+  };
+  return directiveDefinitionsObject;
+}
+
+export function validCssDirective() {
+  let directiveDefinitionsObject = {
+    require: 'ngModel',
+    link: function($scope, $el, $attrs, $ctrl) {
+      $ctrl.$validators.validCss = function(modelValue, viewValue) { // valid css
+        if (_.isEmpty(viewValue)) return true;
+        try {
+          let parseTree = css.parse(viewValue);
+          return true;
         } catch(e) {
           return false;
         }

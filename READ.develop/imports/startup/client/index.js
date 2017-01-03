@@ -25,7 +25,7 @@ import 'leaflet/dist/leaflet.css';
 import {readStateFactory} from '/imports/api/client/readstatefactory.js';
 import {readCtrl} from '/imports/ui/readctrl.js';
 
-import {validJsonDirective, validObjectDirective, validStateObjectDirective, validFunctionDirective} from '/imports/ui/partials/aceoptions';
+import {validJsonDirective, validObjectDirective, validStateObjectDirective, validFunctionDirective, validCssDirective} from '/imports/ui/partials/aceoptions';
 import {dimensionsDirective} from 'read-common/imports/ui/partials/dimensions';
 
 import {headerNavComponent} from '/imports/ui/partials/common/headernav/headernav';
@@ -105,6 +105,7 @@ angularModule
 .directive('validObject', validObjectDirective)
 .directive('validStateObject', validStateObjectDirective)
 .directive('validFunction', validFunctionDirective)
+.directive('validCss', validCssDirective)
 .directive('dimensions', dimensionsDirective)
 .component('headerNav', headerNavComponent)
 .component('sideNav', sideNavComponent)

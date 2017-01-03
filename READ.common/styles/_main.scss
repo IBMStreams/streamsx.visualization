@@ -49,6 +49,22 @@ body {
   background-color: #ffeeee;
 }
 
+.nav-tabs > li.quick-buttons {
+  float: right;
+}
+
+.nav-tabs > li.quick-buttons a {
+  background-color: #ffeeee;
+  border-left: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.navbar-brand {
+  font-size: 23px;
+  line-height: 23px;
+}
+
 .navbar-default .navbar-nav > li > a,
 .navbar-default .navbar-brand,
 .navbar-default .navbar-nav > li > a:focus,
@@ -89,9 +105,9 @@ body {
 }
 
 .sidenav hr.divider {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-top: 1px solid #dddddd;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-top: 1px solid #eac0c0;
 }
 
 .side-topic {
@@ -100,7 +116,7 @@ body {
   align-items: center;
 }
 
-.side-items strong {
+.side-items div.lead {
   display: flex;
   align-items: center;
 }
@@ -113,7 +129,7 @@ a.user-control {
   background-color: $sidenav-background-color;
   margin-left: 5px;
   margin-right: 5px;
-  border: 1px solid #ffabab;
+  border: 1px solid #eac0c0;
 }
 
 .side-topic .side-items .user-controls .user-control {
@@ -221,14 +237,14 @@ pre {
 }
 
 .sidenav-item input.form-control[readonly]:hover {
-  color: #000000;
-  border: 1px solid #ff7e7e;
+  color: #b73333;
+  border: 1px solid #eac0c0;
 }
 
 .sidenav-item.selected-item input[readonly] {
   background: rgba(0,0,0,0.0);
-  border: 1px solid #ff7e7e;
-  color: #000000;
+  border: 1px solid #eac0c0;
+  color: #b73333;
 }
 
 .sidenav-item.selected-item input:not([readonly]) {

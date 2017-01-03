@@ -32,6 +32,8 @@ export const chartTemplateSchema = {
       }
     },
     cleanupFunction: {type: "string"},
+    options: {type: "string"},
+    css: {type: "string"},
     position: {type: "number"}
   },
   required: ["userId", "pluginId", "name", "initFunction", "inputs", "position"],

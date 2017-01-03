@@ -13,7 +13,8 @@ function ($scope, $reactive, $state, $timeout, readState, defaultDatasets) {
     user: () => Users.findOne({}),
     datasets: () => PlaygroundDatasets.find().fetch().sort((a, b) => a.position - b.position),
     dataset: () => PlaygroundDatasets.findOne({_id: self.getReactively('user.selectedIds.playgroundDatasetId')}),
-    deletableDataset: () => ! self.user.readOnly // and other stuff needs to go here like dependency checks, etc.
+    deletableDataset: () => ! self.user.readOnly, // and other stuff needs to go here like dependency checks, etc.
+    clonableDataset: () => ! self.user.readOnly // and other stuff needs to go here like dependency checks, etc.
   });
 
   this.createDataset = (datasetType) => {

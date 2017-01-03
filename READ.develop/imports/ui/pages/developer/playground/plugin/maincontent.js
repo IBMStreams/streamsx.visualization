@@ -16,7 +16,7 @@ function ($scope, $reactive, $timeout, $state, $stateParams, readState) {
   let self = this;
   this.readState = readState;
 
-  let pluginIndex = Number($stateParams.index);
+  // let pluginIndex = Number($stateParams.index);
 
   this.aceJsonSchemaOptions = aceJsonSchemaOptions;
   this.aceJavaScriptOptions = aceJavaScriptOptions;
@@ -28,15 +28,15 @@ function ($scope, $reactive, $timeout, $state, $stateParams, readState) {
     Plugins.findOne({_id: self.user.selectedIds.pluginId}) : undefined
   });
 
-  this.switchPlugin = (selectedId) => {
-    self.user.selectedIds.pluginId = selectedId;
-    Meteor.call('user.update', self.user, (err, res) => {if (err) alert(err);}); //update user
-    $state.reload($state.$current.name);
-  }
-
-  if ((_.isNumber(pluginIndex)) && (pluginIndex >= 0) && (pluginIndex < self.plugins.length)) {
-    self.switchPlugin(self.plugins[pluginIndex]._id);
-  }
+  // this.switchPlugin = (selectedId) => {
+  //   self.user.selectedIds.pluginId = selectedId;
+  //   Meteor.call('user.update', self.user, (err, res) => {if (err) alert(err);}); //update user
+  //   $state.reload($state.$current.name);
+  // }
+  //
+  // if ((_.isNumber(pluginIndex)) && (pluginIndex >= 0) && (pluginIndex < self.plugins.length)) {
+  //   self.switchPlugin(self.plugins.sort((a, b) => a.position - b.position)[pluginIndex]._id);
+  // }
 
   // this.validators = {
   //   testData: true,

@@ -1,16 +1,16 @@
 <div class="side-topic">
     <a href="javascript:void(0)" ui-sref="read.developer.playground.plugin"
     ui-sref-opts="{reload: 'read.developer.playground'}" class="user-control">
-      <strong>PLUGINS&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i></strong>
+      <span class="lead">PLUGINS&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+      {{sideNavCtrl.plugin.name}}</span>
     </a>
-    &nbsp&nbsp{{sideNavCtrl.plugin.name}}
 </div>
 
 <hr class="divider" />
 
 <div class="side-item" ng-if="sideNavCtrl.user.readOnly">
     <a href="javascript:void(0)" ui-sref="read.developer.playground.charttemplate"
-    ui-sref-opts="{reload: 'read.developer.playground'}"><strong>TEMPLATES</strong></a>
+    ui-sref-opts="{reload: 'read.developer.playground'}"><span class="lead">TEMPLATES</span></a>
     <a href="javascript:void(0)" class="user-control disabled"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
     <a href="javascript:void(0)" class="user-control disabled"><i class="fa fa-upload" aria-hidden="true"></i></a>
     <a href="javascript:void(0)" class="user-control disabled"><i class="fa fa-download" aria-hidden="true"></i></a>
@@ -19,7 +19,7 @@
 
 <div class="side-topic selected" ng-if="! sideNavCtrl.user.readOnly">
   <div class="side-items">
-    <strong>
+    <div class="lead">
       <a href="javascript:void(0)" ui-sref="read.developer.playground.charttemplate"
       ui-sref-opts="{reload: 'read.developer.playground'}" class="user-control">TEMPLATES</a>
       <span class="badge user-controls">
@@ -43,7 +43,7 @@
       </span>
       <span ng-if="sideNavCtrl.showExported" class="btn btn-success btn-xs">Chart Template exported</span>
       <button ng-if="sideNavCtrl.showAreYouSure" class="btn btn-danger btn-xs" ng-click="sideNavCtrl.deleteChartTemplate()">Confirm</button>
-    </strong>
+    </div>
   </div>
 </div>
 
@@ -68,6 +68,6 @@
 <div class="side-topic">
     <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset"
     ui-sref-opts="{reload: 'read.developer.playground'}" class="user-control">
-      <strong>DATASETS&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i></strong>
+      <span class="lead">DATASETS&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
     </a>
 </div>

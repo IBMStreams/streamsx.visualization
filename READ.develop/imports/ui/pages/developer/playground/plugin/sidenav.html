@@ -1,15 +1,17 @@
 <div class="side-item" ng-if="sideNavCtrl.user.readOnly">
+  <div class="lead">
     <a href="javascript:void(0)" ui-sref="read.developer.playground.plugin"
     ui-sref-opts="{reload: 'read.developer.playground'}"><strong>PLUGINS</strong></a>
     <a href="javascript:void(0)" class="user-control disabled"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
     <a href="javascript:void(0)" class="user-control disabled"><i class="fa fa-upload" aria-hidden="true"></i></a>
     <a href="javascript:void(0)" class="user-control disabled"><i class="fa fa-download" aria-hidden="true"></i></a>
     <a href="javascript:void(0)" class="user-control disabled"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+  </div>
 </div>
 
 <div class="side-topic selected" ng-if="! sideNavCtrl.user.readOnly">
   <div class="side-items">
-    <strong>
+    <div class="lead">
       <a href="javascript:void(0)" ui-sref="read.developer.playground.plugin"
       ui-sref-opts="{reload: 'read.developer.playground'}" class="user-control">PLUGINS</a>
       <span class="badge user-controls">
@@ -25,7 +27,7 @@
       </span>
       <span ng-if="sideNavCtrl.showExported" class="btn btn-success btn-xs">Plugin exported</span>
       <button ng-if="sideNavCtrl.showAreYouSure" class="btn btn-danger btn-xs" ng-click="sideNavCtrl.deletePlugin()">Confirm</button>
-    </strong>
+    </div>
   </div>
 </div>
 
@@ -50,7 +52,7 @@
 <div class="side-topic">
     <a href="javascript:void(0)" ui-sref="read.developer.playground.charttemplate"
     ui-sref-opts="{reload: 'read.developer.playground'}" class="user-control">
-      <strong>TEMPLATES&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i></strong>
+      <span class="lead">TEMPLATES&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
     </a>
 </div>
 
@@ -59,6 +61,6 @@
 <div class="side-topic">
     <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset"
     ui-sref-opts="{reload: 'read.developer.playground'}" class="user-control">
-      <strong>DATASETS&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i></strong>
+      <span class="lead">DATASETS&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
     </a>
 </div>

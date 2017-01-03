@@ -11,8 +11,8 @@
           <li ng-class="{active: datasetCtrl.readState.playground.dataset === 'usageInfo'}">
             <a ng-click="datasetCtrl.readState.playground.dataset = 'usageInfo'">Usage Info</a>
           </li>
-          <li class="quick-buttons" ng-click="sideNavCtrl.copy()" uib-tooltip="Copy Data to Clipboard" tooltip-placement="bottom">
-            <a href="javascript:void(0)"><i class="fa fa-files-o" aria-hidden="true"></i></a>
+          <li class="quick-buttons">
+            <a ng-click="sideNavCtrl.copy()" uib-tooltip="Copy Data to Clipboard" tooltip-placement="bottom" href="javascript:void(0)"><i class="fa fa-files-o" aria-hidden="true"></i></a>
           </li>
         </ul>
       </div>

@@ -1,74 +1,66 @@
-<ol class="breadcrumb secondary">
-  <li>
+<div class="side-topic">
     <a href="javascript:void(0)" ui-sref="read.developer.playground.plugin"
-    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">
-      Plugins&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="user-control">
+      <span class="lead">PLUGINS&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
     </a>
-  </li>
-</ol>
+    &nbsp&nbsp{{sideNavCtrl.plugin.name}}
+</div>
 
-<ol class="breadcrumb secondary">
-  <li>
+<hr class="divider" />
+
+<div class="side-topic">
     <a href="javascript:void(0)" ui-sref="read.developer.playground.charttemplate"
-    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">
-      Templates&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    ui-sref-opts="{reload: 'read.developer.playground'}" class="user-control">
+      <span class="lead">TEMPLATES&nbsp&nbsp<i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
     </a>
-  </li>
-</ol>
+</div>
 
-<ol class="breadcrumb" ng-if="sideNavCtrl.user.readOnly">
-  <li>
-    <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset"
-    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">Datasets</a>
-    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-  </li>
-  <li>
-    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-upload" aria-hidden="true"></i></a>
-  </li>
-  <li>
-    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-download" aria-hidden="true"></i></a>
-  </li>
-  <li>
-    <a href="javascript:void(0)" class="btn disabled"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-  </li>
-</ol>
+<hr class="divider" />
 
-<ol class="breadcrumb" ng-if="! sideNavCtrl.user.readOnly">
-  <li>
+<div class="side-item" ng-if="sideNavCtrl.user.readOnly">
+  <div class="lead">
     <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset"
-    ui-sref-opts="{reload: 'read.developer.playground'}" class="btn">Datasets</a>
-  </li>
-  <li ng-click="sideNavCtrl.cloneDataset()">
-    <a href="javascript:void(0)"
-    uib-tooltip="Clone Dataset"
-    tooltip-placement="bottom"><i class="fa fa-clone" aria-hidden="true"></i></a>
-  </li>
-  <li ng-click="sideNavCtrl.createDataset()">
-    <a href="javascript:void(0)"
-    uib-tooltip="Create Dataset"
-    tooltip-placement="bottom-left"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-  </li>
-  <li ngclipboard data-clipboard-text="{{sideNavCtrl.exportedStr}}" ng-click="sideNavCtrl.brieflyShowExported()">
-    <a href="javascript:void(0)" uib-tooltip="Export Dataset to clipboard" tooltip-placement="bottom"><i class="fa fa-upload" aria-hidden="true"></i></a>
-  </li>
-  <li ng-click="sideNavCtrl.importDataset()">
-    <a href="javascript:void(0)" uib-tooltip="Import Dataset" tooltip-placement="bottom"><i class="fa fa-download" aria-hidden="true"></i></a>
-  </li>
-  <li ng-show="sideNavCtrl.dataset && sideNavCtrl.deletableDataset" ng-click="sideNavCtrl.brieflyShowAreYouSure()">
-    <a href="javascript:void(0)" uib-tooltip="Delete Dataset"
-    tooltip-placement="bottom-left"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-  </li>
-  <li ng-if="sideNavCtrl.showExported">
-    <span class="btn btn-success btn-xs">Dataset exported</span>
-  </li>
-  <li ng-if="sideNavCtrl.showAreYouSure">
-    <button class="btn btn-danger btn-xs" ng-click="sideNavCtrl.deleteDataset()">Confirm</button>
-  </li>
-</ol>
+    ui-sref-opts="{reload: 'read.developer.playground'}"><strong>DATASETS</strong></a>
+    <a href="javascript:void(0)" class="user-control disabled"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+    <a href="javascript:void(0)" class="user-control disabled"><i class="fa fa-upload" aria-hidden="true"></i></a>
+    <a href="javascript:void(0)" class="user-control disabled"><i class="fa fa-download" aria-hidden="true"></i></a>
+    <a href="javascript:void(0)" class="user-control disabled"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+  </div>
+</div>
+
+<div class="side-topic selected" ng-if="! sideNavCtrl.user.readOnly">
+  <div class="side-items">
+    <div class="lead">
+      <a href="javascript:void(0)" ui-sref="read.developer.playground.dataset"
+      ui-sref-opts="{reload: 'read.developer.playground'}" class="user-control">DATASETS</a>
+      <span class="badge user-controls">
+        <a href="javascript:void(0)" ng-click="sideNavCtrl.cloneDataset()"
+        ng-show="sideNavCtrl.dataset && sideNavCtrl.clonableDataset"
+        uib-tooltip="Clone Dataset" class="user-control"
+        tooltip-placement="bottom"><i class="fa fa-clone" aria-hidden="true"></i></a>
+        <a href="javascript:void(0)" ng-click="sideNavCtrl.createDataset()"
+        uib-tooltip="Create Dataset" class="user-control"
+        tooltip-placement="bottom"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+        <a href="javascript:void(0)" class="user-control" ngclipboard data-clipboard-text="{{sideNavCtrl.exportedStr}}"
+        ng-click="sideNavCtrl.brieflyShowExported()"
+        uib-tooltip="Export Dataset to Clipboard" tooltip-placement="bottom"><i class="fa fa-upload" aria-hidden="true"></i></a>
+        <a href="javascript:void(0)" class="user-control"
+        ng-click="sideNavCtrl.importDataset()" uib-tooltip="Import Dataset"
+        tooltip-placement="bottom"><i class="fa fa-download" aria-hidden="true"></i></a>
+        <a href="javascript:void(0)" class="user-control"
+        ng-show="sideNavCtrl.dataset && sideNavCtrl.deletableDataset"
+        ng-click="sideNavCtrl.brieflyShowAreYouSure()"
+        uib-tooltip="Delete Dataset"
+        tooltip-placement="bottom"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+      </span>
+      <span ng-if="sideNavCtrl.showExported" class="btn btn-success btn-xs">Dataset exported</span>
+      <button ng-if="sideNavCtrl.showAreYouSure" class="btn btn-danger btn-xs" ng-click="sideNavCtrl.deleteDataset()">Confirm</button>
+    </div>
+  </div>
+</div>
 
 <form name="sideNavForm" novalidate id="alldatasets">
   <div ui-sortable="sideNavCtrl.sortOptions" ng-model="sideNavCtrl.datasets" class="sortable-list">
-    <label for="selectedId">Select Dataset</label>
     <div ng-repeat="dataset in sideNavCtrl.datasets" class="sidenav-item sortable-item"
     ng-class="{'selected-item': sideNavCtrl.dataset._id === dataset._id}">
       <input type="text" class="form-control" ng-if="sideNavCtrl.dataset._id !== dataset._id"

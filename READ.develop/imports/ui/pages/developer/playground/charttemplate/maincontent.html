@@ -19,9 +19,7 @@
             </a>
           </li>
           <li ng-class="{active: chartTemplateCtrl.readState.playground.chartTemplate === 'visualization'}">
-            <a ng-click="chartTemplateCtrl.readState.playground.chartTemplate = 'visualization'">Visualization
-              <i ng-if="! chartTemplateCtrl.validators.visualization" class="fa fa-bug" aria-hidden="true" ng-style="{color: '#d9534f'}"></i>
-            </a>
+            <a ng-click="chartTemplateCtrl.readState.playground.chartTemplate = 'visualization'">Visualization</a>
           </li>
           <li ng-class="{active: chartTemplateCtrl.readState.playground.chartTemplate === 'usageInfo'}">
             <a ng-click="chartTemplateCtrl.readState.playground.chartTemplate = 'usageInfo'">Usage Info</a>
@@ -93,13 +91,29 @@
           </form>
         </div>
 
-        <div class="col-md-12" ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'options'">
+        <div ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'options'">
+          <form name="chartTemplateCtrl.options" ng-if="chartTemplateCtrl.chartTemplate">
+            <div class="form-group">
+              <div ui-ace="chartTemplateCtrl.aceJavaScriptOptions" ng-model="chartTemplateCtrl.chartTemplate.options"
+              valid-json ng-model-options="{allowInvalid: true}"
+              ng-readonly="chartTemplateCtrl.user.readOnly" name="options">
+              </div>
+            </div>
+          </form>
         </div>
 
-        <div class="col-md-12" ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'css'">
+        <div ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'css'">
+          <form name="chartTemplateCtrl.css" ng-if="chartTemplateCtrl.chartTemplate">
+            <div class="form-group">
+              <div ui-ace="chartTemplateCtrl.aceJavaScriptOptions" ng-model="chartTemplateCtrl.chartTemplate.css"
+              valid-css ng-model-options="{allowInvalid: true}"
+              ng-readonly="chartTemplateCtrl.user.readOnly" name="css">
+              </div>
+            </div>
+          </form>
         </div>
 
-        <div class="col-md-12" ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'visualization'">
+        <div ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'visualization'">
         </div>
 
         <div class="col-md-12" ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'usageInfo'">
