@@ -23,6 +23,7 @@
     "bower": "^1.7.9",
     "corsproxy": "^1.5.0",
     "cytoscape": "^2.7.9",
+    "jsgrid": "git+https://github.com/tabalinas/jsgrid.git",
     "meteor-node-stubs": "^0.2.3",
     "ngclipboard": "^1.1.1",
     "node-red": "^0.15.2",

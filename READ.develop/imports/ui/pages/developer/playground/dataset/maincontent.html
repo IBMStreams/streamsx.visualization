@@ -12,8 +12,18 @@
             <a ng-click="datasetCtrl.readState.playground.dataset = 'usageInfo'">Usage Info</a>
           </li>
           <li class="quick-buttons">
-            <a ng-click="sideNavCtrl.copy()" uib-tooltip="Copy Data to Clipboard" tooltip-placement="bottom" href="javascript:void(0)"><i class="fa fa-files-o" aria-hidden="true"></i></a>
+            <a uib-tooltip="Copy Data to Clipboard" tooltip-placement="left"
+            ngclipboard ng-attr-data-clipboard-text="{{datasetCtrl.stringifiedData}}"
+            ng-mouseover="datasetCtrl.stringifyData()"
+            ng-click="datasetCtrl.brieflyShow('Data Copied')"
+            href="javascript:void(0)">
+              <i class="fa fa-files-o" aria-hidden="true"></i>
+              <span ng-if="datasetCtrl.showBriefly">{{datasetCtrl.showBriefly}}</span>
+            </a>
           </li>
+          <!-- <li class="quick-buttons">
+            <button ng-if="datasetCtrl.showBriefly" class="quick-buttons btn btn-info btn-xs">{{datasetCtrl.showBriefly}}</button>
+          </li> -->
         </ul>
       </div>
 

@@ -32,6 +32,11 @@ function($scope, $reactive, readState, $state, $timeout) {
     user: () => Users.findOne({}),
     plugin: () => Plugins.findOne({_id: self.getReactively('user.selectedIds.pluginId')}),
     chartTemplate: () => ChartTemplates.findOne({_id: self.getReactively('plugin.selectedChartTemplateId')}),
+    visualization: () => {
+      let viz = self.getReactively('chartTemplate', true);
+      viz.inputs.forEach(input => input.reactiveData = readState.pipeline.findReactiveData(input.datasetId));
+      return viz;
+    },
     inputtable: () => (PlaygroundDatasets.find({}).fetch().length > 0),
     playgroundDatasets: () => PlaygroundDatasets.find({}).fetch().sort((a, b) => a.position - b.position)
   });

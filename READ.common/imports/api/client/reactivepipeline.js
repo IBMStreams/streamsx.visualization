@@ -33,7 +33,9 @@ let Pipeline = class Pipeline {
     if (index < 0) throw new Error("could not find index in changeReactiveData");
     let theRd = this.removeReactiveData(newReactiveData._id);
     let rs = theRd.getReactiveStream();
+    console.log('resetting reactive stream');
     newReactiveData.resetReactiveStream(rs);
+    console.log('to', rs);
     let latest = this.addReactiveData(newReactiveData, 0);
   }
 
@@ -55,6 +57,7 @@ let Pipeline = class Pipeline {
   }
 
   changeDataset(dataset) {
+    console.log('changing reactive data');
     return this.changeReactiveData(this.makeReactiveData(dataset));
   }
 

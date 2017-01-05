@@ -138,12 +138,12 @@ export const headerNavComponent = {
         }
       ]});
 
-      tour.init();
+      // tour.init();
 
-      this.startTour = function() {
-        // Initialize the tour
-        if (tour.getCurrentStep()) tour.restart()
-        else tour.start(true);
-      }
+      // this.startTour = function() {
+      //   // Initialize the tour
+      //   if (tour.getCurrentStep()) tour.restart()
+      //   else tour.start(true);
+      // }
     }]
   };

@@ -114,6 +114,7 @@
         </div>
 
         <div ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'visualization'">
+          <visualization ng-attr-id="{{chartTemplateCtrl.visualization._id}}" viz-object="chartTemplateCtrl.visualization"></visualization>
         </div>
 
         <div class="col-md-12" ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'usageInfo'">

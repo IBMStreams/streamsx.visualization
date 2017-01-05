@@ -7,8 +7,8 @@ import {PlaygroundDatasets} from '/imports/api/playgrounddatasets';
 
 import {aceJsonSchemaOptions, aceJavaScriptOptions, aceHTMLOptions} from '/imports/ui/partials/aceoptions';
 
-export const playgroundDatasetCtrl = ['$scope', '$reactive', 'readState', '$state', 'datasetTypes', 'defaultDatasets',
-function($scope, $reactive, readState, $state, datasetTypes, defaultDatasets) {
+export const playgroundDatasetCtrl = ['$scope', '$reactive', '$timeout', 'readState', '$state', 'datasetTypes', 'defaultDatasets',
+function($scope, $reactive, $timeout, readState, $state, datasetTypes, defaultDatasets) {
   $reactive(this).attach($scope);
   let self = this;
   this.readState = readState;
@@ -35,13 +35,29 @@ function($scope, $reactive, readState, $state, datasetTypes, defaultDatasets) {
       valid: self.validators.datasetEditor,
       item: self.dataset
     });
-  }, 100), true);
+  }, 1000), true);
 
   this.updateDatabase = (val) => {
     Meteor.call('playgroundDataset.update', val._id, val, (err, res) => {
       if (err) alert(err);
     });
   };
+
+  this.stringifiedData = undefined;
+  this.stringifyData = () => {
+    self.stringifiedData = self.lastDataObject.isData ?
+    JSON.stringify(self.lastDataObject.data, null, 2) :
+    JSON.stringify(self.lastDataObject, null, 2);
+  }
+
+  this.showBriefly = undefined;
+  this.brieflyShow = (text) => {
+    this.showBriefly = text;
+    // if (self.briefTimer) self.briefTimer();
+    self.briefTimer = $timeout(() => {
+      self.showBriefly = undefined;
+    }, 3000); // 3 seconds
+  }
 
   //update database
   self.itemStream
@@ -52,10 +68,8 @@ function($scope, $reactive, readState, $state, datasetTypes, defaultDatasets) {
     self.updateDatabase(x);
   }).subscribe(new Rx.ReplaySubject(0));
 
-  this.rds = readState.pipeline.findReactiveData(self.dataset._id);
-
-  this.rds.stream.doOnNext(x => {
+  readState.pipeline.findReactiveData(self.dataset._id).stream.doOnNext(x => {
     self.lastDataObject = x;
-    $timeout(); // this seems necessary for propagating changes to the view...
+    $timeout();
   }).subscribe(new Rx.ReplaySubject(0));
 }];

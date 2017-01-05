@@ -40,10 +40,13 @@ let ReactiveData = class ReactiveData {
     return this.stream;
   }
 
-  resetReactiveStream(newStream) { // this makes sense only if there are no subscribers to the current stream
+  resetReactiveStream(newStream) {
+    // this makes sense only if there are no subscribers to the current stream
+    // which will be the case if we're replacing the stream of a brand new(ly) created reactive dataset
     let self = this;
     this.stream.doOnNext(msg => {
       self.stream = newStream;
+      console.log('injecting ', msg, ' into the stream');
       self.stream.onNext(msg);
     }).subscribe();
   }

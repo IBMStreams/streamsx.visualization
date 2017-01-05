@@ -20,6 +20,12 @@ import angularLeafletDirective from 'angular-leaflet-directive/dist/angular-leaf
 import 'drmonty-leaflet-awesome-markers/js/leaflet.awesome-markers.js';
 import 'leaflet/dist/leaflet.css';
 
+import '/public/bower_components/jsgrid/dist/jsgrid.min.css';
+import '/public/bower_components/jsgrid/dist/jsgrid-theme.min.css';
+let jsg = require('/public/bower_components/jsgrid/dist/jsgrid');
+
+import myModules from 'read-common/imports/mymodules/mymodules';
+
 // import {reactiveDataFactory} from 'read-common/imports/api/client/reactivedatafactory.js';
 // import {reactivePipeline} from 'read-common/imports/api/client/reactivepipeline';
 import {readStateFactory} from '/imports/api/client/readstatefactory.js';
@@ -27,6 +33,7 @@ import {readCtrl} from '/imports/ui/readctrl.js';
 
 import {validJsonDirective, validObjectDirective, validStateObjectDirective, validFunctionDirective, validCssDirective} from '/imports/ui/partials/aceoptions';
 import {dimensionsDirective} from 'read-common/imports/ui/partials/dimensions';
+import {visualizationDirective} from 'read-common/imports/ui/partials/visualization/visualization';
 
 import {headerNavComponent} from '/imports/ui/partials/common/headernav/headernav';
 import {sideNavComponent} from '/imports/ui/partials/common/sidenav/sidenav';
@@ -107,6 +114,7 @@ angularModule
 .directive('validFunction', validFunctionDirective)
 .directive('validCss', validCssDirective)
 .directive('dimensions', dimensionsDirective)
+.directive('visualization', visualizationDirective)
 .component('headerNav', headerNavComponent)
 .component('sideNav', sideNavComponent)
 // .component('nvd3Provider', nvd3ProviderComponent)

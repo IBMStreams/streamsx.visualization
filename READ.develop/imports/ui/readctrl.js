@@ -88,6 +88,7 @@ function ($scope, $reactive, readState, $timeout) {
       else {
         if (_.contains(['Derived'], oldDataset.datasetType)) readState.dependencies.removeParents(oldDataset._id);
         if (_.contains(['Derived'], newDataset.datasetType)) changeDatasetParents(newDataset);
+        console.log('changing dataset to new dataset');
         readState.pipeline.changeDataset(newDataset);
       }
     }
