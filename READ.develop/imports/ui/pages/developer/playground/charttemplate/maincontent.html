@@ -52,6 +52,15 @@
                 </div>
 
                 <div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="input.optional"
+                      ng-disabled="chartTemplateCtrl.user.readOnly"><strong>Optional</strong> 
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
                   <label>Dataset for {{input.name}}</label>
                   <select class="form-control" ng-model="input.datasetId"
                   ng-options="dataset._id as dataset.name for dataset in chartTemplateCtrl.playgroundDatasets"

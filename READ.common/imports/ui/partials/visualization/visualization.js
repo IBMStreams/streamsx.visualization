@@ -11,6 +11,7 @@ const visualizationDirective = ['$timeout', function($timeout) {
     link: function($scope, $el, $attrs, $ctrl) {
       try {
         var linkFn = undefined;
+        let vizOptions = eval('(' + $scope.vizObject.options + ')');
         (function evalLinkFn() {
           linkFn = eval('(' + $scope.vizObject.initFunction + ')');
         })();
@@ -33,7 +34,7 @@ const visualizationDirective = ['$timeout', function($timeout) {
               }
               console.log('finished executing dataHandler');
             }
-            console.log('input data has errors');
+            else console.log('input data has errors');
             $timeout();
           }).subscribe(Rx.ReplaySubject(0));
         });

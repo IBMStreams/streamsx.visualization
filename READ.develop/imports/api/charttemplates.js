@@ -24,10 +24,11 @@ export const chartTemplateSchema = {
             minLength: 1,
             maxLength: 20
           },
+          optional: {type: "boolean"},
           datasetId: {type: "string"},
           dataHandler: {type: "string"}
         },
-        required: ["name", "datasetId", "dataHandler"],
+        required: ["name", "optional", "datasetId", "dataHandler"],
         additionalProperties: false
       }
     },

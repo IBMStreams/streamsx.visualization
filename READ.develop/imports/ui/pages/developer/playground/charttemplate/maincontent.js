@@ -48,6 +48,7 @@ function($scope, $reactive, readState, $state, $timeout) {
   self.createInput = () => {
     let input = {
       name: "Input " + self.chartTemplate.inputs.length,
+      optional: true,
       datasetId: PlaygroundDatasets.find({}).fetch()[0]._id,
       dataHandler: 'x => x'
     }
