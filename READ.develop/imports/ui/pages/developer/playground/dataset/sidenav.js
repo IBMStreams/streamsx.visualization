@@ -38,7 +38,9 @@ function ($scope, $reactive, $state, $timeout, readState, defaultDatasets) {
   this.switchDataset = (selectedId) => {
     self.user.selectedIds.playgroundDatasetId = selectedId;
     Meteor.call('user.update', self.user, (err, res) => {if (err) alert(err);}); //update user
-    $state.reload($state.$current.name);
+    $state.transitionTo($state.current, {}, {
+      reload: true, inherit: false, notify: true
+    });
   }
 
   // update dataset in database

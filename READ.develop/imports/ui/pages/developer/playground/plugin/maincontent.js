@@ -16,8 +16,6 @@ function ($scope, $reactive, $timeout, $state, $stateParams, readState) {
   let self = this;
   this.readState = readState;
 
-  // let pluginIndex = Number($stateParams.index);
-
   this.aceJsonSchemaOptions = aceJsonSchemaOptions;
   this.aceJavaScriptOptions = aceJavaScriptOptions;
 
@@ -25,7 +23,7 @@ function ($scope, $reactive, $timeout, $state, $stateParams, readState) {
     user: () => Users.findOne({}),
     plugins: () => Plugins.find({}).fetch(),
     plugin: () => self.getReactively('user.selectedIds.pluginId') ?
-    Plugins.findOne({_id: self.user.selectedIds.pluginId}) : undefined
+    Plugins.findOne({_id: self.getReactively('user.selectedIds.pluginId')}) : undefined
   });
 
   // this.switchPlugin = (selectedId) => {

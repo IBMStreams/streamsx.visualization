@@ -24,6 +24,16 @@
           <li ng-class="{active: chartTemplateCtrl.readState.playground.chartTemplate === 'usageInfo'}">
             <a ng-click="chartTemplateCtrl.readState.playground.chartTemplate = 'usageInfo'">Usage Info</a>
           </li>
+
+          <li class="quick-buttons" ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'css'">
+            <a uib-tooltip="Copy Template Id to Clipboard" tooltip-placement="left"
+            ngclipboard ng-attr-data-clipboard-text="{{chartTemplateCtrl.visualization._id}}"
+            ng-click="chartTemplateCtrl.brieflyShow('Template Id Copied')"
+            href="javascript:void(0)">
+              <i class="fa fa-clipboard" aria-hidden="true"></i>
+              <span ng-if="chartTemplateCtrl.showBriefly">{{chartTemplateCtrl.showBriefly}}</span>
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -55,7 +65,7 @@
                   <div class="checkbox">
                     <label>
                       <input type="checkbox" ng-model="input.optional"
-                      ng-disabled="chartTemplateCtrl.user.readOnly"><strong>Optional</strong> 
+                      ng-disabled="chartTemplateCtrl.user.readOnly"><strong>Optional</strong>
                     </label>
                   </div>
                 </div>
@@ -122,8 +132,8 @@
           </form>
         </div>
 
-        <div ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'visualization'">
-          <visualization ng-attr-id="{{chartTemplateCtrl.visualization._id}}" viz-object="chartTemplateCtrl.visualization"></visualization>
+        <div ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'visualization'" ng-attr-id="{{chartTemplateCtrl.visualization._id}}">
+          <visualization viz-object="chartTemplateCtrl.visualization"></visualization>
         </div>
 
         <div class="col-md-12" ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'usageInfo'">

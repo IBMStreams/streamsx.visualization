@@ -33,6 +33,8 @@ function($scope, $reactive, readState, $state, $timeout) {
     plugin: () => Plugins.findOne({_id: self.getReactively('user.selectedIds.pluginId')}),
     chartTemplate: () => ChartTemplates.findOne({_id: self.getReactively('plugin.selectedChartTemplateId')}),
     visualization: () => {
+      console.log(self.plugin);
+      console.log(self.chartTemplate);
       let viz = self.getReactively('chartTemplate', true);
       viz.inputs.forEach(input => input.reactiveData = readState.pipeline.findReactiveData(input.datasetId));
       return viz;
@@ -54,6 +56,15 @@ function($scope, $reactive, readState, $state, $timeout) {
     }
     self.chartTemplate.inputs.push(input);
     self.injectChartTemplate(self.chartTemplate);
+  }
+
+  this.showBriefly = undefined;
+  this.brieflyShow = (text) => {
+    this.showBriefly = text;
+    // if (self.briefTimer) self.briefTimer();
+    self.briefTimer = $timeout(() => {
+      self.showBriefly = undefined;
+    }, 3000); // 3 seconds
   }
 
   self.showAreYouSure = undefined; // no we do not want to delete this input... and we don't want to see deletion option...

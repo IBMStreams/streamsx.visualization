@@ -49,7 +49,9 @@ function ($scope, $reactive, $state, $timeout, readState) {
   this.switchChartTemplate = (selectedId) => {
     self.plugin.selectedChartTemplateId = selectedId;
     Meteor.call('plugin.update', self.plugin._id, self.plugin, (err, res) => {if (err) alert(err);}); //update plugin
-    $state.reload($state.$current.name);
+    $state.transitionTo($state.current, {}, {
+      reload: true, inherit: false, notify: true
+    });
   }
 
   // update chart template in database

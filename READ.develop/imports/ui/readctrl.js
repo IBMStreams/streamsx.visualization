@@ -100,6 +100,29 @@ function ($scope, $reactive, readState, $timeout) {
     }
   });
 
+  let addStyle = (templateId, cssString) => {
+    if (cssString) {
+      let cssElString = "<style type='text/css' " + "id='st-" + templateId + "'>" + cssString + "</style>";
+      $(cssElString).appendTo("head");
+    }
+  };
+  let removeStyle = (templateId) => {
+    let styleEl = "#st-" + templateId;
+    $(styleEl).remove();
+  };
+  let templateQuery = ChartTemplates.find({});
+  let templateQueryObserveHandle = templateQuery.observe({
+    added: (template) => {
+      addStyle(template._id, template.css);
+    },
+    removed: (template) => {
+      removeStyle(template._id);
+    },
+    changed: (newTemplate, oldTemplate) => { // we can optimize later... // this has to be based on fields not all changes...
+      removeStyle(oldTemplate._id);
+      addStyle(newTemplate._id, newTemplate.css);
+    }
+  });
 
   // this.subscribe('playground', null, {
   //   onReady: () => {

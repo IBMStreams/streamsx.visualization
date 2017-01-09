@@ -214,7 +214,7 @@ pre {
 }
 
 .grid-stack-item-content > .panel > .panel-body {
-  @include calc(height, '100% - 36px') // panel header height...
+  @include calc(height, '100% - 38px') // panel header height...
   padding: 0px;
 }
 

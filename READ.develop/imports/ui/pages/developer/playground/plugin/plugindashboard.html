@@ -1,0 +1,15 @@
+<div class="grid-stack">
+  <div ng-repeat="visualization in $ctrl.visualizations" class="grid-stack-item"
+  data-gs-auto-position data-gs-width="6" data-gs-height="5">
+    <div class="grid-stack-item-content">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong>{{visualization.name}}</strong>
+        </div>
+        <div class="panel-body" ng-attr-id="{{visualization._id}}">
+          <visualization viz-object="visualization"></visualization>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

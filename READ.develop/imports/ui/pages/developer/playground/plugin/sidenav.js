@@ -35,7 +35,9 @@ function ($scope, $reactive, $state, $timeout, readState) {
   this.switchPlugin = (selectedId) => {
     self.user.selectedIds.pluginId = selectedId;
     Meteor.call('user.update', self.user, (err, res) => {if (err) alert(err);}); //update user
-    $state.reload($state.$current.name);
+    $state.transitionTo($state.current, {}, {
+      reload: true, inherit: false, notify: true
+    });
   }
 
   // update plugin in database

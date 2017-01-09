@@ -40,6 +40,8 @@ import {sideNavComponent} from '/imports/ui/partials/common/sidenav/sidenav';
 import sideNavWrapperTemplateUrl from '/imports/ui/partials/common/sidenav/sidenavwrapper.html';
 import {dashboardComponent} from '/imports/ui/partials/dashboard/dashboard';
 
+import {pluginDashboardComponent} from '/imports/ui/pages/developer/playground/plugin/plugindashboard';
+
 import developerHomeTemplateUrl from '/imports/ui/pages/developer/home/home.html';
 
 // import {appSideNavCtrl} from '/imports/ui/pages/developer/app/dashboard/app/sidenav.js';
@@ -117,13 +119,13 @@ angularModule
 .directive('visualization', visualizationDirective)
 .component('headerNav', headerNavComponent)
 .component('sideNav', sideNavComponent)
+.component('pluginDashboard', pluginDashboardComponent)
 // .component('nvd3Provider', nvd3ProviderComponent)
 // .directive('leafletMap', leafletMapDirective)
 // .component('leafletProvider', leafletProviderComponent)
 // .component('visualization', visualizationComponent)
 // .component('nvd3Visualization', nvd3VisualizationComponent)
 // .component('leafletVisualization', leafletVisualizationComponent)
-// .component('dashboard', dashboardComponent)
 .controller('readCtrl', readCtrl)
 // .controller('appCtrl', appCtrl)
 // .controller('dataSetCtrl', dashboardDataSetCtrl)
@@ -257,6 +259,11 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', f
   // })
   .state('read.developer.playground', {
     url: "/developer/playground",
+    params: {
+      plugin: null,
+      template: null,
+      dataset: null
+    },
     views: {
       'maincontent@': {
         templateUrl: playgroundMainContentTemplateUrl,
@@ -270,7 +277,7 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', f
     }]
   })
   .state('read.developer.playground.plugin', {
-    url: "/plugin?index",
+    url: "/plugin?plugin",
     views: {
       'sidenav@': {
         templateUrl: pluginSideNavTemplateUrl,
@@ -283,7 +290,7 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', f
     }
   })
   .state('read.developer.playground.dataset', {
-    url: "/dataset?index",
+    url: "/dataset?dataset",
     views: {
       'sidenav@': {
         templateUrl: playgroundDatasetSideNavTemplateUrl,
@@ -296,7 +303,7 @@ angularModule.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', f
     }
   })
   .state('read.developer.playground.charttemplate', {
-    url: "/charttemplate?pluginIndex&chartTemplateIndex",
+    url: "/charttemplate?plugin&template",
     views: {
       'sidenav@': {
         templateUrl: chartTemplateSideNavTemplateUrl,

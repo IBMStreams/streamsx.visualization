@@ -17,6 +17,18 @@ const visualizationDirective = ['$timeout', function($timeout) {
         })();
         linkFn($scope, $el, $attrs, $ctrl);
 
+        var cleanupFn = undefined;
+        (function evalCleanupFn() {
+          cleanupFn = eval('(' + $scope.vizObject.cleanupFunction + ')');
+        })();
+        $scope.$on('$destroy', () => {
+          try {
+            cleanupFn();
+          } catch (e) {
+            console.log('clean up error', e);
+          }
+        });
+
         $scope.disposableSubs = $scope.vizObject.inputs.map(input => {
           let dataHandler = undefined;
           (function evalDataHandler() {
