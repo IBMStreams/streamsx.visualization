@@ -198,6 +198,11 @@ pre {
   display: inline-block!important;
 }
 
+visualization {
+  width: 100%;
+  display: block;
+}
+
 .grid-stack-item-content > .panel {
   height: 100%;
   width: 100%;
@@ -216,6 +221,10 @@ pre {
 .grid-stack-item-content > .panel > .panel-body {
   @include calc(height, '100% - 38px') // panel header height...
   padding: 0px;
+}
+
+.grid-stack-item-content visualization {
+  height: 100%;
 }
 
 .thumbnail .caption .word-wrap, .usage-info .word-wrap {

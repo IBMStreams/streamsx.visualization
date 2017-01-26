@@ -24,8 +24,6 @@ import '/public/bower_components/jsgrid/dist/jsgrid.min.css';
 import '/public/bower_components/jsgrid/dist/jsgrid-theme.min.css';
 let jsg = require('/public/bower_components/jsgrid/dist/jsgrid');
 
-import myModules from 'read-common/imports/mymodules/mymodules';
-
 // import {reactiveDataFactory} from 'read-common/imports/api/client/reactivedatafactory.js';
 // import {reactivePipeline} from 'read-common/imports/api/client/reactivepipeline';
 import {readStateFactory} from '/imports/api/client/readstatefactory.js';

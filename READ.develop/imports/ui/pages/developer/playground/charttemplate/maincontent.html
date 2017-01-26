@@ -90,7 +90,7 @@
                   <button class="btn btn-warning btn-xs"
                   ng-click="chartTemplateCtrl.brieflyShowAreYouSure(input)">Delete</button>
 
-                  <button ng-if="chartTemplateCtrl.showAreYouSure === input"
+                  <button ng-if="chartTemplateCtrl.showAreYouSure == input"
                   class="btn btn-danger btn-xs" ng-click="chartTemplateCtrl.deleteInput(input)">Confirm</button>
                 </div>
 
@@ -133,7 +133,7 @@
         </div>
 
         <div ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'visualization'" ng-attr-id="{{chartTemplateCtrl.visualization._id}}">
-          <visualization viz-object="chartTemplateCtrl.visualization"></visualization>
+          <visualization viz-object="chartTemplateCtrl.visualization" class="viz"></visualization>
         </div>
 
         <div class="col-md-12" ng-if="chartTemplateCtrl.readState.playground.chartTemplate === 'usageInfo'">

@@ -33,8 +33,6 @@ function($scope, $reactive, readState, $state, $timeout) {
     plugin: () => Plugins.findOne({_id: self.getReactively('user.selectedIds.pluginId')}),
     chartTemplate: () => ChartTemplates.findOne({_id: self.getReactively('plugin.selectedChartTemplateId')}),
     visualization: () => {
-      console.log(self.plugin);
-      console.log(self.chartTemplate);
       let viz = self.getReactively('chartTemplate', true);
       viz.inputs.forEach(input => input.reactiveData = readState.pipeline.findReactiveData(input.datasetId));
       return viz;

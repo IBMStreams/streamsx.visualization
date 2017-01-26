@@ -19,6 +19,7 @@
     "ajv": "^4.8.2",
     "angular": "^1.5.8",
     "bootstrap-sass": "^3.3.7",
+    "chart.js": "^2.4.0",
     "css": "^2.2.1",
     "cytoscape": "^2.7.10",
     "drmonty-leaflet-awesome-markers": "^2.0.2",
