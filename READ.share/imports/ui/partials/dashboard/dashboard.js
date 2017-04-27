@@ -19,24 +19,26 @@ export const dashboardComponent = {
     $reactive(this).attach($scope);
     let self = this;
 
-    this.helpers({
-      visualizations: () => Visualizations.find({dashboardId: self.dashboardId}).fetch().map(viz => {
-          viz.dimensions = {
-            height: undefined,
-            width: undefined
-          };
-          return viz;
-      })
-    });
+    this.$onInit = function() {
+      self.helpers({
+        visualizations: () => Visualizations.find({dashboardId: self.dashboardId}).fetch().map(viz => {
+            viz.dimensions = {
+              height: undefined,
+              width: undefined
+            };
+            return viz;
+        })
+      });
 
-    if (self.gsOptions) {
-      $timeout(function() {
-        $(function () {
-          $('.grid-stack').gridstack(self.gsOptions);
-        });
-      }, 1);
+      if (self.gsOptions) {
+        $timeout(function() {
+          $(function () {
+            $('.grid-stack').gridstack(self.gsOptions);
+          });
+        }, 1);
+      }
+      else throw new Error('undefined gsOptions in dashboard component');
     }
-    else throw new Error('undefined gsOptions in dashboard component');
 
   }]
 };

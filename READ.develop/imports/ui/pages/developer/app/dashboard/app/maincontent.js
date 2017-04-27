@@ -22,7 +22,7 @@ function ($scope, $reactive, $timeout, $state, reactiveDataFactory) {
     if (lastChar != '/') {         // If the last character is not a slash
        au = au + '/';            // Append a slash to it.
     }
-    au = au + '#/app/' + self.app._id;
+    au = au + '#!/app/' + self.app._id;
     return au;
   };
 
