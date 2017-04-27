@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import angular from 'angular';
 import _ from 'underscore/underscore';
 import ajv from 'ajv';
 import Rx from 'rx/dist/rx.all';

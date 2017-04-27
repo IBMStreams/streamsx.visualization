@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
-import angular from 'angular';
 import _ from 'underscore/underscore';
 import toposort from 'toposort';
 

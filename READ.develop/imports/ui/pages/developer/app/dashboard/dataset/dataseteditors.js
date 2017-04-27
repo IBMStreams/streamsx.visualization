@@ -1,4 +1,3 @@
-import angular from 'angular';
 import Rx from 'rx/dist/rx.all';
 
 import rawDataEditorTemplateUrl from './rawdataeditor.html';

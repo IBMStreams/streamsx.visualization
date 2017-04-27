@@ -15,15 +15,17 @@ export const leafletVisualizationComponent = {
     $reactive(this).attach($scope);
     let self = this;
 
-    this.helpers({
-      template: () => Playground.findOne({_id: self.visualization.templateId})
-    });
+    this.$onInit = function() {
+      this.helpers({
+        template: () => Playground.findOne({_id: self.visualization.templateId})
+      });
 
-    let reactivePipeline = reactivePipelineService.getInstance();
-    let tds = reactivePipeline.addReactiveData(readState.pipeline.findReactiveData(self.visualization.dataSetId));
-    tds.stream.doOnNext((x) => {
-      self.validatedDataObject = x;
-    }).subscribe(new Rx.ReplaySubject(0));
+      let reactivePipeline = reactivePipelineService.getInstance();
+      let tds = reactivePipeline.addReactiveData(readState.pipeline.findReactiveData(self.visualization.dataSetId));
+      tds.stream.doOnNext((x) => {
+        self.validatedDataObject = x;
+      }).subscribe(new Rx.ReplaySubject(0));      
+    }
 
     // this is a major major hack -- we're turning off validation for leaflet
 
